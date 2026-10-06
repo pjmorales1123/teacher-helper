@@ -1,0 +1,42 @@
+{
+  "id": "l4-q3", "level": 4, "kind": "quest", "order": 3,
+  "title": "Summing Up Facts",
+  "tip": {
+    "skill": "summary", "title": "Shrink the text",
+    "text": "To summarize an information text: (1) find the topic sentence of each paragraph, (2) delete examples, repeats, and small details, (3) replace lists with one general word (\"mangoes, bananas, papayas\" becomes \"fruits\"), (4) write the ideas in your own words in the same order. A summary is much shorter than the text and has no opinions of your own."
+  },
+  "passage": {
+    "title": "How Rice Gets to Your Plate",
+    "text": "Rice is the main food of most Filipino families, but few people think about the long path a grain takes before it is cooked.\n\nIt begins in a seedbed. Farmers soak seeds, let them sprout, and grow them in a small, flooded plot for about three weeks. The young plants are then pulled up in bundles and transplanted, one by one, into the larger paddy. This is backbreaking work, often done bent over in ankle-deep water from dawn until the heat becomes unbearable.\n\nFor the next three months the paddy must be kept flooded, weeded, and guarded from pests such as rats, snails, and birds. Farmers watch the weather closely. Too little rain and the field cracks; a typhoon at the wrong time can flatten a whole crop days before harvest.\n\nAt harvest, the golden stalks are cut, threshed to separate the grain, and dried in the sun, often on the road itself. Mills then remove the husk and bran, turning brown grain into white rice. Finally the rice is bagged, trucked to markets, and sold by the kilo.\n\nFrom seed to sack takes about four months and hundreds of hours of labor. The next time a plate of rice is left unfinished, it is worth remembering how much went into it."
+  },
+  "words": [
+    { "word": "transplanted", "meaning": "moved a growing plant from one place to another", "example": "We transplanted the tomato seedlings into the garden." },
+    { "word": "unbearable", "meaning": "too much to stand or put up with", "example": "The noise from the concert was unbearable." },
+    { "word": "threshed", "meaning": "separated the grain from the stalks by beating or shaking", "example": "The farmers threshed the rice by hand." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "summary", "prompt": "Which is the BEST summary of the passage?",
+      "choices": [
+        "Rats, snails, and birds eat rice plants.",
+        "Rice goes from seedbed to transplanting, months of care in a flooded paddy, then harvest, drying, milling, and selling, taking about four months of hard work.",
+        "Farmers dry rice on the road and that is dangerous.",
+        "Rice is the main food of Filipinos and tastes good."
+      ], "answer": 1,
+      "why": "It keeps the stages in order and the key point about time and labor, with no small details." },
+    { "id": "i2", "type": "mc", "skill": "summary", "prompt": "In a summary, the list \"rats, snails, and birds\" should become which general word?",
+      "choices": ["Animals", "Pests", "Farmers", "Weather"], "answer": 1,
+      "why": "The passage itself calls them pests. One general word replaces the list." },
+    { "id": "i3", "type": "mc", "skill": "summary", "prompt": "Which sentence from the passage is a DETAIL that a summary could leave out?",
+      "choices": ["\"It begins in a seedbed.\"", "\"The young plants are then... transplanted... into the larger paddy.\"", "\"...often on the road itself.\"", "\"From seed to sack takes about four months.\""], "answer": 2,
+      "why": "Where the rice is dried is a small detail; the other sentences are stages or the main point." },
+    { "id": "i4", "type": "mc", "skill": "sequence", "prompt": "Which stage comes right AFTER harvest?",
+      "choices": ["Transplanting", "Threshing and drying", "Soaking seeds", "Bagging"], "answer": 1,
+      "why": "\"The golden stalks are cut, threshed... and dried in the sun.\" Milling and bagging come after." },
+    { "id": "i5", "type": "mc", "skill": "word-parts", "prompt": "\"The heat becomes unbearable.\" Using word parts, what does unbearable mean?",
+      "choices": ["Easy to bear", "Cannot be endured", "Bearable again", "Like a bear"], "answer": 1,
+      "why": "un- (not) + bear (endure) + -able (can be): not able to be endured." },
+    { "id": "i6", "type": "mc", "skill": "purpose", "prompt": "Why did the author write the LAST paragraph?",
+      "choices": ["To list the steps again", "To persuade readers not to waste rice", "To describe rice mills", "To tell a story about a farmer"], "answer": 1,
+      "why": "After informing, the author asks readers to remember the labor \"the next time a plate of rice is left unfinished.\"" }
+  ]
+}

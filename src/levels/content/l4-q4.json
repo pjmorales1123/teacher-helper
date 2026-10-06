@@ -1,0 +1,37 @@
+{
+  "id": "l4-q4", "level": 4, "kind": "quest", "order": 4,
+  "title": "Chains of Cause",
+  "tip": {
+    "skill": "cause-effect", "title": "One effect becomes the next cause",
+    "text": "In science and history texts, causes often form a CHAIN: A causes B, B causes C. To follow a chain, draw arrows as you read. Also watch for several causes of one effect, or one cause with several effects. Be careful: two things happening one after the other does not always mean the first caused the second. Look for the words that prove the link: because, leads to, results in, due to, therefore."
+  },
+  "passage": {
+    "title": "The Coral and the Fisherman",
+    "text": "In the warm shallow waters around many Philippine islands lie coral reefs, built over centuries by tiny animals called polyps. Each polyp makes a hard skeleton, and millions of skeletons together form the reef. Inside the polyps live even tinier algae that give the coral its color and, through sunlight, most of its food.\n\nWhen the sea becomes unusually warm, even by one or two degrees, the polyps become stressed and push the algae out. Without the algae, the coral turns ghostly white. Scientists call this bleaching. A bleached coral is not dead yet, but it is starving. If the water stays warm for weeks, the coral dies.\n\nThe damage does not stop there. Reefs are where small fish feed and hide. As the coral dies, the small fish disappear, and the larger fish that eat them move away or die too. Fishermen who once filled their boats near the reef come home with little. Some switch to dynamite fishing to catch what is left, which shatters more coral, leaving even fewer places for fish to live.\n\nThe chain can also run the other way. When communities protect a reef by banning destructive fishing and reducing pollution, the coral recovers, the small fish return, the big fish follow, and catches rise again."
+  },
+  "words": [
+    { "word": "polyps", "meaning": "tiny soft sea animals that build coral", "example": "A reef is made by millions of polyps." },
+    { "word": "bleaching", "meaning": "coral turning white after losing its algae because of stress", "example": "Warm seas caused coral bleaching this summer." },
+    { "word": "destructive", "meaning": "causing great damage", "example": "The destructive typhoon flattened the crops." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "cause-effect", "prompt": "What causes coral to turn white?",
+      "choices": ["Too much sunlight on the water", "Polyps pushing out their algae when the water gets too warm", "Fish eating the color", "Dynamite fishing"], "answer": 1,
+      "why": "\"The polyps become stressed and push the algae out. Without the algae, the coral turns ghostly white.\"" },
+    { "id": "i2", "type": "mc", "skill": "cause-effect", "prompt": "Why does a bleached coral starve?",
+      "choices": ["Fish stop feeding it.", "The algae that made most of its food are gone.", "The water is too cold.", "Fishermen take its food."], "answer": 1,
+      "why": "The algae give the coral \"most of its food.\" Without them, the coral has nothing to eat." },
+    { "id": "i3", "type": "order", "skill": "cause-effect", "prompt": "Arrange this chain of causes and effects in order.",
+      "steps": ["The sea becomes unusually warm.", "The coral bleaches and dies.", "Small fish lose their feeding and hiding places.", "Large fish move away.", "Fishermen's catches drop."],
+      "why": "Each effect becomes the next cause: warm water leads to coral death, then small fish, then large fish, then the catch." },
+    { "id": "i4", "type": "mc", "skill": "cause-effect", "prompt": "How does dynamite fishing make the problem WORSE?",
+      "choices": ["It warms the water.", "It shatters more coral, leaving fewer places for fish.", "It feeds the polyps.", "It brings in more fishermen."], "answer": 1,
+      "why": "\"...which shatters more coral, leaving even fewer places for fish to live.\"" },
+    { "id": "i5", "type": "mc", "skill": "main-idea", "prompt": "What is the main idea of the LAST paragraph?",
+      "choices": ["Reefs cannot recover once damaged.", "Protecting a reef can reverse the chain and bring the fish back.", "Pollution is worse than warming.", "Big fish eat small fish."], "answer": 1,
+      "why": "It shows the same chain running in reverse once the reef is protected." },
+    { "id": "i6", "type": "mc", "skill": "context-clues", "prompt": "\"Banning destructive fishing.\" What does destructive mean?",
+      "choices": ["Done at night", "Causing great damage", "Done with nets", "Cheap"], "answer": 1,
+      "why": "The passage has just described dynamite fishing shattering coral, so destructive means causing damage." }
+  ]
+}

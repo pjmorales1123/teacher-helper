@@ -1,0 +1,37 @@
+{
+  "id": "l6-q2", "level": 6, "kind": "quest", "order": 2,
+  "title": "Weighing an Argument",
+  "tip": {
+    "skill": "evidence", "title": "Is the reasoning sound?",
+    "text": "Evaluating an argument means more than finding the claim. Ask: (1) Is the evidence relevant to THIS claim? (2) Is it sufficient, or just one example? (3) Is the source credible? (4) Does the reasoning actually connect evidence to claim, or does it jump? Watch for common faults: overgeneralizing from a few cases, assuming that because B came after A, A caused B, appealing to emotion instead of facts, and attacking the person rather than the idea."
+  },
+  "passage": {
+    "title": "Ban Phones in Class? Two Letters",
+    "text": "LETTER ONE\nPhones must be banned from every classroom in our school. Last month a student in Grade 9 was caught watching videos during a quiz. Clearly, phones destroy learning. Any teacher who disagrees simply does not care about discipline. Our grandparents learned without phones and turned out fine. If we do not act now, our school's reputation will be ruined forever.\n\nLETTER TWO\nI understand the worry about phones, but a total ban would be a mistake. A 2021 study of 1,200 students in Metro Manila found that classes which used phones for structured tasks, such as timed quizzes and vocabulary apps, scored slightly higher on end-of-term tests than classes with no phone use, while classes with unrestricted phone use scored lowest. The problem, then, is not the device but the rules around it. I propose a \"phones face-down unless the teacher says otherwise\" policy, with confiscation for repeat violations. This keeps the benefits, removes most distractions, and teaches students the self-control they will need in any workplace. We should also track results for one semester and revisit the policy if scores drop."
+  },
+  "words": [
+    { "word": "reputation", "meaning": "what people generally think about someone or something", "example": "The school has a reputation for good science teaching." },
+    { "word": "unrestricted", "meaning": "without limits or rules", "example": "The pass gives unrestricted access to the library." },
+    { "word": "confiscation", "meaning": "taking something away as a penalty", "example": "Confiscation of the toy ended the fight." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "evidence", "prompt": "What is the main weakness of Letter One's evidence?",
+      "choices": ["It uses too many statistics.", "It generalizes from a single student's behavior to all phones and all students.", "It is too long.", "It quotes a study that is too old."], "answer": 1,
+      "why": "One Grade 9 student watching videos is used to conclude \"phones destroy learning\" for everyone. That is overgeneralization." },
+    { "id": "i2", "type": "mc", "skill": "evidence", "prompt": "\"Any teacher who disagrees simply does not care about discipline.\" What fault is this?",
+      "choices": ["Attacking the people who disagree instead of their reasons", "Giving too much evidence", "Using a study", "Proposing a trial period"], "answer": 0,
+      "why": "It dismisses opponents by questioning their character rather than answering their argument." },
+    { "id": "i3", "type": "mc", "skill": "evidence", "prompt": "Why is Letter Two's study stronger evidence than Letter One's example?",
+      "choices": ["It is about Manila.", "It covers 1,200 students, compares different conditions, and measures results.", "It is more recent than last month.", "It uses bigger words."], "answer": 1,
+      "why": "Size, comparison groups, and measured outcomes make evidence more reliable than one anecdote." },
+    { "id": "i4", "type": "mc", "skill": "evidence", "prompt": "\"If we do not act now, our school's reputation will be ruined forever.\" This sentence mainly...",
+      "choices": ["Reports a measured result", "Appeals to fear instead of giving evidence", "Proposes a fair test", "Defines a term"], "answer": 1,
+      "why": "It predicts disaster with no support; it is an emotional appeal, not proof." },
+    { "id": "i5", "type": "mc", "skill": "evidence", "prompt": "Which feature makes Letter Two's reasoning more careful?",
+      "choices": ["It says phones are perfect.", "It suggests tracking results for a semester and revisiting the policy.", "It mentions grandparents.", "It bans phones completely."], "answer": 1,
+      "why": "Planning to check results and change course shows the writer is testing the claim, not just asserting it." },
+    { "id": "i6", "type": "mc", "skill": "compare", "prompt": "What do the two letters have in COMMON?",
+      "choices": ["Both want a complete ban.", "Both agree that unrestricted phone use in class is a problem.", "Both cite a study.", "Both attack teachers."], "answer": 1,
+      "why": "Letter One wants a ban; Letter Two also says unrestricted use scores lowest and proposes rules to limit it." }
+  ]
+}

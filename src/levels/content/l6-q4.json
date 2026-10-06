@@ -1,0 +1,37 @@
+{
+  "id": "l6-q4", "level": 6, "kind": "quest", "order": 4,
+  "title": "Reading the Tone",
+  "tip": {
+    "skill": "purpose", "title": "Purpose, tone, and word choice",
+    "text": "Beyond persuade, inform, entertain, skilled writers have precise purposes: to warn, to honor, to mock, to comfort. TONE is the writer's attitude, carried by WORD CHOICE. \"The official declined to comment\" is neutral; \"the official dodged the question\" is critical. To read tone, find the loaded words and ask what they make you feel. Irony is when the words say one thing and mean the opposite; a sarcastic compliment is still a criticism."
+  },
+  "passage": {
+    "title": "In Praise of the Waiting Shed",
+    "text": "Let us take a moment to honor the waiting shed on the national highway outside our town, that monument to civic planning.\n\nBuilt in 2019 at a cost, according to the plaque, of 1.2 million pesos, the shed offers travelers a roof, three benches, and a view of the exact spot where the jeepneys do not stop. The jeepneys stop fifty meters down the road, at the corner by the bakery, where they have stopped since before anyone can remember. Commuters therefore have a choice: sit in the shade and miss their ride, or stand in the sun and catch it. Most choose the sun. The benches, polished by rain and nothing else, remain in excellent condition.\n\nThe plaque bears the names of four officials, in letters larger than the word \"shed.\" It does not bear the name of whoever decided where the shed should go, which is a pity, because that person deserves recognition.\n\nI am told that a second shed is planned for the other side of the highway. I hope it, too, will be built with the same care, and that the commuters there, like us, will learn to admire it from a distance."
+  },
+  "words": [
+    { "word": "monument", "meaning": "a structure built to honor something; also used mockingly for something that shows a failure", "example": "The empty mall is a monument to bad planning." },
+    { "word": "civic", "meaning": "relating to a town or city and its people", "example": "Voting is a civic duty." },
+    { "word": "recognition", "meaning": "public credit or praise for something done", "example": "She received recognition for her bravery." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "purpose", "prompt": "What is the author's REAL purpose?",
+      "choices": ["To sincerely praise the waiting shed", "To criticize wasteful, poorly planned public projects through irony", "To inform readers where the jeepneys stop", "To ask for a third shed"], "answer": 1,
+      "why": "Every \"praise\" is undercut by facts showing the shed is useless; the piece mocks the project." },
+    { "id": "i2", "type": "mc", "skill": "purpose", "prompt": "\"The benches, polished by rain and nothing else, remain in excellent condition.\" What is the author really saying?",
+      "choices": ["The benches are well made.", "No one ever uses the benches.", "It rains often in the town.", "The benches should be cleaned."], "answer": 1,
+      "why": "\"Polished by rain and nothing else\" means no person has ever sat on them. The compliment is ironic." },
+    { "id": "i3", "type": "mc", "skill": "purpose", "prompt": "Which word choice MOST signals the ironic tone in the first sentence?",
+      "choices": ["\"national highway\"", "\"monument to civic planning\"", "\"outside our town\"", "\"take a moment\""], "answer": 1,
+      "why": "Calling a shed a monument is deliberately grand; readers soon learn it is a monument to bad planning." },
+    { "id": "i4", "type": "mc", "skill": "inference", "prompt": "\"That person deserves recognition.\" What does the author actually mean?",
+      "choices": ["The planner should get an award.", "The planner should be held responsible for a foolish decision.", "The planner's name was forgotten by accident.", "The officials were generous."], "answer": 1,
+      "why": "The author wants the person who chose the useless location to be named, not honored." },
+    { "id": "i5", "type": "mc", "skill": "evidence", "prompt": "Which FACT in the passage most strongly supports the author's criticism?",
+      "choices": ["The shed has three benches.", "The jeepneys stop fifty meters away at the corner where they have always stopped.", "The plaque has four names.", "A second shed is planned."], "answer": 1,
+      "why": "The shed was built where the jeepneys do not stop; this single fact makes the project pointless." },
+    { "id": "i6", "type": "mc", "skill": "point-of-view", "prompt": "What does the detail about the plaque's letter sizes suggest about the officials?",
+      "choices": ["They are humble.", "They cared more about credit than about the shed's usefulness.", "They paid for the shed themselves.", "They designed the shed."], "answer": 1,
+      "why": "Names \"in letters larger than the word shed\" implies self-promotion over public service." }
+  ]
+}

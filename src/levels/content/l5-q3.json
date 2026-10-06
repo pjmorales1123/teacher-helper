@@ -1,0 +1,37 @@
+{
+  "id": "l5-q3", "level": 5, "kind": "quest", "order": 3,
+  "title": "Not Meant Literally",
+  "tip": {
+    "skill": "figurative", "title": "Simile, metaphor, personification",
+    "text": "FIGURATIVE language says one thing to mean another. A SIMILE compares using like or as (\"as quiet as a library\"). A METAPHOR says one thing IS another (\"the classroom was a zoo\"). PERSONIFICATION gives human actions to non-human things (\"the wind whispered\"). HYPERBOLE exaggerates (\"I waited forever\"). To understand it, ask: What two things are being compared? What quality do they share? Why did the writer choose this picture instead of plain words?"
+  },
+  "passage": {
+    "title": "Typhoon Night",
+    "text": "By nine o'clock the wind had found its voice. It howled through the gaps in the walls and rattled the roof like a child shaking a tin can full of stones. Our house, which had always seemed solid, now felt like a paper boat on an angry sea.\n\nMother was a lighthouse that night. She moved from window to window with the flashlight, calm, checking the ties on the shutters, while the rest of us huddled on the one dry mattress. Every few minutes the flashlight beam swept across our faces, and each time it did, I breathed again.\n\nThe water came in under the door at midnight, a thin silver tongue that licked across the floor and kept coming. Father and my older brother worked like machines, bailing with pots and a basin, the water refusing to be beaten. By two the rain had softened. By four the wind had grown tired and gone to sleep somewhere over the mountains.\n\nIn the morning the sky was so blue it seemed to be apologizing. The street was a river of mud and broken branches. We stood in the doorway, soaked and exhausted and alive, and my mother said, \"Well. Coffee first.\""
+  },
+  "words": [
+    { "word": "huddled", "meaning": "crowded close together, usually for warmth or safety", "example": "The puppies huddled in the box." },
+    { "word": "bailing", "meaning": "scooping water out of something, like a boat", "example": "They kept bailing water out of the canoe." },
+    { "word": "exhausted", "meaning": "extremely tired", "example": "After the hike, we were exhausted." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "figurative", "prompt": "\"Mother was a lighthouse that night.\" What kind of figurative language is this, and what does it mean?",
+      "choices": ["Simile; she was very tall", "Metaphor; she was a calm, steady guide in the dark", "Hyperbole; she had a very bright flashlight", "Personification; the lighthouse acted like a mother"], "answer": 1,
+      "why": "It says she IS a lighthouse (metaphor). Lighthouses stand firm and give light to guide others, which is what she did." },
+    { "id": "i2", "type": "mc", "skill": "figurative", "prompt": "\"The wind had grown tired and gone to sleep.\" This is an example of...",
+      "choices": ["Simile", "Hyperbole", "Personification", "Metaphor"], "answer": 2,
+      "why": "The wind is given human actions: growing tired and sleeping." },
+    { "id": "i3", "type": "mc", "skill": "figurative", "prompt": "\"Rattled the roof like a child shaking a tin can full of stones.\" What does this simile help you understand?",
+      "choices": ["A child was on the roof.", "The noise was loud, sharp, and constant.", "The roof was made of tin cans.", "The family had many stones."], "answer": 1,
+      "why": "The comparison (using like) gives the reader the sound: a rattling, clattering noise that does not stop." },
+    { "id": "i4", "type": "mc", "skill": "figurative", "prompt": "\"Our house... felt like a paper boat on an angry sea.\" What two things are compared, and what quality do they share?",
+      "choices": ["The house and a boat; both float", "The house and a paper boat; both seem fragile and at the mercy of the storm", "The sea and the wind; both are angry", "The family and sailors; both are brave"], "answer": 1,
+      "why": "A paper boat is helpless on rough water. The simile shows how weak the house suddenly felt." },
+    { "id": "i5", "type": "mc", "skill": "figurative", "prompt": "\"The sky was so blue it seemed to be apologizing.\" Why did the writer choose this image?",
+      "choices": ["To say the sky was actually sorry", "To show how calm and innocent the morning looked after such a violent night", "To explain the color blue", "To say it would rain again"], "answer": 1,
+      "why": "Personifying the sky as apologetic contrasts the peaceful morning with the storm's damage." },
+    { "id": "i6", "type": "mc", "skill": "inference", "prompt": "What does the mother's line \"Well. Coffee first.\" tell you about her?",
+      "choices": ["She is addicted to coffee.", "She faces disaster calmly and practically, one step at a time.", "She does not care about the damage.", "She wants to go back to sleep."], "answer": 1,
+      "why": "After a night of danger, she turns at once to the next small, sensible task. It matches the lighthouse image." }
+  ]
+}

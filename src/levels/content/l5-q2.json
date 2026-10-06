@@ -1,0 +1,37 @@
+{
+  "id": "l5-q2", "level": 5, "kind": "quest", "order": 2,
+  "title": "Prove It",
+  "tip": {
+    "skill": "evidence", "title": "Claim, evidence, reasoning",
+    "text": "A CLAIM is what someone says is true. EVIDENCE is the proof: facts, numbers, quotations, examples, expert findings. REASONING explains how the evidence supports the claim. Strong evidence is specific, relevant, and checkable. Weak support is just opinion, exaggeration, or a story about one person. When a question asks which sentence best supports an idea, pick the one that directly proves it, not just mentions it."
+  },
+  "passage": {
+    "title": "Should Classes Start Later?",
+    "text": "Most public high schools in the country start classes at 6:00 or 7:00 in the morning. A growing number of teachers, doctors, and students are asking whether this is wise.\n\nThe case for a later start rests on sleep science. Research on adolescents shows that during the teenage years the body's internal clock shifts: teenagers naturally fall asleep later and wake later than children or adults. A 2019 review of studies covering more than 300,000 students found that those who started school later slept an average of 40 minutes more per night and reported less daytime sleepiness. In one Philippine survey of Grade 7 to 10 students, two out of three reported sleeping fewer than seven hours on school nights, below the eight to ten hours doctors recommend.\n\nLack of sleep is not a small matter. Sleep-deprived students have been shown to score lower on memory tasks, get sick more often, and have more accidents on the way to school. Several schools abroad that moved their start time to 8:30 recorded improved attendance and fewer tardy marks within a year.\n\nOpponents raise practical concerns. Later dismissal means students travel home in heavier afternoon traffic, and parents who start work at seven would have to leave children unsupervised. Some teachers also argue that the hot afternoon hours are the worst for learning. These are real problems, but they are problems of scheduling, not of biology, and schedules can be changed."
+  },
+  "words": [
+    { "word": "adolescents", "meaning": "young people between childhood and adulthood; teenagers", "example": "Adolescents need more sleep than adults." },
+    { "word": "deprived", "meaning": "kept from having something needed", "example": "The plant was deprived of water and wilted." },
+    { "word": "tardy", "meaning": "late", "example": "She got a tardy mark for arriving after the bell." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "evidence", "prompt": "What is the author's main CLAIM?",
+      "choices": ["Teenagers are lazy.", "Schools should consider starting classes later because teenagers need more sleep.", "Afternoon traffic is heavy.", "Doctors recommend eight hours of sleep."], "answer": 1,
+      "why": "The whole text builds the case for a later start; the other options are details or wrong." },
+    { "id": "i2", "type": "mc", "skill": "evidence", "prompt": "Which sentence is the STRONGEST evidence that later starts help students sleep more?",
+      "choices": ["\"Most public high schools... start classes at 6:00 or 7:00.\"", "\"A 2019 review of studies covering more than 300,000 students found that those who started school later slept an average of 40 minutes more per night.\"", "\"Lack of sleep is not a small matter.\"", "\"Schedules can be changed.\""], "answer": 1,
+      "why": "It is specific, large-scale, and directly measures the effect of later start times on sleep." },
+    { "id": "i3", "type": "mc", "skill": "evidence", "prompt": "The author says sleep loss causes real harm. Which evidence supports this?",
+      "choices": ["Teenagers' internal clocks shift.", "Sleep-deprived students score lower on memory tasks and get sick more often.", "Parents start work at seven.", "Two out of three students sleep fewer than seven hours."], "answer": 1,
+      "why": "This sentence lists the harms themselves. The others describe causes or the situation, not the harm." },
+    { "id": "i4", "type": "mc", "skill": "evidence", "prompt": "Which of these would be the WEAKEST support for the claim?",
+      "choices": ["A survey of 300,000 students", "A doctor's recommendation of eight to ten hours", "One student saying she feels tired", "Attendance records from schools that changed their start time"], "answer": 2,
+      "why": "A single person's feeling is not strong evidence. The others are large studies, expert advice, or records." },
+    { "id": "i5", "type": "mc", "skill": "point-of-view", "prompt": "How does the author respond to the opponents' concerns?",
+      "choices": ["By ignoring them", "By admitting they are real but calling them scheduling problems that can be solved", "By saying parents are wrong", "By agreeing to keep the early start"], "answer": 1,
+      "why": "\"These are real problems, but they are problems of scheduling, not of biology, and schedules can be changed.\"" },
+    { "id": "i6", "type": "mc", "skill": "word-parts", "prompt": "\"Sleep-deprived students.\" The suffix -ed and the root deprive tell you deprived means...",
+      "choices": ["Given plenty of", "Kept from having", "Asleep", "Proud of"], "answer": 1,
+      "why": "To deprive is to keep someone from having something; deprived of sleep means not getting enough." }
+  ]
+}

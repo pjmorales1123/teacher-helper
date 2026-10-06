@@ -1,0 +1,49 @@
+{
+  "id": "l4-c", "level": 4, "kind": "challenge", "order": 9,
+  "title": "Tree Challenge: Plastic in the Barangay",
+  "passage": {
+    "title": "The Plastic Problem in Barangay San Roque",
+    "text": "Every rainy season, the creek in Barangay San Roque overflows, and every year the reason is the same: plastic. Sachets, bags, and bottles clog the drainage canals until the water has nowhere to go but the streets.\n\nIn 2023, the barangay council tried something new. Instead of simply fining people who littered, they set up a \"plastic bank.\" Residents could bring clean, sorted plastic to a collection point every Saturday and receive points. The points could be exchanged for rice, cooking oil, or school supplies. A local recycling company bought the plastic from the barangay, which paid for the goods.\n\nThe results surprised even the council. In the first six months, residents brought in more than four tons of plastic. Children became the most eager collectors; some organized teams and competed to fill the most sacks. The canals, cleaned by volunteers at the same time, stayed clear through the next rainy season, and for the first time in a decade the creek did not flood the main road.\n\nCritics point out that the plastic bank does not stop plastic from being made or sold. Sachets are still the cheapest way for poor families to buy shampoo and coffee. \"We are cleaning up a problem that someone else keeps creating,\" one councilor admitted. Still, most residents say the program changed how they see waste. As one grandmother put it, \"Before, plastic was garbage. Now it is rice.\""
+  },
+  "words": [
+    { "word": "clog", "meaning": "to block something so that nothing can pass through", "example": "Hair can clog the shower drain." },
+    { "word": "eager", "meaning": "very keen and excited to do something", "example": "The eager pupils raised their hands." },
+    { "word": "critics", "meaning": "people who point out problems or disagree with something", "example": "Critics of the plan said it would cost too much." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "cause-effect", "prompt": "Why does the creek overflow every rainy season?",
+      "choices": ["Too much rain falls.", "Plastic clogs the drainage canals.", "The creek is too small.", "Volunteers block the road."], "answer": 1,
+      "why": "\"Sachets, bags, and bottles clog the drainage canals until the water has nowhere to go but the streets.\"" },
+    { "id": "i2", "type": "mc", "skill": "details", "prompt": "What could residents exchange their points for?",
+      "choices": ["Money only", "Rice, cooking oil, or school supplies", "Plastic bottles", "Bus tickets"], "answer": 1,
+      "why": "\"The points could be exchanged for rice, cooking oil, or school supplies.\"" },
+    { "id": "i3", "type": "mc", "skill": "purpose", "prompt": "What is the author's main purpose?",
+      "choices": ["To entertain with a story about a grandmother", "To inform readers about a barangay program and its results", "To persuade readers to buy sachets", "To describe a creek"], "answer": 1,
+      "why": "The text reports what the council did, gives numbers, and presents both results and criticism." },
+    { "id": "i4", "type": "mc", "skill": "multiple-meaning", "prompt": "\"They set up a plastic bank.\" What does bank mean here?",
+      "choices": ["The side of a river", "A place where something is collected and stored for exchange", "To lean to one side", "A row of lights"], "answer": 1,
+      "why": "Residents deposit plastic and get points, like a bank that stores and exchanges things." },
+    { "id": "i5", "type": "mc", "skill": "summary", "prompt": "Which is the BEST summary?",
+      "choices": [
+        "Children competed to fill sacks of plastic.",
+        "A barangay fought flooding by paying residents in goods for plastic; the canals stayed clear and the road did not flood, though critics say it does not stop plastic from being sold.",
+        "Sachets are the cheapest way to buy shampoo.",
+        "A grandmother said plastic is now rice."
+      ], "answer": 1,
+      "why": "It covers the problem, the program, the result, and the criticism in order." },
+    { "id": "i6", "type": "mc", "skill": "evidence", "prompt": "Which evidence BEST shows the program reduced flooding?",
+      "choices": ["Children organized teams.", "Residents brought in four tons of plastic.", "For the first time in a decade the creek did not flood the main road.", "A recycling company bought the plastic."], "answer": 2,
+      "why": "No flooding on the main road is the direct outcome; the other choices are causes or side details." },
+    { "id": "i7", "type": "mc", "skill": "point-of-view", "prompt": "What is the critics' main point?",
+      "choices": ["The program costs too much.", "The program cleans up plastic but does not stop it from being made and sold.", "Children should not collect plastic.", "The council lied about the numbers."], "answer": 1,
+      "why": "\"We are cleaning up a problem that someone else keeps creating.\"" },
+    { "id": "i8", "type": "mc", "skill": "figurative", "prompt": "\"Before, plastic was garbage. Now it is rice.\" What does the grandmother mean?",
+      "choices": ["Plastic can be cooked.", "Plastic now has value because it can be exchanged for food.", "Rice is made of plastic.", "She no longer eats rice."], "answer": 1,
+      "why": "She is not speaking literally; plastic has become worth something, like rice." },
+    { "id": "i9", "type": "mc", "skill": "inference", "prompt": "Why did children become the most eager collectors?",
+      "choices": ["They were punished if they did not.", "The points and the competition between teams made it fun and rewarding.", "Adults were not allowed to collect.", "School was closed."], "answer": 1,
+      "why": "The passage says they formed teams and competed, and the points bought school supplies." },
+    { "id": "i10", "type": "short", "skill": "details", "prompt": "On which day of the week was the collection point open?",
+      "accept": ["saturday", "saturdays", "every saturday"], "why": "\"...to a collection point every Saturday.\"" }
+  ]
+}

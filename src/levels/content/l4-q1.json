@@ -1,0 +1,37 @@
+{
+  "id": "l4-q1", "level": 4, "kind": "quest", "order": 1,
+  "title": "Why Was This Written?",
+  "tip": {
+    "skill": "purpose", "title": "PIE: Persuade, Inform, Entertain",
+    "text": "Authors write for a reason. To PERSUADE: convince you to think or do something (ads, letters to the editor, speeches). To INFORM: give facts and explain (textbooks, news, how-to guides). To ENTERTAIN: tell a story or make you feel something (fiction, poems, jokes). Clues: strong opinion words (should, must, best) point to persuade; facts and numbers point to inform; characters and plot point to entertain. A text can mix purposes, so ask which one is strongest."
+  },
+  "passage": {
+    "title": "A Letter to the School Paper",
+    "text": "Dear Editor,\n\nEvery afternoon, the line at the canteen stretches past the flagpole. Students spend half of their twenty-minute break just waiting, and many give up and buy junk food from the gate instead. This is not a small problem. A student who skips a proper meal cannot focus in the afternoon classes, and the teachers notice.\n\nI am proposing that the school open a second serving window during recess. The canteen already has the space; it only needs one more staff member for forty minutes a day. Last year, Mabini High School did exactly this, and their average waiting time fell from eleven minutes to four. Our school could do the same.\n\nSome will say the cost is too high. But think of what we lose now: wasted break time, hungry students, and money going to vendors outside the gate instead of our own canteen. A second window would pay for itself within a semester.\n\nI urge the student council and the principal to try it for one month. If it does not work, close the window. But I am certain it will.\n\nSincerely,\nAndrea Villanueva, Grade 6 Hope"
+  },
+  "words": [
+    { "word": "proposing", "meaning": "suggesting a plan or idea for others to consider", "example": "The mayor is proposing a new bike lane." },
+    { "word": "urge", "meaning": "to strongly encourage someone to do something", "example": "Doctors urge people to drink more water." },
+    { "word": "semester", "meaning": "half of a school year", "example": "The first semester ends in October." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "purpose", "prompt": "What is the author's MAIN purpose?",
+      "choices": ["To entertain readers with a story about the canteen", "To inform readers about Mabini High School", "To persuade the school to open a second serving window", "To describe junk food"], "answer": 2,
+      "why": "The letter argues for a change and uses words like \"I am proposing\" and \"I urge.\"" },
+    { "id": "i2", "type": "mc", "skill": "purpose", "prompt": "Which sentence is the strongest clue that the author wants to PERSUADE?",
+      "choices": ["\"The canteen already has the space.\"", "\"I urge the student council and the principal to try it for one month.\"", "\"Dear Editor,\"", "\"Last year, Mabini High School did exactly this.\""], "answer": 1,
+      "why": "\"I urge\" directly asks the reader to act, which is the heart of persuasion." },
+    { "id": "i3", "type": "mc", "skill": "purpose", "prompt": "Why does the author mention Mabini High School?",
+      "choices": ["To entertain the reader with a story", "To give evidence that the plan has worked elsewhere", "To complain about another school", "To change the topic"], "answer": 1,
+      "why": "Real results from another school make the proposal more convincing." },
+    { "id": "i4", "type": "mc", "skill": "evidence", "prompt": "Which statement is a FACT the author uses, not an opinion?",
+      "choices": ["\"This is not a small problem.\"", "\"Their average waiting time fell from eleven minutes to four.\"", "\"I am certain it will.\"", "\"A second window would pay for itself.\""], "answer": 1,
+      "why": "The waiting-time numbers can be checked. The other choices are the author's beliefs or predictions." },
+    { "id": "i5", "type": "mc", "skill": "point-of-view", "prompt": "How does the author handle people who disagree about the cost?",
+      "choices": ["She ignores them.", "She admits the objection and then answers it with what the school loses now.", "She says they are wrong without reasons.", "She agrees the plan is too costly."], "answer": 1,
+      "why": "\"Some will say the cost is too high. But think of what we lose now...\" states the objection and replies." },
+    { "id": "i6", "type": "mc", "skill": "context-clues", "prompt": "\"I urge the student council... to try it.\" What does urge mean?",
+      "choices": ["Forbid", "Strongly encourage", "Quietly wonder", "Refuse"], "answer": 1,
+      "why": "The whole letter pushes for action, so urge means to strongly encourage." }
+  ]
+}

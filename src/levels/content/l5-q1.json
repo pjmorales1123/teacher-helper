@@ -1,0 +1,37 @@
+{
+  "id": "l5-q1", "level": 5, "kind": "quest", "order": 1,
+  "title": "Whose Eyes Are We Using?",
+  "tip": {
+    "skill": "point-of-view", "title": "Narrator and perspective",
+    "text": "POINT OF VIEW is who tells the story and what they can know. FIRST PERSON uses I and we; you only know what that narrator sees and thinks, and they may be biased or wrong. THIRD PERSON uses he, she, they; a limited narrator follows one character's mind, while an omniscient narrator knows everyone's. Ask: Whose thoughts do I get? What might this narrator not notice or not admit? Changing the narrator changes the story."
+  },
+  "passage": {
+    "title": "The Transfer Student",
+    "text": "I knew from the first day that the new girl would be trouble. She sat in the back row, which is where people sit when they want to hide something, and she did not laugh at any of my jokes. When Teacher asked her to introduce herself, she said only her name, Celine, and that she was from Davao. That was all. No smile.\n\nBy the second week she had stopped eating in the canteen. I saw her once by the library steps with a notebook, writing, writing. Probably about us. I told Ryan she was stuck-up, and he agreed, because Ryan agrees with everything.\n\nThen came the essay contest. Teacher read the winning piece aloud without saying the name. It was about a father who worked in another country, and a girl who kept a notebook of things to tell him when he called, because the calls were short and expensive, and she was afraid of forgetting. It was about laughing less because the house was quiet. By the end, two of my classmates were wiping their eyes.\n\nThe name on the paper was Celine.\n\nI looked at the back row. She was staring at her desk, her ears red. And I thought about every day I had decided who she was without asking her a single question."
+  },
+  "words": [
+    { "word": "stuck-up", "meaning": "proud in an unfriendly way; thinking you are better than others", "example": "He seemed stuck-up, but he was only shy." },
+    { "word": "introduce", "meaning": "to tell people who you are or who someone else is", "example": "Please introduce yourself to the class." },
+    { "word": "decided", "meaning": "made up your mind about something", "example": "I decided to join the club." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "point-of-view", "prompt": "From whose point of view is the story told?",
+      "choices": ["Celine's", "Teacher's", "A classmate who judged Celine", "Ryan's"], "answer": 2,
+      "why": "The narrator says \"I\" and describes watching and judging the new girl. We never get Celine's thoughts directly." },
+    { "id": "i2", "type": "mc", "skill": "point-of-view", "prompt": "How does the first-person point of view affect what the reader knows?",
+      "choices": ["We know everything about every character.", "We only know the narrator's assumptions, so we misjudge Celine too until the essay.", "We know Celine's thoughts from the start.", "We know what Ryan is thinking."], "answer": 1,
+      "why": "The narrator's guesses (\"Probably about us\") are all we have, so the reveal surprises us as it surprises the narrator." },
+    { "id": "i3", "type": "mc", "skill": "point-of-view", "prompt": "Which detail shows the narrator is NOT a reliable judge of Celine?",
+      "choices": ["\"She was from Davao.\"", "\"The back row... is where people sit when they want to hide something.\"", "\"Teacher read the winning piece aloud.\"", "\"The name on the paper was Celine.\""], "answer": 1,
+      "why": "This is an assumption presented as fact. It reveals the narrator's bias, not the truth about Celine." },
+    { "id": "i4", "type": "mc", "skill": "inference", "prompt": "What was Celine really writing in her notebook?",
+      "choices": ["Complaints about her classmates", "Things to tell her father during his short, expensive calls", "Her essay about Davao", "Jokes"], "answer": 1,
+      "why": "The winning essay describes \"a notebook of things to tell him when he called.\" The narrator realizes the essay is about Celine herself." },
+    { "id": "i5", "type": "mc", "skill": "theme", "prompt": "What lesson does the narrator learn?",
+      "choices": ["Essay contests are unfair.", "Do not judge people before you know their story.", "New students should sit in front.", "Ryan is a bad friend."], "answer": 1,
+      "why": "The last line: \"every day I had decided who she was without asking her a single question.\"" },
+    { "id": "i6", "type": "mc", "skill": "context-clues", "prompt": "The narrator calls Celine stuck-up. Based on the passage, what does stuck-up mean?",
+      "choices": ["Unable to move", "Thinking you are better than others and acting unfriendly", "Very tall", "Always late"], "answer": 1,
+      "why": "The narrator uses it to explain why Celine does not smile or laugh, treating her quietness as pride." }
+  ]
+}

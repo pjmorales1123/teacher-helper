@@ -1,0 +1,37 @@
+{
+  "id": "l5-q4", "level": 5, "kind": "quest", "order": 4,
+  "title": "Clues for Hard Words",
+  "tip": {
+    "skill": "context-clues", "title": "Five kinds of clues",
+    "text": "Harder texts give clues in five ways. DEFINITION: the meaning is stated (\"an archipelago, a group of islands\"). SYNONYM: a similar word nearby. ANTONYM or CONTRAST: an opposite, often after but, unlike, although. EXAMPLE: the word is followed by examples (such as, like, for instance). INFERENCE: the whole situation tells you. Name the type of clue you found; it makes your guess more reliable."
+  },
+  "passage": {
+    "title": "The Weavers of the North",
+    "text": "In the highlands of the Cordillera, weaving is not merely a craft; it is a language. Each pattern on a woven blanket is a lexicon, a vocabulary of symbols that tells where the weaver comes from, what her family has lived through, and sometimes what she hopes for.\n\nThe work is meticulous. A single blanket can take weeks, and an error of one thread is visible to a trained eye from across a room. Unlike factory cloth, which is uniform and quick, handwoven fabric carries small irregularities that the weavers consider marks of honesty rather than flaws.\n\nThe dyes are derived from local plants: indigo for deep blue, turmeric for yellow, and the bark of certain trees for brown. Younger weavers have begun to experiment with brighter commercial dyes, which some elders find garish, too loud for cloth that once used only the muted colors of the forest.\n\nThe tradition has been imperiled by cheap imitations sold to tourists, machine-printed with patterns copied from photographs. Yet it persists. In several towns, cooperatives now certify authentic weaves, teach the craft in schools, and pay weavers a fair price. The looms, as one elder put it, are still talking."
+  },
+  "words": [
+    { "word": "meticulous", "meaning": "extremely careful about every small detail", "example": "She is meticulous about checking her work." },
+    { "word": "imperiled", "meaning": "put in danger", "example": "The floods imperiled the whole village." },
+    { "word": "authentic", "meaning": "real and genuine; not a copy", "example": "The museum displays authentic ancient tools." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "context-clues", "prompt": "\"Each pattern... is a lexicon, a vocabulary of symbols.\" What does lexicon mean, and what kind of clue helps you?",
+      "choices": ["A blanket; example clue", "A set of words or symbols; definition clue", "A weaver; contrast clue", "A color; inference clue"], "answer": 1,
+      "why": "The phrase after the comma, \"a vocabulary of symbols,\" defines lexicon directly." },
+    { "id": "i2", "type": "mc", "skill": "context-clues", "prompt": "\"The work is meticulous. A single blanket can take weeks, and an error of one thread is visible...\" What does meticulous mean?",
+      "choices": ["Fast and rough", "Very careful and detailed", "Cheap", "Colorful"], "answer": 1,
+      "why": "The sentences that follow (weeks of work, one-thread errors) show extreme care, an inference clue." },
+    { "id": "i3", "type": "mc", "skill": "context-clues", "prompt": "\"Unlike factory cloth, which is uniform and quick, handwoven fabric carries small irregularities.\" What does uniform mean here?",
+      "choices": ["A school outfit", "The same all over, without variation", "Expensive", "Woven by hand"], "answer": 1,
+      "why": "The contrast clue (unlike) pairs uniform against \"irregularities,\" so uniform means all the same." },
+    { "id": "i4", "type": "mc", "skill": "context-clues", "prompt": "\"...commercial dyes, which some elders find garish, too loud for cloth that once used only the muted colors of the forest.\" What does garish mean?",
+      "choices": ["Soft and pale", "Too bright and showy", "Made from plants", "Expensive"], "answer": 1,
+      "why": "Synonym clue (\"too loud\") plus contrast with \"muted colors\" tells you garish means overly bright." },
+    { "id": "i5", "type": "mc", "skill": "context-clues", "prompt": "\"The dyes are derived from local plants: indigo for deep blue, turmeric for yellow...\" Which kind of clue explains derived?",
+      "choices": ["Antonym", "Example", "Definition", "None"], "answer": 1,
+      "why": "The colon introduces examples of plants the dyes come from, showing that derived means obtained or taken from." },
+    { "id": "i6", "type": "mc", "skill": "figurative", "prompt": "\"The looms... are still talking.\" What does the elder mean?",
+      "choices": ["The looms make noise.", "The weaving tradition, with its patterns that carry meaning, is still alive.", "Elders talk while weaving.", "The looms are broken."], "answer": 1,
+      "why": "The first paragraph calls weaving a language. \"Still talking\" means the tradition continues to communicate." }
+  ]
+}

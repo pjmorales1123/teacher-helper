@@ -1,0 +1,37 @@
+{
+  "id": "l4-q2", "level": 4, "kind": "quest", "order": 2,
+  "title": "One Word, Many Jobs",
+  "tip": {
+    "skill": "multiple-meaning", "title": "Which meaning fits?",
+    "text": "Many English words have more than one meaning. \"Bank\" can be a place for money or the side of a river. \"Light\" can mean not heavy or not dark. To choose the right meaning, look at the sentence: What kind of word is it here (a thing, an action, a describing word)? What are the nearby words about? Swap in each meaning and keep the one that makes sense."
+  },
+  "passage": {
+    "title": "The Fair at the River Bank",
+    "text": "The town fair was set up on the wide bank of the river, just below the bridge. By nine in the morning the field was already crowded. Vendors had staked their stalls in neat rows, and the smell of grilled corn drifted over everything.\n\nJoy had saved fifty pesos for the fair. It was not much, so she had to be fair with herself: one game, one snack, nothing more. At the ring-toss booth she watched a boy miss five times in a row. The rings were light, almost like paper, and the bottles were set far apart. \"The game is not fair,\" she thought, and walked on.\n\nAt the next stall, an old man was carving small animals from wood. A tiny carabao caught her eye. \"Twenty pesos,\" he said. She turned the carving over in her hand. The wood was smooth, and the horns were carved with real care. Joy paid, bought a cup of grilled corn with the rest, and sat on the bank to watch the river. She had spent exactly fifty pesos, and she did not regret a single one."
+  },
+  "words": [
+    { "word": "vendors", "meaning": "people who sell things, usually in a market or on the street", "example": "The vendors shouted the prices of their fruit." },
+    { "word": "staked", "meaning": "fixed in place using stakes (pointed posts)", "example": "They staked the tent before the wind came." },
+    { "word": "regret", "meaning": "to feel sorry about something you did", "example": "I regret not studying for the test." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "multiple-meaning", "prompt": "\"The fair was set up on the wide bank of the river.\" What does bank mean here?",
+      "choices": ["A place that keeps money", "The land along the edge of a river", "A row of switches", "To trust someone"], "answer": 1,
+      "why": "The sentence is about a river and a bridge, so bank means the land beside the water." },
+    { "id": "i2", "type": "mc", "skill": "multiple-meaning", "prompt": "\"She had to be fair with herself.\" Which meaning of fair fits?",
+      "choices": ["A festival with stalls and games", "Light in color", "Honest and reasonable", "Fine weather"], "answer": 2,
+      "why": "Being fair with herself means being honest and reasonable about how much to spend." },
+    { "id": "i3", "type": "mc", "skill": "multiple-meaning", "prompt": "\"The rings were light, almost like paper.\" What does light mean here?",
+      "choices": ["Not heavy", "Not dark", "A lamp", "To start a fire"], "answer": 0,
+      "why": "Comparing the rings to paper tells you they weigh very little." },
+    { "id": "i4", "type": "mc", "skill": "multiple-meaning", "prompt": "The word fair appears with THREE different meanings in the passage. Which is NOT one of them?",
+      "choices": ["A festival", "Honest", "Not cheating", "Light-colored hair"], "answer": 3,
+      "why": "The passage uses fair as a festival, as being honest with oneself, and as a game that does not cheat. Hair color never appears." },
+    { "id": "i5", "type": "mc", "skill": "inference", "prompt": "Why did Joy decide the ring-toss game was not fair?",
+      "choices": ["The boy was cheating.", "The rings were too light and the bottles too far apart to win.", "It cost too much.", "The vendor was rude."], "answer": 1,
+      "why": "She noticed the light rings and far-apart bottles after watching the boy miss five times." },
+    { "id": "i6", "type": "mc", "skill": "theme", "prompt": "Which lesson does the story BEST support?",
+      "choices": ["Never go to a fair.", "Spending thoughtfully on something you value brings no regret.", "Games are always rigged.", "Wood carvings are cheap."], "answer": 1,
+      "why": "Joy plans her money, avoids the unfair game, buys something made with care, and \"did not regret a single one.\"" }
+  ]
+}
