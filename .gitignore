@@ -1,0 +1,8 @@
+node_modules/
+.env
+credentials.md
+*.db
+*.sqlite
+uploads/
+dist/
+.DS_Store
