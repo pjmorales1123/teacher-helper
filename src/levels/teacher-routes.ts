@@ -10,6 +10,7 @@ import type { ContentStore } from "./content.ts";
 import { draftQuest } from "./draft.ts";
 import { LEVELS, MAX_LEVEL, SKILLS } from "./meta.ts";
 import { resetPlacement, setLevel } from "./repo.ts";
+import { getSetting, setSetting } from "../db/connection.ts";
 import { classOverview, studentDetail } from "./teacher-report.ts";
 import { validateQuest } from "./validate.ts";
 
@@ -27,7 +28,12 @@ export function levelsTeacherRoutes(db: Db, store: ContentStore, config: Config)
   const r = Router();
   r.use(requireTeacher);
 
-  r.get("/meta", (_req, res) => res.json({ levels: LEVELS, skills: SKILLS }));
+  r.get("/meta", (_req, res) => res.json({ levels: LEVELS, skills: SKILLS, leaderboard: getSetting(db, "lv_leaderboard", "1") === "1" }));
+  r.put("/settings", (req, res) => {
+    const body = req.body as { leaderboard?: unknown };
+    if (typeof body.leaderboard === "boolean") setSetting(db, "lv_leaderboard", body.leaderboard ? "1" : "0");
+    res.json({ ok: true, leaderboard: getSetting(db, "lv_leaderboard", "1") === "1" });
+  });
   r.get("/overview", (req, res) => res.json(classOverview(db, store, sectionParam(req.query.section))));
 
   r.get("/students/:id", (req, res) => {

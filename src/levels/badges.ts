@@ -8,14 +8,14 @@ export interface BadgeDef {
 }
 
 export const BADGES: BadgeDef[] = [
-  { id: "first-quest", name: "First Steps", hint: "Finish your first quest." },
+  { id: "first-quest", name: "First Clear", hint: "Finish your first quest." },
   { id: "perfect-quest", name: "Perfect!", hint: "Get every item right in a quest." },
-  { id: "streak-3", name: "On a Roll", hint: "Play three days in a row." },
+  { id: "streak-3", name: "Three-Peat", hint: "Play three days in a row." },
   { id: "streak-7", name: "Week Warrior", hint: "Play seven days in a row." },
   { id: "reviewer-10", name: "Word Collector", hint: "Finish ten word reviews." },
   { id: "word-keeper", name: "Word Keeper", hint: "Master ten words (box 5)." },
   { id: "flawless-challenge", name: "Flawless", hint: "Score 100% on a Challenge." },
-  ...LEVELS.slice(1).map((l) => ({ id: `level-${l.level}`, name: `${l.name} Reached`, hint: `Reach ${l.name} level.` })),
+  ...LEVELS.slice(1).map((l) => ({ id: `level-${l.level}`, name: `${l.name} Rank`, hint: `Reach ${l.name} rank.` })),
 ];
 
 export interface BadgeContext {

@@ -23,11 +23,13 @@
   Formative activities are never counted.
 - **AI** runs through the host PC's logged-in `claude` or `codex` subscription
   CLI. No API key anywhere. The AI only drafts; the teacher approves.
-- **LEVELS** is a gamified English literacy training ground. Students take a
-  short placement test, then play reading quests (tip → passage → questions
-  with instant feedback), earn stars, XP, streaks and badges, review vocabulary
-  on a spaced schedule, and level up by passing a Challenge. Six levels map to
-  Grade 3–8 reading bands. Thirty built-in quests and challenges ship with the
+- **LEVELS** is a gamified English literacy training ground for junior high
+  students reading below grade level. Students take a short placement test,
+  then play reading quests (tip → passage → questions with instant feedback),
+  earn stars, XP, combos, streaks and badges, chase a daily goal and a weekly
+  section leaderboard, review vocabulary on a spaced schedule, and rank up
+  (Warrior → Legend) by passing a Challenge. Six ranks map to Grade 3–8
+  reading bands; passages are teen-interest "hi-lo" texts. Thirty built-in quests and challenges ship with the
   app; everything is auto-graded locally (no AI tokens). Teachers see a class
   skill heatmap, per-student detail, can override a level, and can write or
   AI-draft new quests. See `docs/levels.md`.

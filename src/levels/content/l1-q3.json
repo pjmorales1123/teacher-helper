@@ -1,36 +1,36 @@
 {
   "id": "l1-q3", "level": 1, "kind": "quest", "order": 3,
-  "title": "Clean-Up Day",
+  "title": "The Crew",
   "tip": {
     "skill": "main-idea", "title": "What is it MOSTLY about?",
-    "text": "The main idea is the big point of the whole text, not one small part. Ask: What is this MOSTLY about? Then check: do most of the sentences talk about that? A detail is only one piece; the main idea covers all of them."
+    "text": "The main idea is the big point of the whole text, not one small part. Ask: What is this MOSTLY about? Then test it: do most sentences support that idea? A detail is one piece of the picture. The main idea is the whole picture."
   },
   "passage": {
-    "title": "Clean-Up Day",
-    "text": "Every Friday, Grade 3 has Clean-Up Day. The whole class helps make the room neat.\n\nRon and Pia sweep the floor. They push the dust into one corner and put it in the trash can. Jun wipes the blackboard with a wet rag until it shines. Nina and Ara line up the chairs in straight rows. The teacher, Ma'am Cruz, waters the plants by the window.\n\nAt the end, everyone looks around. The floor is clean. The board is black again. The chairs are in neat lines. \"A clean room is a happy room,\" Ma'am Cruz says. The class claps. Then they go home, tired but proud."
+    "title": "The Crew",
+    "text": "Every afternoon, five students meet at the covered court. They are a dance crew called Northside. They have no coach and no studio. They have a phone, a speaker, and three hours.\n\nKaye picks the music. Dave, the tallest, works out the moves. The others copy him, step by step, until the whole crew moves as one. When someone falls, they laugh, then try again.\n\nLast month they joined a dance battle at the mall. Big crews from the city were there, with matching jackets and real coaches. Northside wore plain black shirts.\n\nThey did not win. But the crowd cheered loudest for them. One judge said, \"You dance like you mean it.\"\n\nNow they practice harder. The next battle is in March. They still have no coach. They still have each other."
   },
   "words": [
-    { "word": "neat", "meaning": "clean and in good order", "example": "Keep your desk neat." },
-    { "word": "rag", "meaning": "an old piece of cloth used for cleaning", "example": "Wipe the table with a rag." },
-    { "word": "proud", "meaning": "feeling glad about something you did well", "example": "She was proud of her drawing." }
+    { "word": "crew", "meaning": "a group of people who work or perform together", "example": "The dance crew practiced all night." },
+    { "word": "studio", "meaning": "a room made for practicing dance, music, or art", "example": "The studio has mirrors on the wall." },
+    { "word": "judge", "meaning": "a person who decides who wins a contest", "example": "The judge gave the crew a high score." }
   ],
   "items": [
-    { "id": "i1", "type": "mc", "skill": "main-idea", "prompt": "What is the story MOSTLY about?",
-      "choices": ["Jun wiping the blackboard", "Ma'am Cruz's plants", "A class working together to clean their room", "How to sweep a floor"], "answer": 2,
-      "why": "Every paragraph talks about different pupils cleaning the room together. Jun's job is only one detail." },
+    { "id": "i1", "type": "mc", "skill": "main-idea", "prompt": "What is the passage MOSTLY about?",
+      "choices": ["Dave is the tallest dancer.", "A dance crew with no coach keeps practicing and improving together.", "The mall had a dance battle.", "Kaye picks the music."], "answer": 1,
+      "why": "Every paragraph is about the crew working hard together without a coach. The other choices are single details." },
     { "id": "i2", "type": "mc", "skill": "main-idea", "prompt": "Which sentence is a DETAIL, not the main idea?",
-      "choices": ["The class cleans the room every Friday.", "Nina and Ara line up the chairs.", "Everyone helps on Clean-Up Day.", "The class works together."], "answer": 1,
-      "why": "Lining up the chairs is one small part of the clean-up. The other sentences describe the whole story." },
-    { "id": "i3", "type": "mc", "skill": "details", "prompt": "Who waters the plants?",
-      "choices": ["Ron", "Pia", "Ma'am Cruz", "Jun"], "answer": 2,
-      "why": "The text says, \"The teacher, Ma'am Cruz, waters the plants by the window.\"" },
-    { "id": "i4", "type": "mc", "skill": "context-clues", "prompt": "\"Jun wipes the blackboard with a wet rag.\" What is a rag?",
-      "choices": ["A piece of cloth for cleaning", "A kind of chalk", "A small brush", "A bucket of water"], "answer": 0,
-      "why": "You wipe with cloth. A rag is an old piece of cloth used for cleaning." },
-    { "id": "i5", "type": "mc", "skill": "inference", "prompt": "How do the pupils feel at the end of the story?",
-      "choices": ["Angry", "Proud", "Scared", "Bored"], "answer": 1,
-      "why": "The last sentence says they go home \"tired but proud.\"" },
-    { "id": "i6", "type": "short", "skill": "details", "prompt": "On what day of the week is Clean-Up Day?",
-      "accept": ["Friday", "fridays", "every friday"], "why": "The first sentence says, \"Every Friday, Grade 3 has Clean-Up Day.\"" }
+      "choices": ["Northside practices every afternoon without a coach.", "The crew keeps going after losing.", "They have a phone, a speaker, and three hours.", "The crew works as a team."], "answer": 2,
+      "why": "The phone and speaker are one small piece. The other sentences describe the whole story." },
+    { "id": "i3", "type": "mc", "skill": "details", "prompt": "Who works out the moves?",
+      "choices": ["Kaye", "Dave", "The judge", "A coach"], "answer": 1,
+      "why": "\"Dave, the tallest, works out the moves.\"" },
+    { "id": "i4", "type": "mc", "skill": "context-clues", "prompt": "\"They have no coach and no studio.\" What is a studio?",
+      "choices": ["A place to practice", "A kind of shoe", "A music speaker", "A dance move"], "answer": 0,
+      "why": "The crew practices at a covered court because they have no studio, so a studio is a place to practice." },
+    { "id": "i5", "type": "mc", "skill": "inference", "prompt": "What did the judge mean by \"You dance like you mean it\"?",
+      "choices": ["Their moves were wrong.", "They danced with real feeling and effort.", "They needed a coach.", "They should wear jackets."], "answer": 1,
+      "why": "The crowd cheered loudest for them, and the judge was praising their heart, not their gear." },
+    { "id": "i6", "type": "short", "skill": "details", "prompt": "What is the name of the crew? (one word)",
+      "accept": ["Northside"], "why": "\"They are a dance crew called Northside.\"" }
   ]
 }

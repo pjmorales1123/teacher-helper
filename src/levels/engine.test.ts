@@ -1,7 +1,7 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { checkItem, gradeQuest, normalize, skillStats, toPublicItem, weakestSkills } from "./engine.ts";
-import { nextStreak, currentStreak, placementStep, xpFor } from "./progression.ts";
+import { comboBonus, nextStreak, currentStreak, placementStep, xpFor } from "./progression.ts";
 import { buildReview, nextBox } from "./words.ts";
 import { earnedBadges } from "./badges.ts";
 import { addDays, daysBetween } from "./dates.ts";
@@ -61,11 +61,14 @@ describe("progression", () => {
     assert.equal(nextStreak({ streak: 5, last_active: "2026-10-01" }, "2026-10-06"), 1);
     assert.equal(currentStreak({ streak: 5, last_active: "2026-10-01" }, "2026-10-06"), 0);
   });
-  it("awards xp", () => {
+  it("awards xp with combo bonuses", () => {
     const outcome = { results: [], score: 5, total: 6, passed: true };
     assert.equal(xpFor("quest", outcome, true), 75);
     assert.equal(xpFor("quest", outcome, false), 50);
     assert.equal(xpFor("challenge", outcome, false), 100);
+    const r = (c: boolean) => ({ correct: c });
+    assert.equal(comboBonus([r(true), r(true), r(true), r(true), r(false), r(true)]), 10);
+    assert.equal(comboBonus([r(true), r(false), r(true), r(true)]), 0);
   });
   it("places at the last passed level", () => {
     assert.deepEqual(placementStep(1, 1), { placed: 1, nextRound: 1 });

@@ -1,9 +1,9 @@
 {
   "id": "l2-c", "level": 2, "kind": "challenge", "order": 9,
-  "title": "Sprout Challenge: The Fisherman's Lesson",
+  "title": "Elite Challenge: The Fisherman's Lesson",
   "passage": {
     "title": "The Fisherman's Lesson",
-    "text": "Mang Isko had fished the same bay for forty years. Every dawn he pushed his small boat into the water and came back by noon with a basket of fish. But this year the baskets were lighter. Some days he came home with almost nothing.\n\nHis granddaughter Tess, who was in Grade 4, asked why. \"The big boats with the fine nets take everything,\" he said. \"Even the small fish that have not laid eggs yet. So next year there are fewer fish, and the year after, fewer still.\"\n\nTess read about this in school. Her teacher called it overfishing. The class wrote letters to the town council asking for a rule to protect the young fish. Tess read hers aloud at the meeting, her voice shaking at first, then growing steady.\n\nThe council agreed to set a no-fishing season in the bay for three months each year. Mang Isko grumbled about the lost days. But two years later, his basket was heavy again. \"Your letter did that,\" he told Tess. She shook her head. \"The fish did that. We just gave them time.\""
+    "text": "Mang Isko had fished the same bay for forty years. Every dawn he pushed his small boat into the water and came back by noon with a basket of fish. But this year the baskets were lighter. Some days he came home with almost nothing.\n\nHis granddaughter Tess, who was in Grade 9, asked why. \"The big boats with the fine nets take everything,\" he said. \"Even the small fish that have not laid eggs yet. So next year there are fewer fish, and the year after, fewer still.\"\n\nTess read about this in school. Her teacher called it overfishing. The class wrote letters to the town council asking for a rule to protect the young fish. Tess read hers aloud at the meeting, her voice shaking at first, then growing steady.\n\nThe council agreed to set a no-fishing season in the bay for three months each year. Mang Isko grumbled about the lost days. But two years later, his basket was heavy again. \"Your letter did that,\" he told Tess. She shook her head. \"The fish did that. We just gave them time.\""
   },
   "words": [
     { "word": "dawn", "meaning": "the first light of morning", "example": "The rooster crows at dawn." },
@@ -41,7 +41,7 @@
       "steps": ["Mang Isko's baskets became lighter.", "The class wrote letters to the council.", "The council set a no-fishing season.", "Mang Isko's basket was heavy again."],
       "why": "The problem came first, then the letters, then the rule, and the recovery two years later." },
     { "id": "i9", "type": "mc", "skill": "main-idea", "prompt": "What is the main idea of the passage?",
-      "choices": ["Fishing is a hard job.", "Protecting young fish helped the bay recover.", "Grade 4 pupils write letters.", "Old fishermen like to grumble."], "answer": 1,
+      "choices": ["Fishing is a hard job.", "Protecting young fish helped the bay recover.", "Grade 9 students write letters.", "Old fishermen like to grumble."], "answer": 1,
       "why": "The story's big point is that giving the fish time to grow brought them back." },
     { "id": "i10", "type": "short", "skill": "details", "prompt": "At what time of day did Mang Isko push his boat into the water? (one word)",
       "accept": ["dawn", "at dawn", "every dawn"], "why": "\"Every dawn he pushed his small boat into the water.\"" }

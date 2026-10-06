@@ -18,8 +18,8 @@ export async function renderPlacement(onDone) {
       const res = await post("/api/student/levels/placement", { answers });
       if (res.done) {
         root.replaceChildren(h("div", { class: "card result passed" },
-          h("h2", {}, `You start at ${res.levelName}!`),
-          h("p", {}, "This is where the quests will fit you best. You can climb from here."),
+          h("h2", {}, `Rank: ${res.levelName}`),
+          h("p", {}, "This is where the quests match you right now. Pass the Challenge to rank up."),
           h("button", { class: "primary", onclick: onDone }, "Open my map")));
       } else {
         await round();
@@ -30,7 +30,7 @@ export async function renderPlacement(onDone) {
         h("p", { class: "muted" }, `Round ${r.round}. Answer three quick questions. Get two right to climb to the next round.`)),
       ...views.map(({ v }) => h("div", { class: "card" }, v.el)),
       h("div", { class: "row" }, submit,
-        r.round === 1 && h("button", { onclick: async () => { await post("/api/student/levels/placement/skip"); onDone(); } }, "Skip, start at Seedling")));
+        r.round === 1 && h("button", { onclick: async () => { await post("/api/student/levels/placement/skip"); onDone(); } }, "Skip, start at Warrior")));
   }
   await round();
   return root;

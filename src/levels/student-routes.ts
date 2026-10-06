@@ -7,7 +7,10 @@ import { BADGES } from "./badges.ts";
 import type { ContentStore } from "./content.ts";
 import { todayLocal } from "./dates.ts";
 import { checkItem, toPublicItem } from "./engine.ts";
-import { LEVELS, SKILLS, levelMeta } from "./meta.ts";
+import { DAILY_GOAL, LEVELS, SKILLS, levelMeta } from "./meta.ts";
+import { getSetting } from "../db/connection.ts";
+import { getStudent } from "../features/students/repo.ts";
+import { weeklyLeaderboard, xpOnDay } from "./xp-log.ts";
 import { PLACEMENT_ROUND_SIZE, currentStreak, levelView, placementStep } from "./progression.ts";
 import { bestByQuest, getProgress, listBadges, updateProgress } from "./repo.ts";
 import { finishReview } from "./service.ts";
@@ -27,9 +30,17 @@ export function levelsStudentRoutes(db: Db, store: ContentStore): Router {
     const today = todayLocal();
     const bests = bestByQuest(db, studentId);
     const held = new Set(listBadges(db, studentId).map((b) => b.badge));
+    const student = getStudent(db, studentId);
+    const showBoard = getSetting(db, "lv_leaderboard", "1") === "1" && Boolean(student?.section);
+    const board = showBoard ? weeklyLeaderboard(db, student!.section, today) : [];
+    const streak = currentStreak(p, today);
     res.json({
       placed: Boolean(p.placed), level: p.level, levelName: levelMeta(p.level).name, xp: p.xp,
-      streak: currentStreak(p, today), dueWords: countDue(db, studentId, today), wordCount: listWords(db, studentId).length,
+      streak, streakAtRisk: streak > 0 && p.last_active !== today,
+      todayXp: xpOnDay(db, studentId, today), dailyGoal: DAILY_GOAL,
+      leaderboard: board.slice(0, 10).map((r) => ({ ...r, me: r.id === studentId })),
+      myRank: board.find((r) => r.id === studentId)?.rank ?? null, boardSize: board.length,
+      dueWords: countDue(db, studentId, today), wordCount: listWords(db, studentId).length,
       levels: LEVELS.map((l) => ({ level: l.level, name: l.name, reached: l.level <= p.level })),
       map: levelView(p.level, store.forLevel(p.level, "quest"), store.forLevel(p.level, "challenge"), bests),
       badges: BADGES.map((b) => ({ ...b, earned: held.has(b.id) })),

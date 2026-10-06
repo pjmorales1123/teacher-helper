@@ -1,7 +1,7 @@
 // Level map, streaks, XP and placement rules. Pure functions over repo data.
 import { daysBetween } from "./dates.ts";
 import type { GradeOutcome } from "./engine.ts";
-import { MAX_LEVEL, XP, levelMeta, stars } from "./meta.ts";
+import { COMBO_FROM, MAX_LEVEL, XP, levelMeta, stars } from "./meta.ts";
 import type { BestRow } from "./repo.ts";
 import type { Progress, Quest } from "./types.ts";
 
@@ -59,8 +59,19 @@ export function currentStreak(p: Pick<Progress, "streak" | "last_active">, today
   return daysBetween(p.last_active, today) <= 1 ? p.streak : 0;
 }
 
+/** Bonus XP for every correct answer that is the COMBO_FROM-th or later in an unbroken run. */
+export function comboBonus(results: readonly { correct: boolean }[]): number {
+  let run = 0;
+  let bonus = 0;
+  for (const r of results) {
+    run = r.correct ? run + 1 : 0;
+    if (run >= COMBO_FROM) bonus += XP.combo;
+  }
+  return bonus;
+}
+
 export function xpFor(kind: Quest["kind"], outcome: GradeOutcome, firstPass: boolean): number {
-  let xp = outcome.score * XP.item;
+  let xp = outcome.score * XP.item + comboBonus(outcome.results);
   if (kind === "quest" && firstPass) xp += XP.questFirstPass;
   if (kind === "challenge" && outcome.passed) xp += XP.challengePass;
   return xp;

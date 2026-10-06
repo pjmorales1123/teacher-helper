@@ -1,5 +1,5 @@
 // Teacher LEVELS tab: class progress (default) and the content manager.
-import { get } from "../../api.js";
+import { get, put } from "../../api.js";
 import { append, fmtDate, h } from "../../ui.js";
 import { withSection } from "../../section.js";
 import { renderContent } from "./content.js";
@@ -30,8 +30,11 @@ function subnav(active, swap, home) {
 }
 
 async function renderProgress(swap, home) {
-  const o = await get(withSection("/api/levels/overview"));
+  const [o, meta] = await Promise.all([get(withSection("/api/levels/overview")), get("/api/levels/meta")]);
   const root = h("div", {}, subnav("progress", swap, home));
+  const board = h("input", { type: "checkbox", checked: meta.leaderboard, onchange: async () => {
+    const r = await put("/api/levels/settings", { leaderboard: board.checked }); board.checked = r.leaderboard;
+  } });
   const placed = o.students.filter((s) => s.placed).length;
   const levelLine = o.levels.map((l) => `${l.name} ${l.count}`).join(" · ");
   append(root,
@@ -40,6 +43,7 @@ async function renderProgress(swap, home) {
       tile("active this week", o.activeThisWeek, "played at least once"),
       tile("levels", o.levels.length ? levelLine : "–", "students per level"),
       tile("items answered", o.skills.reduce((n, s) => n + s.total, 0), "across the class")),
+    h("p", { class: "small muted" }, h("label", { class: "row", style: "font-weight:400;display:inline-flex" }, board, " Show the weekly section leaderboard to students (XP this week only; ranks and reading levels are never shown to classmates)")),
     h("div", { class: "cols-2" },
       h("div", { class: "card table-wrap" }, h("h3", { style: "padding:12px 12px 0" }, "Skill heatmap (class)"),
         o.skills.length ? h("table", {}, h("thead", {}, h("tr", {}, ...["Skill", "Strand", "Accuracy", "Items"].map((t) => h("th", {}, t)))),

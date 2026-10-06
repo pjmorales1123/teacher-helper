@@ -1,37 +1,37 @@
 {
   "id": "l2-q2", "level": 2, "kind": "quest", "order": 2,
-  "title": "The Empty Lunch Box",
+  "title": "The Empty Seat",
   "tip": {
     "skill": "inference", "title": "Read between the lines",
-    "text": "Writers do not tell you everything. An INFERENCE is a smart guess that uses clues from the text plus what you already know. Formula: text clue + what I know = inference. If a character's hands shake and her voice is small, you can infer she is nervous, even if the word \"nervous\" is never written."
+    "text": "Writers do not spell out everything. An INFERENCE is a smart conclusion from clues in the text plus what you already know. Formula: text clue + what I know = inference. If a character keeps checking his phone and tapping his foot, you can infer he is nervous, even if the word is never used. Always point to the clue that supports your inference."
   },
   "passage": {
-    "title": "The Empty Lunch Box",
-    "text": "Every day at recess, Dindo opened his lunch box and ate quickly. But this week, he kept his lunch box closed. He said he was not hungry. Then he went to the water fountain and drank for a long time.\n\nHis classmate Bea noticed. She also noticed that Dindo's shoes had a hole near the toe and that he had worn the same shirt three days in a row. On Thursday, when Dindo was at the fountain, Bea looked at his lunch box. It was empty.\n\nOn Friday, Bea brought two sandwiches. \"My mother made too many,\" she said, even though her mother had made exactly two. \"Can you help me finish?\" Dindo looked at the sandwich for a moment. Then he smiled a little and took it. They ate together by the window, not saying much. The next week, Bea's mother started making too many sandwiches every day."
+    "title": "The Empty Seat",
+    "text": "Dindo used to be the loudest person in Grade 9 Mabini. Then, in October, he started missing school. First one day a week. Then two. When he did come, he slept at his desk with his head on his arms.\n\nHis classmate Bea noticed other things. His shoes were the same ones from June, now with a hole near the toe. His hands had small cuts and were rough. Once, in the canteen, he counted coins twice before buying a single piece of bread.\n\nBea did not ask him anything in front of the others. On Friday she waited by the gate. \"My tita's eatery needs someone to pass out flyers on Saturdays,\" she said. \"Two hundred pesos and lunch. I told her I know someone.\" This was not exactly true. She had asked her tita for the job that morning.\n\nDindo looked at her for a long moment. \"Okay,\" he said. The next week, he was in school four days. The week after, five."
   },
   "words": [
-    { "word": "noticed", "meaning": "saw or became aware of something", "example": "I noticed a crack in the wall." },
-    { "word": "recess", "meaning": "a short break between classes", "example": "We play tag during recess." },
-    { "word": "exactly", "meaning": "precisely; not more and not less", "example": "The bus leaves at exactly 7:00." }
+    { "word": "noticed", "meaning": "saw or became aware of something", "example": "I noticed a crack in the screen." },
+    { "word": "eatery", "meaning": "a small restaurant", "example": "The eatery near school sells cheap rice meals." },
+    { "word": "flyers", "meaning": "printed papers that advertise something", "example": "They handed out flyers for the sale." }
   ],
   "items": [
-    { "id": "i1", "type": "mc", "skill": "inference", "prompt": "Why did Dindo keep his lunch box closed this week?",
-      "choices": ["He did not like the food.", "He had no food to bring.", "He was sick.", "He wanted to play instead."], "answer": 1,
-      "why": "Clues: the box was empty, he drank water for a long time, his shoes had a hole. Together they show he had no food." },
-    { "id": "i2", "type": "mc", "skill": "inference", "prompt": "Why did Bea say her mother made too many sandwiches?",
-      "choices": ["Her mother really made too many.", "She wanted to share without embarrassing Dindo.", "She did not like sandwiches.", "She wanted Dindo to pay her."], "answer": 1,
-      "why": "The text says her mother made \"exactly two.\" Bea said \"too many\" so Dindo could accept without feeling ashamed." },
-    { "id": "i3", "type": "mc", "skill": "inference", "prompt": "What can you infer from the last sentence?",
-      "choices": ["Bea's mother is forgetful.", "Bea's family decided to keep helping Dindo.", "Bea got tired of sandwiches.", "Dindo's family moved away."], "answer": 1,
-      "why": "\"Started making too many sandwiches every day\" means Bea's mother agreed to send food for Dindo from then on." },
-    { "id": "i4", "type": "mc", "skill": "evidence", "prompt": "Which clue BEST shows that Dindo's family may be poor?",
-      "choices": ["He ate quickly.", "He went to the water fountain.", "His shoes had a hole and he wore the same shirt three days in a row.", "He ate by the window."], "answer": 2,
-      "why": "Worn-out shoes and the same shirt for days are clues about his family's situation." },
-    { "id": "i5", "type": "mc", "skill": "details", "prompt": "On what day did Bea look inside Dindo's lunch box?",
-      "choices": ["Monday", "Wednesday", "Thursday", "Friday"], "answer": 2,
-      "why": "\"On Thursday, when Dindo was at the fountain, Bea looked at his lunch box.\"" },
-    { "id": "i6", "type": "mc", "skill": "context-clues", "prompt": "\"His classmate Bea noticed.\" What does noticed mean?",
-      "choices": ["Forgot", "Saw and paid attention", "Laughed", "Asked"], "answer": 1,
-      "why": "The next sentences list the things Bea saw, so noticed means she saw and paid attention." }
+    { "id": "i1", "type": "mc", "skill": "inference", "prompt": "Why was Dindo probably missing school and sleeping in class?",
+      "choices": ["He was lazy.", "He was working to earn money for his family.", "He was playing games all night.", "He moved to another town."], "answer": 1,
+      "why": "Clues: rough hands with cuts, old shoes, counting coins carefully. Together they point to work and money problems." },
+    { "id": "i2", "type": "mc", "skill": "inference", "prompt": "Why did Bea say \"I told her I know someone\" even though it was not exactly true?",
+      "choices": ["She likes to lie.", "She wanted Dindo to accept the job without feeling like charity.", "Her tita told her to say it.", "She forgot what she said."], "answer": 1,
+      "why": "She created the job for him but made it sound like a normal opening, so he could say yes with his pride intact." },
+    { "id": "i3", "type": "mc", "skill": "inference", "prompt": "What can you infer from the last two sentences?",
+      "choices": ["Dindo quit the job.", "The Saturday job helped enough that Dindo could come back to school.", "Bea stopped talking to him.", "School became easier."], "answer": 1,
+      "why": "After taking the job, his attendance went from a few days to five. The weekend money made the difference." },
+    { "id": "i4", "type": "mc", "skill": "evidence", "prompt": "Which clue BEST supports the idea that Dindo's family had money problems?",
+      "choices": ["He used to be the loudest person in class.", "He counted coins twice before buying a single piece of bread.", "He said \"Okay.\"", "It was October."], "answer": 1,
+      "why": "Counting coins twice for one piece of bread shows he had very little money." },
+    { "id": "i5", "type": "mc", "skill": "details", "prompt": "Where did Bea wait for Dindo?",
+      "choices": ["In the canteen", "By the gate", "At her tita's eatery", "At his house"], "answer": 1,
+      "why": "\"On Friday she waited by the gate.\"" },
+    { "id": "i6", "type": "mc", "skill": "inference", "prompt": "Why did Bea not ask Dindo anything in front of the others?",
+      "choices": ["She was shy.", "She did not want to embarrass him.", "She did not care.", "The teacher was watching."], "answer": 1,
+      "why": "She chose a private moment at the gate, showing she wanted to protect him from shame." }
   ]
 }

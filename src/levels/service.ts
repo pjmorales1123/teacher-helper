@@ -6,14 +6,16 @@ import type { ContentStore } from "./content.ts";
 import { todayLocal } from "./dates.ts";
 import { gradeQuest, revealAnswer, skillStats, weakestSkills, type GradeOutcome } from "./engine.ts";
 import { MAX_LEVEL, XP, levelMeta, stars } from "./meta.ts";
-import { nextStreak, xpFor } from "./progression.ts";
+import { comboBonus, nextStreak, xpFor } from "./progression.ts";
 import { addAttempt, awardBadges, bestByQuest, countAttempts, getProgress, listAttempts, updateProgress } from "./repo.ts";
 import type { ItemResult, Quest } from "./types.ts";
 import { addWords, applyReview, countMastered } from "./words.ts";
+import { logXp } from "./xp-log.ts";
 
 export interface QuestFinish extends GradeOutcome {
   stars: number;
   xp: number;
+  combo: number;
   firstPass: boolean;
   leveledUp: boolean;
   level: number;
@@ -50,6 +52,7 @@ export function finishQuest(db: Db, store: ContentStore, studentId: string, ques
   const leveledUp = quest.kind === "challenge" && outcome.passed && quest.level === p.level && p.level < MAX_LEVEL;
   const level = leveledUp ? p.level + 1 : p.level;
   updateProgress(db, studentId, { xp: p.xp + xp, level, streak: nextStreak(p, today), last_active: today });
+  logXp(db, studentId, today, xp);
   if (quest.kind === "quest") addWords(db, studentId, quest.words, today);
 
   const perfect = outcome.total > 0 && outcome.score === outcome.total;
@@ -67,7 +70,7 @@ export function finishQuest(db: Db, store: ContentStore, studentId: string, ques
   }
   return {
     ...outcome, stars: quest.kind === "quest" ? stars(outcome.score, outcome.total) : (outcome.passed ? 3 : 0),
-    xp, firstPass, leveledUp, level, levelName: levelMeta(level).name, newBadges, review, practice,
+    xp, combo: comboBonus(outcome.results), firstPass, leveledUp, level, levelName: levelMeta(level).name, newBadges, review, practice,
   };
 }
 
@@ -90,5 +93,6 @@ export function finishReview(db: Db, studentId: string, answers: Map<number, num
   const p = getProgress(db, studentId);
   const xp = correct * XP.reviewWord;
   updateProgress(db, studentId, { xp: p.xp + xp, reviews: p.reviews + 1, streak: nextStreak(p, today), last_active: today });
+  logXp(db, studentId, today, xp);
   return { correct, total: results.length, xp, newBadges: refreshBadges(db, studentId, {}), results };
 }

@@ -2,7 +2,14 @@
 
 LEVELS is the second half of Teacher Helper: a gamified English practice system
 where students "play" their way up reading levels. It is remediation that does
-not feel like remediation. Everything in LEVELS is auto-graded on the server
+not feel like remediation.
+
+**Audience.** Junior high school students (Grade 7–10) whose English reading
+is below their grade, often at a Grade 3–5 level. Everything is written as
+"hi-lo" text: low readability, high interest. Passages are about tryouts,
+part-time work, rap battles, OFW parents, dance crews, barangay politics,
+never about lost slippers or a Grade 3 classroom. Students see rank names,
+never a grade band, and their level is private: classmates only ever see XP. Everything in LEVELS is auto-graded on the server
 (no AI tokens are spent when students play). The subscription CLI is used only
 when the teacher asks for a *draft* of a new quest, and the teacher edits and
 publishes it.
@@ -22,16 +29,19 @@ publishes it.
 | Placement before practice | Short adaptive placement test (3 items per level, stop when a level is failed) |
 | Motivation: autonomy, competence, progress visibility (self-determination theory) | Free choice of quest order, stars, XP, streaks, badges, a visible map |
 
-## Levels (students see names, teachers see the band)
+## Ranks (students see names, teachers see the band)
 
-| Level | Name | ≈ Band | Passage length | Style |
+| Level | Rank | ≈ Band | Passage length | Style |
 |---|---|---|---|---|
-| 1 | Seedling | Grade 3 | 90–130 words | short simple sentences, concrete events |
-| 2 | Sprout | Grade 4 | 130–170 | compound sentences, simple inference |
-| 3 | Sapling | Grade 5 | 170–210 | paragraphs with topic sentences, cause/effect |
-| 4 | Tree | Grade 6 | 210–260 | informational + narrative, author's purpose |
-| 5 | Grove | Grade 7 | 250–300 | abstract ideas, point of view, evidence |
-| 6 | Forest | Grade 8 | 290–350 | argument, theme, figurative language |
+| 1 | Warrior | Grade 3 | 90–130 words | short simple sentences, concrete events |
+| 2 | Elite | Grade 4 | 130–170 | compound sentences, simple inference |
+| 3 | Master | Grade 5 | 170–210 | paragraphs with topic sentences, cause/effect |
+| 4 | Grandmaster | Grade 6 | 210–260 | informational + narrative, author's purpose |
+| 5 | Epic | Grade 7 | 250–300 | abstract ideas, point of view, evidence |
+| 6 | Legend | Grade 8 | 290–350 | argument, theme, figurative language |
+
+Rank names follow the ladder every Filipino teen knows from mobile games, so
+"Warrior" reads as a starting rank, not as "Grade 3".
 
 A student who holds Level 2 in the app has repeatedly shown Grade-4-band
 comprehension on unseen passages, which is what transfers to real assessments.
@@ -81,8 +91,18 @@ case/punctuation-insensitively against `accept`).
   best score kept.
 - Challenge: unlocked when every quest in the level is passed. Pass at ≥ 80 %
   → level up. Fail → shows the two weakest skills with the quests that train them.
-- XP: 10 per correct item, +25 first pass of a quest, +50 passing a Challenge,
-  5 per correct word review. XP never goes down.
+- XP: 10 per correct item, +5 combo bonus for the third and every later
+  correct answer in an unbroken run, +25 first pass of a quest, +50 passing a
+  Challenge, 5 per correct word review. XP never goes down.
+- Daily goal: 50 XP, shown as a bar on the home screen. A streak the student
+  has not yet kept today is flagged "play today to keep it".
+- Weekly leaderboard: per section, XP earned in the last 7 days only, so a
+  new or struggling student can reach the top any week. Ranks and reading
+  levels are never shown to classmates. The teacher can switch it off
+  (`lv_leaderboard` setting).
+- Celebrations: correct answers pulse, wrong ones shake, a combo counter
+  shows runs, and clearing a quest or ranking up drops confetti. Honors
+  `prefers-reduced-motion`.
 - Streak: consecutive calendar days (server local date) with at least one
   finished quest, challenge or review.
 - Word bank: a quest's words are added on first completion (box 1, due today).
@@ -98,7 +118,7 @@ case/punctuation-insensitively against `accept`).
 placement_round)`, `lv_attempts(id, student_id, quest_id, level, kind, score,
 total, passed, results JSON, created_at)`, `lv_words(id, student_id, word,
 meaning, example, box, due, UNIQUE(student_id, word))`, `lv_badges(student_id,
-badge, earned_at)`, `lv_quests(id PK, level, kind, title, json, published,
+badge, earned_at)`, `lv_xp_log(id, student_id, day, xp)`, `lv_quests(id PK, level, kind, title, json, published,
 updated_at)`.
 
 ## API
@@ -107,7 +127,7 @@ Student (`/api/student/levels`): `GET /home`, `GET /placement`,
 `POST /placement`, `GET /quests/:id`, `POST /quests/:id/check`,
 `POST /quests/:id/submit`, `GET /review`, `POST /review`.
 
-Teacher (`/api/levels`): `GET /overview?section=`, `GET /students/:id`,
+Teacher (`/api/levels`): `GET /meta`, `PUT /settings`, `GET /overview?section=`, `GET /students/:id`,
 `PUT /students/:id/level`, `GET /content`, `GET /content/:id`,
 `PUT /content/:id`, `DELETE /content/:id`, `POST /content/validate`,
 `POST /content/draft` (CLI draft, never auto-published).

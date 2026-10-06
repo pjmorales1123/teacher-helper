@@ -1,42 +1,42 @@
 {
   "id": "l2-q4", "level": 2, "kind": "quest", "order": 4,
-  "title": "The Science Fair Volcano",
+  "title": "When the Music Stopped",
   "tip": {
     "skill": "summary", "title": "Somebody wanted... but... so... then",
-    "text": "A SUMMARY tells the most important parts in a few sentences, in order, in your own words. Leave out small details. For a story, use this frame: SOMEBODY (who?) WANTED (goal) BUT (problem) SO (what they did) THEN (how it ended). A good summary could be understood by someone who never read the story."
+    "text": "A SUMMARY gives only the most important parts, in order, in your own words. Leave out small details. For a story, use this frame: SOMEBODY (who?) WANTED (goal) BUT (problem) SO (what they did) THEN (how it ended). A good summary makes sense to someone who never read the story."
   },
   "passage": {
-    "title": "The Science Fair Volcano",
-    "text": "Kaye wanted to win the Grade 4 science fair. She decided to build a volcano that would really erupt. For a week she shaped a mountain out of clay around a plastic bottle and painted it brown and red.\n\nOn the morning of the fair, she mixed baking soda inside the bottle. When the judges came, she poured in vinegar. Nothing happened. Kaye's face turned hot. She had forgotten the dish soap that made the foam. One judge, Mr. Santos, waited quietly.\n\nKaye took a deep breath. \"May I try again?\" she asked. She added a squirt of soap and poured the vinegar. Red foam bubbled up and spilled down the sides of the mountain. The crowd clapped.\n\nKaye got second place. The judge wrote on her card: \"Good scientists fix their mistakes.\" Kaye pinned the card above her desk at home."
+    "title": "When the Music Stopped",
+    "text": "The Northside crew had practiced for two months for the city dance battle. They wanted to make the top three. The prize was ten thousand pesos and a slot in the regional finals.\n\nThey were the sixth crew to perform. Thirty seconds into their routine, the speaker cut out. Silence. The crowd went quiet. Dave froze in the middle of a move. For a second, nobody knew what to do.\n\nThen Kaye started clapping a beat. Loud, steady, on time. The rest of the crew picked it up. They finished the whole routine to the sound of their own hands and feet. By the end, the crowd was clapping with them.\n\nThe sound team fixed the speaker, and the judges let them perform again with music. But the judges said the first run was the one they would remember. Northside placed second. On the jeepney home, nobody talked about the prize money. They talked about the clapping."
   },
   "words": [
-    { "word": "erupt", "meaning": "to burst out suddenly, like a volcano throwing out lava", "example": "The volcano could erupt at any time." },
-    { "word": "squirt", "meaning": "a small amount of liquid pushed out quickly", "example": "Add a squirt of lemon to the water." },
-    { "word": "judge", "meaning": "a person who decides who wins a contest", "example": "The judge chose the best painting." }
+    { "word": "routine", "meaning": "a set of moves performed in a fixed order", "example": "The crew practiced their routine every day." },
+    { "word": "froze", "meaning": "suddenly stopped moving, usually from shock or fear", "example": "He froze when he saw the snake." },
+    { "word": "regional", "meaning": "covering a whole region, bigger than one city", "example": "She won the regional science contest." }
   ],
   "items": [
     { "id": "i1", "type": "mc", "skill": "summary", "prompt": "Which is the BEST summary of the story?",
       "choices": [
-        "Kaye painted a clay volcano brown and red and pinned a card above her desk.",
-        "Kaye built a volcano for the science fair. It failed at first because she forgot the soap, so she tried again, it erupted, and she won second place.",
-        "Mr. Santos was a judge who waited quietly and wrote on a card.",
-        "Baking soda and vinegar make foam when you add dish soap."
+        "Northside rode a jeepney home and did not talk about money.",
+        "Northside wanted a top-three finish, but the speaker died mid-routine, so they finished by clapping their own beat, and they placed second.",
+        "Kaye clapped a beat and the crowd joined in.",
+        "The sound team fixed the speaker and the crew performed again."
       ], "answer": 1,
-      "why": "It has the somebody, the goal, the problem, the fix, and the ending. The others are details or just facts." },
+      "why": "It has the somebody, the goal, the problem, the fix, and the ending. The others are single details." },
     { "id": "i2", "type": "mc", "skill": "summary", "prompt": "Which detail should be LEFT OUT of a summary?",
-      "choices": ["Kaye forgot the dish soap.", "Kaye asked to try again.", "The volcano was painted brown and red.", "Kaye got second place."], "answer": 2,
-      "why": "The colors do not change what happens. The other choices are key events." },
+      "choices": ["The speaker cut out.", "They were the sixth crew to perform.", "They finished the routine by clapping.", "They placed second."], "answer": 1,
+      "why": "Being sixth in line does not change what happens. The other choices are key events." },
     { "id": "i3", "type": "mc", "skill": "summary", "prompt": "In the frame \"Somebody wanted... but...\", what is the BUT (the problem)?",
-      "choices": ["Kaye wanted to win.", "The volcano did not erupt the first time.", "The crowd clapped.", "Kaye pinned the card."], "answer": 1,
-      "why": "The problem is the failed eruption. Wanting to win is the goal; clapping and the card are the ending." },
-    { "id": "i4", "type": "mc", "skill": "cause-effect", "prompt": "Why did nothing happen when Kaye first poured the vinegar?",
-      "choices": ["The bottle was empty.", "She forgot the dish soap.", "The judges were late.", "The clay was too thick."], "answer": 1,
-      "why": "\"She had forgotten the dish soap that made the foam.\"" },
-    { "id": "i5", "type": "mc", "skill": "inference", "prompt": "\"Kaye's face turned hot.\" What does this tell you about how she felt?",
-      "choices": ["Embarrassed", "Sleepy", "Proud", "Cold"], "answer": 0,
-      "why": "A hot face in front of judges, after a failure, shows embarrassment." },
+      "choices": ["They wanted the top three.", "The speaker cut out during their routine.", "The crowd clapped with them.", "They placed second."], "answer": 1,
+      "why": "The problem is the dead speaker. Wanting the top three is the goal; the rest is the ending." },
+    { "id": "i4", "type": "mc", "skill": "cause-effect", "prompt": "Why did the crew keep dancing after the music stopped?",
+      "choices": ["The judges ordered them to.", "Kaye clapped a beat and the others followed it.", "The speaker came back on.", "They did not notice."], "answer": 1,
+      "why": "\"Then Kaye started clapping a beat... The rest of the crew picked it up.\"" },
+    { "id": "i5", "type": "mc", "skill": "inference", "prompt": "Why did the judges say the first run was the one they would remember?",
+      "choices": ["It had better music.", "The crew showed courage and teamwork by finishing without music.", "It was shorter.", "The crowd was louder."], "answer": 1,
+      "why": "Finishing a routine with no music, on a clapped beat, is harder and braver than dancing to a track." },
     { "id": "i6", "type": "order", "skill": "sequence", "prompt": "Put the events of the story in order.",
-      "steps": ["Kaye built a clay volcano.", "She poured vinegar and nothing happened.", "She added soap and tried again.", "She won second place."],
-      "why": "Building came first, then the failed try, the fixed try, and finally the prize." }
+      "steps": ["The speaker cut out.", "Kaye started clapping a beat.", "The crowd clapped with them.", "Northside placed second."],
+      "why": "Silence came first, then Kaye's beat, then the crowd joined, and the placing came at the end." }
   ]
 }

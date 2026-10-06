@@ -1,83 +1,279 @@
 {
-  "id": "placement", "level": 1, "kind": "placement", "order": 0,
+  "id": "placement",
+  "level": 1,
+  "kind": "placement",
+  "order": 0,
   "title": "Where do I start?",
   "items": [
-    { "id": "p1a", "level": 1, "type": "mc", "skill": "details",
-      "prompt": "Read: \"Nena has a red bag. She puts her books and a pencil inside. She walks to school with her friend Ana.\"\nWhat is inside Nena's bag?",
-      "choices": ["Food and water", "Books and a pencil", "A toy", "A red cap"], "answer": 1,
-      "why": "The text says she puts her books and a pencil inside." },
-    { "id": "p1b", "level": 1, "type": "mc", "skill": "sequence",
-      "prompt": "Read: \"First, Jun washed his hands. Then he ate his rice. After eating, he brushed his teeth.\"\nWhat did Jun do right after washing his hands?",
-      "choices": ["Brushed his teeth", "Ate his rice", "Went to sleep", "Washed the plate"], "answer": 1,
-      "why": "\"Then he ate his rice\" comes right after washing his hands." },
-    { "id": "p1c", "level": 1, "type": "mc", "skill": "context-clues",
-      "prompt": "Read: \"The puppy was soaked after playing in the rain. Water dripped from its fur.\"\nWhat does soaked mean?",
-      "choices": ["Very wet", "Very hungry", "Sleepy", "Dirty"], "answer": 0,
-      "why": "Water dripping from its fur shows the puppy was very wet." },
-
-    { "id": "p2a", "level": 2, "type": "mc", "skill": "cause-effect",
+    {
+      "id": "p1a",
+      "level": 1,
+      "type": "mc",
+      "skill": "details",
+      "prompt": "Read: \"Nico packed his bag for the game. He put in his jersey, his shoes, and a towel. He left the house at six.\"\nWhat did Nico put in his bag?",
+      "choices": [
+        "Food and water",
+        "His jersey, shoes, and a towel",
+        "A basketball",
+        "A phone charger"
+      ],
+      "answer": 1,
+      "why": "The text says he put in his jersey, his shoes, and a towel."
+    },
+    {
+      "id": "p1b",
+      "level": 1,
+      "type": "mc",
+      "skill": "sequence",
+      "prompt": "Read: \"First, Ria swept the shop floor. Then she wiped the tables. After that, she opened the front door for customers.\"\nWhat did Ria do right after sweeping?",
+      "choices": [
+        "Opened the door",
+        "Wiped the tables",
+        "Counted the money",
+        "Went home"
+      ],
+      "answer": 1,
+      "why": "\"Then she wiped the tables\" comes right after sweeping."
+    },
+    {
+      "id": "p1c",
+      "level": 1,
+      "type": "mc",
+      "skill": "context-clues",
+      "prompt": "Read: \"The players were drenched after practice in the rain. Water dripped from their jerseys.\"\nWhat does drenched mean?",
+      "choices": [
+        "Very wet",
+        "Very tired",
+        "Hungry",
+        "Late"
+      ],
+      "answer": 0,
+      "why": "Water dripping from their jerseys shows they were very wet."
+    },
+    {
+      "id": "p2a",
+      "level": 2,
+      "type": "mc",
+      "skill": "cause-effect",
       "prompt": "Read: \"Because the bridge was closed for repairs, the school bus took the long road and arrived thirty minutes late.\"\nWhy was the bus late?",
-      "choices": ["The driver overslept.", "The bridge was closed, so the bus took a longer road.", "The students were slow.", "It was raining."], "answer": 1,
-      "why": "The sentence begins with \"Because the bridge was closed,\" which is the cause." },
-    { "id": "p2b", "level": 2, "type": "mc", "skill": "inference",
-      "prompt": "Read: \"Mia kept looking at the door. She checked the clock again and again. Her lunch sat untouched.\"\nHow does Mia most likely feel?",
-      "choices": ["Relaxed", "Worried or anxious about someone arriving", "Angry at the clock", "Very hungry"], "answer": 1,
-      "why": "Watching the door, checking the clock, and not eating are clues that she is anxiously waiting." },
-    { "id": "p2c", "level": 2, "type": "mc", "skill": "synonyms",
+      "choices": [
+        "The driver overslept.",
+        "The bridge was closed, so the bus took a longer road.",
+        "The students were slow.",
+        "It was raining."
+      ],
+      "answer": 1,
+      "why": "The sentence begins with \"Because the bridge was closed,\" which is the cause."
+    },
+    {
+      "id": "p2b",
+      "level": 2,
+      "type": "mc",
+      "skill": "inference",
+      "prompt": "Read: \"Marco kept looking at the door of the classroom. He checked the clock again and again. His lunch sat untouched.\"\nHow does Marco most likely feel?",
+      "choices": [
+        "Relaxed",
+        "Anxious about someone or something arriving",
+        "Angry at the clock",
+        "Very hungry"
+      ],
+      "answer": 1,
+      "why": "Watching the door, checking the clock, and not eating are clues that he is nervously waiting."
+    },
+    {
+      "id": "p2c",
+      "level": 2,
+      "type": "mc",
+      "skill": "synonyms",
       "prompt": "Which word means almost the same as enormous?",
-      "choices": ["Tiny", "Huge", "Quick", "Quiet"], "answer": 1,
-      "why": "Enormous and huge both mean very big." },
-
-    { "id": "p3a", "level": 3, "type": "mc", "skill": "main-idea",
+      "choices": [
+        "Tiny",
+        "Huge",
+        "Quick",
+        "Quiet"
+      ],
+      "answer": 1,
+      "why": "Enormous and huge both mean very big."
+    },
+    {
+      "id": "p3a",
+      "level": 3,
+      "type": "mc",
+      "skill": "main-idea",
       "prompt": "Read: \"Bats help farmers. A single bat can eat thousands of insects in one night, including pests that damage crops. Some bats also pollinate fruit trees such as durian. Farmers who protect bat caves often see healthier harvests.\"\nWhat is the main idea?",
-      "choices": ["Bats eat insects at night.", "Bats are useful to farmers in several ways.", "Durian trees need bats.", "Bat caves should be visited."], "answer": 1,
-      "why": "The first sentence states it and the others give supporting examples." },
-    { "id": "p3b", "level": 3, "type": "mc", "skill": "word-parts",
+      "choices": [
+        "Bats eat insects at night.",
+        "Bats are useful to farmers in several ways.",
+        "Durian trees need bats.",
+        "Bat caves should be visited."
+      ],
+      "answer": 1,
+      "why": "The first sentence states it and the others give supporting examples."
+    },
+    {
+      "id": "p3b",
+      "level": 3,
+      "type": "mc",
+      "skill": "word-parts",
       "prompt": "The word misplaced is made of mis + placed. What does it mean?",
-      "choices": ["Placed carefully", "Put in the wrong place", "Placed again", "Not placed yet"], "answer": 1,
-      "why": "The prefix mis- means wrongly, so misplaced means put in the wrong place." },
-    { "id": "p3c", "level": 3, "type": "mc", "skill": "compare",
+      "choices": [
+        "Placed carefully",
+        "Put in the wrong place",
+        "Placed again",
+        "Not placed yet"
+      ],
+      "answer": 1,
+      "why": "The prefix mis- means wrongly, so misplaced means put in the wrong place."
+    },
+    {
+      "id": "p3c",
+      "level": 3,
+      "type": "mc",
+      "skill": "compare",
       "prompt": "Read: \"Both the jeepney and the tricycle carry passengers. However, the jeepney follows a fixed route, while the tricycle can go anywhere the passenger asks.\"\nHow are they DIFFERENT?",
-      "choices": ["Only the jeepney carries passengers.", "The jeepney has a fixed route; the tricycle goes where asked.", "The tricycle is bigger.", "They are not different."], "answer": 1,
-      "why": "\"However\" and \"while\" signal the contrast about routes." },
-
-    { "id": "p4a", "level": 4, "type": "mc", "skill": "purpose",
+      "choices": [
+        "Only the jeepney carries passengers.",
+        "The jeepney has a fixed route; the tricycle goes where asked.",
+        "The tricycle is bigger.",
+        "They are not different."
+      ],
+      "answer": 1,
+      "why": "\"However\" and \"while\" signal the contrast about routes."
+    },
+    {
+      "id": "p4a",
+      "level": 4,
+      "type": "mc",
+      "skill": "purpose",
       "prompt": "Read: \"Join the coastal clean-up this Saturday! Every bag you fill saves a turtle. Bring gloves and your friends. Our beach deserves better.\"\nWhat is the author's purpose?",
-      "choices": ["To entertain with a story about turtles", "To persuade readers to join the clean-up", "To explain how turtles live", "To describe the beach"], "answer": 1,
-      "why": "The commands (\"Join\", \"Bring\") and emotional appeal are meant to persuade." },
-    { "id": "p4b", "level": 4, "type": "mc", "skill": "multiple-meaning",
+      "choices": [
+        "To entertain with a story about turtles",
+        "To persuade readers to join the clean-up",
+        "To explain how turtles live",
+        "To describe the beach"
+      ],
+      "answer": 1,
+      "why": "The commands (\"Join\", \"Bring\") and emotional appeal are meant to persuade."
+    },
+    {
+      "id": "p4b",
+      "level": 4,
+      "type": "mc",
+      "skill": "multiple-meaning",
       "prompt": "\"The nurse checked the patient's pulse, then asked him to be patient while she prepared the medicine.\"\nThe word patient is used with two meanings. Which pair is correct?",
-      "choices": ["A sick person being treated; able to wait calmly", "A doctor; a kind of medicine", "A nurse; a bed", "Fast; slow"], "answer": 0,
-      "why": "First it names the person being treated; second it describes waiting calmly." },
-    { "id": "p4c", "level": 4, "type": "mc", "skill": "summary",
+      "choices": [
+        "A sick person being treated; able to wait calmly",
+        "A doctor; a kind of medicine",
+        "A nurse; a bed",
+        "Fast; slow"
+      ],
+      "answer": 0,
+      "why": "First it names the person being treated; second it describes waiting calmly."
+    },
+    {
+      "id": "p4c",
+      "level": 4,
+      "type": "mc",
+      "skill": "summary",
       "prompt": "Read: \"The town's old market burned down in March. Vendors sold from tents for six months while the council raised funds. In September, a new concrete market opened with more stalls and a fire alarm system.\"\nWhich is the best summary?",
-      "choices": ["Vendors sold from tents.", "After the old market burned, vendors used tents until a safer new market opened six months later.", "The new market has a fire alarm.", "The fire happened in March."], "answer": 1,
-      "why": "It covers the problem, the temporary fix, and the result without small details." },
-
-    { "id": "p5a", "level": 5, "type": "mc", "skill": "point-of-view",
+      "choices": [
+        "Vendors sold from tents.",
+        "After the old market burned, vendors used tents until a safer new market opened six months later.",
+        "The new market has a fire alarm.",
+        "The fire happened in March."
+      ],
+      "answer": 1,
+      "why": "It covers the problem, the temporary fix, and the result without small details."
+    },
+    {
+      "id": "p5a",
+      "level": 5,
+      "type": "mc",
+      "skill": "point-of-view",
       "prompt": "Read: \"I told everyone the new coach was useless. Three weeks later we won our first game in two years, and I had to admit, quietly, that I might have been wrong.\"\nWhat does the first-person point of view reveal?",
-      "choices": ["The coach's thoughts", "The narrator's own bias and later change of mind", "The team's statistics", "The referee's opinion"], "answer": 1,
-      "why": "We see only the narrator's judgment and then the narrator's admission of error." },
-    { "id": "p5b", "level": 5, "type": "mc", "skill": "evidence",
+      "choices": [
+        "The coach's thoughts",
+        "The narrator's own bias and later change of mind",
+        "The team's statistics",
+        "The referee's opinion"
+      ],
+      "answer": 1,
+      "why": "We see only the narrator's judgment and then the narrator's admission of error."
+    },
+    {
+      "id": "p5b",
+      "level": 5,
+      "type": "mc",
+      "skill": "evidence",
       "prompt": "Claim: \"Walking to school improves concentration.\" Which is the STRONGEST evidence?",
-      "choices": ["My cousin walks and gets good grades.", "A study of 2,000 students found that walkers scored 8% higher on attention tests than those driven to school.", "Walking is healthy, everyone knows that.", "Teachers prefer students who walk."], "answer": 1,
-      "why": "A large, measured study directly tests the claim; the others are anecdotes or opinions." },
-    { "id": "p5c", "level": 5, "type": "mc", "skill": "figurative",
+      "choices": [
+        "My cousin walks and gets good grades.",
+        "A study of 2,000 students found that walkers scored 8% higher on attention tests than those driven to school.",
+        "Walking is healthy, everyone knows that.",
+        "Teachers prefer students who walk."
+      ],
+      "answer": 1,
+      "why": "A large, measured study directly tests the claim; the others are anecdotes or opinions."
+    },
+    {
+      "id": "p5c",
+      "level": 5,
+      "type": "mc",
+      "skill": "figurative",
       "prompt": "\"The exam was a mountain, and I had no shoes.\" What does the speaker mean?",
-      "choices": ["The exam was held on a mountain.", "The exam felt huge and the speaker felt unprepared.", "The speaker forgot their shoes.", "The exam was easy."], "answer": 1,
-      "why": "The metaphor compares the exam to a mountain (hard to climb) and lacking shoes to being unprepared." },
-
-    { "id": "p6a", "level": 6, "type": "mc", "skill": "theme",
+      "choices": [
+        "The exam was held on a mountain.",
+        "The exam felt huge and the speaker felt unprepared.",
+        "The speaker forgot their shoes.",
+        "The exam was easy."
+      ],
+      "answer": 1,
+      "why": "The metaphor compares the exam to a mountain (hard to climb) and lacking shoes to being unprepared."
+    },
+    {
+      "id": "p6a",
+      "level": 6,
+      "type": "mc",
+      "skill": "theme",
       "prompt": "Read: \"Every evening Lola sorted the beans: good ones in the pot, bad ones to the chickens. When I asked why she didn't just cook them all, she said, 'Because the chickens also need to eat.'\"\nWhich statement best expresses the theme?",
-      "choices": ["Chickens eat beans.", "Even small acts of sorting can be acts of care for everyone who depends on you.", "Lola was a slow cook.", "Children ask too many questions."], "answer": 1,
-      "why": "The theme is a general idea about life drawn from Lola's reason, not a fact from the story." },
-    { "id": "p6b", "level": 6, "type": "mc", "skill": "evidence",
+      "choices": [
+        "Chickens eat beans.",
+        "Even small acts of sorting can be acts of care for everyone who depends on you.",
+        "Lola was a slow cook.",
+        "Children ask too many questions."
+      ],
+      "answer": 1,
+      "why": "The theme is a general idea about life drawn from Lola's reason, not a fact from the story."
+    },
+    {
+      "id": "p6b",
+      "level": 6,
+      "type": "mc",
+      "skill": "evidence",
       "prompt": "\"Our neighbor got sick after the new cell tower was built, so the tower must be causing illness.\" What is the flaw in this reasoning?",
-      "choices": ["It uses too many statistics.", "It assumes that because one thing happened after another, the first caused the second.", "It attacks the neighbor.", "It is too short."], "answer": 1,
-      "why": "One case and a time sequence do not prove cause; other explanations are ignored." },
-    { "id": "p6c", "level": 6, "type": "mc", "skill": "purpose",
+      "choices": [
+        "It uses too many statistics.",
+        "It assumes that because one thing happened after another, the first caused the second.",
+        "It attacks the neighbor.",
+        "It is too short."
+      ],
+      "answer": 1,
+      "why": "One case and a time sequence do not prove cause; other explanations are ignored."
+    },
+    {
+      "id": "p6c",
+      "level": 6,
+      "type": "mc",
+      "skill": "purpose",
       "prompt": "\"Congratulations to the committee on finishing the road only two years late and only twice over budget.\" What is the author's tone and purpose?",
-      "choices": ["Sincere praise", "Ironic criticism of the committee's poor performance", "Neutral reporting", "Sadness about roads"], "answer": 1,
-      "why": "\"Only two years late\" is sarcasm; the words praise but the meaning criticizes." }
+      "choices": [
+        "Sincere praise",
+        "Ironic criticism of the committee's poor performance",
+        "Neutral reporting",
+        "Sadness about roads"
+      ],
+      "answer": 1,
+      "why": "\"Only two years late\" is sarcasm; the words praise but the meaning criticizes."
+    }
   ]
 }

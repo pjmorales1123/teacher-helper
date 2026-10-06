@@ -1,13 +1,13 @@
 {
   "id": "l4-c", "level": 4, "kind": "challenge", "order": 9,
-  "title": "Tree Challenge: Plastic in the Barangay",
+  "title": "Grandmaster Challenge: Plastic in the Barangay",
   "passage": {
     "title": "The Plastic Problem in Barangay San Roque",
     "text": "Every rainy season, the creek in Barangay San Roque overflows, and every year the reason is the same: plastic. Sachets, bags, and bottles clog the drainage canals until the water has nowhere to go but the streets.\n\nIn 2023, the barangay council tried something new. Instead of simply fining people who littered, they set up a \"plastic bank.\" Residents could bring clean, sorted plastic to a collection point every Saturday and receive points. The points could be exchanged for rice, cooking oil, or school supplies. A local recycling company bought the plastic from the barangay, which paid for the goods.\n\nThe results surprised even the council. In the first six months, residents brought in more than four tons of plastic. Children became the most eager collectors; some organized teams and competed to fill the most sacks. The canals, cleaned by volunteers at the same time, stayed clear through the next rainy season, and for the first time in a decade the creek did not flood the main road.\n\nCritics point out that the plastic bank does not stop plastic from being made or sold. Sachets are still the cheapest way for poor families to buy shampoo and coffee. \"We are cleaning up a problem that someone else keeps creating,\" one councilor admitted. Still, most residents say the program changed how they see waste. As one grandmother put it, \"Before, plastic was garbage. Now it is rice.\""
   },
   "words": [
     { "word": "clog", "meaning": "to block something so that nothing can pass through", "example": "Hair can clog the shower drain." },
-    { "word": "eager", "meaning": "very keen and excited to do something", "example": "The eager pupils raised their hands." },
+    { "word": "eager", "meaning": "very keen and excited to do something", "example": "The eager students raised their hands." },
     { "word": "critics", "meaning": "people who point out problems or disagree with something", "example": "Critics of the plan said it would cost too much." }
   ],
   "items": [

@@ -1,4 +1,4 @@
-// Level bands and skill taxonomy. Students see level names; teachers also see bands.
+// Rank names and skill taxonomy. Students see rank names only; teachers also see the grade band.
 export interface LevelMeta {
   level: number;
   name: string;
@@ -7,12 +7,12 @@ export interface LevelMeta {
 }
 
 export const LEVELS: readonly LevelMeta[] = [
-  { level: 1, name: "Seedling", band: "Grade 3", words: "90–130" },
-  { level: 2, name: "Sprout", band: "Grade 4", words: "130–170" },
-  { level: 3, name: "Sapling", band: "Grade 5", words: "170–210" },
-  { level: 4, name: "Tree", band: "Grade 6", words: "210–260" },
-  { level: 5, name: "Grove", band: "Grade 7", words: "250–300" },
-  { level: 6, name: "Forest", band: "Grade 8", words: "290–350" },
+  { level: 1, name: "Warrior", band: "Grade 3", words: "90–130" },
+  { level: 2, name: "Elite", band: "Grade 4", words: "130–170" },
+  { level: 3, name: "Master", band: "Grade 5", words: "170–210" },
+  { level: 4, name: "Grandmaster", band: "Grade 6", words: "210–260" },
+  { level: 5, name: "Epic", band: "Grade 7", words: "250–300" },
+  { level: 6, name: "Legend", band: "Grade 8", words: "290–350" },
 ];
 export const MAX_LEVEL = LEVELS.length;
 
@@ -45,7 +45,9 @@ export const SKILL_IDS = Object.keys(SKILLS);
 
 export const QUEST_PASS = 0.7;
 export const CHALLENGE_PASS = 0.8;
-export const XP = { item: 10, questFirstPass: 25, challengePass: 50, reviewWord: 5 } as const;
+export const XP = { item: 10, questFirstPass: 25, challengePass: 50, reviewWord: 5, combo: 5 } as const;
+export const COMBO_FROM = 3; // third correct answer in a row and beyond earns the combo bonus
+export const DAILY_GOAL = 50; // XP per day
 export const REVIEW_DAYS = [1, 3, 7, 14, 30] as const;
 
 export function stars(score: number, total: number): number {

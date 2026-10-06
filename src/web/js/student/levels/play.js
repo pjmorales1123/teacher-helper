@@ -26,12 +26,16 @@ export async function playQuest(id, goHome) {
   let index = 0;
 
   const progress = h("div", { class: "muted small" });
+  const combo = h("span", { class: "combo" });
+  const bar = h("div", { class: "bar small-bar" }, h("div", { class: "fill" }));
   const slot = h("div");
-  const right = h("div", {}, progress, slot);
+  const right = h("div", {}, h("div", { class: "row" }, progress, combo), bar, slot);
+  let run = 0;
 
   function showItem() {
     const item = q.items[index];
     progress.textContent = `Question ${index + 1} of ${q.items.length}`;
+    bar.firstChild.style.width = `${Math.round((100 * index) / q.items.length)}%`;
     const view = itemView(item);
     const feedback = h("div", { class: "feedback" });
     const next = h("button", { class: "primary", hidden: true, onclick: () => { index += 1; index < q.items.length ? showItem() : finish(); } },
@@ -43,8 +47,12 @@ export async function playQuest(id, goHome) {
       answers[item.id] = a;
       view.lock();
       view.mark(r.answer, r.correct);
+      run = r.correct ? run + 1 : 0;
+      combo.textContent = run >= 2 ? `🔥 ${run} in a row${run >= 3 ? " +5 XP" : ""}` : "";
+      combo.className = `combo ${run >= 3 ? "hot" : ""}`;
+      view.el.classList.add(r.correct ? "pulse-good" : "shake");
       feedback.className = `feedback ${r.correct ? "good" : "bad"}`;
-      feedback.replaceChildren(h("strong", {}, r.correct ? "Correct! " : "Not quite. "), r.why);
+      feedback.replaceChildren(h("strong", {}, r.correct ? (run >= 3 ? "On fire! " : "Correct! ") : "Not quite. "), r.why);
       check.hidden = true;
       next.hidden = false;
       next.focus();
@@ -71,7 +79,7 @@ export async function playQuest(id, goHome) {
   root.append(h("div", { class: "toolbar" }, h("button", { onclick: goHome }, "← Back"), h("h2", {}, q.title)));
   if (q.tip) root.append(tipScreen(q, startReading));
   else root.append(h("div", { class: "card" }, h("h3", {}, `${q.levelName} Challenge`),
-    h("p", {}, "No tips this time. Read carefully, use everything you practised, and score 80% or more to level up."),
+    h("p", {}, "No tips this time. Read carefully, use everything you practised, and score 80% or more to rank up."),
     h("button", { class: "primary", onclick: startReading }, "Begin challenge")));
   return root;
 }
