@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teacher Helper · Student</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/app.css">
+</head>
+<body>
+<main>
+  <header class="top">
+    <div><h1 id="who">My work</h1><span id="section" class="muted small"></span></div>
+    <button id="logout">Sign out</button>
+  </header>
+  <nav class="tabs" id="tabs">
+    <button data-tab="work" class="active">Required work</button>
+    <button data-tab="claims">Effort claims</button>
+    <button data-tab="grades">My grades</button>
+  </nav>
+  <section id="view"></section>
+</main>
+<script type="module" src="/js/student/main.js"></script>
+</body>
+</html>

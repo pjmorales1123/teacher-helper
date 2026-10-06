@@ -1,24 +1,51 @@
 # Teacher Helper
 
-"Never miss student effort." A self-hosted grading helper for DepEd teachers.
+"Never miss student effort." A self-hosted grading helper for DepEd teachers
+(DepEd Order 015, s. 2026).
 
 ## What it does
-- Teacher uploads competencies, instructions and a rubric for each posted activity.
-- Students see required submissions, check status and score. They submit by phone camera, a dedicated scanner camera, or essay text.
-- Students can file effort claims for extra points. The teacher approves them.
-- Teacher clicks **Pre-score** (AI draft score and comments) or scores manually, then approves.
-- Grades follow DepEd Order 015, s. 2026 (WW/PT/EX weights, transmutation) as swappable presets.
-- AI runs through the host PC's logged-in `claude` or `codex` subscription CLI, not an API.
-
-## Status
-Design phase. See `docs/brief.md`. No code yet.
-
-## Planned structure
-```
-src/features/   activities, submissions, grading, effort-claims
-src/services/   ai adapter (claude/codex CLI), storage
-src/lib/        grade engine, transmutation presets
-```
+- **Teacher** posts activities with competencies, instructions and a rubric.
+  Clicks **Pre-score with AI** for a draft score and feedback, or scores by hand.
+  Approves every grade. Decides on effort claims for extra points.
+- **Student** signs in with ID + PIN, sees required work, status (checked or not)
+  and score. Submits by phone camera, scanner-style image upload, or essay text.
+  Can file effort claims.
+- **Grades** follow DO 015 s. 2026: three terms, WW/PT/EX weights, transmutation.
+  Weights and transmutation tables are swappable presets in `src/lib/presets.ts`.
+  Formative activities are never counted.
+- **AI** runs through the host PC's logged-in `claude` or `codex` subscription
+  CLI. No API key anywhere. The AI only drafts; the teacher approves.
 
 ## Run
-Not yet available.
+Requirements: Node 22.13 or newer (uses the built-in SQLite driver, no native build).
+
+```sh
+cp .env.example .env     # set TEACHER_PASSWORD and AI_BACKEND
+npm install
+npm start                # http://localhost:3000
+```
+
+Students on the same LAN open `http://<teacher-pc-ip>:3000`. For remote
+access use Cloudflare Tunnel or Tailscale pointed at that port.
+
+`npm run check` runs the type check and the unit tests.
+
+## Project layout
+```
+src/server.ts            entry point
+src/app.ts               express app, routes, error handler
+src/config.ts            .env loading (no secrets in code)
+src/db/                  SQLite connection and schema
+src/lib/                 grade engine, presets, shared types, http helpers
+src/services/ai/         prompt builder + CLI runner (claude / codex)
+src/services/auth.ts     cookie sessions: teacher password, student ID + PIN
+src/services/storage.ts  image uploads under DATA_DIR/uploads
+src/features/            students, activities, submissions, grading, effort-claims, grades
+src/web/                 static UI (vanilla JS modules, one CSS file)
+docs/                    brief and architecture notes
+```
+Every file stays under 150 lines.
+
+## Data
+Everything lives in `DATA_DIR` (default `./data`): `teacher-helper.db` and
+`uploads/`. Back up that folder.

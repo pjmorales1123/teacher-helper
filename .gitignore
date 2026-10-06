@@ -3,6 +3,10 @@ node_modules/
 credentials.md
 *.db
 *.sqlite
+*.db-journal
+*.db-wal
+*.db-shm
+data/
 uploads/
 dist/
 .DS_Store

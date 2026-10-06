@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teacher Helper</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/app.css">
+</head>
+<body>
+<main class="login">
+  <h1>Teacher Helper</h1>
+  <p class="muted">Never miss student effort.</p>
+
+  <section class="card">
+    <h2>Student sign-in</h2>
+    <form id="student-form">
+      <div class="field"><label for="sid">Student ID</label><input id="sid" name="id" autocomplete="username" required></div>
+      <div class="field"><label for="spin">PIN</label><input id="spin" name="pin" type="password" inputmode="numeric" autocomplete="current-password" required></div>
+      <button class="primary" type="submit">Sign in as student</button>
+    </form>
+  </section>
+
+  <section class="card">
+    <h2>Teacher sign-in</h2>
+    <form id="teacher-form">
+      <div class="field"><label for="tpass">Password</label><input id="tpass" name="password" type="password" autocomplete="current-password" required></div>
+      <button type="submit">Sign in as teacher</button>
+    </form>
+  </section>
+  <p id="msg" class="small" role="alert"></p>
+</main>
+<script type="module" src="/js/login.js"></script>
+</body>
+</html>

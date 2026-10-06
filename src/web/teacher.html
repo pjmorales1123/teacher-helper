@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teacher Helper · Teacher</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/app.css">
+</head>
+<body>
+<main>
+  <header class="top">
+    <h1>Teacher Helper</h1>
+    <div class="row"><span id="ai-backend" class="muted small"></span><button id="logout">Sign out</button></div>
+  </header>
+  <div id="notice"></div>
+  <nav class="tabs" id="tabs">
+    <button data-tab="grading" class="active">To check</button>
+    <button data-tab="activities">Activities</button>
+    <button data-tab="claims">Effort claims</button>
+    <button data-tab="grades">Grades</button>
+    <button data-tab="students">Students</button>
+  </nav>
+  <section id="view"></section>
+</main>
+<script type="module" src="/js/teacher/main.js"></script>
+</body>
+</html>
