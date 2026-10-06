@@ -3,10 +3,15 @@ import type { Student } from "../../lib/types.ts";
 
 export type PublicStudent = Omit<Student, "pin">;
 
-export function listStudents(db: Db): PublicStudent[] {
-  return db
-    .prepare("SELECT id, name, section, created_at FROM students ORDER BY section, name")
-    .all() as unknown as PublicStudent[];
+export function listStudents(db: Db, section?: string): PublicStudent[] {
+  const sql = "SELECT id, name, section, created_at FROM students";
+  if (section) return db.prepare(`${sql} WHERE section = ? ORDER BY name`).all(section) as unknown as PublicStudent[];
+  return db.prepare(`${sql} ORDER BY section, name`).all() as unknown as PublicStudent[];
+}
+
+export function listSections(db: Db): string[] {
+  const rows = db.prepare("SELECT DISTINCT section FROM students WHERE section != '' ORDER BY section").all();
+  return (rows as { section: string }[]).map((r) => r.section);
 }
 
 export function getStudent(db: Db, id: string): Student | undefined {

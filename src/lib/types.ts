@@ -22,6 +22,7 @@ export interface Activity {
   competencies: string;
   instructions: string;
   rubric: string;
+  section: string; // '' means every section
   due_date: string | null;
   created_at: string;
 }

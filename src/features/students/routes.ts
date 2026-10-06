@@ -3,14 +3,20 @@ import { Router } from "express";
 import type { Db } from "../../db/connection.ts";
 import { bad, notFound, str } from "../../lib/http.ts";
 import { requireTeacher } from "../../services/auth.ts";
-import { deleteStudent, listStudents, upsertStudent } from "./repo.ts";
+import { sectionParam } from "../../lib/section.ts";
+import { deleteStudent, listSections, listStudents, upsertStudent } from "./repo.ts";
+import { importStudents } from "./import.ts";
 
 export function studentRoutes(db: Db): Router {
   const r = Router();
   r.use(requireTeacher);
 
-  r.get("/", (_req, res) => {
-    res.json(listStudents(db));
+  r.get("/", (req, res) => {
+    res.json(listStudents(db, sectionParam(req.query.section)));
+  });
+
+  r.get("/sections", (_req, res) => {
+    res.json(listSections(db));
   });
 
   r.post("/", (req, res) => {
@@ -25,17 +31,10 @@ export function studentRoutes(db: Db): Router {
     res.status(201).json({ ok: true });
   });
 
-  /** Bulk import: lines of "id, name, section, pin". */
+  /** Bulk import from CSV text: "id, name, section, pin" per line. */
   r.post("/import", (req, res) => {
-    const text = str((req.body as Record<string, unknown>).text, "Import text", { required: true });
-    let count = 0;
-    for (const line of text.split(/\r?\n/)) {
-      const [id = "", name = "", section = "", pin = ""] = line.split(",").map((c) => c.trim());
-      if (!id || !name || !/^[A-Za-z0-9-]+$/.test(id)) continue;
-      upsertStudent(db, { id, name, section, pin: /^\d{4,12}$/.test(pin) ? pin : "" });
-      count++;
-    }
-    res.json({ imported: count });
+    const text = str((req.body as Record<string, unknown>).text, "Import text", { required: true, max: 2_000_000 });
+    res.json(importStudents(db, text));
   });
 
   r.delete("/:id", (req, res) => {

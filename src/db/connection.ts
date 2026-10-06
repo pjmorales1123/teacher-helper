@@ -12,7 +12,14 @@ export function openDatabase(path: string): Db {
   const db = new DatabaseSync(path);
   db.exec("PRAGMA journal_mode = WAL; PRAGMA foreign_keys = ON;");
   db.exec(SCHEMA_SQL);
+  migrate(db);
   return db;
+}
+
+/** Add columns introduced after the first release. Safe to run every start. */
+function migrate(db: Db): void {
+  const cols = (db.prepare("PRAGMA table_info(activities)").all() as { name: string }[]).map((c) => c.name);
+  if (!cols.includes("section")) db.exec("ALTER TABLE activities ADD COLUMN section TEXT NOT NULL DEFAULT ''");
 }
 
 /** Read a settings value, falling back to the given default. */

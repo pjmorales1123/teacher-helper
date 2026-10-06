@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS activities (
   competencies TEXT NOT NULL DEFAULT '',
   instructions TEXT NOT NULL DEFAULT '',
   rubric       TEXT NOT NULL DEFAULT '',
+  section      TEXT NOT NULL DEFAULT '',
   due_date     TEXT,
   created_at   TEXT NOT NULL DEFAULT (datetime('now'))
 );

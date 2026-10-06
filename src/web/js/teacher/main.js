@@ -1,6 +1,7 @@
 // Teacher dashboard shell: tab routing and shared state.
 import { get, logout, requireRole } from "../api.js";
 import { clear, h } from "../ui.js";
+import { currentSection, setSection } from "../section.js";
 import { renderActivities } from "./activities.js";
 import { renderClaims } from "./claims.js";
 import { renderGrades } from "./grades.js";
@@ -29,6 +30,7 @@ async function show(name) {
   } catch (err) {
     clear(view).append(h("p", { class: "muted" }, err.message));
   }
+  active = name;
   history.replaceState(null, "", `#${name}`);
 }
 
@@ -38,6 +40,17 @@ tabs.addEventListener("click", (e) => {
 });
 document.getElementById("logout").addEventListener("click", logout);
 
+let active = "overview";
+const picker = document.getElementById("section-pick");
+export async function refreshSections() {
+  const sections = await get("/api/students/sections").catch(() => []);
+  const current = currentSection();
+  picker.replaceChildren(h("option", { value: "" }, "All sections"),
+    ...sections.map((s) => h("option", { value: s, selected: s === current }, s)));
+  if (current && !sections.includes(current)) setSection("");
+}
+picker.addEventListener("change", () => { setSection(picker.value); show(active); });
+
 await requireRole("teacher");
 const health = await get("/api/health").catch(() => ({}));
 document.getElementById("ai-backend").textContent = `AI: ${health.aiBackend ?? "?"} CLI`;
@@ -46,4 +59,5 @@ if (health.passwordIsDefault) {
     h("div", { class: "notice" }, "TEACHER_PASSWORD is not set in .env. Set one before students connect."),
   );
 }
+await refreshSections();
 show(views[location.hash.slice(1)] ? location.hash.slice(1) : "overview");

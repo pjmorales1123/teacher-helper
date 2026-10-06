@@ -9,7 +9,8 @@ import { getActivity, listActivities } from "../activities/repo.ts";
 import { createClaim, listClaimsForStudent } from "../effort-claims/repo.ts";
 import { reportForStudent } from "../grades/report.ts";
 import { getStudent } from "../students/repo.ts";
-import { listForStudent, upsertSubmission } from "./repo.ts";
+import { upsertSubmission } from "./repo.ts";
+import { activityLines } from "../grades/student-report.ts";
 
 export function studentApiRoutes(db: Db, storage: Storage): Router {
   const r = Router();
@@ -21,21 +22,14 @@ export function studentApiRoutes(db: Db, storage: Storage): Router {
     res.json({ id: s.id, name: s.name, section: s.section });
   });
 
-  /** Activities with this student's submission status and approved score. */
+  /** Activities for this student's section with submission status and score. */
   r.get("/activities", (_req, res) => {
-    const mine = new Map(listForStudent(db, res.locals.studentId as string).map((s) => [s.activity_id, s]));
-    const rows = listActivities(db).map((a) => {
-      const sub = mine.get(a.id);
-      return {
-        id: a.id, title: a.title, component: a.component, term: a.term,
-        max_score: a.max_score, formative: a.formative, due_date: a.due_date,
-        instructions: a.instructions, competencies: a.competencies, rubric: a.rubric,
-        status: sub ? (sub.status === "approved" ? "checked" : "submitted") : "missing",
-        score: sub?.status === "approved" ? sub.score : null,
-        feedback: sub?.status === "approved" ? sub.feedback : null,
-        submitted_at: sub?.submitted_at ?? null,
-        kind: sub?.kind ?? null,
-      };
+    const student = getStudent(db, res.locals.studentId as string);
+    if (!student) notFound("Student");
+    const text = new Map(listActivities(db, student.section || undefined).map((a) => [a.id, a]));
+    const rows = activityLines(db, student).map((line) => {
+      const a = text.get(line.id)!;
+      return { ...line, instructions: a.instructions, competencies: a.competencies, rubric: a.rubric };
     });
     res.json(rows);
   });
@@ -44,7 +38,10 @@ export function studentApiRoutes(db: Db, storage: Storage): Router {
     const studentId = res.locals.studentId as string;
     const body = req.body as Record<string, unknown>;
     const activityId = intParam(String(body.activity_id ?? ""), "Activity id");
-    if (!getActivity(db, activityId)) notFound("Activity");
+    const activity = getActivity(db, activityId);
+    const student = getStudent(db, studentId);
+    if (!activity || !student) notFound("Activity");
+    if (activity.section && activity.section !== student.section) bad("This activity is for another section.");
     const kind = body.kind;
     let content: string;
     if (kind === "text") {

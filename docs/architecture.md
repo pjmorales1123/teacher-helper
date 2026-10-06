@@ -22,6 +22,12 @@ The final grade is the average of complete terms' transmuted grades.
 Transmutation presets are parametric (passing initial → 75, floor 60) so the
 SY 2026-27 "70 → 75" rule and a later zero-based rule are both data.
 
+## Sections
+`students.section` is free text. `activities.section` is '' (every section)
+or one section name. The teacher's picker sends `?section=` to list endpoints
+(`src/lib/section.ts`); student endpoints always scope to the student's own
+section. New columns are added by `migrate()` in `src/db/connection.ts`.
+
 ## AI pre-score
 `src/services/ai/cli.ts` spawns `claude -p --output-format json` or
 `codex exec` with the prompt on stdin. Image submissions pass the file path

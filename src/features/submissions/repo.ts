@@ -17,7 +17,7 @@ const JOINED = `
   JOIN students st ON st.id = s.student_id
   JOIN activities a ON a.id = s.activity_id`;
 
-export function listSubmissions(db: Db, filter: { activityId?: number; status?: string }): SubmissionRow[] {
+export function listSubmissions(db: Db, filter: { activityId?: number; status?: string; section?: string }): SubmissionRow[] {
   const where: string[] = [];
   const params: (number | string)[] = [];
   if (filter.activityId) {
@@ -27,6 +27,10 @@ export function listSubmissions(db: Db, filter: { activityId?: number; status?: 
   if (filter.status) {
     where.push("s.status = ?");
     params.push(filter.status);
+  }
+  if (filter.section) {
+    where.push("st.section = ?");
+    params.push(filter.section);
   }
   const sql = `${JOINED} ${where.length ? "WHERE " + where.join(" AND ") : ""} ORDER BY s.submitted_at DESC`;
   return db.prepare(sql).all(...params) as unknown as SubmissionRow[];

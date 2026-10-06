@@ -1,11 +1,13 @@
 // Students tab: roster with ID + PIN sign-in, single add or bulk import.
 import { del, get, post } from "../api.js";
 import { append, busy, field, h, toast } from "../ui.js";
+import { withSection } from "../section.js";
+import { refreshSections } from "./main.js";
 
 export async function renderStudents() {
   const root = h("div");
   const reload = () => renderStudents().then((n) => root.replaceWith(n));
-  const students = await get("/api/students");
+  const students = await get(withSection("/api/students"));
 
   const id = h("input", { placeholder: "e.g. 2026-0012", required: true });
   const name = h("input", { placeholder: "Full name", required: true });
@@ -14,18 +16,25 @@ export async function renderStudents() {
   const add = h("button", { class: "primary", type: "submit" }, "Add student");
   const addForm = h("form", { class: "card", onsubmit: (e) => { e.preventDefault(); busy(add, async () => {
     await post("/api/students", { id: id.value, name: name.value, section: section.value, pin: pin.value });
-    toast("Student added."); reload();
+    toast("Student added."); await refreshSections(); reload();
   }); } },
     h("h3", {}, "Add student"),
     h("div", { class: "grid" }, field("Student ID", id), field("Name", name), field("Section", section), field("PIN", pin)), add);
 
   const bulk = h("textarea", { placeholder: "2026-0001, Juan Dela Cruz, Grade 7 - Rizal, 1234\n2026-0002, Maria Santos, Grade 7 - Rizal, 5678" });
-  const importBtn = h("button", { onclick: () => busy(importBtn, async () => {
+  const file = h("input", { type: "file", accept: ".csv,.txt,text/csv" });
+  file.addEventListener("change", async () => { if (file.files[0]) bulk.value = await file.files[0].text(); });
+  const importBtn = h("button", { class: "primary", onclick: () => busy(importBtn, async () => {
     const r = await post("/api/students/import", { text: bulk.value });
-    toast(`Imported ${r.imported} students.`); reload();
+    const skipped = r.skipped.length ? ` ${r.skipped.length} skipped (line ${r.skipped[0].line}: ${r.skipped[0].reason}).` : "";
+    toast(`Imported ${r.imported} students.${skipped}`, r.skipped.length > 0);
+    await refreshSections(); reload();
   }) }, "Import");
-  const bulkForm = h("details", { class: "card" }, h("summary", {}, "Bulk import (one per line: ID, name, section, PIN)"),
-    h("div", { style: "margin-top:10px" }, bulk), importBtn);
+  const template = "data:text/csv;charset=utf-8," + encodeURIComponent("Student ID,Name,Section,PIN\r\n2026-0001,Juan Dela Cruz,Grade 7 - Rizal,1234\r\n");
+  const bulkForm = h("div", { class: "card" }, h("h3", {}, "Import from CSV"),
+    h("p", { class: "muted small" }, "Columns: Student ID, Name, Section, PIN. A header row is fine. Existing IDs are updated. ",
+      h("a", { href: template, download: "students-template.csv" }, "Download template")),
+    h("div", { class: "field" }, file), h("div", { class: "field" }, bulk), importBtn);
 
   const rows = students.map((s) => h("tr", {}, h("td", {}, s.id), h("td", {}, s.name), h("td", {}, s.section),
     h("td", {}, h("button", { class: "danger", onclick: async () => {

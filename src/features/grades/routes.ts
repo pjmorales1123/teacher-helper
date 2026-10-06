@@ -9,10 +9,12 @@ import {
   TRANSMUTATION_PRESETS,
   WEIGHT_PRESETS,
 } from "../../lib/presets.ts";
+import { sectionParam } from "../../lib/section.ts";
 import { requireTeacher } from "../../services/auth.ts";
 import { getStudent, listStudents } from "../students/repo.ts";
 import { reportsToCsv } from "./csv.ts";
 import { reportForStudent } from "./report.ts";
+import { studentReport } from "./student-report.ts";
 
 export function gradeRoutes(db: Db): Router {
   const r = Router();
@@ -38,12 +40,12 @@ export function gradeRoutes(db: Db): Router {
     res.json({ ok: true });
   });
 
-  r.get("/", (_req, res) => {
-    res.json(listStudents(db).map((s) => reportForStudent(db, s)));
+  r.get("/", (req, res) => {
+    res.json(listStudents(db, sectionParam(req.query.section)).map((s) => reportForStudent(db, s)));
   });
 
-  r.get("/export.csv", (_req, res) => {
-    const csv = reportsToCsv(listStudents(db).map((s) => reportForStudent(db, s)));
+  r.get("/export.csv", (req, res) => {
+    const csv = reportsToCsv(listStudents(db, sectionParam(req.query.section)).map((s) => reportForStudent(db, s)));
     res.setHeader("Content-Type", "text/csv; charset=utf-8");
     res.setHeader("Content-Disposition", `attachment; filename="grades-${new Date().toISOString().slice(0, 10)}.csv"`);
     res.send("\uFEFF" + csv);
@@ -53,6 +55,13 @@ export function gradeRoutes(db: Db): Router {
     const s = getStudent(db, req.params.studentId);
     if (!s) notFound("Student");
     res.json(reportForStudent(db, s));
+  });
+
+  /** Full per-student report: grades, every activity, effort claims. */
+  r.get("/:studentId/report", (req, res) => {
+    const s = getStudent(db, req.params.studentId);
+    if (!s) notFound("Student");
+    res.json(studentReport(db, s));
   });
 
   return r;

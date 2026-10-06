@@ -1,6 +1,7 @@
 // "To check" tab: submissions queue, AI pre-score, approval.
 import { get, post } from "../api.js";
 import { append, badge, busy, field, fmtDate, h, toast } from "../ui.js";
+import { withSection } from "../section.js";
 
 function detail(s, onDone) {
   const score = h("input", { type: "number", min: 0, max: s.max_score, step: "0.5", value: s.score ?? s.draft_score ?? "" });
@@ -42,7 +43,7 @@ function detail(s, onDone) {
 export async function renderGrading() {
   const root = h("div");
   const reload = () => renderGrading().then((n) => root.replaceWith(n));
-  const [subs, activities] = await Promise.all([get("/api/grading/submissions"), get("/api/activities")]);
+  const [subs, activities] = await Promise.all([get(withSection("/api/grading/submissions")), get(withSection("/api/activities"))]);
   const filter = h("select", {}, h("option", { value: "" }, "All activities"),
     ...activities.map((a) => h("option", { value: a.id }, a.title)));
   const onlyPending = h("input", { type: "checkbox", checked: true });

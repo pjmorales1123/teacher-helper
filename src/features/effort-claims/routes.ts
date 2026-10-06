@@ -3,6 +3,7 @@
 import { Router } from "express";
 import type { Db } from "../../db/connection.ts";
 import { bad, intParam, notFound, num, str } from "../../lib/http.ts";
+import { sectionParam } from "../../lib/section.ts";
 import { requireTeacher } from "../../services/auth.ts";
 import { decideClaim, listClaims } from "./repo.ts";
 
@@ -12,7 +13,7 @@ export function effortClaimRoutes(db: Db): Router {
 
   r.get("/", (req, res) => {
     const status = typeof req.query.status === "string" ? req.query.status : undefined;
-    res.json(listClaims(db, status));
+    res.json(listClaims(db, { status, section: sectionParam(req.query.section) }));
   });
 
   r.post("/:id/decide", (req, res) => {

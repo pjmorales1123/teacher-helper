@@ -11,8 +11,13 @@
   and score. Submits by phone camera, scanner-style image upload, or essay text.
   Can file effort claims.
 - **Overview** shows what needs attention and exactly who has not submitted
-  which activity. One click pre-scores every pending submission of an activity.
-- **Grades** export to CSV for the E-Class Record. Activities can be duplicated.
+  which activity, with overdue flags. One click pre-scores every pending
+  submission of an activity. One click downloads a database backup.
+- **Sections**: a picker in the sidebar filters every tab. An activity can be
+  for all sections or one section; students only see their own.
+- **Students** import from a CSV file (ID, name, section, PIN; header optional).
+- **Reports**: click a name in Grades for a printable per-student report.
+  Grades export to CSV for the E-Class Record. Activities can be duplicated.
 - **Grades** follow DO 015 s. 2026: three terms, WW/PT/EX weights, transmutation.
   Weights and transmutation tables are swappable presets in `src/lib/presets.ts`.
   Formative activities are never counted.
@@ -51,4 +56,5 @@ Every file stays under 150 lines.
 
 ## Data
 Everything lives in `DATA_DIR` (default `./data`): `teacher-helper.db` and
-`uploads/`. Back up that folder.
+`uploads/`. The Overview tab's backup button downloads the database; copy the
+`uploads/` folder separately to keep submitted photos.

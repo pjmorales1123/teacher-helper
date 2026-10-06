@@ -15,6 +15,7 @@ a { color: var(--accent); }
 .side { background: var(--card); border-bottom: 1px solid var(--line); padding: 10px 16px 0; }
 .side .brand { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 8px; }
 .side .foot { display: none; }
+.side .field { margin: 0 0 8px; }
 .side .brand .sub { display: block; color: var(--muted); font-size: .8rem; font-weight: 400; }
 nav.tabs { display: flex; gap: 4px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
 nav.tabs button { flex: 0 0 auto; background: none; border: 1px solid transparent; padding: 8px 14px; border-radius: 999px;
@@ -74,7 +75,8 @@ th { font-size: .78rem; text-transform: uppercase; letter-spacing: .03em; color:
 
 /* Bits */
 .badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: .78rem; font-weight: 600; }
-.badge.missing { background: #ffebe9; color: var(--bad); }
+.badge.missing, .badge.overdue { background: #ffebe9; color: var(--bad); }
+.overdue { color: var(--bad); font-weight: 600; }
 .badge.submitted, .badge.pending, .badge.prescored { background: #fff8c5; color: var(--warn); }
 .badge.checked, .badge.approved { background: #dafbe1; color: var(--ok); }
 .badge.rejected { background: #eee; color: var(--muted); }
@@ -91,3 +93,10 @@ pre.work { white-space: pre-wrap; background: var(--bg); padding: 14px; border-r
 .login { max-width: 900px; margin: 6vh auto; padding: 0 16px; }
 .login .cols-2 { margin-top: 16px; }
 @media (max-width: 640px) { main.content { padding: 12px 12px 40px; } .card { padding: 12px; } }
+
+@media print {
+  .side, .no-print, #notice { display: none !important; }
+  body { background: #fff; } main.content { padding: 0; max-width: none; }
+  .card { break-inside: avoid; box-shadow: none; }
+  .cards { grid-template-columns: repeat(3, 1fr); }
+}

@@ -1,6 +1,7 @@
 // Effort claims tab: approve or reject extra-point requests.
 import { get, post } from "../api.js";
 import { append, badge, busy, fmtDate, h, toast } from "../ui.js";
+import { withSection } from "../section.js";
 
 function row(c, reload) {
   const points = h("input", { type: "number", min: 0, step: "0.5", value: c.points || 1, style: "width:90px" });
@@ -25,7 +26,7 @@ function row(c, reload) {
 export async function renderClaims() {
   const root = h("div");
   const reload = () => renderClaims().then((n) => root.replaceWith(n));
-  const claims = await get("/api/claims");
+  const claims = await get(withSection("/api/claims"));
   const pending = claims.filter((c) => c.status === "pending");
   const decided = claims.filter((c) => c.status !== "pending");
   append(root, 

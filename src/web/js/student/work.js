@@ -3,6 +3,8 @@ import { get, post } from "../api.js";
 import { append, badge, busy, h, toast } from "../ui.js";
 import { fileToDataUrl } from "./camera.js";
 
+const today = new Date().toISOString().slice(0, 10);
+
 function submitForm(a, onDone) {
   const text = h("textarea", { placeholder: "Type your essay or answer here…" });
   const photo = h("input", { type: "file", accept: "image/*", capture: "environment" });
@@ -51,7 +53,7 @@ function card(a, root, reload) {
     h("div", { class: "row" },
       h("div", {}, h("h3", {}, a.title),
         h("div", { class: "muted small" }, `${a.component} · Term ${a.term}${a.formative ? " · practice" : ""}${a.due_date ? ` · due ${a.due_date}` : ""}`)),
-      h("div", { class: "right row" }, badge(a.status),
+      h("div", { class: "right row" }, badge(a.status === "missing" && a.due_date && a.due_date < today ? "overdue" : a.status),
         a.score !== null && h("span", { class: "score" }, `${a.score} / ${a.max_score}`))),
     a.feedback && h("p", { class: "small", style: "margin-top:8px" }, h("strong", {}, "Teacher: "), a.feedback),
     h("div", { class: "row", style: "margin-top:8px" },

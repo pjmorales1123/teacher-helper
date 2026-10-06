@@ -6,6 +6,7 @@ export interface ActivityOverview {
   title: string;
   component: string;
   term: number;
+  section: string;
   due_date: string | null;
   formative: number;
   total: number;
@@ -26,13 +27,15 @@ function count(db: Db, sql: string): number {
   return Number((db.prepare(sql).get() as { n: number }).n);
 }
 
-export function buildOverview(db: Db): Overview {
-  const students = db
-    .prepare("SELECT id, name, section FROM students ORDER BY section, name")
-    .all() as unknown as { id: string; name: string; section: string }[];
-  const activities = db
-    .prepare("SELECT id, title, component, term, due_date, formative FROM activities ORDER BY term, due_date, created_at")
-    .all() as unknown as Omit<ActivityOverview, "total" | "submitted" | "approved" | "missing">[];
+export function buildOverview(db: Db, section?: string): Overview {
+  const students = (section
+    ? db.prepare("SELECT id, name, section FROM students WHERE section = ? ORDER BY name").all(section)
+    : db.prepare("SELECT id, name, section FROM students ORDER BY section, name").all()
+  ) as unknown as { id: string; name: string; section: string }[];
+  const activities = (section
+    ? db.prepare("SELECT id, title, component, term, section, due_date, formative FROM activities WHERE section = '' OR section = ? ORDER BY term, due_date, created_at").all(section)
+    : db.prepare("SELECT id, title, component, term, section, due_date, formative FROM activities ORDER BY term, due_date, created_at").all()
+  ) as unknown as Omit<ActivityOverview, "total" | "submitted" | "approved" | "missing">[];
   const subs = db
     .prepare("SELECT activity_id, student_id, status FROM submissions")
     .all() as unknown as { activity_id: number; student_id: string; status: string }[];
@@ -46,12 +49,13 @@ export function buildOverview(db: Db): Overview {
   let missingTotal = 0;
   const rows = activities.map((a): ActivityOverview => {
     const statuses = byActivity.get(a.id) ?? new Map<string, string>();
-    const missing = students.filter((s) => !statuses.has(s.id));
+    const audience = a.section ? students.filter((s) => s.section === a.section) : students;
+    const missing = audience.filter((s) => !statuses.has(s.id));
     missingTotal += missing.length;
-    const values = [...statuses.values()];
+    const values = audience.filter((s) => statuses.has(s.id)).map((s) => statuses.get(s.id)!);
     return {
       ...a,
-      total: students.length,
+      total: audience.length,
       submitted: values.filter((v) => v !== "approved").length,
       approved: values.filter((v) => v === "approved").length,
       missing,

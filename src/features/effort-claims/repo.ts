@@ -15,9 +15,13 @@ const JOINED = `
   JOIN students st ON st.id = c.student_id
   JOIN activities a ON a.id = c.activity_id`;
 
-export function listClaims(db: Db, status?: string): ClaimRow[] {
-  const sql = status ? `${JOINED} WHERE c.status = ? ORDER BY c.created_at DESC` : `${JOINED} ORDER BY c.created_at DESC`;
-  return (status ? db.prepare(sql).all(status) : db.prepare(sql).all()) as unknown as ClaimRow[];
+export function listClaims(db: Db, filter: { status?: string; section?: string }): ClaimRow[] {
+  const where: string[] = [];
+  const params: string[] = [];
+  if (filter.status) { where.push("c.status = ?"); params.push(filter.status); }
+  if (filter.section) { where.push("st.section = ?"); params.push(filter.section); }
+  const sql = `${JOINED} ${where.length ? "WHERE " + where.join(" AND ") : ""} ORDER BY c.created_at DESC`;
+  return db.prepare(sql).all(...params) as unknown as ClaimRow[];
 }
 
 export function listClaimsForStudent(db: Db, studentId: string): ClaimRow[] {
