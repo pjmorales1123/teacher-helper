@@ -16,6 +16,9 @@ import { studentApiRoutes } from "./features/submissions/student-routes.ts";
 import { HttpError } from "./lib/http.ts";
 import type { AiAdapter } from "./services/ai/adapter.ts";
 import type { Storage } from "./services/storage.ts";
+import { createContentStore, loadBuiltIn } from "./levels/content.ts";
+import { levelsStudentRoutes } from "./levels/student-routes.ts";
+import { levelsTeacherRoutes } from "./levels/teacher-routes.ts";
 
 export interface AppDeps {
   config: Config;
@@ -30,6 +33,7 @@ export function createApp({ config, db, ai, storage }: AppDeps): express.Express
   const app = express();
   app.disable("x-powered-by");
   app.use(express.json({ limit: "12mb" }));
+  const content = createContentStore(db, loadBuiltIn());
 
   app.get("/api/health", (_req, res) => {
     res.json({ ok: true, aiBackend: config.aiBackend, passwordIsDefault: config.teacherPasswordIsDefault });
@@ -42,6 +46,8 @@ export function createApp({ config, db, ai, storage }: AppDeps): express.Express
   app.use("/api/grades", gradeRoutes(db));
   app.use("/api/overview", overviewRoutes(db));
   app.use("/api/backup", backupRoutes(db, config.dbPath));
+  app.use("/api/levels", levelsTeacherRoutes(db, content, config));
+  app.use("/api/student/levels", levelsStudentRoutes(db, content));
   app.use("/api/student", studentApiRoutes(db, storage));
   app.use("/api", (_req, res) => {
     res.status(404).json({ error: "Unknown API route." });
