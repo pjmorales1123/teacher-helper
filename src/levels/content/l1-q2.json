@@ -1,0 +1,37 @@
+{
+  "id": "l1-q2", "level": 1, "kind": "quest", "order": 2,
+  "title": "Making Champorado",
+  "tip": {
+    "skill": "sequence", "title": "First, next, then, last",
+    "text": "Stories and instructions happen in order. Look for signal words like FIRST, NEXT, THEN, AFTER, and FINALLY. When you are asked what happened before or after something, go back to the text and check which sentence comes earlier."
+  },
+  "passage": {
+    "title": "Making Champorado",
+    "text": "It was a rainy Saturday. Lolo Ben said, \"Let us make champorado.\"\n\nFirst, Lolo washed one cup of sticky rice. Next, he put the rice in a pot with five cups of water. He turned on the stove and let it boil. Mia stirred the pot with a wooden spoon so the rice would not stick.\n\nAfter ten minutes, Lolo added three pieces of tablea. The tablea melted and the rice turned brown. Then he added sugar. Mia tasted it. \"More sugar, Lolo!\" she said.\n\nFinally, Lolo poured the champorado into two bowls and added a little milk on top. They ate it while the rain fell outside. Mia said it was the best breakfast ever."
+  },
+  "words": [
+    { "word": "stirred", "meaning": "mixed something by moving a spoon around in it", "example": "He stirred the soup so it would not burn." },
+    { "word": "melted", "meaning": "changed from solid to liquid because of heat", "example": "The ice melted in the sun." },
+    { "word": "finally", "meaning": "at the end; after everything else", "example": "Finally, the bus arrived." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "sequence", "prompt": "What did Lolo do FIRST?",
+      "choices": ["He added the tablea.", "He washed the sticky rice.", "He poured milk on top.", "He added sugar."], "answer": 1,
+      "why": "The text says, \"First, Lolo washed one cup of sticky rice.\"" },
+    { "id": "i2", "type": "mc", "skill": "sequence", "prompt": "What happened right AFTER Lolo added the tablea?",
+      "choices": ["Mia washed the pot.", "The rice turned brown.", "They ate breakfast.", "Lolo turned on the stove."], "answer": 1,
+      "why": "\"The tablea melted and the rice turned brown\" comes right after he added the tablea." },
+    { "id": "i3", "type": "order", "skill": "sequence", "prompt": "Put the steps in the correct order.",
+      "steps": ["Wash the sticky rice.", "Boil the rice in water.", "Add the tablea.", "Add sugar.", "Pour into bowls with milk."],
+      "why": "The signal words First, Next, After, Then, and Finally show this order." },
+    { "id": "i4", "type": "mc", "skill": "details", "prompt": "How many pieces of tablea did Lolo add?",
+      "choices": ["One", "Two", "Three", "Five"], "answer": 2,
+      "why": "The text says, \"Lolo added three pieces of tablea.\"" },
+    { "id": "i5", "type": "mc", "skill": "context-clues", "prompt": "\"The tablea melted and the rice turned brown.\" What does melted mean?",
+      "choices": ["Got cold and hard", "Turned to liquid from heat", "Broke into pieces", "Became very loud"], "answer": 1,
+      "why": "Tablea is a hard chocolate. In a hot pot it turns to liquid, which makes the rice brown." },
+    { "id": "i6", "type": "mc", "skill": "inference", "prompt": "Why did Mia stir the pot?",
+      "choices": ["So the rice would not stick", "Because she was bored", "To make the rice cold", "To add more water"], "answer": 0,
+      "why": "The story says she stirred \"so the rice would not stick.\"" }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "l3-q4", "level": 3, "kind": "quest", "order": 4,
+  "title": "The Last Jeepney Home",
+  "tip": {
+    "skill": "inference", "title": "What the character does not say",
+    "text": "To understand a character, watch three things: what they DO, what they SAY, and what others say about them. Then ask: why would a person act this way? A character who keeps checking the clock and tapping her foot is anxious. A character who gives away his last coin is generous. Motives are rarely stated; you infer them from actions."
+  },
+  "passage": {
+    "title": "The Last Jeepney Home",
+    "text": "Rain hammered the tin roof of the waiting shed. It was past seven, and Lito had been standing there for forty minutes. He counted the coins in his pocket again: fourteen pesos. The fare home was fifteen.\n\nA jeepney finally splashed to a stop. It was the last trip of the night. Lito climbed in and sat near the back, keeping his eyes on the floor. When the driver's helper came for the fare, Lito held out the coins without a word.\n\nThe helper, a boy not much older than Lito, counted them. He looked at Lito's wet uniform, then at the coins, then at the driver, who was watching in the mirror. The driver gave a tiny nod. \"Okay na,\" the helper said, and moved on.\n\nLito said nothing until his stop. As he jumped down, he turned and called out, \"Salamat po!\" The driver raised one hand without looking back. The jeepney rolled away into the rain, its lights blurring, and Lito ran the rest of the way home."
+  },
+  "words": [
+    { "word": "hammered", "meaning": "hit hard and repeatedly", "example": "The rain hammered the windows all night." },
+    { "word": "fare", "meaning": "the money you pay to ride a vehicle", "example": "The tricycle fare went up by two pesos." },
+    { "word": "blurring", "meaning": "becoming unclear or hard to see", "example": "Her eyes were blurring with tears." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "inference", "prompt": "Why did Lito keep his eyes on the floor?",
+      "choices": ["He was looking for coins he dropped.", "He was ashamed that he did not have the full fare.", "He was sleepy.", "He did not like the driver."], "answer": 1,
+      "why": "He had only fourteen pesos for a fifteen-peso fare. Looking down and saying nothing shows embarrassment." },
+    { "id": "i2", "type": "mc", "skill": "inference", "prompt": "What did the driver's tiny nod mean?",
+      "choices": ["\"Make him get off.\"", "\"Let him ride; it is fine.\"", "\"Count the coins again.\"", "\"We are at the last stop.\""], "answer": 1,
+      "why": "Right after the nod, the helper says \"Okay na\" and moves on. The driver was giving permission." },
+    { "id": "i3", "type": "mc", "skill": "inference", "prompt": "What does the helper's behavior tell you about him?",
+      "choices": ["He is careless with money.", "He is observant and kind.", "He is angry at Lito.", "He does not know how to count."], "answer": 1,
+      "why": "He noticed Lito's wet uniform and the short fare, checked with the driver, and chose to be kind." },
+    { "id": "i4", "type": "mc", "skill": "inference", "prompt": "Why did Lito call out \"Salamat po!\" only when he was jumping down?",
+      "choices": ["He forgot earlier.", "He was too shy to speak until he was leaving.", "The driver asked him to.", "It was a rule of the jeepney."], "answer": 1,
+      "why": "He \"said nothing until his stop.\" His silence throughout shows shyness or shame; he thanked them once it was safe to leave." },
+    { "id": "i5", "type": "mc", "skill": "figurative", "prompt": "\"Rain hammered the tin roof.\" What does this comparison tell you?",
+      "choices": ["Someone was fixing the roof.", "The rain was heavy and loud.", "The rain was soft.", "The roof was broken."], "answer": 1,
+      "why": "Hammering is hard and loud; the author means the rain hit the roof hard and loudly." },
+    { "id": "i6", "type": "mc", "skill": "details", "prompt": "How much was the fare home?",
+      "choices": ["Twelve pesos", "Fourteen pesos", "Fifteen pesos", "Twenty pesos"], "answer": 2,
+      "why": "\"The fare home was fifteen.\"" }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "l1-q4", "level": 1, "kind": "quest", "order": 4,
+  "title": "The Kite Festival",
+  "tip": {
+    "skill": "context-clues", "title": "Clues around the word",
+    "text": "When you meet a new word, do not stop. Read the words BEFORE and AFTER it. Ask: What is happening? What would make sense here? The other words are clues that help you guess the meaning. Then re-read the sentence with your guess to check it."
+  },
+  "passage": {
+    "title": "The Kite Festival",
+    "text": "The wind was strong on the beach. It was the day of the kite festival.\n\nPaolo held his kite tightly. It was shaped like a fish, with a long tail. He had made it with his father from bamboo sticks and old paper. Other kids had kites shaped like birds, boxes, and stars.\n\n\"Go!\" the judge shouted. Paolo ran. The kite rose into the air. It climbed higher and higher. Then a strong gust pushed it sideways. The string went tight. Paolo pulled gently, and the kite steadied. It flew straight and proud above the beach.\n\nPaolo did not win first prize. But a small girl pointed at his kite and said, \"That one looks like it is swimming in the sky.\" Paolo smiled. That was enough."
+  },
+  "words": [
+    { "word": "gust", "meaning": "a sudden, strong blow of wind", "example": "A gust blew the papers off the table." },
+    { "word": "steadied", "meaning": "became steady; stopped shaking or moving around", "example": "He steadied the ladder before climbing." },
+    { "word": "festival", "meaning": "a special day or event with many people celebrating", "example": "Our town has a festival every May." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "context-clues", "prompt": "\"Then a strong gust pushed it sideways.\" What is a gust?",
+      "choices": ["A sudden strong wind", "A big wave", "A loud shout", "A piece of string"], "answer": 0,
+      "why": "The story is about wind and kites. Something that pushes a kite sideways on a windy beach is a sudden blow of wind." },
+    { "id": "i2", "type": "mc", "skill": "context-clues", "prompt": "\"Paolo pulled gently, and the kite steadied.\" What does steadied mean?",
+      "choices": ["Fell to the ground", "Became still and stable", "Got bigger", "Broke apart"], "answer": 1,
+      "why": "After it steadied, the kite \"flew straight.\" So steadied means it stopped wobbling and became stable." },
+    { "id": "i3", "type": "mc", "skill": "context-clues", "prompt": "Which words in the passage help you know what a festival is?",
+      "choices": ["\"bamboo sticks and old paper\"", "\"Other kids had kites\" and \"the judge shouted\"", "\"held his kite tightly\"", "\"a small girl pointed\""], "answer": 1,
+      "why": "Many kids, a judge, and a prize tell you a festival is a big event where people gather and celebrate." },
+    { "id": "i4", "type": "mc", "skill": "details", "prompt": "What was Paolo's kite shaped like?",
+      "choices": ["A bird", "A star", "A box", "A fish"], "answer": 3,
+      "why": "The text says, \"It was shaped like a fish, with a long tail.\"" },
+    { "id": "i5", "type": "mc", "skill": "inference", "prompt": "Why was Paolo happy even though he did not win?",
+      "choices": ["He got a new kite.", "A girl said his kite looked like it was swimming in the sky.", "The judge gave him money.", "His father won instead."], "answer": 1,
+      "why": "The girl's words made Paolo smile, and the story says, \"That was enough.\"" },
+    { "id": "i6", "type": "order", "skill": "sequence", "prompt": "Put the events in order.",
+      "steps": ["The judge shouted \"Go!\"", "The kite climbed higher and higher.", "A gust pushed the kite sideways.", "Paolo pulled and the kite steadied."],
+      "why": "The story tells these events one after the other in the third paragraph." }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "l1-q3", "level": 1, "kind": "quest", "order": 3,
+  "title": "Clean-Up Day",
+  "tip": {
+    "skill": "main-idea", "title": "What is it MOSTLY about?",
+    "text": "The main idea is the big point of the whole text, not one small part. Ask: What is this MOSTLY about? Then check: do most of the sentences talk about that? A detail is only one piece; the main idea covers all of them."
+  },
+  "passage": {
+    "title": "Clean-Up Day",
+    "text": "Every Friday, Grade 3 has Clean-Up Day. The whole class helps make the room neat.\n\nRon and Pia sweep the floor. They push the dust into one corner and put it in the trash can. Jun wipes the blackboard with a wet rag until it shines. Nina and Ara line up the chairs in straight rows. The teacher, Ma'am Cruz, waters the plants by the window.\n\nAt the end, everyone looks around. The floor is clean. The board is black again. The chairs are in neat lines. \"A clean room is a happy room,\" Ma'am Cruz says. The class claps. Then they go home, tired but proud."
+  },
+  "words": [
+    { "word": "neat", "meaning": "clean and in good order", "example": "Keep your desk neat." },
+    { "word": "rag", "meaning": "an old piece of cloth used for cleaning", "example": "Wipe the table with a rag." },
+    { "word": "proud", "meaning": "feeling glad about something you did well", "example": "She was proud of her drawing." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "main-idea", "prompt": "What is the story MOSTLY about?",
+      "choices": ["Jun wiping the blackboard", "Ma'am Cruz's plants", "A class working together to clean their room", "How to sweep a floor"], "answer": 2,
+      "why": "Every paragraph talks about different pupils cleaning the room together. Jun's job is only one detail." },
+    { "id": "i2", "type": "mc", "skill": "main-idea", "prompt": "Which sentence is a DETAIL, not the main idea?",
+      "choices": ["The class cleans the room every Friday.", "Nina and Ara line up the chairs.", "Everyone helps on Clean-Up Day.", "The class works together."], "answer": 1,
+      "why": "Lining up the chairs is one small part of the clean-up. The other sentences describe the whole story." },
+    { "id": "i3", "type": "mc", "skill": "details", "prompt": "Who waters the plants?",
+      "choices": ["Ron", "Pia", "Ma'am Cruz", "Jun"], "answer": 2,
+      "why": "The text says, \"The teacher, Ma'am Cruz, waters the plants by the window.\"" },
+    { "id": "i4", "type": "mc", "skill": "context-clues", "prompt": "\"Jun wipes the blackboard with a wet rag.\" What is a rag?",
+      "choices": ["A piece of cloth for cleaning", "A kind of chalk", "A small brush", "A bucket of water"], "answer": 0,
+      "why": "You wipe with cloth. A rag is an old piece of cloth used for cleaning." },
+    { "id": "i5", "type": "mc", "skill": "inference", "prompt": "How do the pupils feel at the end of the story?",
+      "choices": ["Angry", "Proud", "Scared", "Bored"], "answer": 1,
+      "why": "The last sentence says they go home \"tired but proud.\"" },
+    { "id": "i6", "type": "short", "skill": "details", "prompt": "On what day of the week is Clean-Up Day?",
+      "accept": ["Friday", "fridays", "every friday"], "why": "The first sentence says, \"Every Friday, Grade 3 has Clean-Up Day.\"" }
+  ]
+}

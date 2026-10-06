@@ -1,0 +1,54 @@
+// Level bands and skill taxonomy. Students see level names; teachers also see bands.
+export interface LevelMeta {
+  level: number;
+  name: string;
+  band: string;
+  words: string;
+}
+
+export const LEVELS: readonly LevelMeta[] = [
+  { level: 1, name: "Seedling", band: "Grade 3", words: "90–130" },
+  { level: 2, name: "Sprout", band: "Grade 4", words: "130–170" },
+  { level: 3, name: "Sapling", band: "Grade 5", words: "170–210" },
+  { level: 4, name: "Tree", band: "Grade 6", words: "210–260" },
+  { level: 5, name: "Grove", band: "Grade 7", words: "250–300" },
+  { level: 6, name: "Forest", band: "Grade 8", words: "290–350" },
+];
+export const MAX_LEVEL = LEVELS.length;
+
+export function levelMeta(level: number): LevelMeta {
+  return LEVELS[Math.min(Math.max(level, 1), MAX_LEVEL) - 1]!;
+}
+
+export type Strand = "vocabulary" | "comprehension" | "analysis";
+
+export const SKILLS: Record<string, { label: string; strand: Strand }> = {
+  "context-clues": { label: "Context clues", strand: "vocabulary" },
+  "word-parts": { label: "Word parts", strand: "vocabulary" },
+  synonyms: { label: "Synonyms & antonyms", strand: "vocabulary" },
+  "multiple-meaning": { label: "Multiple meanings", strand: "vocabulary" },
+  "main-idea": { label: "Main idea", strand: "comprehension" },
+  details: { label: "Key details", strand: "comprehension" },
+  sequence: { label: "Sequence", strand: "comprehension" },
+  "cause-effect": { label: "Cause & effect", strand: "comprehension" },
+  inference: { label: "Inference", strand: "comprehension" },
+  summary: { label: "Summarizing", strand: "comprehension" },
+  purpose: { label: "Author's purpose", strand: "analysis" },
+  "point-of-view": { label: "Point of view", strand: "analysis" },
+  compare: { label: "Compare & contrast", strand: "analysis" },
+  evidence: { label: "Using evidence", strand: "analysis" },
+  theme: { label: "Theme", strand: "analysis" },
+  figurative: { label: "Figurative language", strand: "analysis" },
+};
+
+export const SKILL_IDS = Object.keys(SKILLS);
+
+export const QUEST_PASS = 0.7;
+export const CHALLENGE_PASS = 0.8;
+export const XP = { item: 10, questFirstPass: 25, challengePass: 50, reviewWord: 5 } as const;
+export const REVIEW_DAYS = [1, 3, 7, 14, 30] as const;
+
+export function stars(score: number, total: number): number {
+  const r = total ? score / total : 0;
+  return r >= 1 ? 3 : r >= 0.85 ? 2 : r >= QUEST_PASS ? 1 : 0;
+}

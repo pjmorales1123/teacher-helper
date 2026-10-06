@@ -1,0 +1,36 @@
+{
+  "id": "l1-q1", "level": 1, "kind": "quest", "order": 1,
+  "title": "The Lost Slipper",
+  "tip": {
+    "skill": "details", "title": "Right there!",
+    "text": "Some answers are RIGHT THERE in the story. Find a key word from the question, put your finger on it in the text, and read the sentence around it. The answer is usually in that same sentence."
+  },
+  "passage": {
+    "title": "The Lost Slipper",
+    "text": "Liza could not find her blue slipper. She looked under the bed. She looked behind the door. She looked inside her school bag. It was not there.\n\nHer little brother Toto was playing in the yard. He was wearing one blue slipper and one red slipper. \"Toto!\" Liza shouted. \"That is my slipper!\"\n\nToto laughed. \"I could not find mine,\" he said. \"The dog took it.\"\n\nLiza looked at the dog, Bantay. Bantay was lying in the shade. Next to him was a red slipper, all muddy. Liza sighed. Then she laughed too. \"Let us wash it together,\" she said."
+  },
+  "words": [
+    { "word": "shade", "meaning": "a cool, darker spot where the sun does not reach", "example": "The cat slept in the shade of the tree." },
+    { "word": "muddy", "meaning": "covered with wet, soft dirt", "example": "My shoes got muddy after the rain." },
+    { "word": "sighed", "meaning": "let out a long breath, often when tired or sad", "example": "She sighed when she saw the long line." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "details", "prompt": "What color is Liza's lost slipper?",
+      "choices": ["Red", "Blue", "Yellow", "Black"], "answer": 1,
+      "why": "The first sentence says, \"Liza could not find her blue slipper.\"" },
+    { "id": "i2", "type": "mc", "skill": "details", "prompt": "Where was Toto playing?",
+      "choices": ["In the kitchen", "In the classroom", "In the yard", "On the road"], "answer": 2,
+      "why": "The story says, \"Her little brother Toto was playing in the yard.\"" },
+    { "id": "i3", "type": "mc", "skill": "details", "prompt": "Who took Toto's slipper?",
+      "choices": ["Liza", "Their mother", "The dog, Bantay", "Nobody"], "answer": 2,
+      "why": "Toto says, \"The dog took it,\" and Liza sees the muddy red slipper next to Bantay." },
+    { "id": "i4", "type": "mc", "skill": "context-clues", "prompt": "Bantay was lying in the shade. What is shade?",
+      "choices": ["A cool spot away from the sun", "A kind of food", "A loud sound", "A small house"], "answer": 0,
+      "why": "A dog lies down in a cool place. Shade is the darker, cooler spot where the sun does not reach." },
+    { "id": "i5", "type": "order", "skill": "sequence", "prompt": "Put the events in the order they happened.",
+      "steps": ["Liza looked under the bed.", "Liza saw Toto wearing her slipper.", "Liza found the muddy red slipper next to Bantay."],
+      "why": "First Liza searched, then she saw Toto, and last she found the red slipper by the dog." },
+    { "id": "i6", "type": "short", "skill": "details", "prompt": "What is the name of the dog? (one word)",
+      "accept": ["Bantay"], "why": "The story says, \"Liza looked at the dog, Bantay.\"" }
+  ]
+}

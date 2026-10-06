@@ -1,0 +1,42 @@
+{
+  "id": "l2-q4", "level": 2, "kind": "quest", "order": 4,
+  "title": "The Science Fair Volcano",
+  "tip": {
+    "skill": "summary", "title": "Somebody wanted... but... so... then",
+    "text": "A SUMMARY tells the most important parts in a few sentences, in order, in your own words. Leave out small details. For a story, use this frame: SOMEBODY (who?) WANTED (goal) BUT (problem) SO (what they did) THEN (how it ended). A good summary could be understood by someone who never read the story."
+  },
+  "passage": {
+    "title": "The Science Fair Volcano",
+    "text": "Kaye wanted to win the Grade 4 science fair. She decided to build a volcano that would really erupt. For a week she shaped a mountain out of clay around a plastic bottle and painted it brown and red.\n\nOn the morning of the fair, she mixed baking soda inside the bottle. When the judges came, she poured in vinegar. Nothing happened. Kaye's face turned hot. She had forgotten the dish soap that made the foam. One judge, Mr. Santos, waited quietly.\n\nKaye took a deep breath. \"May I try again?\" she asked. She added a squirt of soap and poured the vinegar. Red foam bubbled up and spilled down the sides of the mountain. The crowd clapped.\n\nKaye got second place. The judge wrote on her card: \"Good scientists fix their mistakes.\" Kaye pinned the card above her desk at home."
+  },
+  "words": [
+    { "word": "erupt", "meaning": "to burst out suddenly, like a volcano throwing out lava", "example": "The volcano could erupt at any time." },
+    { "word": "squirt", "meaning": "a small amount of liquid pushed out quickly", "example": "Add a squirt of lemon to the water." },
+    { "word": "judge", "meaning": "a person who decides who wins a contest", "example": "The judge chose the best painting." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "summary", "prompt": "Which is the BEST summary of the story?",
+      "choices": [
+        "Kaye painted a clay volcano brown and red and pinned a card above her desk.",
+        "Kaye built a volcano for the science fair. It failed at first because she forgot the soap, so she tried again, it erupted, and she won second place.",
+        "Mr. Santos was a judge who waited quietly and wrote on a card.",
+        "Baking soda and vinegar make foam when you add dish soap."
+      ], "answer": 1,
+      "why": "It has the somebody, the goal, the problem, the fix, and the ending. The others are details or just facts." },
+    { "id": "i2", "type": "mc", "skill": "summary", "prompt": "Which detail should be LEFT OUT of a summary?",
+      "choices": ["Kaye forgot the dish soap.", "Kaye asked to try again.", "The volcano was painted brown and red.", "Kaye got second place."], "answer": 2,
+      "why": "The colors do not change what happens. The other choices are key events." },
+    { "id": "i3", "type": "mc", "skill": "summary", "prompt": "In the frame \"Somebody wanted... but...\", what is the BUT (the problem)?",
+      "choices": ["Kaye wanted to win.", "The volcano did not erupt the first time.", "The crowd clapped.", "Kaye pinned the card."], "answer": 1,
+      "why": "The problem is the failed eruption. Wanting to win is the goal; clapping and the card are the ending." },
+    { "id": "i4", "type": "mc", "skill": "cause-effect", "prompt": "Why did nothing happen when Kaye first poured the vinegar?",
+      "choices": ["The bottle was empty.", "She forgot the dish soap.", "The judges were late.", "The clay was too thick."], "answer": 1,
+      "why": "\"She had forgotten the dish soap that made the foam.\"" },
+    { "id": "i5", "type": "mc", "skill": "inference", "prompt": "\"Kaye's face turned hot.\" What does this tell you about how she felt?",
+      "choices": ["Embarrassed", "Sleepy", "Proud", "Cold"], "answer": 0,
+      "why": "A hot face in front of judges, after a failure, shows embarrassment." },
+    { "id": "i6", "type": "order", "skill": "sequence", "prompt": "Put the events of the story in order.",
+      "steps": ["Kaye built a clay volcano.", "She poured vinegar and nothing happened.", "She added soap and tried again.", "She won second place."],
+      "why": "Building came first, then the failed try, the fixed try, and finally the prize." }
+  ]
+}

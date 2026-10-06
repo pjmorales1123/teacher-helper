@@ -1,0 +1,49 @@
+{
+  "id": "l2-c", "level": 2, "kind": "challenge", "order": 9,
+  "title": "Sprout Challenge: The Fisherman's Lesson",
+  "passage": {
+    "title": "The Fisherman's Lesson",
+    "text": "Mang Isko had fished the same bay for forty years. Every dawn he pushed his small boat into the water and came back by noon with a basket of fish. But this year the baskets were lighter. Some days he came home with almost nothing.\n\nHis granddaughter Tess, who was in Grade 4, asked why. \"The big boats with the fine nets take everything,\" he said. \"Even the small fish that have not laid eggs yet. So next year there are fewer fish, and the year after, fewer still.\"\n\nTess read about this in school. Her teacher called it overfishing. The class wrote letters to the town council asking for a rule to protect the young fish. Tess read hers aloud at the meeting, her voice shaking at first, then growing steady.\n\nThe council agreed to set a no-fishing season in the bay for three months each year. Mang Isko grumbled about the lost days. But two years later, his basket was heavy again. \"Your letter did that,\" he told Tess. She shook her head. \"The fish did that. We just gave them time.\""
+  },
+  "words": [
+    { "word": "dawn", "meaning": "the first light of morning", "example": "The rooster crows at dawn." },
+    { "word": "grumbled", "meaning": "complained in a low, unhappy voice", "example": "He grumbled about the long line." },
+    { "word": "council", "meaning": "a group of people who make decisions for a town", "example": "The council voted to build a new park." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "cause-effect", "prompt": "According to Mang Isko, why were there fewer fish each year?",
+      "choices": ["The water got too cold.", "Big boats caught even the young fish before they laid eggs.", "Tess wrote letters.", "He fished too close to shore."], "answer": 1,
+      "why": "He explains that the big boats take even the small fish \"that have not laid eggs yet,\" so fewer fish are born." },
+    { "id": "i2", "type": "mc", "skill": "details", "prompt": "How long did the council's no-fishing season last each year?",
+      "choices": ["One month", "Two months", "Three months", "Six months"], "answer": 2,
+      "why": "\"A no-fishing season in the bay for three months each year.\"" },
+    { "id": "i3", "type": "mc", "skill": "inference", "prompt": "\"Her voice shaking at first, then growing steady.\" What does this show about Tess?",
+      "choices": ["She was nervous but became more confident.", "She was cold.", "She was angry at the council.", "She could not read well."], "answer": 0,
+      "why": "A shaking voice shows nerves; a steady voice shows she gained confidence as she spoke." },
+    { "id": "i4", "type": "mc", "skill": "synonyms", "prompt": "Which word means almost the same as grumbled?",
+      "choices": ["Cheered", "Complained", "Whispered", "Laughed"], "answer": 1,
+      "why": "To grumble is to complain in a low, unhappy voice." },
+    { "id": "i5", "type": "mc", "skill": "summary", "prompt": "Which is the BEST summary?",
+      "choices": [
+        "Mang Isko fished for forty years and liked to push his boat at dawn.",
+        "Fish were disappearing because of overfishing, so Tess and her class asked the council for a rule. The council made a no-fishing season, and the fish came back.",
+        "Tess's teacher taught the class a new word.",
+        "Big boats have fine nets."
+      ], "answer": 1,
+      "why": "This covers the problem, what Tess did, and the result, without small details." },
+    { "id": "i6", "type": "mc", "skill": "context-clues", "prompt": "What does overfishing mean in the passage?",
+      "choices": ["Fishing at night", "Catching more fish than the sea can replace", "Fishing from a big boat", "Selling fish too cheaply"], "answer": 1,
+      "why": "The passage links it to taking even the young fish so that \"next year there are fewer fish.\"" },
+    { "id": "i7", "type": "mc", "skill": "inference", "prompt": "Why did Tess say \"The fish did that. We just gave them time\"?",
+      "choices": ["She did not want credit; the rest came from letting the fish grow.", "She was tired of fishing.", "She thought her letter was bad.", "She wanted her grandfather to stop fishing."], "answer": 0,
+      "why": "She shook her head at the praise and pointed out that protecting the fish, not her letter alone, fixed the problem." },
+    { "id": "i8", "type": "order", "skill": "sequence", "prompt": "Put the events in order.",
+      "steps": ["Mang Isko's baskets became lighter.", "The class wrote letters to the council.", "The council set a no-fishing season.", "Mang Isko's basket was heavy again."],
+      "why": "The problem came first, then the letters, then the rule, and the recovery two years later." },
+    { "id": "i9", "type": "mc", "skill": "main-idea", "prompt": "What is the main idea of the passage?",
+      "choices": ["Fishing is a hard job.", "Protecting young fish helped the bay recover.", "Grade 4 pupils write letters.", "Old fishermen like to grumble."], "answer": 1,
+      "why": "The story's big point is that giving the fish time to grow brought them back." },
+    { "id": "i10", "type": "short", "skill": "details", "prompt": "At what time of day did Mang Isko push his boat into the water? (one word)",
+      "accept": ["dawn", "at dawn", "every dawn"], "why": "\"Every dawn he pushed his small boat into the water.\"" }
+  ]
+}

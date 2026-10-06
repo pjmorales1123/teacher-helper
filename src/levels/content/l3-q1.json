@@ -1,0 +1,37 @@
+{
+  "id": "l3-q1", "level": 3, "kind": "quest", "order": 1,
+  "title": "The Unbreakable Bridge",
+  "tip": {
+    "skill": "word-parts", "title": "Break the word apart",
+    "text": "Long words are built from parts. A PREFIX goes in front (un- = not, re- = again, pre- = before, mis- = wrongly). A SUFFIX goes at the end (-less = without, -ful = full of, -able = can be, -er = one who). The ROOT is the main part. Unbreakable = un + break + able = cannot be broken. When you meet a long word, cover the prefix and suffix and find the root first."
+  },
+  "passage": {
+    "title": "The Unbreakable Bridge",
+    "text": "The old footbridge across the creek had been rebuilt three times, and three times the floods had carried it away. The barangay captain called it hopeless. But Engineer Dela Cruz, who had grown up in the village, disagreed.\n\n\"The bridge is not the problem,\" she told the council. \"The design is.\" The previous builders had set wooden posts in the soft bank, which was unstable during heavy rain. She proposed something different: steel posts drilled deep into the rock below, and a deck that was slightly higher than the worst flood anyone could remember.\n\nSome villagers were doubtful. The plan was costly, and it would take longer. But the engineer explained that a bridge that survives is cheaper than three bridges that do not. The council agreed.\n\nThe new bridge was finished before the rainy season. That July, the creek rose higher than ever. The water roared under the deck, carrying branches and even a fallen tree. The bridge did not move. By morning, children were crossing it on their way to school, and someone had painted a sign on the railing: \"UNBREAKABLE.\""
+  },
+  "words": [
+    { "word": "unstable", "meaning": "not firm or steady; likely to move or fall", "example": "The ladder was unstable on the wet floor." },
+    { "word": "doubtful", "meaning": "not sure; full of doubt", "example": "He was doubtful that the plan would work." },
+    { "word": "proposed", "meaning": "suggested a plan for others to consider", "example": "She proposed a picnic on Saturday." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "word-parts", "prompt": "The word unbreakable is made of un + break + able. What does it mean?",
+      "choices": ["Easy to break", "Cannot be broken", "Broken again", "A person who breaks things"], "answer": 1,
+      "why": "un- means not, -able means can be. Not able to be broken." },
+    { "id": "i2", "type": "mc", "skill": "word-parts", "prompt": "The bridge had been rebuilt three times. What does the prefix re- tell you?",
+      "choices": ["Built before", "Built again", "Built wrongly", "Built badly"], "answer": 1,
+      "why": "re- means again. Rebuilt means built again." },
+    { "id": "i3", "type": "mc", "skill": "word-parts", "prompt": "The captain called the bridge hopeless. Which part of the word means \"without\"?",
+      "choices": ["hope", "-less", "ho-", "-ss"], "answer": 1,
+      "why": "The suffix -less means without. Hopeless means without hope." },
+    { "id": "i4", "type": "mc", "skill": "word-parts", "prompt": "Which word means \"full of doubt\"?",
+      "choices": ["doubtless", "doubter", "doubtful", "undoubted"], "answer": 2,
+      "why": "The suffix -ful means full of. The villagers were doubtful because they were not sure." },
+    { "id": "i5", "type": "mc", "skill": "cause-effect", "prompt": "Why did the earlier bridges get washed away?",
+      "choices": ["They were too high.", "The wooden posts were set in a soft, unstable bank.", "Children crossed them too often.", "The steel was weak."], "answer": 1,
+      "why": "\"The previous builders had set wooden posts in the soft bank, which was unstable during heavy rain.\"" },
+    { "id": "i6", "type": "mc", "skill": "evidence", "prompt": "Which sentence BEST supports the idea that the engineer's plan worked?",
+      "choices": ["The plan was costly, and it would take longer.", "The barangay captain called it hopeless.", "The water roared under the deck... The bridge did not move.", "She had grown up in the village."], "answer": 2,
+      "why": "The bridge holding during the highest flood ever is direct proof that the design worked." }
+  ]
+}

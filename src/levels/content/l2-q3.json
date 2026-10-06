@@ -1,0 +1,37 @@
+{
+  "id": "l2-q3", "level": 2, "kind": "quest", "order": 3,
+  "title": "Giant of the Rice Fields",
+  "tip": {
+    "skill": "synonyms", "title": "Same, or opposite?",
+    "text": "SYNONYMS are words with almost the same meaning (big / large / huge). ANTONYMS are opposites (big / small). Writers use synonyms to avoid repeating a word. When a question asks for a word that means the same, swap it into the sentence and check that the sentence still makes sense."
+  },
+  "passage": {
+    "title": "Giant of the Rice Fields",
+    "text": "The carabao is the national animal of the Philippines. It is a large, gentle animal with wide, curved horns and a dark gray body. Farmers have used carabaos for hundreds of years to pull plows through muddy rice fields.\n\nA carabao is strong but slow. It can pull heavy loads all day, but it does not hurry. In the hot afternoon, a carabao loves to wallow in a mud pool. The mud keeps its skin cool and protects it from biting insects.\n\nCarabaos are also calm. A small child can lead one by a rope. Many farmers treat their carabao like a member of the family. In some towns, there is even a carabao festival where the animals are washed, decorated with flowers, and paraded through the streets. Today, machines do some of the work, but in many villages the patient carabao is still the farmer's best helper."
+  },
+  "words": [
+    { "word": "gentle", "meaning": "kind and calm; not rough", "example": "Be gentle with the puppy." },
+    { "word": "wallow", "meaning": "to roll about happily in mud or water", "example": "Pigs wallow in mud to stay cool." },
+    { "word": "patient", "meaning": "able to wait or keep working without getting upset", "example": "The patient teacher explained it again." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "synonyms", "prompt": "Which word means almost the SAME as large?",
+      "choices": ["Tiny", "Big", "Slow", "Gray"], "answer": 1,
+      "why": "Large and big are synonyms. \"It is a big, gentle animal\" means the same thing." },
+    { "id": "i2", "type": "mc", "skill": "synonyms", "prompt": "Which word is the OPPOSITE of calm?",
+      "choices": ["Quiet", "Peaceful", "Wild", "Still"], "answer": 2,
+      "why": "Calm means peaceful and quiet. Wild is its opposite. The other choices are synonyms of calm." },
+    { "id": "i3", "type": "mc", "skill": "synonyms", "prompt": "The text says a carabao \"does not hurry.\" Which word means the same as hurry?",
+      "choices": ["Rest", "Rush", "Eat", "Pull"], "answer": 1,
+      "why": "To hurry is to rush. \"A carabao does not rush\" keeps the meaning." },
+    { "id": "i4", "type": "mc", "skill": "synonyms", "prompt": "Which pair of words from the text are synonyms?",
+      "choices": ["strong / slow", "hot / cool", "gentle / calm", "heavy / light"], "answer": 2,
+      "why": "Gentle and calm both describe a quiet, kind nature. The other pairs are opposites." },
+    { "id": "i5", "type": "mc", "skill": "cause-effect", "prompt": "Why does a carabao wallow in mud?",
+      "choices": ["To hide from farmers", "To keep cool and avoid insect bites", "To get dirty for the festival", "To find food"], "answer": 1,
+      "why": "\"The mud keeps its skin cool and protects it from biting insects.\"" },
+    { "id": "i6", "type": "mc", "skill": "main-idea", "prompt": "What is the passage MOSTLY about?",
+      "choices": ["Rice farming machines", "The carabao and why farmers value it", "A carabao festival", "Mud pools"], "answer": 1,
+      "why": "The whole text describes the carabao: its body, habits, calm nature, and its place in farm life." }
+  ]
+}

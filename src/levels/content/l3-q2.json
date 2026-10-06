@@ -1,0 +1,37 @@
+{
+  "id": "l3-q2", "level": 3, "kind": "quest", "order": 2,
+  "title": "Two Ways to School",
+  "tip": {
+    "skill": "compare", "title": "Alike and different",
+    "text": "To COMPARE is to find what is alike. To CONTRAST is to find what is different. Signal words for alike: both, also, similarly, like. Signal words for different: but, however, unlike, while, on the other hand. A quick way to organize: make two columns and list the same features side by side (cost, time, safety) so you compare the same thing for each."
+  },
+  "passage": {
+    "title": "Two Ways to School",
+    "text": "Twins Marco and Mina live in the same house and go to the same school, but they get there in very different ways.\n\nMarco rides a jeepney. It costs twelve pesos each way and takes about twenty minutes when the road is clear. However, the jeepney stops often to pick up passengers, and during the rainy season traffic can double the travel time. Marco likes it because he can sit, review his notes, and arrive without sweating.\n\nMina walks. The route along the river path takes thirty minutes, rain or shine. It costs nothing, and she says the morning air helps her wake up. On the other hand, she arrives tired on hot days, and when the path floods she has to take the long road around, adding fifteen minutes.\n\nBoth twins leave home at six-thirty. Both usually arrive before the first bell. Their mother says the two routes suit the two children: Marco, who likes comfort and planning, and Mina, who likes being outdoors and saving her allowance for books."
+  },
+  "words": [
+    { "word": "route", "meaning": "the way or path you take to get somewhere", "example": "The bus takes a different route on Sundays." },
+    { "word": "passengers", "meaning": "people riding in a vehicle who are not driving it", "example": "The jeepney was full of passengers." },
+    { "word": "suit", "meaning": "to be right or good for someone", "example": "Early mornings suit her." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "compare", "prompt": "What is one way Marco's and Mina's trips are ALIKE?",
+      "choices": ["Both cost twelve pesos.", "Both leave home at six-thirty.", "Both take exactly twenty minutes.", "Both walk along the river."], "answer": 1,
+      "why": "\"Both twins leave home at six-thirty.\" The other choices describe only one twin." },
+    { "id": "i2", "type": "mc", "skill": "compare", "prompt": "How is Mina's route DIFFERENT from Marco's?",
+      "choices": ["It costs nothing and takes longer.", "It is faster and more expensive.", "It has more passengers.", "It lets her review her notes."], "answer": 0,
+      "why": "Walking is free and takes thirty minutes; the jeepney costs twelve pesos and takes about twenty." },
+    { "id": "i3", "type": "mc", "skill": "compare", "prompt": "Which signal word in the passage introduces a CONTRAST?",
+      "choices": ["Both", "Also", "However", "Same"], "answer": 2,
+      "why": "\"However, the jeepney stops often\" shows a difference from the quick twenty-minute trip." },
+    { "id": "i4", "type": "mc", "skill": "compare", "prompt": "What problem do BOTH routes share?",
+      "choices": ["They cost too much.", "Rain can make the trip longer.", "The twins arrive late every day.", "The school is far away."], "answer": 1,
+      "why": "Traffic doubles in the rainy season for Marco; the flooded path adds fifteen minutes for Mina." },
+    { "id": "i5", "type": "mc", "skill": "inference", "prompt": "Why does Mina probably choose to walk instead of ride?",
+      "choices": ["She is afraid of jeepneys.", "She likes the outdoors and wants to save her allowance.", "Her mother forces her.", "The jeepney does not pass her house."], "answer": 1,
+      "why": "The last paragraph says Mina likes being outdoors and saving her allowance for books." },
+    { "id": "i6", "type": "mc", "skill": "context-clues", "prompt": "\"The two routes suit the two children.\" What does suit mean here?",
+      "choices": ["A set of clothes", "To be right for", "To follow behind", "To cost money"], "answer": 1,
+      "why": "The sentence explains how each route matches each child's likes, so suit means \"to be right for.\"" }
+  ]
+}

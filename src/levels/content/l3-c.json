@@ -1,0 +1,44 @@
+{
+  "id": "l3-c", "level": 3, "kind": "challenge", "order": 9,
+  "title": "Sapling Challenge: The Reading Corner",
+  "passage": {
+    "title": "The Reading Corner",
+    "text": "When Teacher Amy moved to the mountain school, the classroom had a blackboard, thirty chairs, and no books. The nearest library was two hours away by bus. Most of her pupils had never held a storybook.\n\nShe started with a single box. Each month she set aside part of her salary and bought three or four used books from a stall in the city. She wrote to her old classmates, and some sent books too. In six months the box became a shelf; by the end of the year, the shelf became a corner with a mat, two pillows, and a hand-painted sign that said READ HERE.\n\nThe rule was simple: anyone could borrow a book for one week, and anyone who returned a book could borrow another. At first the pupils were careful, unwilling to touch the books, as if they might break. Then a boy named Dado read a book about volcanoes and could not stop talking about it. Soon pupils were arguing over who would get the next book about animals.\n\nTeacher Amy noticed something else. Pupils who had struggled to read a paragraph were reading whole chapters. Their spelling improved without extra drills. \"I did not teach them to read better,\" she said later. \"I just gave them a reason to read.\""
+  },
+  "words": [
+    { "word": "struggled", "meaning": "tried hard to do something difficult", "example": "He struggled to lift the heavy box." },
+    { "word": "unwilling", "meaning": "not wanting to do something", "example": "She was unwilling to leave the party early." },
+    { "word": "drills", "meaning": "repeated practice exercises", "example": "The coach made us do passing drills." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "main-idea", "prompt": "What is the main idea of the passage?",
+      "choices": ["Mountain schools are far from libraries.", "Giving pupils books they wanted to read made them better readers.", "Dado liked volcanoes.", "Teachers should spend their salary on books."], "answer": 1,
+      "why": "The passage builds to Teacher Amy's point: a reason to read made the pupils read better." },
+    { "id": "i2", "type": "mc", "skill": "word-parts", "prompt": "The pupils were unwilling to touch the books. What does unwilling mean?",
+      "choices": ["Not wanting to", "Wanting to very much", "Willing again", "Able to"], "answer": 0,
+      "why": "The prefix un- means not. Unwilling means not willing or not wanting to." },
+    { "id": "i3", "type": "mc", "skill": "sequence", "prompt": "Which happened FIRST?",
+      "choices": ["The shelf became a reading corner.", "Teacher Amy bought books with her salary.", "Dado read about volcanoes.", "Pupils argued over animal books."], "answer": 1,
+      "why": "She started with a single box of books she bought; everything else followed." },
+    { "id": "i4", "type": "mc", "skill": "cause-effect", "prompt": "What caused the pupils to start fighting over books?",
+      "choices": ["Teacher Amy made a rule.", "Dado's excitement about the volcano book spread.", "The library bus arrived.", "They finished their drills."], "answer": 1,
+      "why": "\"Then a boy named Dado read a book... and could not stop talking about it. Soon pupils were arguing...\"" },
+    { "id": "i5", "type": "mc", "skill": "compare", "prompt": "How were the pupils DIFFERENT at the end of the year compared to the start?",
+      "choices": ["They had fewer books.", "They read whole chapters instead of struggling with a paragraph.", "They stopped borrowing books.", "They moved to the city."], "answer": 1,
+      "why": "\"Pupils who had struggled to read a paragraph were reading whole chapters.\"" },
+    { "id": "i6", "type": "mc", "skill": "figurative", "prompt": "\"As if they might break.\" What does this tell you about how the pupils treated the books?",
+      "choices": ["They threw them around.", "They handled them very carefully, like fragile things.", "They broke them on purpose.", "They did not know what books were."], "answer": 1,
+      "why": "Treating books as if they were breakable means handling them with great care." },
+    { "id": "i7", "type": "mc", "skill": "evidence", "prompt": "Which detail BEST supports the claim that reading improved the pupils' skills?",
+      "choices": ["The nearest library was two hours away.", "The corner had a mat and two pillows.", "Their spelling improved without extra drills.", "Teacher Amy wrote to her classmates."], "answer": 2,
+      "why": "Improved spelling with no extra drills is direct evidence that reading itself made them better." },
+    { "id": "i8", "type": "mc", "skill": "inference", "prompt": "What does Teacher Amy mean by \"I just gave them a reason to read\"?",
+      "choices": ["She paid pupils to read.", "Interesting books made the pupils want to read on their own.", "She made reading a punishment.", "She read to them every day."], "answer": 1,
+      "why": "She says she did not teach reading directly; the books themselves gave the motivation." },
+    { "id": "i9", "type": "order", "skill": "sequence", "prompt": "Put the growth of the collection in order.",
+      "steps": ["A single box", "A shelf", "A corner with a mat and sign"],
+      "why": "\"The box became a shelf... the shelf became a corner.\"" },
+    { "id": "i10", "type": "short", "skill": "details", "prompt": "How long could a pupil keep a borrowed book? (write the number of weeks as a number or word)",
+      "accept": ["1", "one", "one week", "1 week", "a week"], "why": "\"Anyone could borrow a book for one week.\"" }
+  ]
+}

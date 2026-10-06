@@ -1,0 +1,37 @@
+{
+  "id": "l3-q3", "level": 3, "kind": "quest", "order": 3,
+  "title": "Mangroves: The Coast's Bodyguards",
+  "tip": {
+    "skill": "main-idea", "title": "Topic sentences and support",
+    "text": "In information texts, each paragraph usually has a TOPIC SENTENCE that states its main idea, often the first or last sentence. The other sentences give SUPPORTING DETAILS: facts, examples, numbers. To find the main idea of the whole text, look at what all the topic sentences have in common. Headings and the title are clues too."
+  },
+  "passage": {
+    "title": "Mangroves: The Coast's Bodyguards",
+    "text": "Mangroves are trees that grow where the land meets the sea. Unlike most trees, they can live in salty water, standing on tangled roots that rise above the mud like stilts.\n\nMangroves protect the coast. When a storm pushes big waves toward the shore, the thick wall of roots slows the water down. Studies in the Philippines found that villages behind healthy mangrove forests had far less damage after typhoons than villages where the mangroves had been cut.\n\nMangroves are also nurseries. Young fish, crabs, and shrimp hide among the roots, where large hunters cannot reach them. Many of the fish that people catch in open water were born in a mangrove forest.\n\nSadly, many mangrove areas were cleared in the past to make fishponds and resorts. Today, students and fisherfolk in many towns plant mangrove seedlings along the shore. A seedling planted this year may take ten years to become a strong tree, but a forest of them can guard a village for generations."
+  },
+  "words": [
+    { "word": "tangled", "meaning": "twisted together in a messy way", "example": "The wires were tangled behind the TV." },
+    { "word": "nursery", "meaning": "a place where young plants or animals are protected while they grow", "example": "The nursery keeps the baby fish safe." },
+    { "word": "generations", "meaning": "all the people born around the same time; a span of about 25 to 30 years each", "example": "This house has been in our family for three generations." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "main-idea", "prompt": "What is the main idea of the SECOND paragraph?",
+      "choices": ["Storms push big waves.", "Mangroves protect the coast from storm waves.", "Some villages were damaged by typhoons.", "Roots are thick."], "answer": 1,
+      "why": "The topic sentence \"Mangroves protect the coast\" states it, and the rest gives supporting evidence." },
+    { "id": "i2", "type": "mc", "skill": "main-idea", "prompt": "What is the main idea of the WHOLE passage?",
+      "choices": ["Mangroves are strange trees with roots like stilts.", "Mangroves are valuable because they protect coasts and shelter young sea life, so people are replanting them.", "Fishponds and resorts are bad.", "Seedlings take ten years to grow."], "answer": 1,
+      "why": "The paragraphs together explain what mangroves do, why they matter, and why people plant them." },
+    { "id": "i3", "type": "mc", "skill": "main-idea", "prompt": "Which sentence is a SUPPORTING DETAIL for \"Mangroves are also nurseries\"?",
+      "choices": ["Mangroves can live in salty water.", "Young fish, crabs, and shrimp hide among the roots.", "Many mangrove areas were cleared.", "Students plant seedlings."], "answer": 1,
+      "why": "This sentence gives an example of how mangroves act as a nursery." },
+    { "id": "i4", "type": "mc", "skill": "evidence", "prompt": "Which evidence does the author give to show mangroves reduce typhoon damage?",
+      "choices": ["Mangroves have tangled roots.", "Studies found villages behind healthy mangroves had less damage.", "Fish are born in mangroves.", "Seedlings take ten years to grow."], "answer": 1,
+      "why": "The author cites studies comparing villages with and without mangroves." },
+    { "id": "i5", "type": "mc", "skill": "figurative", "prompt": "The title calls mangroves \"bodyguards.\" Why?",
+      "choices": ["They are large and strong people.", "They guard the coast the way a bodyguard protects a person.", "They wear uniforms.", "They catch fish."], "answer": 1,
+      "why": "It is a comparison: mangroves stand between danger (storms) and the village, like a bodyguard." },
+    { "id": "i6", "type": "mc", "skill": "context-clues", "prompt": "\"Mangroves are also nurseries.\" In this passage, a nursery is...",
+      "choices": ["A room for babies in a hospital", "A safe place where young sea animals grow", "A school for small children", "A kind of fish"], "answer": 1,
+      "why": "The next sentence explains that young fish, crabs, and shrimp hide among the roots." }
+  ]
+}

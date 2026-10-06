@@ -1,0 +1,37 @@
+{
+  "id": "l2-q1", "level": 2, "kind": "quest", "order": 1,
+  "title": "Why the Lights Went Out",
+  "tip": {
+    "skill": "cause-effect", "title": "Because... so...",
+    "text": "A CAUSE is why something happens. An EFFECT is what happens because of it. Signal words: because, since, so, as a result, that is why. To find a cause, ask \"Why did this happen?\" To find an effect, ask \"What happened because of this?\" Sometimes the cause comes after the effect in the sentence, so read carefully."
+  },
+  "passage": {
+    "title": "Why the Lights Went Out",
+    "text": "The rain had been falling since morning. By four o'clock, the wind was so strong that the mango tree in the Reyes family's yard bent sideways. Inside, Jomar was finishing his homework when the lights flickered and went out.\n\n\"Brownout,\" his mother said. She lit a candle and placed it in a glass on the table. Because the refrigerator had stopped, she moved the fish and vegetables into a cooler with ice. \"The food will spoil if it gets warm,\" she explained.\n\nJomar looked out the window. A big branch had fallen across the road, and it had pulled down an electric wire. That was why the whole street was dark. Two men from the electric company arrived in a truck with a flashing light. They cut the branch and fixed the wire. An hour later, the lights came back on. Jomar's mother smiled and blew out the candle. \"Now finish your homework,\" she said."
+  },
+  "words": [
+    { "word": "flickered", "meaning": "shone unsteadily, going on and off quickly", "example": "The candle flickered in the wind." },
+    { "word": "spoil", "meaning": "to go bad and become unsafe to eat", "example": "Milk will spoil if you leave it outside." },
+    { "word": "brownout", "meaning": "a time when the electricity is cut off", "example": "We used candles during the brownout." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "cause-effect", "prompt": "Why did the lights go out?",
+      "choices": ["Jomar turned them off.", "A branch pulled down an electric wire.", "The candle burned out.", "The electric company turned them off."], "answer": 1,
+      "why": "\"A big branch had fallen across the road, and it had pulled down an electric wire. That was why the whole street was dark.\"" },
+    { "id": "i2", "type": "mc", "skill": "cause-effect", "prompt": "What happened BECAUSE the refrigerator stopped?",
+      "choices": ["The lights flickered.", "Mother moved the food into a cooler with ice.", "The tree bent sideways.", "Jomar stopped his homework."], "answer": 1,
+      "why": "\"Because the refrigerator had stopped, she moved the fish and vegetables into a cooler with ice.\"" },
+    { "id": "i3", "type": "mc", "skill": "cause-effect", "prompt": "What caused the branch to fall?",
+      "choices": ["The strong wind", "The truck", "The two men", "The candle"], "answer": 0,
+      "why": "The wind was so strong that the tree bent sideways. The strong wind made the branch fall." },
+    { "id": "i4", "type": "mc", "skill": "context-clues", "prompt": "\"The food will spoil if it gets warm.\" What does spoil mean?",
+      "choices": ["Taste sweeter", "Go bad", "Get bigger", "Freeze"], "answer": 1,
+      "why": "Mother moves the food to ice so it stays cold. Food that gets warm goes bad." },
+    { "id": "i5", "type": "mc", "skill": "sequence", "prompt": "What happened right after the men cut the branch and fixed the wire?",
+      "choices": ["The rain started.", "Mother lit a candle.", "The lights came back on.", "The tree bent sideways."], "answer": 2,
+      "why": "\"They cut the branch and fixed the wire. An hour later, the lights came back on.\"" },
+    { "id": "i6", "type": "mc", "skill": "inference", "prompt": "Why did Jomar's mother blow out the candle?",
+      "choices": ["The lights were back, so it was no longer needed.", "She was going to sleep.", "The candle was too hot.", "Jomar asked her to."], "answer": 0,
+      "why": "She blew it out right after the lights came back on. There was no more need for candlelight." }
+  ]
+}

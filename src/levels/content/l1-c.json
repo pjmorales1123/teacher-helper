@@ -1,0 +1,44 @@
+{
+  "id": "l1-c", "level": 1, "kind": "challenge", "order": 9,
+  "title": "Seedling Challenge: The Sari-Sari Store",
+  "passage": {
+    "title": "Helping at the Store",
+    "text": "Aling Nena owns a small sari-sari store beside the road. Her son Carlo helps every afternoon after school.\n\nFirst, Carlo sweeps the front of the store. Then he arranges the candies, chips, and canned goods on the shelves. He puts the heavy cans on the bottom and the light chips on top so nothing falls.\n\nOne day, a customer bought ten pesos of rice and gave a twenty-peso bill. Carlo counted the change carefully. \"Ten pesos,\" he said, and handed it over. The customer smiled. \"You are a good helper.\"\n\nAt six o'clock, Aling Nena closed the store. She gave Carlo a cold soda. \"For my hard-working boy,\" she said. Carlo drank it slowly and watched the tricycles pass. He was tired, but he felt useful. Tomorrow he would help again."
+  },
+  "words": [
+    { "word": "arranges", "meaning": "puts things in a neat order", "example": "She arranges the books by size." },
+    { "word": "customer", "meaning": "a person who buys something from a store", "example": "The customer paid for the bread." },
+    { "word": "useful", "meaning": "helpful; able to do good things for others", "example": "A flashlight is useful at night." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "details", "prompt": "Where is the sari-sari store?",
+      "choices": ["Inside the school", "Beside the road", "At the beach", "In the market"], "answer": 1,
+      "why": "The first sentence says the store is \"beside the road.\"" },
+    { "id": "i2", "type": "mc", "skill": "sequence", "prompt": "What does Carlo do FIRST every afternoon?",
+      "choices": ["Counts change", "Drinks a soda", "Sweeps the front of the store", "Closes the store"], "answer": 2,
+      "why": "\"First, Carlo sweeps the front of the store.\"" },
+    { "id": "i3", "type": "mc", "skill": "cause-effect", "prompt": "Why does Carlo put the heavy cans on the bottom shelf?",
+      "choices": ["So nothing falls", "Because they are cheaper", "Because customers like cans", "So he can count them"], "answer": 0,
+      "why": "The text says he does this \"so nothing falls.\"" },
+    { "id": "i4", "type": "mc", "skill": "details", "prompt": "How much change did Carlo give the customer?",
+      "choices": ["Five pesos", "Ten pesos", "Twenty pesos", "Thirty pesos"], "answer": 1,
+      "why": "The customer paid twenty for ten pesos of rice, and Carlo said, \"Ten pesos.\"" },
+    { "id": "i5", "type": "mc", "skill": "main-idea", "prompt": "What is the story MOSTLY about?",
+      "choices": ["How to buy rice", "A boy who helps his mother at their store", "Tricycles on the road", "Cold soda"], "answer": 1,
+      "why": "Every paragraph shows Carlo helping Aling Nena at the store." },
+    { "id": "i6", "type": "mc", "skill": "context-clues", "prompt": "\"He arranges the candies, chips, and canned goods on the shelves.\" What does arranges mean?",
+      "choices": ["Eats", "Hides", "Puts in order", "Throws away"], "answer": 2,
+      "why": "He puts cans on the bottom and chips on top, so he is putting things in order." },
+    { "id": "i7", "type": "mc", "skill": "inference", "prompt": "Why did the customer say \"You are a good helper\"?",
+      "choices": ["Carlo counted the change correctly.", "Carlo gave him free candy.", "Carlo was his son.", "Carlo swept the road."], "answer": 0,
+      "why": "The customer smiled right after Carlo counted the change carefully and gave the right amount." },
+    { "id": "i8", "type": "order", "skill": "sequence", "prompt": "Put the events in order.",
+      "steps": ["Carlo arranged the shelves.", "A customer bought rice.", "Aling Nena closed the store.", "Carlo drank a cold soda."],
+      "why": "The story tells these in order: shelves, the customer, closing at six, then the soda." },
+    { "id": "i9", "type": "mc", "skill": "inference", "prompt": "How does Carlo feel at the end?",
+      "choices": ["Angry and hungry", "Tired but useful", "Scared of the dark", "Sad about school"], "answer": 1,
+      "why": "The text says, \"He was tired, but he felt useful.\"" },
+    { "id": "i10", "type": "short", "skill": "details", "prompt": "What drink did Aling Nena give Carlo? (one word)",
+      "accept": ["soda", "a soda", "cold soda", "a cold soda"], "why": "\"She gave Carlo a cold soda.\"" }
+  ]
+}
