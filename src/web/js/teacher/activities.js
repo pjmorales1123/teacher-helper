@@ -53,6 +53,7 @@ export async function renderActivities() {
     h("td", {}, a.component), h("td", {}, a.term), h("td", {}, a.max_score), h("td", {}, a.due_date ?? ""),
     h("td", {}, h("div", { class: "row" },
       h("button", { onclick: () => openForm(a) }, "Edit"),
+      h("button", { onclick: () => openForm({ ...a, id: undefined, title: `${a.title} (copy)` }) }, "Duplicate"),
       h("button", { class: "danger", onclick: async () => {
         if (!confirm(`Delete "${a.title}" and all its submissions?`)) return;
         await del(`/api/activities/${a.id}`).catch((e) => toast(e.message, true));

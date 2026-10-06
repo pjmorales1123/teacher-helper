@@ -55,6 +55,7 @@ input, select, textarea { width: 100%; font: inherit; padding: 9px 10px; border:
 input[type=checkbox] { width: auto; }
 textarea { min-height: 90px; resize: vertical; }
 .field { margin-bottom: 12px; }
+a.btn { text-decoration: none; display: inline-block; }
 button, .btn { font: inherit; padding: 9px 14px; border-radius: 8px; border: 1px solid var(--line);
   background: #fff; color: var(--text); cursor: pointer; }
 button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
@@ -68,6 +69,7 @@ table { width: 100%; border-collapse: collapse; font-size: .95rem; }
 th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
 tbody tr:last-child td { border-bottom: 0; }
 tbody tr:hover { background: #fafbfc; }
+td > .row { flex-wrap: nowrap; gap: 6px; }
 th { font-size: .78rem; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
 
 /* Bits */

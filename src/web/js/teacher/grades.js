@@ -30,7 +30,8 @@ export async function renderGrades() {
     ...r.terms.map(cell),
     h("td", {}, h("div", { class: "score" }, r.finalGrade ?? "–"))));
   return h("div", {},
-    h("h2", {}, "Grades"),
+    h("div", { class: "toolbar" }, h("h2", {}, "Grades"),
+      h("a", { class: "btn right", href: "/api/grades/export.csv", download: "" }, "Download CSV")),
     h("p", { class: "muted small" }, "Only approved scores on non-formative activities count. IG = initial grade; the big number is the transmuted grade."),
     presets(settings),
     rows.length

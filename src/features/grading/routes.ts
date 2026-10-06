@@ -6,6 +6,7 @@ import type { AiAdapter } from "../../services/ai/adapter.ts";
 import { requireTeacher } from "../../services/auth.ts";
 import type { Storage } from "../../services/storage.ts";
 import { getActivity } from "../activities/repo.ts";
+import { prescoreActivity } from "./batch.ts";
 import { approveScore, getSubmission, listSubmissions, reopenSubmission, saveDraft } from "../submissions/repo.ts";
 
 export function gradingRoutes(db: Db, ai: AiAdapter, storage: Storage): Router {
@@ -40,6 +41,12 @@ export function gradingRoutes(db: Db, ai: AiAdapter, storage: Storage): Router {
     const draft = await ai.prescore(activity, s, imagePath);
     saveDraft(db, s.id, draft.score, draft.feedback);
     res.json({ draft, backend: ai.backend });
+  });
+
+  r.post("/activities/:id/prescore-all", async (req, res) => {
+    const result = await prescoreActivity(db, ai, storage, intParam(req.params.id, "Activity id"));
+    if (!result) notFound("Activity");
+    res.json(result);
   });
 
   r.post("/submissions/:id/approve", (req, res) => {

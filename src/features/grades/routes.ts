@@ -11,6 +11,7 @@ import {
 } from "../../lib/presets.ts";
 import { requireTeacher } from "../../services/auth.ts";
 import { getStudent, listStudents } from "../students/repo.ts";
+import { reportsToCsv } from "./csv.ts";
 import { reportForStudent } from "./report.ts";
 
 export function gradeRoutes(db: Db): Router {
@@ -39,6 +40,13 @@ export function gradeRoutes(db: Db): Router {
 
   r.get("/", (_req, res) => {
     res.json(listStudents(db).map((s) => reportForStudent(db, s)));
+  });
+
+  r.get("/export.csv", (_req, res) => {
+    const csv = reportsToCsv(listStudents(db).map((s) => reportForStudent(db, s)));
+    res.setHeader("Content-Type", "text/csv; charset=utf-8");
+    res.setHeader("Content-Disposition", `attachment; filename="grades-${new Date().toISOString().slice(0, 10)}.csv"`);
+    res.send("\uFEFF" + csv);
   });
 
   r.get("/:studentId", (req, res) => {

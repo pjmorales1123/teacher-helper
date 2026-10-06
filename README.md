@@ -10,6 +10,9 @@
 - **Student** signs in with ID + PIN, sees required work, status (checked or not)
   and score. Submits by phone camera, scanner-style image upload, or essay text.
   Can file effort claims.
+- **Overview** shows what needs attention and exactly who has not submitted
+  which activity. One click pre-scores every pending submission of an activity.
+- **Grades** export to CSV for the E-Class Record. Activities can be duplicated.
 - **Grades** follow DO 015 s. 2026: three terms, WW/PT/EX weights, transmutation.
   Weights and transmutation tables are swappable presets in `src/lib/presets.ts`.
   Formative activities are never counted.

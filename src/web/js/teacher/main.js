@@ -5,9 +5,11 @@ import { renderActivities } from "./activities.js";
 import { renderClaims } from "./claims.js";
 import { renderGrades } from "./grades.js";
 import { renderGrading } from "./grading.js";
+import { renderOverview } from "./overview.js";
 import { renderStudents } from "./students.js";
 
 const views = {
+  overview: renderOverview,
   grading: renderGrading,
   activities: renderActivities,
   claims: renderClaims,
@@ -44,4 +46,4 @@ if (health.passwordIsDefault) {
     h("div", { class: "notice" }, "TEACHER_PASSWORD is not set in .env. Set one before students connect."),
   );
 }
-show(views[location.hash.slice(1)] ? location.hash.slice(1) : "grading");
+show(views[location.hash.slice(1)] ? location.hash.slice(1) : "overview");

@@ -9,6 +9,7 @@ import { authRoutes } from "./features/auth-routes.ts";
 import { effortClaimRoutes } from "./features/effort-claims/routes.ts";
 import { gradeRoutes } from "./features/grades/routes.ts";
 import { gradingRoutes } from "./features/grading/routes.ts";
+import { overviewRoutes } from "./features/overview/routes.ts";
 import { studentRoutes } from "./features/students/routes.ts";
 import { studentApiRoutes } from "./features/submissions/student-routes.ts";
 import { HttpError } from "./lib/http.ts";
@@ -38,6 +39,7 @@ export function createApp({ config, db, ai, storage }: AppDeps): express.Express
   app.use("/api/grading", gradingRoutes(db, ai, storage));
   app.use("/api/claims", effortClaimRoutes(db));
   app.use("/api/grades", gradeRoutes(db));
+  app.use("/api/overview", overviewRoutes(db));
   app.use("/api/student", studentApiRoutes(db, storage));
   app.use("/api", (_req, res) => {
     res.status(404).json({ error: "Unknown API route." });
