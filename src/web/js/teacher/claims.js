@@ -31,10 +31,10 @@ export async function renderClaims() {
   append(root, 
     h("h2", {}, `Effort claims (${pending.length} pending)`),
     h("p", { class: "muted small" }, "Approved points are added to the activity's component raw score for that term, capped at the highest possible score."),
-    ...pending.map((c) => row(c, reload)),
+    h("div", { class: "cards" }, ...pending.map((c) => row(c, reload))),
     pending.length ? null : h("p", { class: "muted" }, "No pending claims."),
     decided.length ? h("h3", { style: "margin-top:20px" }, "Decided") : null,
-    ...decided.slice(0, 30).map((c) => row(c, reload)),
+    h("div", { class: "cards" }, ...decided.slice(0, 30).map((c) => row(c, reload))),
   );
   return root;
 }

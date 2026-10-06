@@ -46,7 +46,7 @@ export async function renderActivities() {
   const reload = () => renderActivities().then((n) => root.replaceWith(n));
   const list = await get("/api/activities");
   const formSlot = h("div");
-  const openForm = (a = {}) => { formSlot.replaceChildren(form(a, reload)); formSlot.scrollIntoView({ behavior: "smooth" }); };
+  const openForm = (a = {}) => { formSlot.replaceChildren(form(a, reload)); body.classList.add("cols-2"); formSlot.scrollIntoView({ behavior: "smooth", block: "nearest" }); };
 
   const rows = list.map((a) => h("tr", {},
     h("td", {}, h("strong", {}, a.title), a.formative ? h("span", { class: "muted small" }, " · formative") : null),
@@ -60,15 +60,12 @@ export async function renderActivities() {
       } }, "Delete"))),
   ));
 
-  append(root, 
-    h("div", { class: "row", style: "margin-bottom:12px" }, h("h2", {}, "Activities"),
-      h("button", { class: "primary right", onclick: () => openForm() }, "+ New activity")),
-    formSlot,
-    list.length
+  const body = h("div", {}, h("div", {}, list.length
       ? h("div", { class: "card table-wrap" }, h("table", {}, h("thead", {}, h("tr", {},
           ...["Title", "Comp.", "Term", "Max", "Due", ""].map((t) => h("th", {}, t)))), h("tbody", {}, ...rows)))
-      : h("p", { class: "muted" }, "No activities yet. Post one so students can submit."),
-  );
+      : h("p", { class: "muted" }, "No activities yet. Post one so students can submit.")), formSlot);
+  append(root, h("div", { class: "toolbar" }, h("h2", {}, "Activities"),
+    h("button", { class: "primary right", onclick: () => openForm() }, "+ New activity")), body);
   if (!list.length) openForm();
   return root;
 }

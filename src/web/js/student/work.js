@@ -66,9 +66,10 @@ export async function renderWork() {
   const reload = () => renderWork().then((n) => root.replaceWith(n));
   const activities = await get("/api/student/activities");
   const missing = activities.filter((a) => a.status === "missing").length;
-  append(root, 
-    h("p", { class: "muted" }, missing ? `${missing} item${missing > 1 ? "s" : ""} still to submit.` : "Everything is submitted. Nice work."),
-    ...activities.map((a) => card(a, root, reload)),
+  append(root,
+    h("div", { class: "toolbar" }, h("h2", {}, "Required work"),
+      h("span", { class: "muted" }, missing ? `${missing} item${missing > 1 ? "s" : ""} still to submit.` : "Everything is submitted. Nice work.")),
+    h("div", { class: "cards" }, ...activities.map((a) => card(a, root, reload))),
     activities.length ? null : h("p", { class: "muted" }, "Your teacher has not posted any activities yet."),
   );
   return root;

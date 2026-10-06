@@ -16,7 +16,7 @@ export async function renderStudents() {
     await post("/api/students", { id: id.value, name: name.value, section: section.value, pin: pin.value });
     toast("Student added."); reload();
   }); } },
-    h("h2", {}, "Add student"),
+    h("h3", {}, "Add student"),
     h("div", { class: "grid" }, field("Student ID", id), field("Name", name), field("Section", section), field("PIN", pin)), add);
 
   const bulk = h("textarea", { placeholder: "2026-0001, Juan Dela Cruz, Grade 7 - Rizal, 1234\n2026-0002, Maria Santos, Grade 7 - Rizal, 5678" });
@@ -34,7 +34,8 @@ export async function renderStudents() {
       reload();
     } }, "Remove"))));
 
-  append(root, addForm, bulkForm,
+  append(root, h("div", { class: "toolbar" }, h("h2", {}, `Students (${students.length})`)),
+    h("div", { class: "cols-2" }, addForm, bulkForm),
     rows.length
       ? h("div", { class: "card table-wrap" }, h("table", {}, h("thead", {}, h("tr", {},
           ...["ID", "Name", "Section", ""].map((t) => h("th", {}, t)))), h("tbody", {}, ...rows)))

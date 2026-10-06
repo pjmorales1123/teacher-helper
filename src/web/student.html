@@ -8,18 +8,21 @@
 <link rel="stylesheet" href="/app.css">
 </head>
 <body>
-<main>
-  <header class="top">
-    <div><h1 id="who">My work</h1><span id="section" class="muted small"></span></div>
-    <button id="logout">Sign out</button>
-  </header>
-  <nav class="tabs" id="tabs">
-    <button data-tab="work" class="active">Required work</button>
-    <button data-tab="claims">Effort claims</button>
-    <button data-tab="grades">My grades</button>
-  </nav>
-  <section id="view"></section>
-</main>
+<div class="shell">
+  <aside class="side">
+    <div class="brand">
+      <h1 id="who">My work <span class="sub" id="section"></span></h1>
+      <button id="logout">Sign out</button>
+    </div>
+    <nav class="tabs" id="tabs">
+      <button data-tab="work" class="active">Required work</button>
+      <button data-tab="claims">Effort claims</button>
+      <button data-tab="grades">My grades</button>
+    </nav>
+    <p class="foot muted small">Student view</p>
+  </aside>
+  <main class="content"><section id="view"></section></main>
+</div>
 <script type="module" src="/js/student/main.js"></script>
 </body>
 </html>

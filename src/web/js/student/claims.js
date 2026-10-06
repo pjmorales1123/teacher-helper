@@ -14,16 +14,15 @@ export async function renderClaims() {
     reload();
   }) }, "Send claim");
 
-  append(root, 
+  append(root, h("div", { class: "split" },
     h("div", { class: "card" }, h("h2", {}, "File an effort claim"),
       h("p", { class: "muted small" }, "Your teacher decides whether to award extra points."),
       activities.length ? [field("Activity", activity), field("What did you do?", note), send]
         : h("p", { class: "muted" }, "No activities to claim on yet.")),
-    ...claims.map((c) => h("div", { class: "card" },
+    h("div", {}, claims.length ? null : h("p", { class: "muted" }, "No claims yet."), ...claims.map((c) => h("div", { class: "card" },
       h("div", { class: "row" }, h("h3", {}, c.activity_title), badge(c.status), h("span", { class: "muted small right" }, fmtDate(c.created_at))),
       h("p", { class: "small" }, c.note),
       c.status === "approved" && h("p", { class: "small" }, h("strong", {}, `+${c.points} points. `), c.teacher_note),
-      c.status === "rejected" && c.teacher_note && h("p", { class: "small muted" }, c.teacher_note))),
-  );
+      c.status === "rejected" && c.teacher_note && h("p", { class: "small muted" }, c.teacher_note))))));
   return root;
 }

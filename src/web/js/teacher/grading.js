@@ -21,16 +21,21 @@ function detail(s, onDone) {
     onDone();
   }) }, "Reopen");
 
-  return h("div", { class: "card" },
-    h("div", { class: "row" }, h("h2", {}, `${s.student_name} · ${s.activity_title}`), badge(s.status),
-      h("span", { class: "muted small right" }, `Submitted ${fmtDate(s.submitted_at)}`)),
-    s.kind === "image"
-      ? h("img", { class: "preview", src: `/api/grading/submissions/${s.id}/image`, alt: "Submitted work" })
-      : h("pre", { class: "work" }, s.content),
-    h("div", { class: "grid", style: "margin-top:12px" },
-      field(`Score (out of ${s.max_score})`, score), field("Feedback to student", feedback)),
-    h("div", { class: "row" }, s.status !== "approved" && prescore, s.status !== "approved" && approve,
-      s.status === "approved" && reopen, h("button", { onclick: onDone }, "Back to list")),
+  return h("div", {},
+    h("div", { class: "toolbar" }, h("button", { onclick: onDone }, "← Back to list"),
+      h("h2", {}, `${s.student_name} · ${s.activity_title}`), badge(s.status),
+      h("span", { class: "muted small right" }, `${s.component} · Term ${s.term} · submitted ${fmtDate(s.submitted_at)}`)),
+    h("div", { class: "split" },
+      h("div", { class: "card" }, s.kind === "image"
+        ? h("img", { class: "preview", src: `/api/grading/submissions/${s.id}/image`, alt: "Submitted work" })
+        : h("pre", { class: "work" }, s.content)),
+      h("div", { class: "card sticky" },
+        h("h3", {}, "Score"),
+        field(`Score (out of ${s.max_score})`, score), field("Feedback to student", feedback),
+        h("div", { class: "row" }, s.status !== "approved" && prescore, s.status !== "approved" && approve,
+          s.status === "approved" && reopen),
+        s.status !== "approved" && h("p", { class: "muted small", style: "margin-top:10px" },
+          "The AI draft is only a suggestion. Nothing counts until you approve."))),
   );
 }
 
@@ -61,7 +66,7 @@ export async function renderGrading() {
   filter.addEventListener("change", draw);
   onlyPending.addEventListener("change", draw);
   draw();
-  append(root, h("div", { class: "row", style: "margin-bottom:12px" }, h("h2", {}, "To check"),
+  append(root, h("div", { class: "toolbar" }, h("h2", {}, "To check"),
     h("div", { style: "min-width:220px" }, filter), h("label", { class: "row" }, onlyPending, "Hide approved"),
     h("button", { class: "right", onclick: reload }, "Refresh")), tableSlot);
   return root;

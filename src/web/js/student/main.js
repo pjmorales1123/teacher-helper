@@ -27,6 +27,6 @@ document.getElementById("logout").addEventListener("click", logout);
 
 await requireRole("student");
 const me = await get("/api/student/me");
-document.getElementById("who").textContent = me.name;
+document.getElementById("who").firstChild.textContent = me.name + " ";
 document.getElementById("section").textContent = `${me.id} · ${me.section}`;
 show("work");

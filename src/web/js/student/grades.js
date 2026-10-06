@@ -16,6 +16,6 @@ export async function renderGrades() {
   });
   return h("div", {},
     h("p", { class: "muted small" }, "Only scores your teacher approved are counted. Extra points from approved effort claims are included."),
-    ...terms,
-    h("div", { class: "card row" }, h("h3", {}, "Final grade"), h("span", { class: "score right" }, r.finalGrade ?? "–")));
+    h("div", { class: "cards" }, ...terms,
+      h("div", { class: "card row" }, h("h3", {}, "Final grade"), h("span", { class: "stat right" }, r.finalGrade ?? "–"))));
 }
