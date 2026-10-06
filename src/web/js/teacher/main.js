@@ -8,6 +8,7 @@ import { renderGrades } from "./grades.js";
 import { renderGrading } from "./grading.js";
 import { renderOverview } from "./overview.js";
 import { renderStudents } from "./students.js";
+import { renderLevelsTeacher } from "./levels/index.js";
 
 const views = {
   overview: renderOverview,
@@ -16,6 +17,7 @@ const views = {
   claims: renderClaims,
   grades: renderGrades,
   students: renderStudents,
+  levels: renderLevelsTeacher,
 };
 
 const view = document.getElementById("view");

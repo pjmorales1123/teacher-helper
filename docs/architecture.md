@@ -35,6 +35,17 @@ section. New columns are added by `migrate()` in `src/db/connection.ts`.
 `{score, feedback}` object and stored as a draft; nothing is a grade until the
 teacher clicks Approve.
 
+## LEVELS (literacy practice)
+`src/levels/` is self-contained. Built-in quests are JSON files in
+`src/levels/content/`, validated by `validate.ts` at startup; the server
+refuses to start on a bad file. `content.ts` merges them with published
+custom quests from `lv_quests`. `engine.ts` grades items; `progression.ts`
+holds pass marks, streaks, XP and placement; `service.ts` applies an attempt
+(XP, level-up, word bank, badges). Student routes live under
+`/api/student/levels`, teacher routes under `/api/levels`. `draft.ts` asks the
+subscription CLI for a quest draft, which the teacher edits and publishes.
+Design, rules and content format: `docs/levels.md`.
+
 ## Open items (from the brief)
 - Verify the component percentage method against the official E-Class Record.
 - Confirm the extra-points policy (currently: added to raw score, capped).

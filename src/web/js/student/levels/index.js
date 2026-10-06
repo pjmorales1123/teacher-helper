@@ -10,7 +10,7 @@ import { renderReview } from "./review.js";
 /** The LEVELS tab: one persistent container whose content is swapped between screens. */
 export async function renderLevels() {
   const root = h("div");
-  const swap = (p) => p.then((n) => root.replaceChildren(n)).catch((e) => root.replaceChildren(h("p", { class: "muted" }, e.message)));
+  const swap = (p) => Promise.resolve(p).then((n) => root.replaceChildren(n)).catch((e) => root.replaceChildren(h("p", { class: "muted" }, e.message)));
   const home = () => swap(renderHome(swap, home));
   await home();
   return root;

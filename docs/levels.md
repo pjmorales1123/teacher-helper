@@ -114,12 +114,19 @@ Teacher (`/api/levels`): `GET /overview?section=`, `GET /students/:id`,
 
 ## Progress checklist
 
-- [ ] Schema, validator, loader
-- [ ] Content: levels 1–3 (4 quests + challenge each)
-- [ ] Content: levels 4–6 + placement
-- [ ] Engine + progression + words + badges (tested)
-- [ ] Student API
-- [ ] Teacher API (+ AI draft)
-- [ ] Student UI
-- [ ] Teacher UI
-- [ ] End-to-end verification, docs
+- [x] Schema, validator, loader
+- [x] Content: levels 1–3 (4 quests + challenge each)
+- [x] Content: levels 4–6 + placement
+- [x] Engine + progression + words + badges (tested)
+- [x] Student API
+- [x] Teacher API (+ AI draft)
+- [x] Student UI
+- [x] Teacher UI
+- [x] End-to-end verification, docs
+
+## Ideas for later (not built)
+
+- Fluency: timed reading with words-per-minute self-report.
+- Printable quest sheets for pupils without a device.
+- Class leaderboard (opt-in, by section) and weekly goals.
+- Import/export of custom quests as a JSON bundle for sharing between teachers.

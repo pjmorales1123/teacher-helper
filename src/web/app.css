@@ -135,3 +135,5 @@ input.correct { border-color: var(--ok); background: #dafbe1; } input.wrong { bo
 .review-row.good .small { color: var(--ok); } .review-row.bad .small { color: var(--bad); }
 .heat { display: inline-block; min-width: 46px; text-align: center; padding: 2px 6px; border-radius: 6px; font-weight: 600; font-size: .85rem; }
 .heat.h0 { background: #ffebe9; color: var(--bad); } .heat.h1 { background: #fff8c5; color: var(--warn); } .heat.h2 { background: #dafbe1; color: var(--ok); }
+nav.tabs.sub { flex-direction: row; padding: 0; gap: 6px; }
+nav.tabs.sub button { padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); }

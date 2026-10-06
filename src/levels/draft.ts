@@ -23,7 +23,7 @@ export function buildDraftPrompt(req: DraftRequest, id: string): string {
     `Focus skill: ${skillLabel} (id "${req.skill}").${req.topic ? ` Topic or setting: ${req.topic}.` : ""}`,
     "Use Philippine settings, names and everyday situations. Write an ORIGINAL passage; no copyrighted text.",
     isQuest
-      ? "Include a short tip (mini-lesson, 3-5 sentences) that teaches the focus skill explicitly, then items that apply it."
+      ? "Include a tip (mini-lesson): tip.text MUST be 3-5 full sentences that teach the focus skill explicitly, then items that apply it."
       : "This is a level Challenge: no tip, exactly 10 items mixing at least five different skills.",
     `Items: ${isQuest ? "6 items, at least 3 on the focus skill" : "10 items"}. Types: "mc" (4 choices, one correct),`,
     '"order" (3-5 steps in correct order), "short" (typed answer with a list of accepted spellings). Mostly mc.',
