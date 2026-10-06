@@ -4,8 +4,9 @@ import { clear, h } from "../ui.js";
 import { renderClaims } from "./claims.js";
 import { renderGrades } from "./grades.js";
 import { renderWork } from "./work.js";
+import { renderLevels } from "./levels/index.js";
 
-const views = { work: renderWork, claims: renderClaims, grades: renderGrades };
+const views = { work: renderWork, levels: renderLevels, claims: renderClaims, grades: renderGrades };
 const view = document.getElementById("view");
 const tabs = document.getElementById("tabs");
 
