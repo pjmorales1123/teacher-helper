@@ -19,6 +19,7 @@ import type { Storage } from "./services/storage.ts";
 import { createContentStore, loadBuiltIn } from "./levels/content.ts";
 import { levelsStudentRoutes } from "./levels/student-routes.ts";
 import { levelsTeacherRoutes } from "./levels/teacher-routes.ts";
+import { loadBanks } from "./levels/grammar/bank.ts";
 
 export interface AppDeps {
   config: Config;
@@ -34,6 +35,7 @@ export function createApp({ config, db, ai, storage }: AppDeps): express.Express
   app.disable("x-powered-by");
   app.use(express.json({ limit: "12mb" }));
   const content = createContentStore(db, loadBuiltIn());
+  const banks = loadBanks();
 
   app.get("/api/health", (_req, res) => {
     res.json({ ok: true, aiBackend: config.aiBackend, passwordIsDefault: config.teacherPasswordIsDefault });
@@ -46,8 +48,8 @@ export function createApp({ config, db, ai, storage }: AppDeps): express.Express
   app.use("/api/grades", gradeRoutes(db));
   app.use("/api/overview", overviewRoutes(db));
   app.use("/api/backup", backupRoutes(db, config.dbPath));
-  app.use("/api/levels", levelsTeacherRoutes(db, content, config));
-  app.use("/api/student/levels", levelsStudentRoutes(db, content));
+  app.use("/api/levels", levelsTeacherRoutes(db, content, config, banks));
+  app.use("/api/student/levels", levelsStudentRoutes(db, content, banks));
   app.use("/api/student", studentApiRoutes(db, storage));
   app.use("/api", (_req, res) => {
     res.status(404).json({ error: "Unknown API route." });

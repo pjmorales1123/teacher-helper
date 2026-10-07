@@ -15,6 +15,8 @@ export const BADGES: BadgeDef[] = [
   { id: "reviewer-10", name: "Word Collector", hint: "Finish ten word reviews." },
   { id: "word-keeper", name: "Word Keeper", hint: "Master ten words (box 5)." },
   { id: "flawless-challenge", name: "Flawless", hint: "Score 100% on a Challenge." },
+  { id: "rush-clear", name: "Rush Rookie", hint: "Clear a Grammar Rush tier (8 of 10 with hearts left)." },
+  { id: "rush-flawless", name: "Perfect Rush", hint: "A Grammar Rush run with 10 of 10 and all hearts." },
   ...LEVELS.slice(1).map((l) => ({ id: `level-${l.level}`, name: `${l.name} Rank`, hint: `Reach ${l.name} rank.` })),
 ];
 

@@ -141,6 +141,37 @@ case/punctuation-insensitively against `accept`).
   (per level), Word Keeper (10 words in box 5), Reviewer (10 review sessions),
   Flawless Challenge.
 
+## Grammar Rush (grammar game)
+
+A fast fill-in-the-blank game that lives on the LEVELS home screen. Each run
+is 10 sentences with one blank and four choices, 3 hearts (a wrong answer or a
+timeout costs one), 15 seconds per sentence, keys 1–4 on a keyboard.
+
+- Bank: `src/levels/grammar/content/g{1..6}.json`, 40 items per tier,
+  validated at startup (`grammar/validate.ts`): one `___` blank, four distinct
+  choices, one correct, a one-sentence rule in `why`, topic ids from
+  `grammar/meta.ts`. Tiers reuse the rank names and ladder:
+  Warrior (subject–verb agreement, pronouns, articles, plurals), Elite
+  (indefinite/compound agreement, possessives and homophones, basic tenses,
+  prepositions), Master (irregular past, pronoun case, adjective vs adverb,
+  comparison, conjunctions), Grandmaster (perfect tenses, tricky agreement,
+  modals, pronoun–antecedent), Epic (conditionals, passive, relative pronouns,
+  reported speech), Legend (subjunctive, advanced agreement, parallel
+  structure, mixed conditionals, perfect modals).
+- Draw: each run picks 10 items leaning toward the topics the student gets
+  wrong (unseen topics count as 60 %), never the same item as the last two
+  runs, at most 4 per topic.
+- Scoring: 5 XP per correct answer plus up to 5 speed bonus, multiplied ×2
+  from a 3-streak and ×3 from a 6-streak; +30 the first time a tier is
+  cleared. Clearing = 8 of 10 with a heart left; it unlocks the next tier.
+  Grammar XP counts toward the daily goal, streak and leaderboard but is
+  capped at 150 XP per day so it cannot be farmed (runs still count for best
+  scores). Badges: Rush Rookie (first clear), Perfect Rush (10/10, all hearts).
+- Teacher: class topic heatmap, runs per tier, a bank browser by tier and
+  topic, and per-student tier/best/topic accuracy on the student page.
+- Grammar Rush is separate from reading rank: a student can be Warrior in
+  reading and Master in grammar.
+
 ## Data model
 
 `lv_progress(student_id PK, level, xp, streak, last_active, placed,
@@ -148,18 +179,21 @@ placement_round)`, `lv_attempts(id, student_id, quest_id, level, kind, score,
 total, passed, results JSON, created_at)`, `lv_words(id, student_id, word,
 meaning, example, box, due, UNIQUE(student_id, word))`, `lv_badges(student_id,
 badge, earned_at)`, `lv_xp_log(id, student_id, day, xp)`, `lv_quests(id PK, level, kind, title, json, published,
-updated_at)`.
+updated_at)`, `lv_grammar_runs(id, student_id, tier, score, total, xp, hearts, results JSON, created_at)`.
 
 ## API
 
 Student (`/api/student/levels`): `GET /home`, `GET /placement`,
 `POST /placement`, `GET /quests/:id`, `POST /quests/:id/check`,
-`POST /quests/:id/submit`, `GET /review`, `POST /review`.
+`POST /quests/:id/submit`, `GET /review`, `POST /review`,
+`GET /grammar`, `POST /grammar/run/start`, `POST /grammar/run/answer`,
+`POST /grammar/run/finish`.
 
 Teacher (`/api/levels`): `GET /meta`, `PUT /settings`, `GET /overview?section=`, `GET /students/:id`,
 `PUT /students/:id/level`, `GET /content`, `GET /content/:id`,
 `PUT /content/:id`, `DELETE /content/:id`, `POST /content/validate`,
-`POST /content/draft` (CLI draft, never auto-published).
+`POST /content/draft` (CLI draft, never auto-published),
+`GET /grammar/overview?section=`, `GET /grammar/bank`, `GET /grammar/students/:id`.
 
 ## Progress checklist
 
@@ -167,6 +201,7 @@ Teacher (`/api/levels`): `GET /meta`, `PUT /settings`, `GET /overview?section=`,
 - [x] Content: levels 1–6 (6 quests + 1 challenge each = 42 passages) + placement
 - [x] Skill mastery as passage evidence (3 texts, one no-hint, shaky), next-up picker, shuffled choices (tested)
 - [x] SVG art: rank shields, badge medals, strand icons, wordmark
+- [x] Grammar Rush: 240-item leveled bank, hearts/timer/streak game, teacher views
 - [x] Engine + progression + words + badges (tested)
 - [x] Student API
 - [x] Teacher API (+ AI draft)

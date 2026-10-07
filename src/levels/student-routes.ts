@@ -16,11 +16,13 @@ import { getProgress, listBadges, updateProgress } from "./repo.ts";
 import { viewFor } from "./view.ts";
 import { finishReview } from "./service.ts";
 import { studentPlayRoutes } from "./student-play.ts";
+import type { Banks } from "./grammar/bank.ts";
+import { grammarStudentRoutes } from "./grammar/student-routes.ts";
 import { buildReview, countDue, dueWords, listWords } from "./words.ts";
 
 const pendingReviews = new Map<string, Map<number, number>>(); // studentId -> wordId -> correct choice
 
-export function levelsStudentRoutes(db: Db, store: ContentStore): Router {
+export function levelsStudentRoutes(db: Db, store: ContentStore, banks: Banks): Router {
   const r = Router();
   r.use(requireStudent);
   const sid = (res: { locals: Record<string, unknown> }) => res.locals.studentId as string;
@@ -100,6 +102,7 @@ export function levelsStudentRoutes(db: Db, store: ContentStore): Router {
     res.json(finishReview(db, studentId, answers, given));
   });
 
+  r.use("/grammar", grammarStudentRoutes(db, banks));
   r.use(studentPlayRoutes(db, store));
   return r;
 }

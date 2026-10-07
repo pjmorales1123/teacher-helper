@@ -32,7 +32,8 @@
   reading bands; passages are teen-interest "hi-lo" texts. Forty-two built-in quests and challenges ship with the
   app; everything is auto-graded locally (no AI tokens). Teachers see a class
   skill heatmap, per-student detail, can override a level, and can write or
-  AI-draft new quests. See `docs/levels.md`.
+  AI-draft new quests. Grammar Rush, a timed fill-the-blank grammar game
+  with a 240-sentence leveled bank, lives on the same screen. See `docs/levels.md`.
 
 ## Run
 Requirements: Node 22.13 or newer (uses the built-in SQLite driver, no native build).

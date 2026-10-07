@@ -189,3 +189,17 @@ nav.tabs.sub button { padding: 6px 12px; border-radius: 999px; border: 1px solid
 .skill-block { padding: 6px 0; border-bottom: 1px solid var(--line); } .skill-block:last-of-type { border-bottom: 0; } .skill-block .skill-row { border-bottom: 0; padding: 2px 0; }
 .ev-list { display: flex; flex-wrap: wrap; gap: 4px; padding-left: 24px; } .chip.ev { font-size: .75rem; padding: 1px 8px; }
 .chip.ev.pass { background: #dafbe1; color: var(--ok); border-color: #b7e0c2; } .chip.ev.fail { background: #ffebe9; color: var(--bad); border-color: #f5c2c0; }
+/* Grammar Rush */
+.rush-card { border-color: #f59e0b; background: linear-gradient(180deg, #fffbeb, var(--card)); }
+.rush-tiers { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+.rush-tier { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px 10px; min-width: 86px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); }
+.rush-tier.cleared { border-color: var(--ok); background: #f0fdf4; } .rush-tier.locked { opacity: .55; cursor: not-allowed; }
+.rush .toolbar h2 { margin-right: 6px; } .hearts { color: #e11d48; font-size: 1.15rem; letter-spacing: 2px; }
+.rush-timer { height: 8px; margin: 0 0 12px; } .rush-timer .fill { transition: width .1s linear; } .rush-timer .fill.urgent { background: var(--bad); }
+.rush-sentence { font-size: 1.35rem; line-height: 1.6; font-weight: 600; } .rush-sentence .blank { color: var(--accent); border-bottom: 3px solid var(--accent); padding: 0 6px; }
+.rush-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+.rush-choice { padding: 14px 12px; font-size: 1.1rem; border: 2px solid var(--line); border-radius: 10px; background: var(--card); text-align: left; display: flex; gap: 10px; align-items: center; }
+.rush-choice kbd { font-size: .75rem; padding: 2px 6px; border-radius: 4px; background: var(--bg); border: 1px solid var(--line); color: var(--muted); }
+.rush-choice:hover:not(:disabled) { border-color: var(--accent); } .rush-choice.correct { background: #dafbe1; border-color: var(--ok); } .rush-choice.wrong { background: #ffebe9; border-color: var(--bad); }
+.topic-bars .topic-name { min-width: 180px; } .topic-bars .row { gap: 8px; margin-top: 4px; }
+@media (max-width: 640px) { .rush-choices { grid-template-columns: 1fr; } .rush-sentence { font-size: 1.15rem; } }

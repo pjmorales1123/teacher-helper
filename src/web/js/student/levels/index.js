@@ -3,6 +3,7 @@ import { get } from "../../api.js";
 import { append, h } from "../../ui.js";
 import { logoEl, strandEl } from "../../levels-art/index.js";
 import { badgeGrid, heroCard, rankPath, skillsCard } from "./cards.js";
+import { rushCard } from "./grammar.js";
 import { starsEl } from "./items.js";
 import { renderPlacement } from "./placement.js";
 import { playQuest } from "./play.js";
@@ -58,6 +59,7 @@ async function renderHome(swap, home) {
       h("div", { class: "bar" }, h("div", { class: `fill ${goalPct >= 100 ? "full" : ""}`, style: `width:${goalPct}%` }))),
     heroCard(d, play),
     h("div", { class: "cols-2" }, skillsCard(map, d.skills), h("div", {}, h("h3", {}, "Rank path"), rankPath(d.levels, d.level))),
+    await rushCard(swap, home),
     h("div", { class: "row", style: "margin-top:14px" }, h("h3", {}, `${map.name} stories`),
       h("span", { class: "muted small" }, map.skills.every((s) => s.mastered) ? "Train more: every story you pass sharpens a skill." : "Play any story. Next up is the fastest path.")),
     map.maxLevel && c?.passed ? h("div", { class: "notice" }, "Legend rank reached. Keep replaying for three stars and keep your streak alive.") : null,

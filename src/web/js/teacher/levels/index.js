@@ -4,6 +4,7 @@ import { append, fmtDate, h } from "../../ui.js";
 import { withSection } from "../../section.js";
 import { rankEl } from "../../levels-art/index.js";
 import { renderContent } from "./content.js";
+import { renderGrammarTeacher } from "./grammar.js";
 import { renderLevelsStudent } from "./student.js";
 
 export function heat(accuracy, total) {
@@ -27,7 +28,8 @@ function subnav(active, swap, home) {
   return h("div", { class: "toolbar" }, h("h2", {}, "LEVELS"),
     h("nav", { class: "tabs sub" },
       h("button", { class: active === "progress" ? "active" : "", onclick: home }, "Class progress"),
-      h("button", { class: active === "content" ? "active" : "", onclick: () => swap(renderContent(swap, home)) }, "Quests & content")));
+      h("button", { class: active === "content" ? "active" : "", onclick: () => swap(renderContent(swap, home)) }, "Quests & content"),
+      h("button", { class: active === "grammar" ? "active" : "", onclick: () => swap(renderGrammarTeacher(subnav("grammar", swap, home))) }, "Grammar Rush")));
 }
 
 async function renderProgress(swap, home) {

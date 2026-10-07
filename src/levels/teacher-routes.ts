@@ -13,6 +13,8 @@ import { resetPlacement, setLevel } from "./repo.ts";
 import { getSetting, setSetting } from "../db/connection.ts";
 import { classOverview, studentDetail } from "./teacher-report.ts";
 import { validateQuest } from "./validate.ts";
+import type { Banks } from "./grammar/bank.ts";
+import { grammarTeacherRoutes } from "./grammar/teacher-routes.ts";
 
 interface CustomRow {
   id: string;
@@ -24,9 +26,10 @@ interface CustomRow {
   updated_at: string;
 }
 
-export function levelsTeacherRoutes(db: Db, store: ContentStore, config: Config): Router {
+export function levelsTeacherRoutes(db: Db, store: ContentStore, config: Config, banks: Banks): Router {
   const r = Router();
   r.use(requireTeacher);
+  r.use("/grammar", grammarTeacherRoutes(db, banks));
 
   r.get("/meta", (_req, res) => res.json({ levels: LEVELS, skills: SKILLS, leaderboard: getSetting(db, "lv_leaderboard", "1") === "1" }));
   r.put("/settings", (req, res) => {

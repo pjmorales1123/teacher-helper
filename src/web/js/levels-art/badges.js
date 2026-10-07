@@ -11,6 +11,8 @@ const GLYPH = {
   "streak-7": flame("7"),
   "reviewer-10": `<path d="M20 28 H30 a3 3 0 0 1 3 3 V50 a2 2 0 0 0-2-2 H20 Z M44 28 H34 a3 3 0 0 0-3 3 V50 a2 2 0 0 1 2-2 H44 Z" fill="#7c2d12"/><path d="M23 33 H29 M23 38 H29 M35 33 H41 M35 38 H41" stroke="#fde68a" stroke-width="1.6" stroke-linecap="round"/>`,
   "word-keeper": `<circle cx="27" cy="34" r="6" fill="none" stroke="#7c2d12" stroke-width="3.5"/><path d="M31.5 37.5 L44 50 M40 46 L43 43 M37 43 L40 40" stroke="#7c2d12" stroke-width="3.5" stroke-linecap="round"/>`,
+  "rush-clear": `<path d="M35 24 L24 40 H32 L29 52 L41 35 H33 Z" fill="#7c2d12"/>`,
+  "rush-flawless": `<path d="M35 24 L24 40 H32 L29 52 L41 35 H33 Z" fill="#dc2626"/><circle cx="44" cy="28" r="3" fill="#7c2d12"/><circle cx="21" cy="47" r="2.5" fill="#7c2d12"/>`,
   "flawless-challenge": `<path d="M24 29 H40 L46 36 L32 52 L18 36 Z" fill="#7c2d12"/><path d="M24 29 L32 36 L40 29 M18 36 H46 M32 36 V52" stroke="#fde68a" stroke-width="1.4" fill="none"/>`,
 };
 function flame(n) {

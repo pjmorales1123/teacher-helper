@@ -118,6 +118,18 @@ CREATE TABLE IF NOT EXISTS lv_xp_log (
 );
 
 CREATE INDEX IF NOT EXISTS idx_lv_xp_day ON lv_xp_log(day, student_id);
+CREATE TABLE IF NOT EXISTS lv_grammar_runs (
+  id         INTEGER PRIMARY KEY AUTOINCREMENT,
+  student_id TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+  tier       INTEGER NOT NULL,
+  score      INTEGER NOT NULL,
+  total      INTEGER NOT NULL,
+  xp         INTEGER NOT NULL,
+  hearts     INTEGER NOT NULL,
+  results    TEXT NOT NULL,
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS idx_lv_grammar_student ON lv_grammar_runs(student_id);
 CREATE INDEX IF NOT EXISTS idx_lv_attempts_student ON lv_attempts(student_id);
 CREATE INDEX IF NOT EXISTS idx_submissions_student ON submissions(student_id);
 CREATE INDEX IF NOT EXISTS idx_claims_student ON effort_claims(student_id);

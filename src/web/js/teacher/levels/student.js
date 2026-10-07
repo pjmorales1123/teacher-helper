@@ -54,6 +54,9 @@ export async function renderLevelsStudent(id, back) {
       h("div", { class: "card" }, h("h3", {}, "Word bank"),
         d.words.length ? h("p", { class: "small" }, ...d.words.map((w) => h("span", { class: "chip", style: "margin:0 6px 6px 0", title: `${w.meaning} · box ${w.box}, due ${w.due}` }, `${w.word} ${"·".repeat(w.box)}`)))
           : h("p", { class: "muted" }, "No words yet."),
+        h("h3", { style: "margin-top:10px" }, "Grammar Rush"),
+        d.grammar.runs ? h("div", {}, h("p", { class: "small" }, `Tier ${d.grammar.tier} reached · ${d.grammar.runs} runs · best: `, d.grammar.tiers.filter((t) => t.best !== null).map((t) => `${t.name} ${t.best}/10`).join(", ")),
+          h("div", { class: "small" }, ...d.grammar.topics.map((t) => h("span", { class: "chip", style: "margin:0 6px 6px 0" }, `${t.label} `, heat(t.accuracy, t.total))))) : h("p", { class: "muted" }, "No runs yet."),
         h("h3", { style: "margin-top:10px" }, "Badges"),
         d.badges.length ? h("p", {}, ...d.badges.map((b) => h("span", { class: "badge checked", style: "margin:0 6px 6px 0" }, b.badge))) : h("p", { class: "muted" }, "None yet."))));
   return root;

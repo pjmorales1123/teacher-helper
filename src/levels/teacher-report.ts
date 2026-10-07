@@ -9,6 +9,7 @@ import { listAttempts, listBadges, listProgressRows } from "./repo.ts";
 import { viewFor } from "./view.ts";
 import type { ItemResult } from "./types.ts";
 import { listWords } from "./words.ts";
+import { grammarStudentSummary } from "./grammar/teacher-routes.ts";
 
 function resultsOf(db: Db, studentId: string, limit = 200): ItemResult[][] {
   return listAttempts(db, studentId, limit).map((a) => JSON.parse(a.results) as ItemResult[]);
@@ -66,5 +67,6 @@ export function studentDetail(db: Db, store: ContentStore, student: { id: string
     })),
     words: listWords(db, student.id),
     badges: listBadges(db, student.id),
+    grammar: grammarStudentSummary(db, student.id),
   };
 }
