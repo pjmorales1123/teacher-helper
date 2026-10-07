@@ -17,21 +17,29 @@ describe("built-in LEVELS content", () => {
       assert.ok(placement[0]!.items.filter((i) => i.level === level).length >= 3, `placement items for level ${level}`);
     }
   });
-  it("covers every focus skill with 7+ items across 2+ quests, so mastery is reachable", () => {
+  it("gives every focus skill 4+ evidence passages (3+ items), with a tip on it and 2+ no-hint passages", () => {
+    const on = (q: { items: { skill: string }[] }, skill: string) => q.items.filter((i) => i.skill === skill).length;
     for (const { level } of LEVELS) {
+      const mine = quests.filter((q) => q.level === level && q.kind !== "placement");
+      const challenge = mine.find((q) => q.kind === "challenge")!;
+      assert.equal(challenge.items.length, 12, `level ${level} challenge has 12 items`);
       for (const skill of LEVEL_SKILLS[level]!) {
-        const qs = quests.filter((q) => q.level === level && q.kind === "quest" && q.items.some((i) => i.skill === skill));
-        const items = qs.reduce((n, q) => n + q.items.filter((i) => i.skill === skill).length, 0);
-        assert.ok(qs.length >= 2 && items >= 7, `level ${level} ${skill}: ${items} items in ${qs.length} quests`);
+        assert.equal(on(challenge, skill), 3, `level ${level} challenge has 3 items on ${skill}`);
+        const ev = mine.filter((q) => on(q, skill) >= 3);
+        assert.ok(ev.some((q) => q.tip?.skill === skill), `level ${level} ${skill} has a tip passage`);
+        assert.ok(ev.filter((q) => q.tip?.skill !== skill).length >= 2, `level ${level} ${skill} has 2+ no-hint passages`);
+        assert.ok(ev.length >= 4, `level ${level} ${skill}: ${ev.length} evidence passages`);
+      }
+      for (const q of mine.filter((q) => q.kind === "quest")) {
+        assert.ok(LEVEL_SKILLS[level]!.includes(q.tip!.skill), `${q.id} tip is a focus skill`);
+        const ev = LEVEL_SKILLS[level]!.filter((s) => on(q, s) >= 3);
+        assert.ok(ev.includes(q.tip!.skill) && ev.length >= 3, `${q.id} is evidence for 3 focus skills incl. its tip (${ev})`);
       }
     }
     assert.equal(new Set(quests.map((q) => q.title)).size, quests.length, "titles are unique");
   });
-  it("gives every quest 2+ words and every challenge 10 items", () => {
-    for (const q of quests) {
-      if (q.kind === "quest") assert.ok(q.words.length >= 2, `${q.id} words`);
-      if (q.kind === "challenge") assert.equal(q.items.length, 10, `${q.id} items`);
-    }
+  it("gives every quest 2+ words", () => {
+    for (const q of quests) if (q.kind === "quest") assert.ok(q.words.length >= 2, `${q.id} words`);
   });
 });
 
@@ -48,7 +56,7 @@ describe("validateQuest", () => {
       id: "L9-Test".toLowerCase(), level: 2, kind: "quest", title: "T",
       tip: { skill: "details", title: "a", text: "b" }, passage: { title: "p", text: "words" },
       words: [{ word: "w", meaning: "m" }],
-      items: Array.from({ length: 4 }, (_, i) => ({ type: "short", skill: "details", prompt: "q", accept: ["a"], why: "w" })),
+      items: Array.from({ length: 6 }, (_, i) => ({ type: "mc", skill: i < 3 ? "details" : "sequence", prompt: "q", choices: ["a", "b"], answer: 0, why: "w" })),
     });
     assert.deepEqual(errors, []);
     assert.equal(quest?.items[3]?.id, "i4");

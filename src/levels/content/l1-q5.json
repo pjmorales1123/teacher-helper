@@ -38,6 +38,12 @@
       "why": "Every paragraph is about the store helping the street during the brownout. The other titles fit only one detail." },
     { "id": "i8", "type": "mc", "skill": "main-idea", "prompt": "What is this passage mostly about?",
       "choices": ["A typhoon that hit a town", "A girl who hated brownouts", "A store that helped its street during a brownout", "How much money a store made in a week"], "answer": 2,
-      "why": "The last line says it: \"the whole street had a place to go.\" The money is only one part." }
+      "why": "The last line says it: \"the whole street had a place to go.\" The money is only one part." },
+    { "id": "i9", "type": "mc", "skill": "context-clues", "prompt": "\"It was more than a normal month.\" What does normal mean here?",
+      "choices": ["Usual", "Rainy", "Short", "Lucky"], "answer": 0,
+      "why": "Lyka is comparing the brownout days to how the store usually does. Normal means the usual amount." },
+    { "id": "i10", "type": "mc", "skill": "sequence", "prompt": "What did Lyka do right AFTER the lights came back?",
+      "choices": ["She wrote the sign.", "She ran an extension cord to the counter.", "She counted the coins.", "She sold hot coffee."], "answer": 2,
+      "why": "\"On Friday the lights came back. Lyka counted the coins.\" Counting the coins is the very next sentence." }
   ]
 }

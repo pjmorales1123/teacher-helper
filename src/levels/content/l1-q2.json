@@ -32,6 +32,18 @@
       "why": "He had been spraying and rinsing cars all day, so his shirt was completely wet." },
     { "id": "i6", "type": "mc", "skill": "inference", "prompt": "Why did Rico get faster by the fifth car?",
       "choices": ["The cars got smaller.", "He learned the steps and stopped making mistakes.", "His uncle helped him.", "He skipped the rinsing."], "answer": 1,
-      "why": "He went from forty minutes to fifteen after practice and after fixing the soap mistake. Practice made him faster." }
+      "why": "He went from forty minutes to fifteen after practice and after fixing the soap mistake. Practice made him faster." },
+    { "id": "i7", "type": "mc", "skill": "details", "prompt": "Where did Rico's uncle find soap on the first car?",
+      "choices": ["On the roof", "On the tires", "Near the mirror", "On the door"], "answer": 2,
+      "why": "\"His uncle checked it and found soap near the mirror.\"" },
+    { "id": "i8", "type": "mc", "skill": "details", "prompt": "How much did Rico's uncle pay him at six o'clock?",
+      "choices": ["Three hundred pesos", "Forty pesos", "Six hundred pesos", "Fifteen pesos"], "answer": 0,
+      "why": "\"At six o'clock his uncle gave him three hundred pesos.\"" },
+    { "id": "i9", "type": "mc", "skill": "context-clues", "prompt": "\"Then rinse it, again from the top.\" What does rinse mean?",
+      "choices": ["Wash off the soap with clean water", "Dry with a towel", "Put on more soap", "Wipe the tires"], "answer": 0,
+      "why": "The step before is soaping the car, and the step after is drying it. Rinsing is washing the soap off with water in between." },
+    { "id": "i10", "type": "mc", "skill": "context-clues", "prompt": "The title is \"First Shift.\" Which words in the passage help you know what a shift is?",
+      "choices": ["\"weekend job\" and \"At six o'clock his uncle gave him three hundred pesos\"", "\"His arms hurt\"", "\"soap near the mirror\"", "\"folded the bills\""], "answer": 0,
+      "why": "The passage is about Rico's job and the hours he worked until six o'clock. A shift is a set time of work." }
   ]
 }

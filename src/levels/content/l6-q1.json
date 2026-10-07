@@ -1,8 +1,12 @@
 {
-  "id": "l6-q1", "level": 6, "kind": "quest", "order": 1,
+  "id": "l6-q1",
+  "level": 6,
+  "kind": "quest",
+  "order": 1,
   "title": "The Message Beneath",
   "tip": {
-    "skill": "theme", "title": "Topic vs. theme",
+    "skill": "theme",
+    "title": "Topic vs. theme",
     "text": "The TOPIC is what a story is about in one or two words (friendship, loss). The THEME is what the story says about that topic: a complete idea about life (\"true friendship survives distance\"). A theme is never stated as a command about one character; it applies to people in general. To find it, look at how the main character changes, what they learn, what is repeated, and how the title and ending connect. Support every theme with evidence from the text."
   },
   "passage": {
@@ -10,28 +14,162 @@
     "text": "When Lolo Ambo died, he left the mango tree to no one, and that was the problem. The land went to his three children in equal parts, but the tree stood exactly at the corner where the three parts met, its branches spreading over all of them.\n\nFor two years the siblings argued. Tiyo Berto wanted to cut it down and sell the wood. Tiya Marites claimed the fruit because the trunk leaned toward her side. My mother, the youngest, wanted it left alone, but she said this quietly, and quiet opinions lose arguments. Lawyers were consulted. Cousins stopped speaking at Christmas. The tree, indifferent, kept fruiting every April, and the fruit fell and rotted because no one would be seen picking it.\n\nIt was my cousin Dindo, eleven years old, who ended it. One April morning he climbed the tree, filled three baskets exactly equal, and set one at each doorstep without a word. He did it again the next day, and the next. By the second week Tiyo Berto was leaving the ladder out for him. By the third, Tiya Marites was cooking the fruit into jam and sending jars to both houses.\n\nNo one ever signed a document about the tree. It still belongs to no one. Every April a child climbs it, and three families eat."
   },
   "words": [
-    { "word": "deed", "meaning": "a legal paper that proves who owns land; also, an act or action", "example": "The deed to the house is in her name." },
-    { "word": "indifferent", "meaning": "not caring; showing no interest", "example": "The cat was indifferent to the new toy." },
-    { "word": "consulted", "meaning": "asked for advice or information from", "example": "We consulted a doctor about the rash." }
+    {
+      "word": "deed",
+      "meaning": "a legal paper that proves who owns land; also, an act or action",
+      "example": "The deed to the house is in her name."
+    },
+    {
+      "word": "indifferent",
+      "meaning": "not caring; showing no interest",
+      "example": "The cat was indifferent to the new toy."
+    },
+    {
+      "word": "consulted",
+      "meaning": "asked for advice or information from",
+      "example": "We consulted a doctor about the rash."
+    }
   ],
   "items": [
-    { "id": "i1", "type": "mc", "skill": "theme", "prompt": "Which statement BEST expresses a theme of the story?",
-      "choices": ["Mango trees should be cut down.", "Sharing freely can heal what arguing over ownership cannot.", "Lawyers solve family problems.", "Children should not climb trees."], "answer": 1,
-      "why": "Two years of fighting over who owns the tree fail; a child simply sharing the fruit brings the family back together." },
-    { "id": "i2", "type": "mc", "skill": "theme", "prompt": "What is the difference between the TOPIC and the THEME here?",
-      "choices": ["Topic: a family dispute; theme: generosity ends conflict better than claiming rights", "Topic: mangoes; theme: fruit is sweet", "Topic: Dindo; theme: Dindo is brave", "They are the same thing"], "answer": 0,
-      "why": "The topic is the subject in a few words; the theme is a general idea about life the story supports." },
-    { "id": "i3", "type": "mc", "skill": "evidence", "prompt": "Which detail BEST supports the theme that sharing healed the family?",
-      "choices": ["\"Lawyers were consulted.\"", "\"By the third [week], Tiya Marites was cooking the fruit into jam and sending jars to both houses.\"", "\"The trunk leaned toward her side.\"", "\"Lolo Ambo died.\""], "answer": 1,
-      "why": "The sister who once claimed the fruit is now giving it away, which shows the change." },
-    { "id": "i4", "type": "mc", "skill": "figurative", "prompt": "\"The tree, indifferent, kept fruiting every April.\" What does calling the tree indifferent add?",
-      "choices": ["The tree was sick.", "It contrasts the family's bitter fight with nature simply going on, making the quarrel seem small.", "The tree chose a side.", "The tree stopped bearing fruit."], "answer": 1,
-      "why": "Personifying the tree as not caring highlights how pointless the argument was." },
-    { "id": "i5", "type": "mc", "skill": "inference", "prompt": "Why does the narrator say \"quiet opinions lose arguments\"?",
-      "choices": ["To show the mother was wrong", "To explain why the mother's sensible view was ignored by her louder siblings", "To praise loud people", "To say the mother did not care"], "answer": 1,
-      "why": "The mother wanted the tree left alone, which proved right in the end, but she was drowned out." },
-    { "id": "i6", "type": "mc", "skill": "multiple-meaning", "prompt": "The title is \"The Mango Tree Deed.\" Which TWO meanings of deed does the story play on?",
-      "choices": ["A legal ownership paper, and an act (Dindo's sharing)", "A tree and a fruit", "A lawyer and a cousin", "A debt and a gift"], "answer": 0,
-      "why": "No deed (document) was ever signed; instead a deed (action) solved the problem." }
+    {
+      "id": "i1",
+      "type": "mc",
+      "skill": "theme",
+      "prompt": "Which statement BEST expresses a theme of the story?",
+      "choices": [
+        "Mango trees should be cut down.",
+        "Sharing freely can heal what arguing over ownership cannot.",
+        "Lawyers solve family problems.",
+        "Children should not climb trees."
+      ],
+      "answer": 1,
+      "why": "Two years of fighting over who owns the tree fail; a child simply sharing the fruit brings the family back together."
+    },
+    {
+      "id": "i2",
+      "type": "mc",
+      "skill": "theme",
+      "prompt": "What is the difference between the TOPIC and the THEME here?",
+      "choices": [
+        "Topic: a family dispute; theme: generosity ends conflict better than claiming rights",
+        "Topic: mangoes; theme: fruit is sweet",
+        "Topic: Dindo; theme: Dindo is brave",
+        "They are the same thing"
+      ],
+      "answer": 0,
+      "why": "The topic is the subject in a few words; the theme is a general idea about life the story supports."
+    },
+    {
+      "id": "i3",
+      "type": "mc",
+      "skill": "evidence",
+      "prompt": "Which detail BEST supports the theme that sharing healed the family?",
+      "choices": [
+        "\"Lawyers were consulted.\"",
+        "\"By the third [week], Tiya Marites was cooking the fruit into jam and sending jars to both houses.\"",
+        "\"The trunk leaned toward her side.\"",
+        "\"Lolo Ambo died.\""
+      ],
+      "answer": 1,
+      "why": "The sister who once claimed the fruit is now giving it away, which shows the change."
+    },
+    {
+      "id": "i4",
+      "type": "mc",
+      "skill": "purpose",
+      "prompt": "Why does the author include the sentence \"The tree, indifferent, kept fruiting every April\"?",
+      "choices": [
+        "To explain that mango trees fruit once a year",
+        "To warn that the tree was dying",
+        "To set the family's bitter fight beside nature simply going on, so the quarrel looks small and pointless",
+        "To show that the tree favored Tiya Marites's side"
+      ],
+      "answer": 2,
+      "why": "While the siblings consult lawyers and stop speaking, the tree keeps giving fruit that rots; the contrast makes the argument look foolish."
+    },
+    {
+      "id": "i8",
+      "type": "mc",
+      "skill": "evidence",
+      "prompt": "Which sentence BEST supports the idea that the family's fight was wasteful?",
+      "choices": [
+        "\"The land went to his three children in equal parts.\"",
+        "\"Tiya Marites claimed the fruit because the trunk leaned toward her side.\"",
+        "\"The fruit fell and rotted because no one would be seen picking it.\"",
+        "\"Dindo, eleven years old, ended it.\""
+      ],
+      "answer": 2,
+      "why": "Good fruit rotting on the ground every April, while three families refuse to pick it, shows what the quarrel actually cost."
+    },
+    {
+      "id": "i5",
+      "type": "mc",
+      "skill": "purpose",
+      "prompt": "Why does the narrator include the remark \"quiet opinions lose arguments\"?",
+      "choices": [
+        "To show the mother was wrong",
+        "To explain why the mother's sensible view was ignored by her louder siblings",
+        "To praise loud people",
+        "To say the mother did not care"
+      ],
+      "answer": 1,
+      "why": "The mother wanted the tree left alone, which proved right in the end, but she was drowned out."
+    },
+    {
+      "id": "i9",
+      "type": "mc",
+      "skill": "evidence",
+      "prompt": "Which sentence shows that Tiyo Berto's attitude toward the tree changed?",
+      "choices": [
+        "\"Tiyo Berto wanted to cut it down and sell the wood.\"",
+        "\"Cousins stopped speaking at Christmas.\"",
+        "\"He did it again the next day, and the next.\"",
+        "\"By the second week Tiyo Berto was leaving the ladder out for him.\""
+      ],
+      "answer": 3,
+      "why": "The man who wanted to cut the tree down is now helping a child climb it; leaving the ladder out is quiet proof of his change."
+    },
+    {
+      "id": "i10",
+      "type": "mc",
+      "skill": "purpose",
+      "prompt": "Why does the author point out that Dindo set the baskets at each doorstep \"without a word\"?",
+      "choices": [
+        "To show that Dindo was too shy to speak to his relatives",
+        "To contrast his silent act of sharing with two years of talking, arguing, and lawyers that solved nothing",
+        "To suggest that Dindo was stealing the fruit",
+        "To explain why the baskets were exactly equal"
+      ],
+      "answer": 1,
+      "why": "The siblings \"argued\" and \"consulted\" lawyers for two years; the fix came from a boy who said nothing and simply gave. The silence is the point."
+    },
+    {
+      "id": "i6",
+      "type": "mc",
+      "skill": "multiple-meaning",
+      "prompt": "The title is \"The Mango Tree Deed.\" Which TWO meanings of deed does the story play on?",
+      "choices": [
+        "A legal ownership paper, and an act (Dindo's sharing)",
+        "A tree and a fruit",
+        "A lawyer and a cousin",
+        "A debt and a gift"
+      ],
+      "answer": 0,
+      "why": "No deed (document) was ever signed; instead a deed (action) solved the problem."
+    },
+    {
+      "id": "i7",
+      "type": "mc",
+      "skill": "theme",
+      "prompt": "\"It still belongs to no one. Every April a child climbs it, and three families eat.\" Which idea about life does this ending BEST support?",
+      "choices": [
+        "Some things serve people best when no one owns them.",
+        "Legal papers are the only way to settle a dispute.",
+        "The youngest in a family always gets the last word.",
+        "Mango trees should be planted at property corners."
+      ],
+      "answer": 0,
+      "why": "The ending stresses that the tree was never owned, yet it now feeds everyone; the lack of ownership is what lets it be shared."
+    }
   ]
 }

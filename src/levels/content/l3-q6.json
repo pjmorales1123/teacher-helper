@@ -15,12 +15,12 @@
     { "word": "buzzed", "meaning": "made a short vibrating sound, like a phone alert", "example": "Her phone buzzed with a message from the group chat." }
   ],
   "items": [
-    { "id": "i1", "type": "mc", "skill": "figurative", "prompt": "\"The call was the one fixed point in his week.\" What does this metaphor tell you about the call?",
-      "choices": ["It only lasted one minute.", "It happened in a fixed place.", "It was something steady he could always count on.", "It was boring and always the same."], "answer": 2,
-      "why": "A fixed point does not move. Every Sunday at eight, the call was always there, and \"they never ran out of things to say.\"" },
-    { "id": "i2", "type": "mc", "skill": "figurative", "prompt": "\"The rain was a drummer who never got tired.\" What two things are compared, and what do they share?",
+    { "id": "i1", "type": "mc", "skill": "figurative", "prompt": "\"The rain was a drummer who never got tired.\" What two things are compared, and what do they share?",
       "choices": ["Rain and a drummer; both make a steady, loud beat that does not stop.", "Rain and a drum; both are round.", "Rain and a tired person; both need rest.", "Rain and music; both are pleasant to hear."], "answer": 0,
       "why": "The rain pounds on and on like drumming. \"Never got tired\" means the pounding did not stop." },
+    { "id": "i2", "type": "mc", "skill": "word-parts", "prompt": "The word drummer is drum + -er. What does the suffix -er mean here?",
+      "choices": ["More than", "One who does something", "Without", "Again"], "answer": 1,
+      "why": "-er means one who. A drummer is one who drums, just as a driver is one who drives." },
     { "id": "i3", "type": "mc", "skill": "figurative", "prompt": "\"The wind screamed through the gaps in the roof.\" What kind of figurative language is this?",
       "choices": ["Simile", "Personification", "Idiom", "Hyperbole"], "answer": 1,
       "why": "Screaming is a human action given to the wind. That is personification; there is no like or as." },

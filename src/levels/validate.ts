@@ -96,6 +96,12 @@ export function validateQuest(raw: unknown): Validation {
   if (items.length < min) errors.push(`a ${kind} needs at least ${min} items`);
   if (items.length > 24) errors.push("too many items (max 24)");
   if (new Set(items.map((it) => it.id)).size !== items.length) errors.push("item ids must be unique");
+  if (kind === "quest" && tip) {
+    const on = (skill: string) => items.filter((it) => it.skill === skill).length;
+    if (on(tip.skill) < 3) errors.push(`a quest needs at least 3 items on its tip skill (${tip.skill}) so it can count as mastery evidence`);
+    if (!Object.keys(SKILLS).some((sk) => sk !== tip.skill && on(sk) >= 3)) errors.push("a quest needs at least 3 items on a second skill (no-hint evidence for that skill)");
+  }
+  if (items.filter((it) => it.type !== "mc").length > 2) errors.push("at most 2 order/short items per passage; mastery evidence should be multiple choice");
 
   if (errors.length) return { quest: null, errors };
   return { quest: { id, level, kind, order, title, tip, passage, words, items }, errors };

@@ -32,17 +32,17 @@
     { "id": "i6", "type": "mc", "skill": "figurative", "prompt": "\"Lea was a clock, steady and exact.\" What does this metaphor tell you about Lea as a leader?",
       "choices": ["She was always late to practice.", "She was loud and fast like Ron.", "She kept things on time and precise.", "She only watched the time and never danced."], "answer": 2,
       "why": "A clock is steady and exact, and the next sentence shows it: she started each practice on time and replayed their weakest part." },
-    { "id": "i7", "type": "mc", "skill": "compare", "prompt": "How was Lea's way of leading DIFFERENT from Ron's?",
-      "choices": ["Ron was quiet; Lea shouted at everyone.", "Lea was steady and exact; Ron was loud and fast.", "Lea taught new steps; Ron only repeated old ones.", "Both led in exactly the same way."], "answer": 1,
-      "why": "\"Ron was a drum, loud and fast. Lea was a clock, steady and exact.\" The two sentences are placed side by side to contrast them." },
+    { "id": "i7", "type": "mc", "skill": "word-parts", "prompt": "Lea ended each practice by replaying their weakest part. What does the prefix re- add to the word play?",
+      "choices": ["Play before", "Play again", "Play wrongly", "Play without"], "answer": 1,
+      "why": "re- means again. Replaying the weakest part means doing it one more time so the crew could fix it." },
     { "id": "i8", "type": "mc", "skill": "word-parts", "prompt": "\"Members who were careless with the counts had to redo them.\" What does careless mean?",
       "choices": ["Full of care", "Without care", "Caring again", "A person who cares"], "answer": 1,
       "why": "The suffix -less means without. Careless members were not paying attention to the counts." },
     { "id": "i9", "type": "mc", "skill": "evidence", "prompt": "Which sentence BEST supports the idea that Lea was strict about mistakes?",
       "choices": ["The others listened.", "She agreed to try.", "Members who were careless with the counts had to redo them until they were clean.", "Nobody wanted his place."], "answer": 2,
       "why": "Making members redo sloppy counts \"until they were clean\" is direct proof she did not let mistakes slide." },
-    { "id": "i10", "type": "mc", "skill": "evidence", "prompt": "Which sentence proves the crew did better than they ever had before?",
-      "choices": ["Practice at the covered court became a mess.", "It was their highest finish ever.", "Lea did not lead the way Ron did.", "The crew had no plan."], "answer": 1,
-      "why": "\"Highest finish ever\" states directly that second place beat every past result. The other lines describe problems, not results." }
+    { "id": "i10", "type": "mc", "skill": "figurative", "prompt": "\"Miguel lifted Lea's notebook in the air like a trophy.\" What does this simile suggest?",
+      "choices": ["The notebook was heavy and made of metal.", "The crew won first place.", "The notebook, like a trophy, was the proof of what they had won.", "Miguel wanted to throw the notebook away."], "answer": 2,
+      "why": "Winners lift a trophy to show what they achieved. Lifting the notebook that way says the notebook was the reason for their best finish ever." }
   ]
 }

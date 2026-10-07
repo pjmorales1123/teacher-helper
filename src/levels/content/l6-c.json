@@ -1,50 +1,198 @@
 {
-  "id": "l6-c", "level": 6, "kind": "challenge", "order": 9,
+  "id": "l6-c",
+  "level": 6,
+  "kind": "challenge",
+  "order": 9,
   "title": "Legend Challenge: The Language We Lose",
   "passage": {
     "title": "The Language We Lose",
     "text": "The Philippines has more than 130 living languages, and linguists estimate that at least a dozen of them will have no fluent speakers by 2050. The pattern is familiar everywhere: grandparents speak the language, parents understand it, children answer in Tagalog or English. Within three generations, a way of seeing the world goes silent.\n\nIt is tempting to shrug. Languages have always died, and a child who grows up fluent in English and Filipino has, by any practical measure, more doors open to her than one who speaks only the language of a valley. Parents who steer their children toward the national and global languages are not villains; they are making a reasonable bet on their children's future.\n\nBut consider what the bet costs. A language is not merely a list of words that can be translated. It carries knowledge that does not survive translation: the names of forty kinds of rice and when each should be planted, the distinction between rain that is good for seedlings and rain that drowns them, the stories that tell a child who her people are. When the last speaker of a language dies, a library burns, and no one even hears the fire.\n\nThe encouraging news is that a language does not need millions of speakers to live. It needs children. Programs that teach reading in a child's mother tongue first, before switching to Filipino and English, have been shown in several provinces to improve reading in all three languages, not just one. A child who learns that her grandmother's words are worth writing down learns something else as well: that she comes from somewhere, and that it matters."
   },
   "words": [
-    { "word": "linguists", "meaning": "scientists who study languages", "example": "Linguists recorded the elders' stories." },
-    { "word": "fluent", "meaning": "able to speak a language easily and well", "example": "She is fluent in three languages." },
-    { "word": "distinction", "meaning": "a difference between two things", "example": "There is a clear distinction between a frog and a toad." }
+    {
+      "word": "linguists",
+      "meaning": "scientists who study languages",
+      "example": "Linguists recorded the elders' stories."
+    },
+    {
+      "word": "fluent",
+      "meaning": "able to speak a language easily and well",
+      "example": "She is fluent in three languages."
+    },
+    {
+      "word": "distinction",
+      "meaning": "a difference between two things",
+      "example": "There is a clear distinction between a frog and a toad."
+    }
   ],
   "items": [
-    { "id": "i1", "type": "mc", "skill": "main-idea", "prompt": "What is the central idea of the passage?",
-      "choices": ["English opens more doors than local languages.", "Dying languages carry irreplaceable knowledge and identity, and teaching children in their mother tongue can keep them alive.", "The Philippines has 130 languages.", "Parents are wrong to teach English."], "answer": 1,
-      "why": "The passage moves from the loss, through the cost, to the solution: children learning in their mother tongue." },
-    { "id": "i2", "type": "mc", "skill": "theme", "prompt": "Which theme does the final paragraph develop?",
-      "choices": ["Knowing where you come from gives a person worth and belonging.", "Rice farming is difficult.", "Reading in three languages is confusing.", "Grandparents talk too much."], "answer": 0,
-      "why": "\"She comes from somewhere, and that it matters\" states the idea that identity rooted in language has value." },
-    { "id": "i3", "type": "mc", "skill": "figurative", "prompt": "\"When the last speaker of a language dies, a library burns, and no one even hears the fire.\" What does this metaphor convey?",
-      "choices": ["Old people should avoid fires.", "An enormous store of knowledge is destroyed silently and unnoticed.", "Libraries are made of language.", "Fires are quiet."], "answer": 1,
-      "why": "A burning library is a vast loss; \"no one hears the fire\" stresses that the loss goes unnoticed." },
-    { "id": "i4", "type": "mc", "skill": "point-of-view", "prompt": "How does the author treat parents who choose English and Filipino for their children?",
-      "choices": ["As villains", "As making a reasonable choice whose hidden cost should still be considered", "As foolish", "As the only hope for languages"], "answer": 1,
-      "why": "\"Not villains... making a reasonable bet\" shows fairness, followed by \"But consider what the bet costs.\"" },
-    { "id": "i5", "type": "mc", "skill": "evidence", "prompt": "Which evidence supports the claim that mother-tongue teaching helps rather than hurts?",
-      "choices": ["Linguists estimate a dozen languages will die.", "Programs in several provinces improved reading in all three languages.", "Grandparents speak the language.", "There are forty kinds of rice."], "answer": 1,
-      "why": "The measured result from provincial programs directly supports the claim." },
-    { "id": "i6", "type": "mc", "skill": "purpose", "prompt": "What is the author's purpose in the SECOND paragraph?",
-      "choices": ["To mock parents", "To fairly present the opposing view before answering it", "To list the dying languages", "To entertain with a story"], "answer": 1,
-      "why": "The author gives the strongest version of the other side (\"more doors open\") before the \"But\" that follows." },
-    { "id": "i7", "type": "mc", "skill": "context-clues", "prompt": "\"Knowledge that does not survive translation.\" Based on the examples that follow, what kind of knowledge is meant?",
-      "choices": ["Mathematics", "Detailed local knowledge of farming, weather, and ancestry tied to specific words", "Grammar rules", "English vocabulary"], "answer": 1,
-      "why": "The examples are forty rice names, kinds of rain, and the people's stories." },
-    { "id": "i8", "type": "mc", "skill": "cause-effect", "prompt": "According to the passage, what causes a language to go silent within three generations?",
-      "choices": ["Government bans", "Each generation using it less: grandparents speak it, parents understand it, children answer in other languages", "Lack of dictionaries", "Children refusing to speak"], "answer": 1,
-      "why": "The first paragraph lays out this three-step chain explicitly." },
-    { "id": "i9", "type": "mc", "skill": "compare", "prompt": "How does the author contrast \"a list of words\" with \"a language\"?",
-      "choices": ["A list can be translated; a language carries knowledge and stories that cannot.", "A list is longer than a language.", "A language is easier to learn.", "They are the same."], "answer": 0,
-      "why": "\"A language is not merely a list of words that can be translated. It carries knowledge that does not survive translation.\"" },
-    { "id": "i10", "type": "mc", "skill": "summary", "prompt": "Which is the BEST summary?",
+    {
+      "id": "i1",
+      "type": "mc",
+      "skill": "evidence",
+      "prompt": "Which sentence BEST supports the claim that language loss is a widespread pattern, not a local one?",
       "choices": [
-        "Many Philippine languages are dying as children switch to Filipino and English; the loss includes untranslatable knowledge and identity, but teaching children in their mother tongue first can keep languages alive and improve reading.",
-        "The Philippines has 130 languages and a dozen will die by 2050.",
-        "Parents make reasonable bets on English.",
-        "A library burns when a speaker dies."
-      ], "answer": 0,
-      "why": "It captures the problem, the cost, and the solution in order." }
+        "\"The Philippines has more than 130 living languages.\"",
+        "\"The pattern is familiar everywhere: grandparents speak the language, parents understand it, children answer in Tagalog or English.\"",
+        "\"It needs children.\"",
+        "\"Parents... are not villains.\""
+      ],
+      "answer": 1,
+      "why": "\"Familiar everywhere\" states that the same three-generation pattern happens in many places, which is what the claim needs."
+    },
+    {
+      "id": "i2",
+      "type": "mc",
+      "skill": "compare",
+      "prompt": "How does the author compare the child fluent in English and Filipino with the child who speaks only \"the language of a valley\"?",
+      "choices": [
+        "The first is smarter; the second is lazier.",
+        "The first has more doors open by practical measures; the second's language carries knowledge that does not translate.",
+        "Both have the same chances in life.",
+        "The first will forget her grandparents; the second will not."
+      ],
+      "answer": 1,
+      "why": "Paragraph 2 says the bilingual child has \"more doors open\"; paragraph 3 answers with what the local language carries that cannot be translated."
+    },
+    {
+      "id": "i3",
+      "type": "mc",
+      "skill": "purpose",
+      "prompt": "Why does the author include the list of \"forty kinds of rice\" and two kinds of rain?",
+      "choices": [
+        "To teach readers how to plant rice",
+        "To entertain readers with unusual facts",
+        "To give concrete examples of knowledge that is lost when a language dies",
+        "To show that farmers do not need English"
+      ],
+      "answer": 2,
+      "why": "The examples follow \"knowledge that does not survive translation\" and make that abstract claim specific."
+    },
+    {
+      "id": "i4",
+      "type": "mc",
+      "skill": "theme",
+      "prompt": "\"When the last speaker of a language dies, a library burns.\" Which statement about life does this idea support?",
+      "choices": [
+        "Books are more valuable than spoken words.",
+        "Old people always know more than young people.",
+        "Libraries need better fire safety.",
+        "What a community knows can vanish with the people who carry it."
+      ],
+      "answer": 3,
+      "why": "The library stands for the knowledge held in a language; when its last speaker dies, that store of knowledge is gone with the person."
+    },
+    {
+      "id": "i5",
+      "type": "mc",
+      "skill": "evidence",
+      "prompt": "Which sentence BEST supports the idea that the loss of a language goes unnoticed?",
+      "choices": [
+        "\"Linguists estimate that at least a dozen of them will have no fluent speakers by 2050.\"",
+        "\"It is tempting to shrug.\"",
+        "\"A library burns, and no one even hears the fire.\"",
+        "\"A language is not merely a list of words.\""
+      ],
+      "answer": 2,
+      "why": "\"No one even hears the fire\" says directly that the loss happens without anyone noticing."
+    },
+    {
+      "id": "i6",
+      "type": "mc",
+      "skill": "compare",
+      "prompt": "How does the author contrast what a language NEEDS to survive with what people might assume it needs?",
+      "choices": [
+        "It needs government funding, not speakers.",
+        "It needs millions of speakers, not children.",
+        "It does not need millions of speakers; it needs children.",
+        "It needs dictionaries, not stories."
+      ],
+      "answer": 2,
+      "why": "\"A language does not need millions of speakers to live. It needs children.\" sets the assumption against the real requirement."
+    },
+    {
+      "id": "i7",
+      "type": "mc",
+      "skill": "theme",
+      "prompt": "Which theme does the final paragraph develop?",
+      "choices": [
+        "Knowing where you come from gives a person worth and belonging.",
+        "Rice farming is difficult.",
+        "Reading in three languages is confusing.",
+        "Grandparents talk too much."
+      ],
+      "answer": 0,
+      "why": "\"She comes from somewhere, and that it matters\" states the idea that identity rooted in language has value."
+    },
+    {
+      "id": "i8",
+      "type": "mc",
+      "skill": "evidence",
+      "prompt": "Which evidence supports the claim that mother-tongue teaching helps rather than hurts?",
+      "choices": [
+        "Linguists estimate a dozen languages will die.",
+        "Programs in several provinces improved reading in all three languages.",
+        "Grandparents speak the language.",
+        "There are forty kinds of rice."
+      ],
+      "answer": 1,
+      "why": "The measured result from provincial programs directly supports the claim."
+    },
+    {
+      "id": "i9",
+      "type": "mc",
+      "skill": "purpose",
+      "prompt": "What is the author's purpose in the SECOND paragraph?",
+      "choices": [
+        "To mock parents",
+        "To fairly present the opposing view before answering it",
+        "To list the dying languages",
+        "To entertain with a story"
+      ],
+      "answer": 1,
+      "why": "The author gives the strongest version of the other side (\"more doors open\") before the \"But\" that follows."
+    },
+    {
+      "id": "i10",
+      "type": "mc",
+      "skill": "compare",
+      "prompt": "How does the author contrast \"a list of words\" with \"a language\"?",
+      "choices": [
+        "A list can be translated; a language carries knowledge and stories that cannot.",
+        "A list is longer than a language.",
+        "A language is easier to learn.",
+        "They are the same."
+      ],
+      "answer": 0,
+      "why": "\"A language is not merely a list of words that can be translated. It carries knowledge that does not survive translation.\""
+    },
+    {
+      "id": "i11",
+      "type": "mc",
+      "skill": "purpose",
+      "prompt": "What is the author's MAIN purpose in this passage?",
+      "choices": [
+        "To inform readers exactly how many Philippine languages exist",
+        "To persuade readers that dying languages are worth saving, especially through mother-tongue teaching",
+        "To entertain readers with a story about a grandmother",
+        "To explain how to translate words between languages"
+      ],
+      "answer": 1,
+      "why": "The passage builds from the problem to the cost to a solution, ending with why mother-tongue programs matter; it argues rather than only reports."
+    },
+    {
+      "id": "i12",
+      "type": "mc",
+      "skill": "theme",
+      "prompt": "Which of these is a THEME of the passage, not a topic?",
+      "choices": [
+        "Philippine languages",
+        "A practical choice can carry a hidden cost worth noticing.",
+        "Mother-tongue reading programs",
+        "Rice farming"
+      ],
+      "answer": 1,
+      "why": "The passage calls parents' choice \"a reasonable bet\" and then says \"consider what the bet costs\"; that is a full statement about life, while the others only name subjects."
+    }
   ]
 }

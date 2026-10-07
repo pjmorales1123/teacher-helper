@@ -27,11 +27,23 @@
     { "id": "i4", "type": "mc", "skill": "inference", "prompt": "What was Celine really writing in her notebook?",
       "choices": ["Complaints about her classmates", "Things to tell her father during his short, expensive calls", "Her essay about Davao", "Jokes"], "answer": 1,
       "why": "The winning essay describes \"a notebook of things to tell him when he called.\" The narrator realizes the essay is about Celine herself." },
-    { "id": "i5", "type": "mc", "skill": "theme", "prompt": "What lesson does the narrator learn?",
-      "choices": ["Essay contests are unfair.", "Do not judge people before you know their story.", "New students should sit in front.", "Ryan is a bad friend."], "answer": 1,
-      "why": "The last line: \"every day I had decided who she was without asking her a single question.\"" },
+    { "id": "i5", "type": "mc", "skill": "context-clues", "prompt": "\"When Teacher asked her to introduce herself, she said only her name, Celine, and that she was from Davao.\" What does introduce herself mean?",
+      "choices": ["Sit in the back row", "Tell the class who she is", "Read her essay aloud", "Laugh at a joke"], "answer": 1,
+      "why": "What Celine does right after is the clue: she gives her name and where she is from. That is telling people who you are." },
     { "id": "i6", "type": "mc", "skill": "context-clues", "prompt": "The narrator calls Celine stuck-up. Based on the passage, what does stuck-up mean?",
       "choices": ["Unable to move", "Thinking you are better than others and acting unfriendly", "Very tall", "Always late"], "answer": 1,
-      "why": "The narrator uses it to explain why Celine does not smile or laugh, treating her quietness as pride." }
+      "why": "The narrator uses it to explain why Celine does not smile or laugh, treating her quietness as pride." },
+    { "id": "i7", "type": "mc", "skill": "evidence", "prompt": "Which sentence from the text BEST supports the idea that Ryan's agreement is NOT good proof that Celine was stuck-up?",
+      "choices": ["\"He agreed, because Ryan agrees with everything.\"", "\"She did not laugh at any of my jokes.\"", "\"She was from Davao.\"", "\"By the second week she had stopped eating in the canteen.\""], "answer": 0,
+      "why": "If Ryan \"agrees with everything,\" his agreement proves nothing. The other sentences are things the narrator used against Celine, not reasons to doubt Ryan." },
+    { "id": "i8", "type": "mc", "skill": "evidence", "prompt": "Which sentence BEST supports the idea that the winning essay moved the class?",
+      "choices": ["\"Teacher read the winning piece aloud without saying the name.\"", "\"It was about a father who worked in another country.\"", "\"By the end, two of my classmates were wiping their eyes.\"", "\"The name on the paper was Celine.\""], "answer": 2,
+      "why": "Classmates \"wiping their eyes\" is a direct sign the essay touched them. The other sentences tell what happened or what the essay was about, not its effect." },
+    { "id": "i9", "type": "mc", "skill": "evidence", "prompt": "Which sentence BEST supports the idea that Celine was embarrassed when her name was revealed?",
+      "choices": ["\"She sat in the back row.\"", "\"She said only her name, Celine, and that she was from Davao.\"", "\"I looked at the back row.\"", "\"She was staring at her desk, her ears red.\""], "answer": 3,
+      "why": "Red ears and staring at the desk show embarrassment in that moment. The other sentences come from the first day or describe the narrator, not Celine's reaction." },
+    { "id": "i10", "type": "mc", "skill": "context-clues", "prompt": "\"Teacher read the winning piece aloud without saying the name.\" What does piece mean in this sentence?",
+      "choices": ["A part of a broken object", "A slice of food", "A written essay", "A chess figure"], "answer": 2,
+      "why": "The sentence before says \"Then came the essay contest,\" and the text calls it \"the paper\" later. The winning piece is the winning essay." }
   ]
 }

@@ -52,9 +52,10 @@ export const LEVEL_SKILLS: Record<number, readonly string[]> = {
   5: ["point-of-view", "evidence", "figurative", "context-clues"],
   6: ["theme", "compare", "purpose", "evidence"],
 };
-/** A skill is mastered at a level when MASTERY_NEED of the last MASTERY_WINDOW items on it (at that level) were right. */
-export const MASTERY_WINDOW = 6;
-export const MASTERY_NEED = 5;
+/** A skill is mastered at a rank after passing it on MASTERY_TEXTS different passages (one of them without the tip). */
+export const MASTERY_TEXTS = 3;
+/** Optional "sharp" mark for keeping it up on more passages after mastery. */
+export const SHARP_TEXTS = 5;
 
 export const QUEST_PASS = 0.7;
 export const CHALLENGE_PASS = 0.8;

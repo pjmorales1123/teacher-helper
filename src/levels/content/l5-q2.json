@@ -30,8 +30,20 @@
     { "id": "i5", "type": "mc", "skill": "point-of-view", "prompt": "How does the author respond to the opponents' concerns?",
       "choices": ["By ignoring them", "By admitting they are real but calling them scheduling problems that can be solved", "By saying parents are wrong", "By agreeing to keep the early start"], "answer": 1,
       "why": "\"These are real problems, but they are problems of scheduling, not of biology, and schedules can be changed.\"" },
-    { "id": "i6", "type": "mc", "skill": "word-parts", "prompt": "\"Sleep-deprived students.\" The suffix -ed and the root deprive tell you deprived means...",
-      "choices": ["Given plenty of", "Kept from having", "Asleep", "Proud of"], "answer": 1,
-      "why": "To deprive is to keep someone from having something; deprived of sleep means not getting enough." }
+    { "id": "i6", "type": "mc", "skill": "point-of-view", "prompt": "Which sentence shows the author's OWN opinion rather than a reported finding?",
+      "choices": ["\"A 2019 review of studies covering more than 300,000 students found that those who started school later slept an average of 40 minutes more per night.\"", "\"Two out of three reported sleeping fewer than seven hours on school nights.\"", "\"Several schools abroad that moved their start time to 8:30 recorded improved attendance.\"", "\"These are real problems, but they are problems of scheduling, not of biology, and schedules can be changed.\""], "answer": 3,
+      "why": "Calling the concerns \"problems of scheduling, not of biology\" is the author's judgment. The other three sentences report what studies, surveys, and records found." },
+    { "id": "i7", "type": "mc", "skill": "context-clues", "prompt": "\"Research on adolescents shows that during the teenage years the body's internal clock shifts.\" Who are adolescents?",
+      "choices": ["Doctors who study sleep", "Teenagers", "Parents who start work early", "Young children"], "answer": 1,
+      "why": "The same sentence says the research is about \"the teenage years,\" so adolescents are teenagers." },
+    { "id": "i8", "type": "mc", "skill": "context-clues", "prompt": "\"The body's internal clock shifts: teenagers naturally fall asleep later and wake later.\" What does internal clock mean here?",
+      "choices": ["A wristwatch worn to bed", "The school's bell schedule", "The body's natural timing for falling asleep and waking", "An alarm clock in the bedroom"], "answer": 2,
+      "why": "The words after the colon explain it: the clock is inside the body and controls when teenagers fall asleep and wake." },
+    { "id": "i9", "type": "mc", "skill": "context-clues", "prompt": "\"Parents who start work at seven would have to leave children unsupervised.\" What does unsupervised mean?",
+      "choices": ["Without an adult watching them", "Without breakfast", "At school too early", "Stuck in traffic"], "answer": 0,
+      "why": "The clue is that the parents have already left for work, so the children would be home with no adult to watch them." },
+    { "id": "i10", "type": "mc", "skill": "point-of-view", "prompt": "Whose point of view does the LAST paragraph mainly present before the author answers it?",
+      "choices": ["Sleep researchers who studied 300,000 students", "People who oppose a later start, such as working parents and some teachers", "Grade 7 to 10 students who sleep too little", "Doctors who recommend eight to ten hours"], "answer": 1,
+      "why": "The paragraph opens with \"Opponents raise practical concerns\" and lists worries about traffic, parents' work hours, and hot afternoons before the author replies." }
   ]
 }

@@ -2,8 +2,8 @@
   "id": "l3-q3", "level": 3, "kind": "quest", "order": 3,
   "title": "Mangroves: The Coast's Bodyguards",
   "tip": {
-    "skill": "main-idea", "title": "Topic sentences and support",
-    "text": "In information texts, each paragraph usually has a TOPIC SENTENCE that states its main idea, often the first or last sentence. The other sentences give SUPPORTING DETAILS: facts, examples, numbers. To find the main idea of the whole text, look at what all the topic sentences have in common. Headings and the title are clues too."
+    "skill": "figurative", "title": "Spot the hidden comparison",
+    "text": "Writers often explain a new thing by comparing it to something you already know. That is FIGURATIVE language: a tree is not really a bodyguard, but calling it one tells you its job. When you meet a comparison, ask what two things are being compared and what they have in common. Roots \"like stilts\" means the roots lift the tree the way stilts lift a house. Information texts use these comparisons too, so watch for them even outside stories."
   },
   "passage": {
     "title": "Mangroves: The Coast's Bodyguards",
@@ -15,23 +15,35 @@
     { "word": "generations", "meaning": "all the people born around the same time; a span of about 25 to 30 years each", "example": "This house has been in our family for three generations." }
   ],
   "items": [
-    { "id": "i1", "type": "mc", "skill": "main-idea", "prompt": "What is the main idea of the SECOND paragraph?",
-      "choices": ["Storms push big waves.", "Mangroves protect the coast from storm waves.", "Some villages were damaged by typhoons.", "Roots are thick."], "answer": 1,
-      "why": "The topic sentence \"Mangroves protect the coast\" states it, and the rest gives supporting evidence." },
-    { "id": "i2", "type": "mc", "skill": "main-idea", "prompt": "What is the main idea of the WHOLE passage?",
-      "choices": ["Mangroves are strange trees with roots like stilts.", "Mangroves are valuable because they protect coasts and shelter young sea life, so people are replanting them.", "Fishponds and resorts are bad.", "Seedlings take ten years to grow."], "answer": 1,
-      "why": "The paragraphs together explain what mangroves do, why they matter, and why people plant them." },
-    { "id": "i3", "type": "mc", "skill": "main-idea", "prompt": "Which sentence is a SUPPORTING DETAIL for \"Mangroves are also nurseries\"?",
-      "choices": ["Mangroves can live in salty water.", "Young fish, crabs, and shrimp hide among the roots.", "Many mangrove areas were cleared.", "Students plant seedlings."], "answer": 1,
-      "why": "This sentence gives an example of how mangroves act as a nursery." },
-    { "id": "i4", "type": "mc", "skill": "evidence", "prompt": "Which evidence does the author give to show mangroves reduce typhoon damage?",
-      "choices": ["Mangroves have tangled roots.", "Studies found villages behind healthy mangroves had less damage.", "Fish are born in mangroves.", "Seedlings take ten years to grow."], "answer": 1,
-      "why": "The author cites studies comparing villages with and without mangroves." },
-    { "id": "i5", "type": "mc", "skill": "figurative", "prompt": "The title calls mangroves \"bodyguards.\" Why?",
+    { "id": "i1", "type": "mc", "skill": "figurative", "prompt": "\"Tangled roots that rise above the mud like stilts.\" What do the roots and stilts have in common?",
+      "choices": ["Both are made of wood from the city.", "Both hold something up above the ground or water.", "Both are used by circus performers.", "Both are soft and easy to bend."], "answer": 1,
+      "why": "Stilts are long poles that lift a person or a house above the ground. The roots lift the mangrove above the mud the same way." },
+    { "id": "i2", "type": "mc", "skill": "compare", "prompt": "How are mangroves DIFFERENT from most other trees?",
+      "choices": ["They have no roots.", "They grow only on mountains.", "They can live in salty water.", "They lose their leaves every year."], "answer": 2,
+      "why": "\"Unlike most trees, they can live in salty water.\" The signal word unlike introduces the difference." },
+    { "id": "i3", "type": "mc", "skill": "figurative", "prompt": "The author calls the roots a \"thick wall.\" Why is this a good comparison?",
+      "choices": ["The roots are painted white like a wall.", "The roots block and slow the waves the way a wall blocks what hits it.", "The roots are flat and smooth.", "People build houses on the roots."], "answer": 1,
+      "why": "The next words say the wall of roots \"slows the water down.\" A wall stops or slows whatever pushes against it." },
+    { "id": "i4", "type": "mc", "skill": "evidence", "prompt": "Which sentence from the text BEST supports the idea that mangroves reduce typhoon damage?",
+      "choices": ["Mangroves are trees that grow where the land meets the sea.", "Studies in the Philippines found that villages behind healthy mangrove forests had far less damage after typhoons than villages where the mangroves had been cut.", "Young fish, crabs, and shrimp hide among the roots.", "A seedling planted this year may take ten years to become a strong tree."], "answer": 1,
+      "why": "The author cites studies comparing villages with and without mangroves. That is direct proof, not just a description." },
+    { "id": "i5", "type": "mc", "skill": "compare", "prompt": "After a typhoon, how did villages with healthy mangroves compare to villages where mangroves were cut?",
+      "choices": ["They had far less damage.", "They had the same amount of damage.", "They had more damage.", "They had more fish but more damage."], "answer": 0,
+      "why": "Studies found villages behind healthy mangroves \"had far less damage after typhoons than villages where the mangroves had been cut.\"" },
+    { "id": "i6", "type": "mc", "skill": "figurative", "prompt": "The title calls mangroves \"bodyguards.\" Why?",
       "choices": ["They are large and strong people.", "They guard the coast the way a bodyguard protects a person.", "They wear uniforms.", "They catch fish."], "answer": 1,
       "why": "It is a comparison: mangroves stand between danger (storms) and the village, like a bodyguard." },
-    { "id": "i6", "type": "mc", "skill": "context-clues", "prompt": "\"Mangroves are also nurseries.\" In this passage, a nursery is...",
-      "choices": ["A room for babies in a hospital", "A safe place where young sea animals grow", "A school for small children", "A kind of fish"], "answer": 1,
-      "why": "The next sentence explains that young fish, crabs, and shrimp hide among the roots." }
+    { "id": "i7", "type": "mc", "skill": "evidence", "prompt": "Which sentence BEST supports the idea that mangroves matter to people who fish in the open sea?",
+      "choices": ["Mangroves are also nurseries.", "Many of the fish that people catch in open water were born in a mangrove forest.", "Mangroves protect the coast.", "Today, students and fisherfolk in many towns plant mangrove seedlings."], "answer": 1,
+      "why": "This line connects open-water fishing directly to mangroves: the fish were born there. The other lines do not mention catching fish." },
+    { "id": "i8", "type": "mc", "skill": "evidence", "prompt": "Which sentence BEST supports the idea that people, not storms, destroyed many mangroves?",
+      "choices": ["When a storm pushes big waves toward the shore, the thick wall of roots slows the water down.", "Sadly, many mangrove areas were cleared in the past to make fishponds and resorts.", "Unlike most trees, they can live in salty water.", "A forest of them can guard a village for generations."], "answer": 1,
+      "why": "Clearing land \"to make fishponds and resorts\" is something people do. The other lines are about storms, salt water, or the future." },
+    { "id": "i9", "type": "mc", "skill": "compare", "prompt": "How is what people do with mangroves TODAY different from what they did in the past?",
+      "choices": ["In the past they planted them; today they cut them.", "In the past they cleared them; today they plant seedlings.", "In the past they studied them; today they ignore them.", "Nothing has changed."], "answer": 1,
+      "why": "\"Many mangrove areas were cleared in the past... Today, students and fisherfolk in many towns plant mangrove seedlings.\"" },
+    { "id": "i10", "type": "mc", "skill": "main-idea", "prompt": "What is the main idea of the WHOLE passage?",
+      "choices": ["Mangroves are strange trees with roots like stilts.", "Mangroves are valuable because they protect coasts and shelter young sea life, so people are replanting them.", "Fishponds and resorts are bad.", "Seedlings take ten years to grow."], "answer": 1,
+      "why": "The paragraphs together explain what mangroves do, why they matter, and why people plant them." }
   ]
 }

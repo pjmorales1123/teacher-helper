@@ -37,6 +37,18 @@
       "why": "Finishing a routine with no music, on a clapped beat, is harder and braver than dancing to a track." },
     { "id": "i6", "type": "order", "skill": "sequence", "prompt": "Put the events of the story in order.",
       "steps": ["The speaker cut out.", "Kaye started clapping a beat.", "The crowd clapped with them.", "Northside placed second."],
-      "why": "Silence came first, then Kaye's beat, then the crowd joined, and the placing came at the end." }
+      "why": "Silence came first, then Kaye's beat, then the crowd joined, and the placing came at the end." },
+    { "id": "i7", "type": "mc", "skill": "cause-effect", "prompt": "Why did the crowd go quiet thirty seconds into the routine?",
+      "choices": ["The crew stopped dancing on purpose.","The judges stood up.","The speaker cut out, and there was silence.","Dave fell down."], "answer": 2,
+      "why": "\"Thirty seconds into their routine, the speaker cut out. Silence. The crowd went quiet.\"" },
+    { "id": "i8", "type": "mc", "skill": "inference", "prompt": "\"Dave froze in the middle of a move.\" What does this show about Dave?",
+      "choices": ["He was cold.","He was tired of dancing.","He forgot the whole routine.","He was shocked and did not know what to do."], "answer": 3,
+      "why": "To freeze is to stop from shock. The next sentence confirms it: \"For a second, nobody knew what to do.\"" },
+    { "id": "i9", "type": "mc", "skill": "cause-effect", "prompt": "What happened BECAUSE the sound team fixed the speaker?",
+      "choices": ["The judges let the crew perform again with music.","Northside placed first.","The crowd stopped clapping.","Kaye stopped the routine."], "answer": 0,
+      "why": "\"The sound team fixed the speaker, and the judges let them perform again with music.\"" },
+    { "id": "i10", "type": "mc", "skill": "inference", "prompt": "Why did nobody talk about the prize money on the jeepney home?",
+      "choices": ["They were sad that they lost.","They were prouder of finishing without music than of the money.","They had already spent it.","The coach told them to stay quiet."], "answer": 1,
+      "why": "They placed second and won money, yet \"they talked about the clapping.\" The moment they made together mattered more than the prize." }
   ]
 }

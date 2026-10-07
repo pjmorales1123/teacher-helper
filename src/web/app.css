@@ -177,3 +177,15 @@ nav.tabs.sub button { padding: 6px 12px; border-radius: 999px; border: 1px solid
 .practice button.mini { margin-right: 6px; }
 @media (max-width: 640px) { .hero { padding: 14px; } .hero-name { font-size: 1.25rem; } }
 .row.nowrap { flex-wrap: nowrap; white-space: nowrap; }
+.slots { display: inline-flex; gap: 4px; } .slots i { width: 14px; height: 14px; border-radius: 4px; background: var(--bg); border: 1px solid var(--line); position: relative; }
+.slots i.on { background: var(--accent); border-color: var(--accent); } .slots.mastered i.on { background: var(--ok); border-color: var(--ok); }
+.slots.shaky i.on { background: #f59e0b; border-color: #d97706; } .slots i.extra { border-radius: 50%; }
+.slots i.nohint::after, .slots i.want-nohint::after { content: ""; position: absolute; inset: 3px; border-radius: 2px; background: #fff; opacity: .9; }
+.slots i.want-nohint { border-style: dashed; } .slots i.want-nohint::after { background: var(--line); }
+.skill-row.shaky .skill-state { color: #b45309; font-weight: 700; } .skill-row.shaky .skill-name { color: #b45309; }
+.skill-row.mastered .skill-name, .skill-row.mastered .skill-state { color: var(--ok); } .skill-row.mastered .skill-state { font-weight: 700; }
+.good-text { color: var(--ok); font-weight: 600; } .bad-text { color: var(--bad); font-weight: 600; }
+.reteach { margin: 10px 0; background: #fffbe6; border-color: #f5d76e; }
+.skill-block { padding: 6px 0; border-bottom: 1px solid var(--line); } .skill-block:last-of-type { border-bottom: 0; } .skill-block .skill-row { border-bottom: 0; padding: 2px 0; }
+.ev-list { display: flex; flex-wrap: wrap; gap: 4px; padding-left: 24px; } .chip.ev { font-size: .75rem; padding: 1px 8px; }
+.chip.ev.pass { background: #dafbe1; color: var(--ok); border-color: #b7e0c2; } .chip.ev.fail { background: #ffebe9; color: var(--bad); border-color: #f5c2c0; }

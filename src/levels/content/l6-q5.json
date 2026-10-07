@@ -37,6 +37,12 @@
       "why": "A topic is one or two words that name the subject; a theme is a full statement about life that the story supports." },
     { "id": "i8", "type": "mc", "skill": "theme", "prompt": "Test each statement against the WHOLE story, including the ending. Which one does the whole story support?",
       "choices": ["Honesty can beat cleverness, and it can change the person who loses.", "Winning money is what matters most.", "Never enter a contest you might lose.", "Mothers should not run sari-sari stores."], "answer": 0,
-      "why": "Paeng wins with the truth, and the ending shows Kidlat paying for his chips and no longer writing about anyone's mother." }
+      "why": "Paeng wins with the truth, and the ending shows Kidlat paying for his chips and no longer writing about anyone's mother." },
+    { "id": "i9", "type": "mc", "skill": "compare", "prompt": "How does the crowd's reaction to Kidlat's verse DIFFER from its reaction to Paeng's?",
+      "choices": ["The crowd was silent for Kidlat and roared for Paeng.", "The crowd roared at Kidlat's lines but went quiet for Paeng and turned the speaker down to hear him.", "The crowd laughed at both rappers the same way.", "The crowd booed Kidlat and ignored Paeng."], "answer": 1,
+      "why": "For Kidlat, \"The crowd roared\"; for Paeng, \"Nobody laughed. Somebody turned the speaker down so they could hear him.\"" },
+    { "id": "i10", "type": "mc", "skill": "compare", "prompt": "How is Kidlat at the END of the story different from Kidlat at the BEGINNING?",
+      "choices": ["At the start he was nervous; at the end he is confident.", "At the start he avoided the store; at the end he attacks it in a new verse.", "At the start he had bars \"ready to bury anyone\"; at the end he pays for his chips and no longer writes about anyone's mother.", "He is the same: he still plans to win the next battle."], "answer": 2,
+      "why": "The opening Kidlat wants to \"bury anyone\"; the closing Kidlat buys chips at the store, pays, and \"has not written a line about anyone's mother since.\"" }
   ]
 }

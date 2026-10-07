@@ -2,8 +2,8 @@
   "id": "l1-q6", "level": 1, "kind": "quest", "order": 6,
   "title": "Round One",
   "tip": {
-    "skill": "main-idea", "title": "Topic plus the point",
-    "text": "A main idea has two parts: the topic, and what the text says about the topic. First, name the topic in one or two words, like \"Rico's job\". Then ask: what does the text say about it? Put them together: Rico's job was hard, but it made him proud. That full sentence is the main idea, not just the topic."
+    "skill": "sequence", "title": "Find it, then look next door",
+    "text": "Order questions ask what happened BEFORE or AFTER an event. Here is the move: find the event from the question in the passage first. Then read the sentence right before it or right after it, depending on what the question asks. Signal words like FIRST, NEXT, and THEN help, but the sentence next door is the real proof. If the question says \"right after Migs forgot his lines,\" find that line and read the very next sentence."
   },
   "passage": {
     "title": "Round One",
@@ -37,6 +37,12 @@
       "why": "The whole story is about Migs finding a way to rap in front of people. The prize and the kid are small parts." },
     { "id": "i8", "type": "mc", "skill": "main-idea", "prompt": "What is this passage mostly about?",
       "choices": ["A boy who freezes in a rap battle but finds a new way to rap", "A fiesta with many food stands", "Judges who pick the best rhymes", "A host who runs a stage"], "answer": 0,
-      "why": "Topic: Migs at the rap battle. The point: he froze, then rapped his own way and got asked back. That is the whole story." }
+      "why": "Topic: Migs at the rap battle. The point: he froze, then rapped his own way and got asked back. That is the whole story." },
+    { "id": "i9", "type": "mc", "skill": "details", "prompt": "What was the prize for the rap battle?",
+      "choices": ["A new phone", "Two thousand pesos", "Free fishballs", "Two hundred pesos"], "answer": 1,
+      "why": "\"The prize was two thousand pesos.\"" },
+    { "id": "i10", "type": "mc", "skill": "details", "prompt": "What did the host say to Migs after the show?",
+      "choices": ["\"You won the prize.\"", "\"Clean up your rhymes.\"", "\"Next month, same stage.\"", "\"Go home now.\""], "answer": 2,
+      "why": "\"After the show, the host found him. 'Next month, same stage,' he said.\"" }
   ]
 }

@@ -7,7 +7,7 @@
   },
   "passage": {
     "title": "Two Ways to School",
-    "text": "Twins Marco and Mina live in the same house and go to the same school, but they get there in very different ways.\n\nMarco rides a jeepney. It costs twelve pesos each way and takes about twenty minutes when the road is clear. However, the jeepney stops often to pick up passengers, and during the rainy season traffic can double the travel time. Marco likes it because he can sit, review his notes, and arrive without sweating.\n\nMina walks. The route along the river path takes thirty minutes, rain or shine. It costs nothing, and she says the morning air helps her wake up. On the other hand, she arrives tired on hot days, and when the path floods she has to take the long road around, adding fifteen minutes.\n\nBoth twins leave home at six-thirty. Both usually arrive before the first bell. Their mother says the two routes suit the two children: Marco, who likes comfort and planning, and Mina, who likes being outdoors and saving her allowance for books."
+    "text": "Twins Marco and Mina live in the same house and go to the same school, but they get there in very different ways.\n\nMarco rides a jeepney. It costs twelve pesos each way and takes about twenty minutes when the road is clear. However, the jeepney stops often to pick up passengers, and during the rainy season traffic can double the travel time. On those mornings, Marco says, the jeepney crawls like a tired snail. Marco likes it because he can sit, review his notes, and arrive without sweating.\n\nMina walks. The route along the river path takes thirty minutes, rain or shine. It costs nothing, and she says the morning air helps her wake up. On the other hand, she arrives tired on hot days, and when the path floods she has to take the long road around, adding fifteen minutes.\n\nBoth twins leave home at six-thirty. Both usually arrive before the first bell. Their mother says the two routes suit the two children: Marco, who likes comfort and planning, and Mina, who likes being outdoors and saving her allowance for books."
   },
   "words": [
     { "word": "route", "meaning": "the way or path you take to get somewhere", "example": "The bus takes a different route on Sundays." },
@@ -15,23 +15,35 @@
     { "word": "suit", "meaning": "to be right or good for someone", "example": "Early mornings suit her." }
   ],
   "items": [
-    { "id": "i1", "type": "mc", "skill": "compare", "prompt": "What is one way Marco's and Mina's trips are ALIKE?",
-      "choices": ["Both cost twelve pesos.", "Both leave home at six-thirty.", "Both take exactly twenty minutes.", "Both walk along the river."], "answer": 1,
-      "why": "\"Both twins leave home at six-thirty.\" The other choices describe only one twin." },
+    { "id": "i1", "type": "mc", "skill": "evidence", "prompt": "Which sentence from the text BEST supports the idea that the jeepney is not always fast?",
+      "choices": ["Marco rides a jeepney.", "It costs twelve pesos each way.", "However, the jeepney stops often to pick up passengers, and during the rainy season traffic can double the travel time.", "Marco likes it because he can sit."], "answer": 2,
+      "why": "Stopping often and traffic that \"can double the travel time\" are the proof that the ride can be slow. The other lines are about cost or comfort." },
     { "id": "i2", "type": "mc", "skill": "compare", "prompt": "How is Mina's route DIFFERENT from Marco's?",
       "choices": ["It costs nothing and takes longer.", "It is faster and more expensive.", "It has more passengers.", "It lets her review her notes."], "answer": 0,
       "why": "Walking is free and takes thirty minutes; the jeepney costs twelve pesos and takes about twenty." },
     { "id": "i3", "type": "mc", "skill": "compare", "prompt": "Which signal word in the passage introduces a CONTRAST?",
       "choices": ["Both", "Also", "However", "Same"], "answer": 2,
       "why": "\"However, the jeepney stops often\" shows a difference from the quick twenty-minute trip." },
-    { "id": "i4", "type": "mc", "skill": "compare", "prompt": "What problem do BOTH routes share?",
+    { "id": "i4", "type": "mc", "skill": "evidence", "prompt": "Which sentence BEST supports the idea that walking has a downside for Mina?",
+      "choices": ["Mina walks.", "It costs nothing, and she says the morning air helps her wake up.", "On the other hand, she arrives tired on hot days.", "Both usually arrive before the first bell."], "answer": 2,
+      "why": "Arriving tired is the bad side of walking. The other lines are neutral or show the good side." },
+    { "id": "i5", "type": "mc", "skill": "compare", "prompt": "What problem do BOTH routes share?",
       "choices": ["They cost too much.", "Rain can make the trip longer.", "The twins arrive late every day.", "The school is far away."], "answer": 1,
       "why": "Traffic doubles in the rainy season for Marco; the flooded path adds fifteen minutes for Mina." },
-    { "id": "i5", "type": "mc", "skill": "inference", "prompt": "Why does Mina probably choose to walk instead of ride?",
-      "choices": ["She is afraid of jeepneys.", "She likes the outdoors and wants to save her allowance.", "Her mother forces her.", "The jeepney does not pass her house."], "answer": 1,
-      "why": "The last paragraph says Mina likes being outdoors and saving her allowance for books." },
-    { "id": "i6", "type": "mc", "skill": "context-clues", "prompt": "\"The two routes suit the two children.\" What does suit mean here?",
-      "choices": ["A set of clothes", "To be right for", "To follow behind", "To cost money"], "answer": 1,
-      "why": "The sentence explains how each route matches each child's likes, so suit means \"to be right for.\"" }
+    { "id": "i6", "type": "mc", "skill": "compare", "prompt": "What is one way Marco's and Mina's trips are ALIKE?",
+      "choices": ["Both cost twelve pesos.", "Both leave home at six-thirty.", "Both take exactly twenty minutes.", "Both walk along the river."], "answer": 1,
+      "why": "\"Both twins leave home at six-thirty.\" The other choices describe only one twin." },
+    { "id": "i7", "type": "mc", "skill": "evidence", "prompt": "Which sentence BEST supports the idea that neither twin is usually late for school?",
+      "choices": ["Both usually arrive before the first bell.", "They get there in very different ways.", "The route along the river path takes thirty minutes, rain or shine.", "Their mother says the two routes suit the two children."], "answer": 0,
+      "why": "Arriving \"before the first bell\" is the proof that they are on time. The other lines are about the routes, not about being late or early." },
+    { "id": "i8", "type": "mc", "skill": "figurative", "prompt": "\"The jeepney crawls like a tired snail.\" What does this comparison mean?",
+      "choices": ["The jeepney is very small.", "The jeepney moves very slowly in the rain.", "The jeepney is old and dirty.", "The jeepney carries animals."], "answer": 1,
+      "why": "A snail is known for moving slowly. The simile paints the rainy-day jeepney as slow, which matches \"traffic can double the travel time.\"" },
+    { "id": "i9", "type": "mc", "skill": "figurative", "prompt": "Mina's walk takes thirty minutes \"rain or shine.\" What does this idiom mean?",
+      "choices": ["Only on sunny days", "Only on rainy days", "No matter what the weather is", "When the rain stops and the sun comes out"], "answer": 2,
+      "why": "\"Rain or shine\" is an expression meaning in any weather. The sentence says her walk takes the same time whatever the weather." },
+    { "id": "i10", "type": "mc", "skill": "figurative", "prompt": "\"On the other hand, she arrives tired on hot days.\" What does the expression on the other hand mean here?",
+      "choices": ["She carries her bag in her other hand.", "Looking at the opposite side of the matter", "She waves at people on the path.", "Her hands get tired from walking."], "answer": 1,
+      "why": "The expression is not about real hands. It introduces the opposite side: the good points of walking came first, and now the bad point." }
   ]
 }

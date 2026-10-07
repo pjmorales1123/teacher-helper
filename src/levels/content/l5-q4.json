@@ -27,11 +27,23 @@
     { "id": "i4", "type": "mc", "skill": "context-clues", "prompt": "\"...commercial dyes, which some elders find garish, too loud for cloth that once used only the muted colors of the forest.\" What does garish mean?",
       "choices": ["Soft and pale", "Too bright and showy", "Made from plants", "Expensive"], "answer": 1,
       "why": "Synonym clue (\"too loud\") plus contrast with \"muted colors\" tells you garish means overly bright." },
-    { "id": "i5", "type": "mc", "skill": "context-clues", "prompt": "\"The dyes are derived from local plants: indigo for deep blue, turmeric for yellow...\" Which kind of clue explains derived?",
-      "choices": ["Antonym", "Example", "Definition", "None"], "answer": 1,
-      "why": "The colon introduces examples of plants the dyes come from, showing that derived means obtained or taken from." },
+    { "id": "i5", "type": "mc", "skill": "evidence", "prompt": "Which sentence from the text BEST supports the idea that weaving demands great care?",
+      "choices": ["\"In the highlands of the Cordillera, weaving is not merely a craft; it is a language.\"", "\"The dyes are derived from local plants.\"", "\"A single blanket can take weeks, and an error of one thread is visible to a trained eye from across a room.\"", "\"Younger weavers have begun to experiment with brighter commercial dyes.\""], "answer": 2,
+      "why": "Weeks of work and a one-thread error that can be seen across a room prove the care required. The other sentences are about meaning, dyes, or the younger weavers." },
     { "id": "i6", "type": "mc", "skill": "figurative", "prompt": "\"The looms... are still talking.\" What does the elder mean?",
       "choices": ["The looms make noise.", "The weaving tradition, with its patterns that carry meaning, is still alive.", "Elders talk while weaving.", "The looms are broken."], "answer": 1,
-      "why": "The first paragraph calls weaving a language. \"Still talking\" means the tradition continues to communicate." }
+      "why": "The first paragraph calls weaving a language. \"Still talking\" means the tradition continues to communicate." },
+    { "id": "i7", "type": "mc", "skill": "figurative", "prompt": "\"Weaving is not merely a craft; it is a language.\" What does this metaphor mean?",
+      "choices": ["Weavers talk to each other while they work.", "Weaving is taught in language class.", "The patterns carry meaning that people can read, the way words do.", "Only people who speak the local language can weave."], "answer": 2,
+      "why": "The next sentence explains: each pattern \"tells where the weaver comes from\" and what her family has lived through. The cloth communicates, like words." },
+    { "id": "i8", "type": "mc", "skill": "figurative", "prompt": "The weavers call the small irregularities in their cloth \"marks of honesty rather than flaws.\" What does this figurative phrase suggest?",
+      "choices": ["The imperfections show the cloth was truly made by human hands, and the weavers value that.", "The weavers write their names on the cloth.", "The weavers apologize for every mistake.", "Factory cloth is dishonest because it is cheap."], "answer": 0,
+      "why": "Cloth cannot literally be honest. The phrase contrasts handwoven fabric with factory cloth that is \"uniform and quick,\" so the small flaws are a truthful sign of handwork." },
+    { "id": "i9", "type": "mc", "skill": "evidence", "prompt": "Which sentence BEST supports the idea that the weaving tradition is in danger?",
+      "choices": ["\"The tradition has been imperiled by cheap imitations sold to tourists, machine-printed with patterns copied from photographs.\"", "\"Yet it persists.\"", "\"The work is meticulous.\"", "\"The looms, as one elder put it, are still talking.\""], "answer": 0,
+      "why": "This sentence names the threat: cheap machine-printed copies. \"Yet it persists\" and \"still talking\" show the opposite, that the tradition survives." },
+    { "id": "i10", "type": "mc", "skill": "evidence", "prompt": "Which sentence BEST supports the idea that people are actively protecting the tradition?",
+      "choices": ["\"Each pattern on a woven blanket is a lexicon.\"", "\"Some elders find garish, too loud for cloth that once used only the muted colors of the forest.\"", "\"Yet it persists.\"", "\"In several towns, cooperatives now certify authentic weaves, teach the craft in schools, and pay weavers a fair price.\""], "answer": 3,
+      "why": "Certifying, teaching, and paying fairly are specific actions that protect the craft. \"Yet it persists\" only says it survives without showing who is doing what." }
   ]
 }

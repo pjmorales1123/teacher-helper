@@ -9,6 +9,7 @@ import { MAX_LEVEL, XP, levelMeta, stars } from "./meta.ts";
 import { comboBonus, nextStreak, xpFor } from "./progression.ts";
 import { addAttempt, awardBadges, bestByQuest, countAttempts, getProgress, listAttempts, updateProgress } from "./repo.ts";
 import type { ItemResult, Quest } from "./types.ts";
+import { isEvidence, passesSkill, type SkillMastery } from "./mastery.ts";
 import { masteryFor } from "./view.ts";
 import { addWords, applyReview, countMastered } from "./words.ts";
 import { logXp } from "./xp-log.ts";
@@ -24,7 +25,9 @@ export interface QuestFinish extends GradeOutcome {
   newBadges: string[];
   review: { id: string; correct: boolean; answer: unknown; why: string }[];
   practice: { skill: string; accuracy: number; quests: { id: string; title: string }[] }[];
-  skillsUp: { skill: string; label: string; before: number; after: number; need: number; mastered: boolean; justMastered: boolean }[];
+  practiceRun: boolean; // same-day replay of a passage already passed: no XP, no evidence
+  evidence: { skill: string; label: string; correct: number; total: number; passed: boolean; noHint: boolean; focus: boolean;
+    passesBefore: number; passesAfter: number; need: number; state: SkillMastery["state"]; justMastered: boolean }[];
   allMastered: boolean;
 }
 
@@ -51,11 +54,12 @@ export function finishQuest(db: Db, store: ContentStore, studentId: string, ques
   const before = bests.get(quest.id);
   const firstPass = outcome.passed && !before?.passed;
   const p = getProgress(db, studentId);
-  const masteryBefore = masteryFor(db, studentId, quest.level);
+  const masteryBefore = masteryFor(db, store, studentId, quest.level);
+  const practiceRun = Boolean(before?.passed) && listAttempts(db, studentId, 50).some((a) => a.quest_id === quest.id && a.created_at.slice(0, 10) === today);
   addAttempt(db, { studentId, questId: quest.id, level: quest.level, kind: quest.kind, ...outcome });
-  const masteryAfter = masteryFor(db, studentId, quest.level);
+  const masteryAfter = masteryFor(db, store, studentId, quest.level);
 
-  const xp = xpFor(quest.kind, outcome, firstPass);
+  const xp = practiceRun ? 0 : xpFor(quest.kind, outcome, firstPass);
   const leveledUp = quest.kind === "challenge" && outcome.passed && quest.level === p.level && p.level < MAX_LEVEL;
   const level = leveledUp ? p.level + 1 : p.level;
   updateProgress(db, studentId, { xp: p.xp + xp, level, streak: nextStreak(p, today), last_active: today });
@@ -76,15 +80,20 @@ export function finishQuest(db: Db, store: ContentStore, studentId: string, ques
       skill: s.skill, accuracy: s.accuracy, quests: questsForSkill(store, quest.level, s.skill, quest.id, bests),
     })).filter((x) => x.quests.length);
   }
-  const touched = new Set(outcome.results.map((r) => r.skill));
-  const skillsUp = masteryAfter.filter((m) => touched.has(m.skill)).map((m) => {
+  const evidence = masteryAfter.filter((m) => isEvidence(quest, m.skill)).map((m) => {
     const b = masteryBefore.find((x) => x.skill === m.skill);
-    return { skill: m.skill, label: m.label, before: b?.correct ?? 0, after: m.correct, need: m.need, mastered: m.mastered, justMastered: m.mastered && !b?.mastered };
+    const mine = outcome.results.filter((r) => r.skill === m.skill);
+    const correct = mine.filter((r) => r.correct).length;
+    return {
+      skill: m.skill, label: m.label, correct, total: mine.length, passed: passesSkill(correct, mine.length),
+      noHint: quest.tip?.skill !== m.skill, focus: quest.tip?.skill === m.skill,
+      passesBefore: b?.passes ?? 0, passesAfter: m.passes, need: m.need, state: m.state, justMastered: m.mastered && !b?.mastered,
+    };
   });
   return {
     ...outcome, stars: quest.kind === "quest" ? stars(outcome.score, outcome.total) : (outcome.passed ? 3 : 0),
     xp, combo: comboBonus(outcome.results), firstPass, leveledUp, level, levelName: levelMeta(level).name, newBadges, review, practice,
-    skillsUp, allMastered: masteryAfter.every((m) => m.mastered),
+    practiceRun, evidence, allMastered: masteryAfter.every((m) => m.mastered),
   };
 }
 

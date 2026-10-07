@@ -27,8 +27,9 @@
     { "id": "i4", "type": "mc", "skill": "context-clues", "prompt": "\"Tin had laughed it off and limped to the water station when she thought no one was watching.\" What does laughed it off mean?",
       "choices": ["Told a joke about the coach", "Acted like it was nothing serious", "Cried quietly", "Asked to be taken out of practice"], "answer": 1,
       "why": "She laughed in front of others but limped when she thought no one saw. The laugh was a cover for the pain." },
-    { "id": "i5", "type": "short", "skill": "context-clues", "prompt": "\"Behind her she heard the chatter stop, then start again, lower.\" In one word, what is chatter?",
-      "accept": ["talking", "talk", "conversation", "chatting", "noise"], "why": "It stops when the team reads the lineup and starts again \"lower,\" so chatter is the players' talking." },
+    { "id": "i5", "type": "mc", "skill": "evidence", "prompt": "Which sentence BEST supports the idea that Reign put Tin's future ahead of winning the finals?",
+      "choices": ["\"The game went five sets.\"", "\"One more bad landing and Tin might not play for a year, scouts or no scouts.\"", "\"They lost the last one by two points.\"", "\"Reign noticed because captains notice.\""], "answer": 1,
+      "why": "This is the reason in Reign's mind: a year of not playing matters more than one game. The score sentences show the cost of her choice, not her reason for it." },
     { "id": "i6", "type": "mc", "skill": "evidence", "prompt": "Which sentence BEST supports the idea that Reign is not fully sure of her own decision?",
       "choices": ["\"If she turned around, she would see Tin's face, and she would change her mind.\"", "\"Reign noticed because captains notice.\"", "\"The game went five sets.\"", "\"Reign posted the lineup on the gym wall.\""], "answer": 0,
       "why": "She avoids looking back because one look would make her change her mind. That proves doubt; the other sentences show confidence or plain events." },
@@ -37,6 +38,12 @@
       "why": "The paper \"wanting to come down\" mirrors Reign, who \"wanted to explain\" but \"said nothing.\" The simile shows her unsettled feeling, not the weather." },
     { "id": "i8", "type": "mc", "skill": "point-of-view", "prompt": "If this story were told from Tin's point of view, what would MOST likely change?",
       "choices": ["We would learn the final score.", "We would know whether Tin felt betrayed or understood, but we would not know Reign's reason.", "We would know that Reign saw the limp on Tuesday.", "Nothing would change."], "answer": 1,
-      "why": "A narrator inside Tin's mind would give her feelings in the locker room but could only guess at Reign's reason, since Reign \"said nothing.\"" }
+      "why": "A narrator inside Tin's mind would give her feelings in the locker room but could only guess at Reign's reason, since Reign \"said nothing.\"" },
+    { "id": "i9", "type": "mc", "skill": "figurative", "prompt": "\"It was her own handwriting, but it looked like someone else's.\" What does this comparison suggest?",
+      "choices": ["Reign's handwriting was messy.", "Someone else secretly wrote the lineup.", "Reign can hardly believe she made this decision herself.", "Reign has a twin on the team."], "answer": 2,
+      "why": "The lineup is in her own handwriting, so nobody else wrote it. Saying it looks like \"someone else's\" shows how strange and hard the choice feels to her." },
+    { "id": "i10", "type": "mc", "skill": "figurative", "prompt": "\"Tin always heard what was behind the words, not the words themselves.\" What does this mean?",
+      "choices": ["Tin had very sharp hearing.", "Tin stood behind people when they talked.", "Tin ignored what people said to her.", "Tin understood the feelings people did not say out loud."], "answer": 3,
+      "why": "Words have nothing physically \"behind\" them. The line explains why Reign fears Tin would hear \"You did not trust me\" even if Reign said \"I did it for you.\"" }
   ]
 }

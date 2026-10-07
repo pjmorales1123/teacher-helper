@@ -2,7 +2,7 @@
 import { get, post, put } from "../../api.js";
 import { busy, fmtDate, h, toast } from "../../ui.js";
 import { rankEl, strandEl } from "../../levels-art/index.js";
-import { pips } from "../../student/levels/cards.js";
+import { slots, stateText } from "../../student/levels/cards.js";
 import { heat } from "./index.js";
 
 export async function renderLevelsStudent(id, back) {
@@ -34,10 +34,13 @@ export async function renderLevelsStudent(id, back) {
             h("td", {}, q.title, q.unlocked === false ? h("span", { class: "muted small" }, " (locked)") : null),
             h("td", {}, q.tries ? `${q.best}/${q.total}` : "–"), h("td", {}, q.tries),
             h("td", { class: "stars" }, q.passed ? "★".repeat(q.stars || 1) : "")))))),
-      h("div", { class: "card" }, h("h3", {}, `${d.map.name} skills to master`),
-        ...d.map.skills.map((s) => h("div", { class: `skill-row ${s.mastered ? "done" : ""}` }, strandEl(s.strand, 16), h("span", { class: "skill-name" }, s.label),
-          pips(s.correct, s.need, s.mastered), h("span", { class: "small skill-state" }, s.mastered ? "mastered" : `${s.correct}/${s.need}`))),
-        h("p", { class: "muted small" }, d.map.challenge?.unlocked ? "Challenge unlocked." : "Challenge locks until every skill shows 5 of the last 6 right.")),
+      h("div", { class: "card" }, h("h3", {}, `${d.map.name} skills: evidence per text`),
+        ...d.map.skills.map((s) => h("div", { class: `skill-block ${s.state}` },
+          h("div", { class: "skill-row" }, strandEl(s.strand, 16), h("span", { class: "skill-name" }, s.label), slots(s), h("span", { class: "small skill-state" }, stateText(s))),
+          h("div", { class: "ev-list" }, ...(s.evidence.length ? s.evidence.map((e) => h("span", { class: `chip ev ${e.passed ? "pass" : "fail"}`, title: `${e.day}${e.noHint ? " · no hint" : " · tip shown"}` },
+            `${e.title}: ${e.correct}/${e.total}${e.noHint ? " ·" : ""}`)) : [h("span", { class: "muted small" }, "no evidence yet")])))),
+        h("p", { class: "muted small" }, "A dot after a score means the skill was not the passage's tip (no-hint evidence). ",
+          d.map.challenge?.unlocked ? "Challenge unlocked." : "Challenge locks until every skill is passed on 3 texts, one without the hint.")),
       h("div", { class: "card table-wrap" }, h("h3", { style: "padding:12px 12px 0" }, "All skills (lowest accuracy first)"),
         d.skills.length ? h("table", {}, h("thead", {}, h("tr", {}, ...["Skill", "Accuracy", "Items"].map((t) => h("th", {}, t)))),
           h("tbody", {}, ...d.skills.map((s) => h("tr", {}, h("td", {}, s.label, h("div", { class: "muted small" }, s.strand)), h("td", {}, heat(s.accuracy, s.total)), h("td", {}, s.total)))))

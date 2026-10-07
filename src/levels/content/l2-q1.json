@@ -27,11 +27,23 @@
     { "id": "i4", "type": "mc", "skill": "context-clues", "prompt": "\"The jeepney drivers went on strike.\" What is a strike?",
       "choices": ["A hit in baseball", "Workers stopping work to protest", "A road accident", "A holiday"], "answer": 1,
       "why": "The result was that no jeepneys were running, so the drivers had stopped working on purpose." },
-    { "id": "i5", "type": "mc", "skill": "sequence", "prompt": "What happened on Wednesday?",
-      "choices": ["The strike started.", "Paolo fell asleep in Math.", "The strike ended and Paolo got to practice on time.", "Paolo walked fifty minutes."], "answer": 2,
-      "why": "\"On Wednesday the strike ended. Paolo rode the jeepney, got to practice on time...\"" },
+    { "id": "i5", "type": "mc", "skill": "summary", "prompt": "Which sentence BEST summarizes paragraph 4?",
+      "choices": ["Paolo's legs hurt from walking.", "Sitting on the bench is the best way to learn a play.", "When the strike ended, Paolo got to practice on time and ran the play with the team, tired but ready because he had watched it so often.", "Paolo rode the jeepney on Wednesday."], "answer": 2,
+      "why": "It keeps the strike ending, the return to the court, and why he knew the play. \"Legs hurt\" and \"rode the jeepney\" are single details, and \"best way to learn\" is an opinion the text does not make." },
     { "id": "i6", "type": "mc", "skill": "inference", "prompt": "How did sitting on the bench end up helping Paolo?",
       "choices": ["He got to rest his legs.", "He watched the new play so many times that he learned it by heart.", "Coach felt sorry for him.", "It did not help him."], "answer": 1,
-      "why": "The last sentence says he knew the play \"because he had watched it so many times.\"" }
+      "why": "The last sentence says he knew the play \"because he had watched it so many times.\"" },
+    { "id": "i7", "type": "mc", "skill": "inference", "prompt": "How did Paolo most likely feel while he watched his teammates run the new play without him?",
+      "choices": ["Relieved to be resting","Bored by basketball","Left out and frustrated","Happy for his teammates"], "answer": 2,
+      "why": "He \"did not want to sit again\" and left home at five-thirty the next day to avoid it, so sitting out clearly bothered him." },
+    { "id": "i8", "type": "mc", "skill": "inference", "prompt": "\"Coach Dizon had one rule: late means you sit.\" What can you infer about Coach Dizon?",
+      "choices": ["He is strict and applies the rule to everyone, no excuses.","He dislikes Paolo.","He does not care about practice.","He is often late himself."], "answer": 0,
+      "why": "The coach benched Paolo even though a strike caused the delay. One rule, no exceptions, shows he is strict and fair." },
+    { "id": "i9", "type": "mc", "skill": "summary", "prompt": "Which sentence BEST summarizes paragraph 3?",
+      "choices": ["Paolo left home at five-thirty in the morning.","The Math teacher was unfair to Paolo.","The strike ended on Tuesday, so Paolo rode the jeepney.","Paolo left very early so he would not be benched again, but he was so tired that he fell asleep in Math and got a zero on the quiz."], "answer": 3,
+      "why": "It keeps the whole chain: leaving early, being tired, sleeping, the zero. \"Five-thirty\" is one detail, \"unfair\" is an opinion the text never gives, and the strike did not end on Tuesday." },
+    { "id": "i10", "type": "mc", "skill": "summary", "prompt": "Which sentence BEST summarizes the whole passage?",
+      "choices": ["Coach Dizon is too strict with his players.","During a jeepney strike, Paolo was benched for being late and lost a quiz trying not to be late again, but when the strike ended he was back on the court and knew the play.","Paolo walked fifty minutes to school on Monday.","Paolo quit the basketball team because of the strike."], "answer": 1,
+      "why": "It covers the strike, the bench, the zero, and the ending. \"Too strict\" is an opinion, the fifty-minute walk is one detail, and Paolo never quit the team." }
   ]
 }

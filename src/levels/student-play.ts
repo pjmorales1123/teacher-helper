@@ -19,7 +19,7 @@ export function studentPlayRoutes(db: Db, store: ContentStore): Router {
     if (!q || q.kind === "placement") notFound("Quest");
     const p = getProgress(db, studentId);
     if (q.level > p.level) bad("This quest is above your level for now.");
-    if (q.kind === "challenge" && !allMastered(masteryFor(db, studentId, q.level))) bad("Master every skill in this rank first.");
+    if (q.kind === "challenge" && !allMastered(masteryFor(db, store, studentId, q.level))) bad("Master every skill in this rank first.");
     return q;
   }
 

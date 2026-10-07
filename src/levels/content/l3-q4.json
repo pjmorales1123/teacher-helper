@@ -2,12 +2,12 @@
   "id": "l3-q4", "level": 3, "kind": "quest", "order": 4,
   "title": "The Last Jeepney Home",
   "tip": {
-    "skill": "inference", "title": "What the character does not say",
-    "text": "To understand a character, watch three things: what they DO, what they SAY, and what others say about them. Then ask: why would a person act this way? A character who keeps checking the clock and tapping her foot is anxious. A character who gives away his last coin is generous. Motives are rarely stated; you infer them from actions."
+    "skill": "evidence", "title": "Prove it with a line",
+    "text": "A story never says \"Lito was ashamed\" straight out, so when you claim something about a character, you need EVIDENCE: a line from the text that shows it. Here is the move: make your claim, then scan the passage for the sentence that proves it, not just one that is close to it. Test the line by asking, \"If I only read this sentence, would I still believe the claim?\" If the answer is no, keep looking. \"He counted the coins again: fourteen pesos\" proves he was short on money; \"Rain hammered the roof\" does not."
   },
   "passage": {
     "title": "The Last Jeepney Home",
-    "text": "Rain hammered the tin roof of the waiting shed. It was past seven, and Lito had been standing there for forty minutes. He counted the coins in his pocket again: fourteen pesos. The fare home was fifteen.\n\nA jeepney finally splashed to a stop. It was the last trip of the night. Lito climbed in and sat near the back, keeping his eyes on the floor. When the driver's helper came for the fare, Lito held out the coins without a word.\n\nThe helper, a boy not much older than Lito, counted them. He looked at Lito's wet uniform, then at the coins, then at the driver, who was watching in the mirror. The driver gave a tiny nod. \"Okay na,\" the helper said, and moved on.\n\nLito said nothing until his stop. As he jumped down, he turned and called out, \"Salamat po!\" The driver raised one hand without looking back. The jeepney rolled away into the rain, its lights blurring, and Lito ran the rest of the way home."
+    "text": "Rain hammered the tin roof of the waiting shed. It was past seven, and Lito had been standing there for forty minutes. He counted the coins in his pocket again: fourteen pesos. The fare home was fifteen. The missing peso sat in his chest like a stone, and the minutes crawled.\n\nA jeepney finally splashed to a stop. It was the last trip of the night. Lito climbed in and sat near the back, keeping his eyes on the floor. When the driver's helper came for the fare, Lito held out the coins without a word.\n\nThe helper, a boy not much older than Lito, counted them. He looked at Lito's wet uniform, then at the coins, then at the driver, who was watching in the mirror. The driver gave a tiny nod. \"Okay na,\" the helper said, and moved on.\n\nLito said nothing until his stop. As he jumped down, he turned and called out, \"Salamat po!\" The driver raised one hand without looking back. The jeepney rolled away into the rain, its lights blurring, and Lito ran the rest of the way home."
   },
   "words": [
     { "word": "hammered", "meaning": "hit hard and repeatedly", "example": "The rain hammered the windows all night." },
@@ -15,23 +15,35 @@
     { "word": "blurring", "meaning": "becoming unclear or hard to see", "example": "Her eyes were blurring with tears." }
   ],
   "items": [
-    { "id": "i1", "type": "mc", "skill": "inference", "prompt": "Why did Lito keep his eyes on the floor?",
-      "choices": ["He was looking for coins he dropped.", "He was ashamed that he did not have the full fare.", "He was sleepy.", "He did not like the driver."], "answer": 1,
-      "why": "He had only fourteen pesos for a fifteen-peso fare. Looking down and saying nothing shows embarrassment." },
-    { "id": "i2", "type": "mc", "skill": "inference", "prompt": "What did the driver's tiny nod mean?",
-      "choices": ["\"Make him get off.\"", "\"Let him ride; it is fine.\"", "\"Count the coins again.\"", "\"We are at the last stop.\""], "answer": 1,
-      "why": "Right after the nod, the helper says \"Okay na\" and moves on. The driver was giving permission." },
-    { "id": "i3", "type": "mc", "skill": "inference", "prompt": "What does the helper's behavior tell you about him?",
-      "choices": ["He is careless with money.", "He is observant and kind.", "He is angry at Lito.", "He does not know how to count."], "answer": 1,
-      "why": "He noticed Lito's wet uniform and the short fare, checked with the driver, and chose to be kind." },
-    { "id": "i4", "type": "mc", "skill": "inference", "prompt": "Why did Lito call out \"Salamat po!\" only when he was jumping down?",
-      "choices": ["He forgot earlier.", "He was too shy to speak until he was leaving.", "The driver asked him to.", "It was a rule of the jeepney."], "answer": 1,
-      "why": "He \"said nothing until his stop.\" His silence throughout shows shyness or shame; he thanked them once it was safe to leave." },
-    { "id": "i5", "type": "mc", "skill": "figurative", "prompt": "\"Rain hammered the tin roof.\" What does this comparison tell you?",
+    { "id": "i1", "type": "mc", "skill": "figurative", "prompt": "\"Rain hammered the tin roof.\" What does this comparison tell you?",
       "choices": ["Someone was fixing the roof.", "The rain was heavy and loud.", "The rain was soft.", "The roof was broken."], "answer": 1,
       "why": "Hammering is hard and loud; the author means the rain hit the roof hard and loudly." },
-    { "id": "i6", "type": "mc", "skill": "details", "prompt": "How much was the fare home?",
-      "choices": ["Twelve pesos", "Fourteen pesos", "Fifteen pesos", "Twenty pesos"], "answer": 2,
-      "why": "\"The fare home was fifteen.\"" }
+    { "id": "i2", "type": "mc", "skill": "evidence", "prompt": "Which sentence from the text BEST supports the idea that Lito did not have enough money for the ride?",
+      "choices": ["It was past seven, and Lito had been standing there for forty minutes.", "A jeepney finally splashed to a stop.", "He counted the coins in his pocket again: fourteen pesos. The fare home was fifteen.", "Lito climbed in and sat near the back."], "answer": 2,
+      "why": "Fourteen pesos against a fifteen-peso fare is the exact proof that he was one peso short. The other lines say nothing about money." },
+    { "id": "i3", "type": "mc", "skill": "figurative", "prompt": "\"The missing peso sat in his chest like a stone.\" What does this simile show?",
+      "choices": ["Lito had swallowed a coin.", "Lito felt a heavy, worried feeling about being short on fare.", "Lito kept the coins in his shirt pocket.", "The peso coin was very heavy."], "answer": 1,
+      "why": "A stone in the chest is heavy and uncomfortable. The author compares his worry about the missing peso to that weight." },
+    { "id": "i8", "type": "mc", "skill": "figurative", "prompt": "\"The minutes crawled.\" Why does the author say the minutes crawled?",
+      "choices": ["To show that the waiting felt very slow to Lito", "To show that insects were in the shed", "To show that Lito's watch was broken", "To show that the jeepney was moving slowly"], "answer": 0,
+      "why": "Minutes cannot really crawl. Giving time this slow movement shows how long the forty-minute wait felt to Lito." },
+    { "id": "i4", "type": "mc", "skill": "compare", "prompt": "In what way are Lito and the helper ALIKE?",
+      "choices": ["Both are wearing wet school uniforms.", "Both are about the same age.", "Both are riding home from school.", "Both have exactly fourteen pesos."], "answer": 1,
+      "why": "The helper is \"a boy not much older than Lito.\" Only Lito has the wet uniform and the fourteen pesos." },
+    { "id": "i5", "type": "mc", "skill": "evidence", "prompt": "Which sentence BEST supports the idea that the helper noticed Lito's situation before deciding what to do?",
+      "choices": ["When the driver's helper came for the fare, Lito held out the coins without a word.", "He looked at Lito's wet uniform, then at the coins, then at the driver, who was watching in the mirror.", "\"Okay na,\" the helper said, and moved on.", "Lito said nothing until his stop."], "answer": 1,
+      "why": "This line shows the helper looking at the uniform, the coins, and the driver one by one, taking in the situation. \"Okay na\" is the decision, not the noticing." },
+    { "id": "i6", "type": "mc", "skill": "inference", "prompt": "What did the driver's tiny nod mean?",
+      "choices": ["\"Make him get off.\"", "\"Let him ride; it is fine.\"", "\"Count the coins again.\"", "\"We are at the last stop.\""], "answer": 1,
+      "why": "Right after the nod, the helper says \"Okay na\" and moves on. The driver was giving permission." },
+    { "id": "i7", "type": "mc", "skill": "compare", "prompt": "How was the DRIVER's way of responding different from the HELPER's?",
+      "choices": ["The driver shouted; the helper whispered.", "The driver used silent gestures; the helper spoke.", "The driver asked for more money; the helper refused it.", "The driver got off the jeepney; the helper stayed."], "answer": 1,
+      "why": "The driver \"gave a tiny nod\" and later \"raised one hand without looking back.\" The helper said \"Okay na\" out loud." },
+    { "id": "i9", "type": "mc", "skill": "compare", "prompt": "How was Lito different when he got OFF the jeepney compared to when he was riding?",
+      "choices": ["While riding he was silent; when leaving he spoke up to say thank you.", "While riding he talked a lot; when leaving he was silent.", "While riding he was dry; when leaving he was wet.", "There was no difference."], "answer": 0,
+      "why": "He \"held out the coins without a word\" and \"said nothing until his stop,\" but as he jumped down he \"called out, 'Salamat po!'\"" },
+    { "id": "i10", "type": "mc", "skill": "evidence", "prompt": "Which sentence BEST supports the idea that Lito was grateful?",
+      "choices": ["The jeepney rolled away into the rain, its lights blurring.", "Lito climbed in and sat near the back, keeping his eyes on the floor.", "It was the last trip of the night.", "As he jumped down, he turned and called out, \"Salamat po!\""], "answer": 3,
+      "why": "Turning back to say thank you is the only line that shows gratitude. The others describe the jeepney or his shame." }
   ]
 }

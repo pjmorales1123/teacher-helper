@@ -27,11 +27,23 @@
     { "id": "i4", "type": "mc", "skill": "synonyms", "prompt": "Which pair of words from the passage are synonyms?",
       "choices": ["quick / clever", "attack / prepare", "strongest / weak", "contest / battle"], "answer": 3,
       "why": "A contest and a battle are both competitions. The passage calls a rap battle \"a contest of words.\"" },
-    { "id": "i5", "type": "mc", "skill": "main-idea", "prompt": "What is the main idea of the LAST paragraph?",
-      "choices": ["Teachers like rap.", "Following battle rap builds vocabulary, which is the same skill reading needs.", "Rappers write hundreds of lines.", "Battles are posted online."], "answer": 1,
-      "why": "The paragraph connects rap vocabulary to reading vocabulary: \"The battle is the same; only the stage is different.\"" },
+    { "id": "i5", "type": "mc", "skill": "cause-effect", "prompt": "Why do battlers cut some of the lines they wrote?",
+      "choices": ["The crowd asked them to.", "They ran out of time on stage.", "Those lines are weak.", "The lines are too funny."], "answer": 2,
+      "why": "\"They study their opponent, write hundreds of lines, and cut the weak ones.\" The weak lines are the reason for the cutting." },
     { "id": "i6", "type": "mc", "skill": "cause-effect", "prompt": "Why did rap battles become popular in the Philippines after 2010?",
       "choices": ["Schools started teaching them.", "Leagues began posting videos online.", "Rappers got faster.", "The crowds got bigger."], "answer": 1,
-      "why": "\"Rap battles became huge after 2010, when leagues started posting videos online.\"" }
+      "why": "\"Rap battles became huge after 2010, when leagues started posting videos online.\"" },
+    { "id": "i7", "type": "mc", "skill": "summary", "prompt": "Which sentence BEST summarizes paragraph 2?",
+      "choices": ["Some battles have been watched tens of millions of times.","Rap battles became big in the Philippines after 2010, and the best battlers win by being clever with words, not just fast.","Rap battles are the best kind of music.","Leagues post videos online."], "answer": 1,
+      "why": "It covers when battles got big and what makes a battler great. The first and last are single details, and \"the best kind of music\" is an opinion the text never states." },
+    { "id": "i8", "type": "mc", "skill": "summary", "prompt": "Which sentence BEST summarizes paragraph 3?",
+      "choices": ["Battlers write hundreds of lines.","The best moments are the jokes.","Battlers prepare for weeks, but the best moment on stage is often a comeback made up on the spot.","Battlers are lazy and only make things up."], "answer": 2,
+      "why": "It keeps both halves of the paragraph: the long preparation and the on-the-spot comeback. \"Hundreds of lines\" is a detail, and \"lazy\" goes against the text." },
+    { "id": "i9", "type": "mc", "skill": "summary", "prompt": "Which detail should be LEFT OUT of a summary of the whole passage?",
+      "choices": ["A rap battle is a contest of words.","Some battles have been watched tens of millions of times.","Students who follow battle rap learn new words fast.","Battlers prepare by studying their opponent and writing lines."], "answer": 1,
+      "why": "The exact number of views does not change the point of the passage. Remove it and the summary still makes sense; the other three are main ideas of their paragraphs." },
+    { "id": "i10", "type": "mc", "skill": "cause-effect", "prompt": "According to paragraph 4, what happens when students who follow battle rap hear a new word in a verse?",
+      "choices": ["They look it up and start using it.", "They skip the verse.", "They ask their teacher to explain it.", "They write their own battle."], "answer": 0,
+      "why": "\"They hear a word in a verse, look it up, and use it.\" That is why these students learn new words fast." }
   ]
 }

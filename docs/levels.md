@@ -19,9 +19,9 @@ publishes it.
 | Principle | Where it shows up |
 |---|---|
 | Leveled text (readability matched to a grade band) | Six levels; passages get longer, sentences more complex, vocabulary rarer |
-| Mastery learning (Bloom): advance only after demonstrated mastery | Each rank names four focus skills. A skill is mastered when 5 of the student's last 6 answers on it (at that rank) are right; the Challenge unlocks only when all four are mastered, then needs 80 % |
-| Adaptive sequencing | "Next up" picks the weakest unmastered skill and a quest that trains it (unplayed first, then retries); a failed quest offers a *different* story on the same skill |
-| Explicit strategy instruction (Duke & Pearson; reciprocal teaching) | Every quest opens with a one-screen "tip" that teaches one skill, then applies it |
+| Mastery learning (Bloom): advance only after demonstrated mastery | Each rank names four focus skills. A skill is mastered when the student passes its items (at most one miss) on **three different passages, at least one of which did not teach that skill in its tip**. The Challenge unlocks only then, and still needs 80 % |
+| Transfer, not priming: uncued evidence | A passage where the skill is only a secondary set of items (no hint) must be among the three; the Challenge has no tips at all |
+| Adaptive, interleaved sequencing | "Next up" serves a shaky skill first, then the skill with fewest passes (tip passage first, then no-hint passages), avoids repeating the skill just played, and never offers a passage played today |
 | Question–Answer Relationships (Raphael): right-there → think-and-search → author-and-me | Skill tags move from `details` to `inference`/`theme` as levels rise |
 | Tier-2 vocabulary with context clues and morphology (Beck, McKeown) | Each quest introduces 2–3 words used in the passage; `context-clues` and `word-parts` items |
 | Spaced retrieval practice (Leitner boxes) | Word Review: words return at 1, 3, 7, 14, 30 days; wrong answers reset |
@@ -90,22 +90,36 @@ case/punctuation-insensitively against `accept`).
   The teacher can override any student's level.
 - Quest: pass at ≥ 70 %. Stars: 1 ≥ 70 %, 2 ≥ 85 %, 3 = 100 %. Replays allowed;
   best score kept.
-- Skill mastery: every rank has four focus skills (`LEVEL_SKILLS` in
-  `meta.ts`). For each, the engine looks at the student's last 6 answers on
-  that skill at that rank (quests and challenges both count); 5 right = mastered.
-  Old mistakes fall out of the window, so a student can always recover.
-  Six quests per rank give each focus skill at least 7 items across at least
-  2 passages (enforced by a test), so mastery is reachable but needs more than
-  one story. Multiple-choice options are shuffled on every play and graded by
-  text, so replaying a story does not reward memorising "answer B".
-- Next up: the home screen leads with one recommended quest: the weakest
-  unmastered skill, then the quest with the most items on it that is not yet
-  beaten (new stories before retries). When every skill is mastered it points
-  at the Challenge; after that, at the lowest-starred quest.
+- Skill mastery (evidence model): every rank has four focus skills
+  (`LEVEL_SKILLS` in `meta.ts`). A passage is *evidence* for a skill when it
+  carries ≥ 3 items on it (≥ 2 in a Challenge). The student's latest counted
+  attempt on each passage gives a pass (at most one miss) or a fail. Mastered =
+  3 passed passages, one of them "no-hint" (the skill was not the passage's tip),
+  and the most recent evidence was a pass. A later fail on a no-hint passage or
+  the Challenge drops the skill to **shaky**: one more pass restores it. A
+  same-day replay of a passage is practice: it changes no evidence and, if the
+  passage was already passed, earns no XP. Five passes mark the skill "sharp".
+- Content shape (enforced by tests and the validator): six quests + one
+  Challenge per rank. Every quest teaches one focus skill in its tip and is
+  evidence for **three** focus skills (≥ 3 items on each, 9–10 items in all);
+  at most two items per passage are not multiple choice. The Challenge has 12
+  items, 3 per focus skill. Four skills × 3 texts = 12 passes, and each quest
+  supplies 3, so a student who reads well masters a rank in **four** of the
+  six texts; every focus skill has ≥ 4 evidence passages (≥ 2 no-hint), so a
+  weak text can be skipped. A shaky skill may be recovered by replaying a
+  passed no-hint text on a later day. Multiple-choice options are reordered on every play and
+  graded by text.
+- Next up: shaky skill → a no-hint passage for it; else the skill with the
+  fewest passes → its tip passage if it has none, otherwise a no-hint
+  passage (unplayed before retried); the skill played last is deprioritised so
+  practice interleaves; passages played today are never offered. When every
+  skill is mastered it points at the Challenge; afterwards the stories list
+  becomes "Train more".
 - Challenge: unlocked when all four focus skills are mastered. Pass at ≥ 80 %
-  → rank up. Fail → shows the two weakest skills with other stories that train them.
-- Failed quest: the result screen shows which skills moved (3 → 4 of 5) and
-  offers a different story on the weakest skill instead of an immediate replay.
+  → rank up. Fail → shows the weakest skills with other stories that train them.
+- Failed passage-skill on the tip skill: the result screen shows the evidence
+  per skill (counts / not yet), re-shows the strategy tip, and offers a
+  different story on the weak skill.
 - XP: 10 per correct item, +5 combo bonus for the third and every later
   correct answer in an unbroken run, +25 first pass of a quest, +50 passing a
   Challenge, 5 per correct word review. XP never goes down.
@@ -151,7 +165,7 @@ Teacher (`/api/levels`): `GET /meta`, `PUT /settings`, `GET /overview?section=`,
 
 - [x] Schema, validator, loader
 - [x] Content: levels 1–6 (6 quests + 1 challenge each = 42 passages) + placement
-- [x] Skill mastery, next-up picker, shuffled choices (tested)
+- [x] Skill mastery as passage evidence (3 texts, one no-hint, shaky), next-up picker, shuffled choices (tested)
 - [x] SVG art: rank shields, badge medals, strand icons, wordmark
 - [x] Engine + progression + words + badges (tested)
 - [x] Student API
@@ -161,6 +175,14 @@ Teacher (`/api/levels`): `GET /meta`, `PUT /settings`, `GET /overview?section=`,
 - [x] End-to-end verification, docs
 
 ## Ideas for later (not built)
+
+- Retention probes: a week after a rank-up, slip 3 items per old-rank skill
+  into new-rank quests; a fail marks the skill shaky and queues an old-rank
+  no-hint passage.
+- Skill drill after two consecutive fails on the same skill (5 items reused
+  from played passages, worked example first).
+- Quarterly paper test entered by the teacher and compared with mastery per
+  skill, to recalibrate the rank definitions against real assessments.
 
 - Fluency: timed reading with words-per-minute self-report.
 - Printable quest sheets for students without a device.

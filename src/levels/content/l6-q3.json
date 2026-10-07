@@ -1,8 +1,12 @@
 {
-  "id": "l6-q3", "level": 6, "kind": "quest", "order": 3,
+  "id": "l6-q3",
+  "level": 6,
+  "kind": "quest",
+  "order": 3,
   "title": "Two Sides of the Same River",
   "tip": {
-    "skill": "compare", "title": "Comparing perspectives",
+    "skill": "compare",
+    "title": "Comparing perspectives",
     "text": "When two texts or two people discuss the same event, compare their PURPOSE (why they speak), their EVIDENCE (what they point to), their TONE (how they sound), and what each LEAVES OUT. Neither side is automatically right. A careful reader can say where they agree, where they truly disagree, and whether the disagreement is about facts or about values (what matters more)."
   },
   "passage": {
@@ -10,28 +14,162 @@
     "text": "THE ENGINEER\nThe Kalinawan dam will supply electricity to 40,000 households and irrigate 3,000 hectares of farmland that currently depends on unreliable rain. During the dry months, farmers downstream lose up to a third of their harvest. The reservoir will also reduce flooding in the lowland towns, which have been hit four times in the past decade. Yes, 180 families in the upland village will need to relocate. The government has set aside new land and housing for them, with compensation above market rates. On balance, the project improves far more lives than it disrupts.\n\nTHE VILLAGE ELDER\nWe are the 180 families. The engineer counts households; we count graves. Our ancestors are buried on that hillside, and the river that will drown it is where our children learned to swim and where our rituals are held each harvest. The new land they offer is flat and hot and far from anything we know. Compensation cannot buy back a place. We do not deny that the lowland farmers suffer in the dry months, or that floods are real. But we ask why the cost of fixing their problem must be paid with our home, and why no one asked us before the plans were drawn."
   },
   "words": [
-    { "word": "irrigate", "meaning": "to bring water to land or crops through channels or pipes", "example": "Canals irrigate the rice fields." },
-    { "word": "relocate", "meaning": "to move to a new place", "example": "The family had to relocate after the fire." },
-    { "word": "compensation", "meaning": "money or goods given to make up for a loss", "example": "The workers received compensation for the accident." }
+    {
+      "word": "irrigate",
+      "meaning": "to bring water to land or crops through channels or pipes",
+      "example": "Canals irrigate the rice fields."
+    },
+    {
+      "word": "relocate",
+      "meaning": "to move to a new place",
+      "example": "The family had to relocate after the fire."
+    },
+    {
+      "word": "compensation",
+      "meaning": "money or goods given to make up for a loss",
+      "example": "The workers received compensation for the accident."
+    }
   ],
   "items": [
-    { "id": "i1", "type": "mc", "skill": "compare", "prompt": "On which FACT do both speakers agree?",
-      "choices": ["The new land is good.", "Lowland farmers suffer in the dry months and floods are real.", "Compensation is fair.", "The village was consulted."], "answer": 1,
-      "why": "The elder says, \"We do not deny that the lowland farmers suffer... or that floods are real.\"" },
-    { "id": "i2", "type": "mc", "skill": "compare", "prompt": "The main disagreement between them is about...",
-      "choices": ["Whether the dam will produce electricity", "Whether what the village loses can be measured and paid for in the same way as benefits", "How many households exist", "The height of the dam"], "answer": 1,
-      "why": "The engineer weighs numbers; the elder argues that graves, rituals, and home cannot be bought. It is a disagreement about values." },
-    { "id": "i3", "type": "mc", "skill": "compare", "prompt": "How do the two speakers' kinds of EVIDENCE differ?",
-      "choices": ["The engineer uses numbers and plans; the elder uses lived experience and meaning.", "Both use statistics.", "The elder uses numbers; the engineer uses stories.", "Neither gives evidence."], "answer": 0,
-      "why": "\"40,000 households, 3,000 hectares\" versus \"graves,\" \"where our children learned to swim.\"" },
-    { "id": "i4", "type": "mc", "skill": "figurative", "prompt": "\"The engineer counts households; we count graves.\" What does this contrast express?",
-      "choices": ["The village has more graves than houses.", "The engineer measures benefit in numbers, while the village measures loss in what cannot be replaced.", "The engineer is bad at math.", "The village wants more houses."], "answer": 1,
-      "why": "The parallel sentence sets numbers against sacred loss to show two ways of valuing the same land." },
-    { "id": "i5", "type": "mc", "skill": "point-of-view", "prompt": "What does the elder's final question reveal about the village's main complaint?",
-      "choices": ["They want more money.", "They were not consulted before decisions were made about their home.", "They dislike the engineer personally.", "They oppose all electricity."], "answer": 1,
-      "why": "\"Why no one asked us before the plans were drawn\" points to the lack of consultation." },
-    { "id": "i6", "type": "mc", "skill": "evidence", "prompt": "Which point does the engineer make that the elder does NOT answer?",
-      "choices": ["The reservoir will reduce flooding.", "The dam will supply electricity to 40,000 households.", "Compensation will be above market rates.", "Farmers lose a third of their harvest."], "answer": 1,
-      "why": "The elder addresses farmers, floods, land, and compensation, but never the electricity benefit." }
+    {
+      "id": "i1",
+      "type": "mc",
+      "skill": "compare",
+      "prompt": "On which FACT do both speakers agree?",
+      "choices": [
+        "The new land is good.",
+        "Lowland farmers suffer in the dry months and floods are real.",
+        "Compensation is fair.",
+        "The village was consulted."
+      ],
+      "answer": 1,
+      "why": "The elder says, \"We do not deny that the lowland farmers suffer... or that floods are real.\""
+    },
+    {
+      "id": "i2",
+      "type": "mc",
+      "skill": "compare",
+      "prompt": "The main disagreement between them is about...",
+      "choices": [
+        "Whether the dam will produce electricity",
+        "Whether what the village loses can be measured and paid for in the same way as benefits",
+        "How many households exist",
+        "The height of the dam"
+      ],
+      "answer": 1,
+      "why": "The engineer weighs numbers; the elder argues that graves, rituals, and home cannot be bought. It is a disagreement about values."
+    },
+    {
+      "id": "i3",
+      "type": "mc",
+      "skill": "compare",
+      "prompt": "How do the two speakers' kinds of EVIDENCE differ?",
+      "choices": [
+        "The engineer uses numbers and plans; the elder uses lived experience and meaning.",
+        "Both use statistics.",
+        "The elder uses numbers; the engineer uses stories.",
+        "Neither gives evidence."
+      ],
+      "answer": 0,
+      "why": "\"40,000 households, 3,000 hectares\" versus \"graves,\" \"where our children learned to swim.\""
+    },
+    {
+      "id": "i8",
+      "type": "mc",
+      "skill": "evidence",
+      "prompt": "Which sentence from the engineer BEST supports the claim that the dam will help farmers?",
+      "choices": [
+        "\"The dam will... irrigate 3,000 hectares of farmland that currently depends on unreliable rain.\"",
+        "\"Yes, 180 families in the upland village will need to relocate.\"",
+        "\"The government has set aside new land and housing for them.\"",
+        "\"On balance, the project improves far more lives than it disrupts.\""
+      ],
+      "answer": 0,
+      "why": "Irrigating 3,000 hectares that now depend on rain is the specific benefit to farmers; the other sentences are about relocation or the overall judgment."
+    },
+    {
+      "id": "i4",
+      "type": "mc",
+      "skill": "figurative",
+      "prompt": "\"The engineer counts households; we count graves.\" What does this contrast express?",
+      "choices": [
+        "The village has more graves than houses.",
+        "The engineer measures benefit in numbers, while the village measures loss in what cannot be replaced.",
+        "The engineer is bad at math.",
+        "The village wants more houses."
+      ],
+      "answer": 1,
+      "why": "The parallel sentence sets numbers against sacred loss to show two ways of valuing the same land."
+    },
+    {
+      "id": "i7",
+      "type": "mc",
+      "skill": "evidence",
+      "prompt": "Which sentence BEST supports the elder's claim that the village is losing more than land?",
+      "choices": [
+        "\"We are the 180 families.\"",
+        "\"We do not deny that the lowland farmers suffer in the dry months.\"",
+        "\"The new land they offer is flat and hot.\"",
+        "\"Our ancestors are buried on that hillside, and the river... is where our children learned to swim and where our rituals are held each harvest.\""
+      ],
+      "answer": 3,
+      "why": "Graves, childhood memories, and harvest rituals are things tied to the place itself, which is the elder's point: it is not just land."
+    },
+    {
+      "id": "i5",
+      "type": "mc",
+      "skill": "purpose",
+      "prompt": "Why does the elder END with the question about why \"no one asked us before the plans were drawn\"?",
+      "choices": [
+        "To ask the engineer for more money",
+        "To show that the village opposes all electricity",
+        "To leave listeners with the village's deepest complaint: it was never consulted about its own home",
+        "To admit that the dam is a good idea"
+      ],
+      "answer": 2,
+      "why": "The speech builds from graves and rituals to this final question; putting it last makes the lack of consultation the point that stays with the listener."
+    },
+    {
+      "id": "i6",
+      "type": "mc",
+      "skill": "evidence",
+      "prompt": "Which point does the engineer make that the elder does NOT answer?",
+      "choices": [
+        "The reservoir will reduce flooding.",
+        "The dam will supply electricity to 40,000 households.",
+        "Compensation will be above market rates.",
+        "Farmers lose a third of their harvest."
+      ],
+      "answer": 1,
+      "why": "The elder addresses farmers, floods, land, and compensation, but never the electricity benefit."
+    },
+    {
+      "id": "i9",
+      "type": "mc",
+      "skill": "purpose",
+      "prompt": "Why does the engineer include the sentence \"Yes, 180 families in the upland village will need to relocate\"?",
+      "choices": [
+        "To admit the cost openly before arguing that the benefits outweigh it",
+        "To persuade the families to stay where they are",
+        "To describe what the new land looks like",
+        "To explain how the reservoir reduces flooding"
+      ],
+      "answer": 0,
+      "why": "The \"Yes\" admits the downside, and the next sentences on new land and compensation lead to \"On balance, the project improves far more lives than it disrupts.\""
+    },
+    {
+      "id": "i10",
+      "type": "mc",
+      "skill": "purpose",
+      "prompt": "Why does the elder say \"We do not deny that the lowland farmers suffer in the dry months, or that floods are real\"?",
+      "choices": [
+        "To agree that the village should relocate",
+        "To prove that the engineer's numbers are wrong",
+        "To change the subject to farming",
+        "To show the village is being fair about the facts before asking why it must pay the whole cost"
+      ],
+      "answer": 3,
+      "why": "Accepting the farmers' problem makes the elder sound reasonable, and the \"But\" that follows turns the speech to the village's real question."
+    }
   ]
 }

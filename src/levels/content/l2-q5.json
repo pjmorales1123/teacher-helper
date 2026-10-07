@@ -38,6 +38,12 @@
       "why": "Where the tower stood does not change the story. Remove it and the summary still makes sense; remove the other three and it does not." },
     { "id": "i8", "type": "mc", "skill": "summary", "prompt": "Which sentence BEST summarizes the whole passage?",
       "choices": ["A typhoon hit a barangay and knocked down a cell tower on a hill.", "Mira charged twenty pesos for Globe load and two pesos went to her.", "Everyone should help their neighbors during a typhoon.", "When a typhoon cut the signal, a girl who sold load walked far to send free messages for her neighbors, and they stayed loyal to her store."], "answer": 3,
-      "why": "It tells who, the problem, what she did, and how it ended. The first is too narrow, the second is a detail, and the third is a lesson, not a summary." }
+      "why": "It tells who, the problem, what she did, and how it ended. The first is too narrow, the second is a detail, and the third is a lesson, not a summary." },
+    { "id": "i9", "type": "mc", "skill": "synonyms", "prompt": "Which word means almost the same as \"hit\" in \"Then Typhoon Enteng hit\" (paragraph 2)?",
+      "choices": ["missed","helped","struck","left"], "answer": 2,
+      "why": "Swap it in: \"Then Typhoon Enteng struck\" keeps the meaning. A typhoon that hits a place strikes it. \"Missed\" is the opposite." },
+    { "id": "i10", "type": "mc", "skill": "cause-effect", "prompt": "Why was the line at the store window longer than ever when the signal came back?",
+      "choices": ["Load became cheaper after the typhoon.","The other stores were still closed.","The typhoon had broken everyone's phones.","The neighbors remembered how Mira had helped them for free."], "answer": 3,
+      "why": "The last sentence gives the cause: \"Her neighbors remembered the girl who walked in the mud.\" They came back because of what she did for them." }
   ]
 }

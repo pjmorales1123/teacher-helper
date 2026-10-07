@@ -21,9 +21,9 @@
     { "id": "i2", "type": "mc", "skill": "synonyms", "prompt": "Which word means almost the same as \"nervous\" in \"Liza felt nervous\" (paragraph 2)?",
       "choices": ["calm", "sleepy", "worried", "angry"], "answer": 2,
       "why": "Swap it in: \"Liza felt worried\" keeps the meaning. \"Calm\" is the antonym, and \"sleepy\" and \"angry\" change the feeling." },
-    { "id": "i3", "type": "mc", "skill": "synonyms", "prompt": "Which word means almost the same as \"huge\" in \"two huge boxes\" (paragraph 2)?",
-      "choices": ["big", "heavy", "old", "tiny"], "answer": 0,
-      "why": "\"Two big boxes\" means the same thing. \"Tiny\" is the opposite, and \"heavy\" and \"old\" are about weight and age, not size." },
+    { "id": "i3", "type": "mc", "skill": "cause-effect", "prompt": "Why did Liza become \"the teacher\" in paragraph 4?",
+      "choices": ["Her mother asked her to tutor her in English.", "Her mother did not know the new jeepney routes, apps, and places in town.", "Liza wanted to skip her Sunday calls.", "Her mother was too tired from the flight."], "answer": 1,
+      "why": "Paragraph 3 lists what her mother did not know, and paragraph 4 opens with \"So Liza became the teacher.\" The word \"so\" links the cause to the effect." },
     { "id": "i4", "type": "mc", "skill": "inference", "prompt": "Why did the hug feel awkward?",
       "choices": ["Liza was angry at her mother for leaving.", "The boxes were in the way.", "Her mother did not want to hug her.", "They had been apart so long that they felt almost like strangers."], "answer": 3,
       "why": "The clue is \"like hugging a tita you only see at fiestas.\" Four years of short calls had made them feel distant, even though both wanted the hug." },
@@ -41,6 +41,9 @@
       "why": "\"So Liza became the teacher... Slowly, the silence filled up with talk... Now they talked every night in the kitchen.\"" },
     { "id": "i9", "type": "mc", "skill": "summary", "prompt": "Which sentence BEST summarizes the whole passage?",
       "choices": ["Liza taught her mother how to use a phone app.", "When Liza's mother came home after four years abroad, they felt like strangers, but Liza taught her the new things in town and they grew close again.", "Liza's mother brought home two huge boxes from Dubai.", "Parents should never work abroad for too long."], "answer": 1,
-      "why": "It tells who, the problem (feeling like strangers), what Liza did, and how it ended. The others are a single detail or a lesson, not a summary." }
+      "why": "It tells who, the problem (feeling like strangers), what Liza did, and how it ended. The others are a single detail or a lesson, not a summary." },
+    { "id": "i10", "type": "mc", "skill": "summary", "prompt": "Which sentence BEST summarizes paragraph 3?",
+      "choices": ["Liza's mother did not know which jeepney went to the new mall.","Liza's mother cooked badly.","After four years away, Liza's mother no longer knew the town or the new ways of doing things.","Phone apps are too hard for parents."], "answer": 2,
+      "why": "It pulls the three examples (the jeepney, the app, the cooking) into one idea. The first is a single detail, the second is unfair to the text, and the last is an opinion." }
   ]
 }

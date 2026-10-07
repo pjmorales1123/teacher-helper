@@ -2,8 +2,8 @@
   "id": "l1-q3", "level": 1, "kind": "quest", "order": 3,
   "title": "The Crew",
   "tip": {
-    "skill": "main-idea", "title": "What is it MOSTLY about?",
-    "text": "The main idea is the big point of the whole text, not one small part. Ask: What is this MOSTLY about? Then test it: do most sentences support that idea? A detail is one piece of the picture. The main idea is the whole picture."
+    "skill": "details", "title": "Scan for the key word",
+    "text": "A detail question asks for one fact: a name, a number, a place, a thing. Do not answer from memory. Pick the key word in the question, then scan the passage with your finger until you find that word. Read the whole sentence around it, because that is where the answer lives. For example, \"Who picks the music?\" Scan for \"music\" and the sentence tells you: Kaye."
   },
   "passage": {
     "title": "The Crew",
@@ -31,6 +31,18 @@
       "choices": ["Their moves were wrong.", "They danced with real feeling and effort.", "They needed a coach.", "They should wear jackets."], "answer": 1,
       "why": "The crowd cheered loudest for them, and the judge was praising their heart, not their gear." },
     { "id": "i6", "type": "short", "skill": "details", "prompt": "What is the name of the crew? (one word)",
-      "accept": ["Northside"], "why": "\"They are a dance crew called Northside.\"" }
+      "accept": ["Northside"], "why": "\"They are a dance crew called Northside.\"" },
+    { "id": "i7", "type": "mc", "skill": "details", "prompt": "Where does the crew meet every afternoon?",
+      "choices": ["At the mall", "At a studio", "At the covered court", "At school"], "answer": 2,
+      "why": "\"Every afternoon, five students meet at the covered court.\"" },
+    { "id": "i8", "type": "mc", "skill": "context-clues", "prompt": "\"They are a dance crew called Northside.\" What is a crew?",
+      "choices": ["A kind of music", "A judge", "A group that performs together", "A dance battle"], "answer": 2,
+      "why": "Five students meet, practice, and dance as one. A crew is a group that performs together." },
+    { "id": "i9", "type": "mc", "skill": "context-clues", "prompt": "\"One judge said, 'You dance like you mean it.'\" What is a judge?",
+      "choices": ["A dancer in the crew", "A person who decides who wins", "A coach", "A fan in the crowd"], "answer": 1,
+      "why": "This happens at a dance battle where someone decides the winner. The crowd cheered, but the judge gave the verdict." },
+    { "id": "i10", "type": "mc", "skill": "main-idea", "prompt": "Which title fits the whole passage best?",
+      "choices": ["The Tallest Dancer", "A Crew That Keeps Going", "The Mall Battle", "Matching Jackets"], "answer": 1,
+      "why": "Every paragraph shows the crew practicing and pushing on without a coach, even after losing. The other titles fit only one detail." }
   ]
 }

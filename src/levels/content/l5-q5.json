@@ -33,10 +33,16 @@
     { "id": "i6", "type": "mc", "skill": "point-of-view", "prompt": "Which sentence shows the author's OPINION rather than a reported fact?",
       "choices": ["\"One study of about 2,000 teenagers, which our science teacher shared in class, found...\"", "\"One hour of a game that makes you think is practice.\"", "\"70 percent said they had learned to communicate faster.\"", "\"Their grades dropped.\""], "answer": 1,
       "why": "Calling one hour \"practice\" is the author's judgment. The other choices report what studies and surveys found." },
-    { "id": "i7", "type": "mc", "skill": "figurative", "prompt": "\"Time is the ingredient that turns a tool into a trap.\" What does this metaphor mean?",
-      "choices": ["Games are only fun at certain times of day.", "Cooking takes a long time.", "The amount of time spent decides whether a game helps you or hurts you.", "Traps are made of tools."], "answer": 2,
-      "why": "The paragraph contrasts one hour (a tool that builds skill) with three or more hours (sleep loss, falling grades). Time is what changes one into the other." },
+    { "id": "i7", "type": "mc", "skill": "point-of-view", "prompt": "Whose point of view does the first paragraph present BEFORE the author gives a different view?",
+      "choices": ["Parents who see the computer shop as a waste of load and time", "Researchers who study strategy games", "The player from Cebu", "The science teacher"], "answer": 0,
+      "why": "The paragraph first gives the parents' view, \"a waste of load and time,\" and then turns with \"But some researchers are starting to disagree.\"" },
     { "id": "i8", "type": "short", "skill": "context-clues", "prompt": "\"Four hours of anything, even studying, will leave you drained.\" In one word, what does drained mean here?",
-      "accept": ["tired", "exhausted", "weak", "empty"], "why": "The clue is the earlier sentence about players who \"slept less\" after long hours; drained means used up and tired." }
+      "accept": ["tired", "exhausted", "weak", "empty"], "why": "The clue is the earlier sentence about players who \"slept less\" after long hours; drained means used up and tired." },
+    { "id": "i9", "type": "mc", "skill": "context-clues", "prompt": "\"Those who played strategy games... practiced planning several moves ahead.\" What does strategy mean here?",
+      "choices": ["Luck", "Fast reflexes", "Planning your moves ahead of time", "Cheating"], "answer": 2,
+      "why": "The text explains what strategy players did: they \"practiced planning several moves ahead.\" That is the meaning of strategy." },
+    { "id": "i10", "type": "mc", "skill": "context-clues", "prompt": "\"Teenagers who played more than three hours a day slept less and were more irritable the next morning.\" What does irritable mean?",
+      "choices": ["Excited", "Hungry", "Sleepy", "Easily annoyed"], "answer": 3,
+      "why": "Sleeping less is already listed separately, so irritable describes a mood that follows a short night: being quick to get annoyed." }
   ]
 }
