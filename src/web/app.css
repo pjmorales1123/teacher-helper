@@ -39,9 +39,9 @@ main.content { flex: 1; padding: 16px 16px 48px; width: 100%; max-width: 1500px;
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
 .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); gap: 14px; align-items: start; }
 .cards > .card { margin-bottom: 0; }
-.cols-2, .split { display: grid; gap: 16px; align-items: start; }
+.cols-2, .cols-3, .split { display: grid; gap: 16px; align-items: start; }
 @media (min-width: 900px) {
-  .cols-2 { grid-template-columns: 1fr 1fr; }
+  .cols-2 { grid-template-columns: 1fr 1fr; } .cols-3 { grid-template-columns: 1fr 1fr 1fr; }
   .split { grid-template-columns: minmax(0, 3fr) minmax(320px, 2fr); }
   .split > .sticky { position: sticky; top: 24px; }
 }
@@ -157,3 +157,23 @@ nav.tabs.sub button { padding: 6px 12px; border-radius: 999px; border: 1px solid
 @keyframes fall { to { transform: translateY(105vh) rotate(720deg); opacity: .2; } }
 .result.passed h2 { animation: pop .4s ease; }
 @media (prefers-reduced-motion: reduce) { .confetti, .pulse-good, .shake, .combo.hot, .result.passed h2 { animation: none; } }
+/* LEVELS art, hero, mastery */
+.art { display: inline-flex; vertical-align: middle; line-height: 0; } .art svg { display: block; }
+.emblem.locked { filter: grayscale(1); opacity: .38; }
+.lv-logo { display: inline-flex; align-items: center; gap: 8px; letter-spacing: .5px; }
+.strand-ico { margin-right: 4px; color: var(--accent); } .strand-ico.vocabulary { color: #b45309; } .strand-ico.analysis { color: #6d28d9; }
+.hero { background: linear-gradient(135deg, #1b1f24, #2b3340 60%, #1f6feb); color: #fff; border: 0; display: flex; flex-wrap: wrap; gap: 18px; align-items: center; justify-content: space-between; }
+.hero-rank { display: flex; align-items: center; gap: 14px; } .hero-name { font-size: 1.5rem; font-weight: 800; } .hero-sub { opacity: .8; }
+.hero .next-up { flex: 1 1 260px; background: rgba(255,255,255,.1); border-radius: 10px; padding: 12px 14px; }
+.hero .next-up .muted { color: #cbd5e1; letter-spacing: 1px; font-weight: 700; } .hero .next-up .row { margin: 4px 0; } .hero .next-up button { margin-top: 8px; }
+.skill-row { display: flex; align-items: center; gap: 8px; padding: 7px 0; border-bottom: 1px solid var(--line); }
+.skill-row:last-child { border-bottom: 0; } .skill-row .skill-name { flex: 1; font-weight: 600; } .skill-row.done .skill-name { color: var(--ok); }
+.skill-state { min-width: 68px; text-align: right; color: var(--muted); } .skill-row.done .skill-state { color: var(--ok); font-weight: 700; }
+.pips { display: inline-flex; gap: 3px; } .pips i { width: 12px; height: 12px; border-radius: 50%; background: var(--bg); border: 1px solid var(--line); }
+.pips i.on { background: var(--accent); border-color: var(--accent); } .pips.done i.on { background: var(--ok); border-color: var(--ok); }
+.lv-node .art { margin-bottom: 2px; }
+.skills-up { margin: 8px 0; } .skills-up .skill-row.done .skill-state { animation: pop .4s ease; }
+.new-badges { margin: 8px 0; gap: 14px; }
+.practice button.mini { margin-right: 6px; }
+@media (max-width: 640px) { .hero { padding: 14px; } .hero-name { font-size: 1.25rem; } }
+.row.nowrap { flex-wrap: nowrap; white-space: nowrap; }

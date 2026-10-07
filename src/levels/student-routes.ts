@@ -11,8 +11,9 @@ import { DAILY_GOAL, LEVELS, SKILLS, levelMeta } from "./meta.ts";
 import { getSetting } from "../db/connection.ts";
 import { getStudent } from "../features/students/repo.ts";
 import { weeklyLeaderboard, xpOnDay } from "./xp-log.ts";
-import { PLACEMENT_ROUND_SIZE, currentStreak, levelView, placementStep } from "./progression.ts";
-import { bestByQuest, getProgress, listBadges, updateProgress } from "./repo.ts";
+import { PLACEMENT_ROUND_SIZE, currentStreak, placementStep } from "./progression.ts";
+import { getProgress, listBadges, updateProgress } from "./repo.ts";
+import { viewFor } from "./view.ts";
 import { finishReview } from "./service.ts";
 import { studentPlayRoutes } from "./student-play.ts";
 import { buildReview, countDue, dueWords, listWords } from "./words.ts";
@@ -28,7 +29,6 @@ export function levelsStudentRoutes(db: Db, store: ContentStore): Router {
     const studentId = sid(res);
     const p = getProgress(db, studentId);
     const today = todayLocal();
-    const bests = bestByQuest(db, studentId);
     const held = new Set(listBadges(db, studentId).map((b) => b.badge));
     const student = getStudent(db, studentId);
     const showBoard = getSetting(db, "lv_leaderboard", "1") === "1" && Boolean(student?.section);
@@ -42,7 +42,7 @@ export function levelsStudentRoutes(db: Db, store: ContentStore): Router {
       myRank: board.find((r) => r.id === studentId)?.rank ?? null, boardSize: board.length,
       dueWords: countDue(db, studentId, today), wordCount: listWords(db, studentId).length,
       levels: LEVELS.map((l) => ({ level: l.level, name: l.name, reached: l.level <= p.level })),
-      map: levelView(p.level, store.forLevel(p.level, "quest"), store.forLevel(p.level, "challenge"), bests),
+      map: viewFor(db, store, studentId, p.level),
       badges: BADGES.map((b) => ({ ...b, earned: held.has(b.id) })),
       skills: SKILLS,
     });

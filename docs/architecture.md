@@ -40,8 +40,10 @@ teacher clicks Approve.
 `src/levels/content/`, validated by `validate.ts` at startup; the server
 refuses to start on a bad file. `content.ts` merges them with published
 custom quests from `lv_quests`. `engine.ts` grades items; `progression.ts`
-holds pass marks, streaks, XP and placement; `service.ts` applies an attempt
-(XP, level-up, word bank, badges). Student routes live under
+holds pass marks, streaks, XP and placement; `mastery.ts` computes per-rank
+skill mastery and the "next up" pick; `service.ts` applies an attempt
+(XP, level-up, word bank, badges, skill movement). Rank, badge and strand
+artwork is inline SVG in `src/web/js/levels-art/`. Student routes live under
 `/api/student/levels`, teacher routes under `/api/levels`. `draft.ts` asks the
 subscription CLI for a quest draft, which the teacher edits and publishes.
 Design, rules and content format: `docs/levels.md`.

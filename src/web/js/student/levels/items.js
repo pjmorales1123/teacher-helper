@@ -15,17 +15,17 @@ function promptEl(item) {
 
 function mcView(item) {
   const name = `mc-${item.id}-${Math.random().toString(36).slice(2, 6)}`;
-  const inputs = item.choices.map((c, i) =>
-    h("label", { class: "choice" }, h("input", { type: "radio", name, value: String(i) }), h("span", {}, c)));
+  const inputs = item.choices.map((c) =>
+    h("label", { class: "choice" }, h("input", { type: "radio", name, value: c }), h("span", {}, c)));
   const el = h("div", { class: "item" }, promptEl(item), h("div", { class: "choices" }, ...inputs));
   return {
     el,
-    answer: () => { const c = el.querySelector("input:checked"); return c ? Number(c.value) : null; },
+    answer: () => el.querySelector("input:checked")?.value ?? null,
     lock: () => el.querySelectorAll("input").forEach((i) => (i.disabled = true)),
-    mark: (correctIndex) => inputs.forEach((lab, i) => {
-      const checked = lab.querySelector("input").checked;
-      if (i === correctIndex) lab.classList.add("correct");
-      else if (checked) lab.classList.add("wrong");
+    mark: (correctText) => inputs.forEach((lab) => {
+      const input = lab.querySelector("input");
+      if (input.value === correctText) lab.classList.add("correct");
+      else if (input.checked) lab.classList.add("wrong");
     }),
   };
 }

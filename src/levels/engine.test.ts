@@ -14,7 +14,9 @@ const short: Item = { id: "c", type: "short", skill: "details", prompt: "?", acc
 describe("checkItem", () => {
   it("grades each type", () => {
     assert.equal(checkItem(mc, 1), true);
-    assert.equal(checkItem(mc, "1"), true);
+    assert.equal(checkItem(mc, "y"), true);
+    assert.equal(checkItem(mc, " Y "), true);
+    assert.equal(checkItem(mc, "x"), false);
     assert.equal(checkItem(mc, 0), false);
     assert.equal(checkItem(order, ["1", "2", "3"]), true);
     assert.equal(checkItem(order, ["2", "1", "3"]), false);

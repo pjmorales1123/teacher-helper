@@ -16,17 +16,20 @@ export function shuffle<T>(arr: readonly T[]): T[] {
   return out;
 }
 
-/** Shuffle until the order differs from the answer (for 3+ distinct steps it always can). */
-function shuffledSteps(steps: readonly string[]): string[] {
+/** Shuffle until the order differs from the original (for 3+ distinct entries it always can). */
+function reordered(list: readonly string[]): string[] {
   for (let tries = 0; tries < 10; tries++) {
-    const s = shuffle(steps);
-    if (s.some((v, i) => v !== steps[i])) return s;
+    const s = shuffle(list);
+    if (s.some((v, i) => v !== list[i])) return s;
   }
-  return [...steps].reverse();
+  return [...list].reverse();
 }
 
 export function checkItem(item: Item, answer: unknown): boolean {
-  if (item.type === "mc") return Number(answer) === item.answer;
+  if (item.type === "mc") {
+    if (typeof answer === "number") return answer === item.answer;
+    return normalize(String(answer ?? "")) === normalize(item.choices[item.answer] ?? "");
+  }
   if (item.type === "order") {
     if (!Array.isArray(answer) || answer.length !== item.steps.length) return false;
     return answer.every((v, i) => String(v) === item.steps[i]);
@@ -37,15 +40,15 @@ export function checkItem(item: Item, answer: unknown): boolean {
 
 /** Correct answer in a form the client can display after checking. */
 export function revealAnswer(item: Item): unknown {
-  if (item.type === "mc") return item.answer;
+  if (item.type === "mc") return item.choices[item.answer];
   if (item.type === "order") return item.steps;
   return item.accept[0];
 }
 
 export function toPublicItem(item: Item): PublicItem {
   const base = { id: item.id, skill: item.skill, prompt: item.prompt, ...(item.level ? { level: item.level } : {}) };
-  if (item.type === "mc") return { ...base, type: "mc", choices: item.choices };
-  if (item.type === "order") return { ...base, type: "order", steps: shuffledSteps(item.steps) };
+  if (item.type === "mc") return { ...base, type: "mc", choices: reordered(item.choices) };
+  if (item.type === "order") return { ...base, type: "order", steps: reordered(item.steps) };
   return { ...base, type: "short" };
 }
 

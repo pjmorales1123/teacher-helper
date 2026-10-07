@@ -29,7 +29,7 @@
   earn stars, XP, combos, streaks and badges, chase a daily goal and a weekly
   section leaderboard, review vocabulary on a spaced schedule, and rank up
   (Warrior → Legend) by passing a Challenge. Six ranks map to Grade 3–8
-  reading bands; passages are teen-interest "hi-lo" texts. Thirty built-in quests and challenges ship with the
+  reading bands; passages are teen-interest "hi-lo" texts. Forty-two built-in quests and challenges ship with the
   app; everything is auto-graded locally (no AI tokens). Teachers see a class
   skill heatmap, per-student detail, can override a level, and can write or
   AI-draft new quests. See `docs/levels.md`.

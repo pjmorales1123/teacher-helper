@@ -1,0 +1,48 @@
+{
+  "id": "l3-q6", "level": 3, "kind": "quest", "order": 6,
+  "title": "Two Minutes",
+  "tip": {
+    "skill": "figurative", "title": "Find the two things compared",
+    "text": "FIGURATIVE language says one thing to mean another. A SIMILE compares using like or as (\"fast as a jeepney on an empty road\"). A METAPHOR says one thing IS another (\"the exam was a wall\"). PERSONIFICATION gives a thing human actions (\"the rain knocked on the roof\"). To decode any of them, ask two questions: what two things are being compared, and what do they share?"
+  },
+  "passage": {
+    "title": "Two Minutes",
+    "text": "Every Sunday at eight, Dex's mother called from Dubai. The call was the one fixed point in his week. His mother asked about school, and Dex asked about the heat. They never ran out of things to say.\n\nThe Sunday the typhoon came, the signal died at six. The rain was a drummer who never got tired. The wind screamed through the gaps in the roof, and the power went out across the whole barangay. Dex stared at his phone. The screen stared back, blank as a wall.\n\nBy seven-thirty, the house was powerless, and so was Dex. His grandmother told him to sleep. Instead, he pulled on his jacket and walked to Tita Nena's sari-sari store near the road. The store had a generator, and its one light bulb was a lighthouse on the dark street. Five neighbors were already there, recharging phones and sharing one bar of signal.\n\nAt eight-ten, Dex's phone buzzed. His mother's voice was thin and broken, like a radio between stations, but it was hers. \"We're okay, Ma,\" he said. \"The roof is still here.\" The call lasted only two minutes. Compared to the usual hour, it was nothing. To Dex, it was everything."
+  },
+  "words": [
+    { "word": "fixed", "meaning": "set and not changing; always the same", "example": "The team has a fixed practice time every Wednesday." },
+    { "word": "generator", "meaning": "a machine that makes electricity when the power is out", "example": "The barangay hall ran a generator during the brownout." },
+    { "word": "buzzed", "meaning": "made a short vibrating sound, like a phone alert", "example": "Her phone buzzed with a message from the group chat." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "figurative", "prompt": "\"The call was the one fixed point in his week.\" What does this metaphor tell you about the call?",
+      "choices": ["It only lasted one minute.", "It happened in a fixed place.", "It was something steady he could always count on.", "It was boring and always the same."], "answer": 2,
+      "why": "A fixed point does not move. Every Sunday at eight, the call was always there, and \"they never ran out of things to say.\"" },
+    { "id": "i2", "type": "mc", "skill": "figurative", "prompt": "\"The rain was a drummer who never got tired.\" What two things are compared, and what do they share?",
+      "choices": ["Rain and a drummer; both make a steady, loud beat that does not stop.", "Rain and a drum; both are round.", "Rain and a tired person; both need rest.", "Rain and music; both are pleasant to hear."], "answer": 0,
+      "why": "The rain pounds on and on like drumming. \"Never got tired\" means the pounding did not stop." },
+    { "id": "i3", "type": "mc", "skill": "figurative", "prompt": "\"The wind screamed through the gaps in the roof.\" What kind of figurative language is this?",
+      "choices": ["Simile", "Personification", "Idiom", "Hyperbole"], "answer": 1,
+      "why": "Screaming is a human action given to the wind. That is personification; there is no like or as." },
+    { "id": "i4", "type": "mc", "skill": "figurative", "prompt": "\"The screen stared back, blank as a wall.\" What does this simile tell you?",
+      "choices": ["The phone was broken in half.", "The phone showed nothing useful, like a wall with nothing on it.", "The phone was hanging on the wall.", "The screen was very bright."], "answer": 1,
+      "why": "A blank wall has nothing on it. The screen had no signal and no messages, so it showed Dex nothing." },
+    { "id": "i5", "type": "short", "skill": "word-parts", "prompt": "\"The house was powerless.\" What is the root word of powerless? Answer in one word.",
+      "accept": ["power", "powers"], "why": "powerless = power + less. The root is power; -less means without, so the house was without power." },
+    { "id": "i6", "type": "mc", "skill": "compare", "prompt": "How was the typhoon Sunday DIFFERENT from a usual Sunday?",
+      "choices": ["His mother called from Dubai.", "The signal died and the power went out.", "Dex asked about the heat.", "The call came at exactly eight."], "answer": 1,
+      "why": "On a usual Sunday the call came at eight with no trouble. This time \"the signal died at six\" and \"the power went out across the whole barangay.\"" },
+    { "id": "i7", "type": "mc", "skill": "figurative", "prompt": "\"Its one light bulb was a lighthouse on the dark street.\" What do the bulb and a lighthouse share?",
+      "choices": ["Both are built near the sea.", "Both are very tall.", "Both guide people through the dark to a safe place.", "Both run on a generator."], "answer": 2,
+      "why": "A lighthouse guides ships through darkness. The bulb pulled Dex and five neighbors through the dark street to the store." },
+    { "id": "i8", "type": "mc", "skill": "compare", "prompt": "How was Tita Nena's store DIFFERENT from Dex's house that night?",
+      "choices": ["The store had a generator, light, and a bit of signal; the house had none.", "The store was farther from the road.", "The house had five neighbors inside.", "Both places had no power at all."], "answer": 0,
+      "why": "The house was \"powerless,\" but the store \"had a generator\" and neighbors there were \"sharing one bar of signal.\"" },
+    { "id": "i9", "type": "mc", "skill": "word-parts", "prompt": "The neighbors were recharging their phones. What does the prefix re- mean?",
+      "choices": ["Before", "Not", "Again", "Wrongly"], "answer": 2,
+      "why": "re- means again. Recharging means charging the phones again after the batteries ran down." },
+    { "id": "i10", "type": "mc", "skill": "compare", "prompt": "How did the typhoon call compare to the usual Sunday calls?",
+      "choices": ["It was longer and clearer.", "It was the same length as always.", "It was shorter and did not matter to Dex.", "It was much shorter but meant just as much, or more."], "answer": 3,
+      "why": "\"Compared to the usual hour, it was nothing. To Dex, it was everything.\" Two minutes was short, but it meant the most." }
+  ]
+}

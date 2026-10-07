@@ -1,0 +1,43 @@
+{
+  "id": "l2-q5", "level": 2, "kind": "quest", "order": 5,
+  "title": "Signal Lost",
+  "tip": {
+    "skill": "summary", "title": "Keep the big, drop the small",
+    "text": "A SUMMARY tells only the most important parts of a text, in a few sentences, in your own words. Start by asking two questions: who or what is this about, and how did it end? Then cross out small details, like exact prices, the name of a street, or what someone was wearing. Here is a test: if you can remove a sentence from your summary and the story still makes sense, that sentence was a detail, not a main event. For example, \"A girl sells load, a typhoon cuts the signal, so she walks far to send messages for her neighbors for free\" is a summary, but \"She earned two pesos per sale\" is only a detail."
+  },
+  "passage": {
+    "title": "Signal Lost",
+    "text": "Mira sold cellphone load from her mother's sari-sari store. Every afternoon after school, neighbors came to the window with coins. \"Twenty pesos, Globe,\" they said, and Mira sent the load from her phone. She earned two pesos for every sale. It was small money, but it was hers.\n\nThen Typhoon Enteng hit. The wind took down the cell tower on the hill. For three days, nobody in the barangay had a signal. Nobody could buy load, so Mira earned nothing. Worse, people could not call their families in Manila or abroad to say they were alive.\n\nOn the fourth day, Mira heard that the tower near the highway was working. She walked two kilometers in the mud with her phone and a list of numbers. One by one, she sent text messages for her neighbors. \"We are safe. The house is okay.\" She charged nothing.\n\nWhen the signal came back a week later, the line at the store window was longer than ever. Her neighbors remembered the girl who walked in the mud."
+  },
+  "words": [
+    { "word": "load", "meaning": "prepaid credit for a cellphone, used for calls, texts and data", "example": "I need to buy load before I can text you." },
+    { "word": "signal", "meaning": "the connection a phone needs to call, text or go online", "example": "There is no signal inside the elevator." },
+    { "word": "abroad", "meaning": "in another country", "example": "Her kuya works abroad as a seaman." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "synonyms", "prompt": "Which word means almost the same as \"small\" in \"It was small money\" (paragraph 1)?",
+      "choices": ["loud", "late", "large", "little"], "answer": 3,
+      "why": "Swap it in: \"It was little money, but it was hers\" keeps the same meaning. \"Large\" is the opposite." },
+    { "id": "i2", "type": "mc", "skill": "summary", "prompt": "Which sentence BEST summarizes paragraph 1?",
+      "choices": ["Mira sold load at her mother's store after school and earned a little money of her own.", "Mira earned two pesos for every sale.", "Mira's mother owned a sari-sari store that sold many things.", "Selling load is the best job for a student."], "answer": 0,
+      "why": "It covers who, what and why it mattered. \"Two pesos\" is only a detail, the store's other goods are not in the text, and \"best job\" is an opinion." },
+    { "id": "i3", "type": "mc", "skill": "cause-effect", "prompt": "Why did Mira earn nothing for three days?",
+      "choices": ["The store was closed for the typhoon.", "She lost her phone in the mud.", "There was no signal, so nobody could buy load.", "Her neighbors had no coins."], "answer": 2,
+      "why": "\"Nobody in the barangay had a signal. Nobody could buy load, so Mira earned nothing.\"" },
+    { "id": "i4", "type": "mc", "skill": "summary", "prompt": "Which sentence BEST summarizes paragraph 3?",
+      "choices": ["Mira walked two kilometers.", "Mira walked to a working tower and sent messages for her neighbors for free.", "Mira typed the words \"We are safe. The house is okay.\"", "Mira was the bravest girl in the barangay."], "answer": 1,
+      "why": "It gives the main action and its purpose. The distance and the exact words are details; \"bravest\" is an opinion the text does not state." },
+    { "id": "i5", "type": "mc", "skill": "cause-effect", "prompt": "What happened BECAUSE Mira sent the messages?",
+      "choices": ["The cell tower on the hill was fixed faster.", "Her neighbors' families learned they were safe.", "The typhoon ended on the fourth day.", "Mira earned two pesos for each message."], "answer": 1,
+      "why": "The messages said \"We are safe. The house is okay,\" which told the families in Manila and abroad that the neighbors were alive. She charged nothing." },
+    { "id": "i6", "type": "short", "skill": "synonyms", "prompt": "In paragraph 4, which word is the OPPOSITE of \"shorter\"? Write the one word.",
+      "accept": ["longer", "long"],
+      "why": "\"The line at the store window was longer than ever.\" Longer is the antonym of shorter." },
+    { "id": "i7", "type": "mc", "skill": "summary", "prompt": "Which detail should be LEFT OUT of a summary of the whole passage?",
+      "choices": ["A typhoon cut the signal in the barangay.", "Mira walked far to send messages for her neighbors.", "The cell tower was on a hill.", "Afterward, more neighbors than ever came to buy load from her."], "answer": 2,
+      "why": "Where the tower stood does not change the story. Remove it and the summary still makes sense; remove the other three and it does not." },
+    { "id": "i8", "type": "mc", "skill": "summary", "prompt": "Which sentence BEST summarizes the whole passage?",
+      "choices": ["A typhoon hit a barangay and knocked down a cell tower on a hill.", "Mira charged twenty pesos for Globe load and two pesos went to her.", "Everyone should help their neighbors during a typhoon.", "When a typhoon cut the signal, a girl who sold load walked far to send free messages for her neighbors, and they stayed loyal to her store."], "answer": 3,
+      "why": "It tells who, the problem, what she did, and how it ended. The first is too narrow, the second is a detail, and the third is a lesson, not a summary." }
+  ]
+}

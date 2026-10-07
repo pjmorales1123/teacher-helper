@@ -19,7 +19,8 @@ publishes it.
 | Principle | Where it shows up |
 |---|---|
 | Leveled text (readability matched to a grade band) | Six levels; passages get longer, sentences more complex, vocabulary rarer |
-| Mastery learning (Bloom): advance only after demonstrated mastery | Quest passes at 70 %; a level's Challenge needs 80 % and all quests passed |
+| Mastery learning (Bloom): advance only after demonstrated mastery | Each rank names four focus skills. A skill is mastered when 5 of the student's last 6 answers on it (at that rank) are right; the Challenge unlocks only when all four are mastered, then needs 80 % |
+| Adaptive sequencing | "Next up" picks the weakest unmastered skill and a quest that trains it (unplayed first, then retries); a failed quest offers a *different* story on the same skill |
 | Explicit strategy instruction (Duke & Pearson; reciprocal teaching) | Every quest opens with a one-screen "tip" that teaches one skill, then applies it |
 | Question–Answer Relationships (Raphael): right-there → think-and-search → author-and-me | Skill tags move from `details` to `inference`/`theme` as levels rise |
 | Tier-2 vocabulary with context clues and morphology (Beck, McKeown) | Each quest introduces 2–3 words used in the passage; `context-clues` and `word-parts` items |
@@ -89,8 +90,22 @@ case/punctuation-insensitively against `accept`).
   The teacher can override any student's level.
 - Quest: pass at ≥ 70 %. Stars: 1 ≥ 70 %, 2 ≥ 85 %, 3 = 100 %. Replays allowed;
   best score kept.
-- Challenge: unlocked when every quest in the level is passed. Pass at ≥ 80 %
-  → level up. Fail → shows the two weakest skills with the quests that train them.
+- Skill mastery: every rank has four focus skills (`LEVEL_SKILLS` in
+  `meta.ts`). For each, the engine looks at the student's last 6 answers on
+  that skill at that rank (quests and challenges both count); 5 right = mastered.
+  Old mistakes fall out of the window, so a student can always recover.
+  Six quests per rank give each focus skill at least 7 items across at least
+  2 passages (enforced by a test), so mastery is reachable but needs more than
+  one story. Multiple-choice options are shuffled on every play and graded by
+  text, so replaying a story does not reward memorising "answer B".
+- Next up: the home screen leads with one recommended quest: the weakest
+  unmastered skill, then the quest with the most items on it that is not yet
+  beaten (new stories before retries). When every skill is mastered it points
+  at the Challenge; after that, at the lowest-starred quest.
+- Challenge: unlocked when all four focus skills are mastered. Pass at ≥ 80 %
+  → rank up. Fail → shows the two weakest skills with other stories that train them.
+- Failed quest: the result screen shows which skills moved (3 → 4 of 5) and
+  offers a different story on the weakest skill instead of an immediate replay.
 - XP: 10 per correct item, +5 combo bonus for the third and every later
   correct answer in an unbroken run, +25 first pass of a quest, +50 passing a
   Challenge, 5 per correct word review. XP never goes down.
@@ -135,8 +150,9 @@ Teacher (`/api/levels`): `GET /meta`, `PUT /settings`, `GET /overview?section=`,
 ## Progress checklist
 
 - [x] Schema, validator, loader
-- [x] Content: levels 1–3 (4 quests + challenge each)
-- [x] Content: levels 4–6 + placement
+- [x] Content: levels 1–6 (6 quests + 1 challenge each = 42 passages) + placement
+- [x] Skill mastery, next-up picker, shuffled choices (tested)
+- [x] SVG art: rank shields, badge medals, strand icons, wordmark
 - [x] Engine + progression + words + badges (tested)
 - [x] Student API
 - [x] Teacher API (+ AI draft)
@@ -147,6 +163,6 @@ Teacher (`/api/levels`): `GET /meta`, `PUT /settings`, `GET /overview?section=`,
 ## Ideas for later (not built)
 
 - Fluency: timed reading with words-per-minute self-report.
-- Printable quest sheets for pupils without a device.
+- Printable quest sheets for students without a device.
 - Class leaderboard (opt-in, by section) and weekly goals.
 - Import/export of custom quests as a JSON bundle for sharing between teachers.

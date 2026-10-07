@@ -43,6 +43,19 @@ export const SKILLS: Record<string, { label: string; strand: Strand }> = {
 
 export const SKILL_IDS = Object.keys(SKILLS);
 
+/** The skills each rank is responsible for. A student masters all of them to unlock the rank's Challenge. */
+export const LEVEL_SKILLS: Record<number, readonly string[]> = {
+  1: ["details", "sequence", "main-idea", "context-clues"],
+  2: ["cause-effect", "inference", "synonyms", "summary"],
+  3: ["word-parts", "compare", "evidence", "figurative"],
+  4: ["purpose", "multiple-meaning", "summary", "cause-effect"],
+  5: ["point-of-view", "evidence", "figurative", "context-clues"],
+  6: ["theme", "compare", "purpose", "evidence"],
+};
+/** A skill is mastered at a level when MASTERY_NEED of the last MASTERY_WINDOW items on it (at that level) were right. */
+export const MASTERY_WINDOW = 6;
+export const MASTERY_NEED = 5;
+
 export const QUEST_PASS = 0.7;
 export const CHALLENGE_PASS = 0.8;
 export const XP = { item: 10, questFirstPass: 25, challengePass: 50, reviewWord: 5, combo: 5 } as const;

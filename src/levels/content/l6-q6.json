@@ -1,0 +1,42 @@
+{
+  "id": "l6-q6", "level": 6, "kind": "quest", "order": 6,
+  "title": "Who Gets Left at the Stop",
+  "tip": {
+    "skill": "purpose", "title": "Follow the author's choices",
+    "text": "An author writes to persuade, to inform, or to entertain, and every choice in the text serves that purpose. To find it, look at three things: the words chosen (loaded or neutral?), what is included and what is left out, and who the audience is. A letter that calls a plan \"half-finished\" and skips the plan's successes is persuading, even if it uses facts. Ask who the writer wants to reach and what they want that reader to do after the last line."
+  },
+  "passage": {
+    "title": "Letter to the Editor: Who Gets Left at the Stop",
+    "text": "I am sixteen, and I have ridden my father's jeepney to school every day since Grade 1. So when the city says the old jeepneys must be gone by December, I am not neutral. I will not pretend to be. But hear me out.\n\nNobody is saying the new jeepneys are bad. They have air-conditioning, seats that face forward, and engines that do not cough black smoke onto the students waiting at the corner. My own lungs would thank the city. If the question were only \"Which vehicle is better?\", the debate would be over.\n\nThe real question is \"Who pays?\" A modern unit costs around 2.8 million pesos. My father's jeepney, which he bought secondhand in 2009, cost 180,000, and he is still fixing it every Sunday. The program asks him to join a cooperative and take a loan that his earnings, about 800 pesos a day after gas, cannot cover. The city's own fact sheet admits that drivers who cannot join a cooperative will \"exit the industry.\" That is a soft way of saying they will lose their jobs.\n\nSupporters answer that drivers can become employees of the cooperative with a fixed salary. That sounds safe. It is also a pay cut for men who used to run their own route, and it is a job offer that does not exist yet in our town, because no cooperative here has enough money to buy the units.\n\nI am not asking the city to keep smoke in the air forever. I am asking for three things: a longer timeline, a subsidy large enough that the loan can actually be paid, and a plan for the drivers who will be fifty-eight years old when the last old jeepney stops. A policy that is good for the air and bad for the people breathing it is not finished. It is half a plan.\n\nMy father will read this at the terminal tomorrow. He will tell me I used too many big words. He will also keep driving."
+  },
+  "words": [
+    { "word": "neutral", "meaning": "not taking a side in an argument", "example": "The referee has to stay neutral even when his cousin is playing." },
+    { "word": "subsidy", "meaning": "money the government gives to help pay for something", "example": "The rice subsidy kept prices low during the typhoon season." },
+    { "word": "cooperative", "meaning": "a business owned and run together by its members", "example": "The fishermen formed a cooperative to buy a bigger boat." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "purpose", "prompt": "What is the writer's MAIN purpose in this letter?",
+      "choices": ["To inform readers about the features of modern jeepneys", "To entertain readers with a story about his father", "To explain how a cooperative works", "To persuade readers that the phase-out should be slowed and better funded"], "answer": 3,
+      "why": "The letter ends with three demands (\"a longer timeline, a subsidy..., and a plan\") and calls the policy \"half a plan.\"" },
+    { "id": "i2", "type": "mc", "skill": "compare", "prompt": "According to the writer, how do the old and new jeepneys COMPARE?",
+      "choices": ["The old ones are safer; the new ones are faster.", "The new ones are cleaner and more comfortable; the old ones are what drivers can afford.", "The new ones pollute more; the old ones are cheaper to fix.", "They are about the same, so the change is pointless."], "answer": 1,
+      "why": "Paragraph 2 praises the new units' air-conditioning and clean engines; paragraph 3 contrasts 2.8 million pesos with 180,000." },
+    { "id": "i3", "type": "mc", "skill": "purpose", "prompt": "Why does the writer admit that \"nobody is saying the new jeepneys are bad\"?",
+      "choices": ["To seem fair so readers trust him, and to narrow the argument to the question of cost", "To show he is changing his mind about the phase-out", "To prove that his father wants a new jeepney", "To inform readers which model to buy"], "answer": 0,
+      "why": "Right after conceding the point, he says the \"real question is 'Who pays?'\", which is where the rest of the letter stays." },
+    { "id": "i4", "type": "mc", "skill": "compare", "prompt": "How does the writer compare being a cooperative EMPLOYEE with running your OWN route?",
+      "choices": ["Being an employee pays more but is less safe.", "Both pay the same, but employees work shorter hours.", "Being an employee sounds safe but means a pay cut, and the jobs do not exist yet.", "Running your own route is illegal under the new program."], "answer": 2,
+      "why": "Paragraph 4: a fixed salary \"sounds safe\" but \"is also a pay cut,\" and \"no cooperative here has enough money to buy the units.\"" },
+    { "id": "i5", "type": "short", "skill": "compare", "prompt": "The city's fact sheet says drivers will \"exit the industry.\" The writer says that is a \"___ way of saying they will lose their jobs.\" Which one word from the text contrasts the city's phrase with the writer's plain words?",
+      "accept": ["soft", "gentle", "softer"], "why": "The text says \"That is a soft way of saying they will lose their jobs,\" setting the city's careful wording against the plain truth." },
+    { "id": "i6", "type": "mc", "skill": "theme", "prompt": "\"A policy that is good for the air and bad for the people breathing it is not finished.\" Which statement turns this into a theme that applies beyond jeepneys?",
+      "choices": ["Clean air is never worth the cost.", "A solution that helps one side by harming another is not yet a real solution.", "Governments should never make rules about vehicles.", "Old things are always better than new things."], "answer": 1,
+      "why": "The sentence is about any policy, not just this one: fixing one problem by creating another leaves the job half done." },
+    { "id": "i7", "type": "mc", "skill": "theme", "prompt": "Which of these is a TOPIC of the letter rather than its message?",
+      "choices": ["Fair change gives people the time and the means to adapt.", "Progress that ignores who pays for it is incomplete.", "Plain words reveal what soft words hide.", "Jeepney modernization"], "answer": 3,
+      "why": "\"Jeepney modernization\" names the subject in two words; the other choices are full statements about life that the letter argues for." },
+    { "id": "i8", "type": "mc", "skill": "theme", "prompt": "Test each statement against the WHOLE letter. Which one does the whole letter support?",
+      "choices": ["Drivers should refuse every change.", "Clean air does not matter to students.", "Fair change gives people the time and the means to adapt.", "Old jeepneys are better than new ones."], "answer": 2,
+      "why": "The writer accepts that the new jeepneys are better and asks only for a longer timeline, a payable loan, and a plan for older drivers." }
+  ]
+}

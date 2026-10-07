@@ -2,6 +2,7 @@
 import { get, put } from "../../api.js";
 import { append, fmtDate, h } from "../../ui.js";
 import { withSection } from "../../section.js";
+import { rankEl } from "../../levels-art/index.js";
 import { renderContent } from "./content.js";
 import { renderLevelsStudent } from "./student.js";
 
@@ -50,10 +51,11 @@ async function renderProgress(swap, home) {
           h("tbody", {}, ...o.skills.map((s) => h("tr", {}, h("td", {}, s.label), h("td", { class: "muted small" }, s.strand), h("td", {}, heat(s.accuracy, s.total)), h("td", {}, s.total)))))
           : h("p", { class: "muted", style: "padding:12px" }, "No answers yet. Lowest-accuracy skills will appear here first.")),
       h("div", { class: "card table-wrap" }, h("h3", { style: "padding:12px 12px 0" }, "Students"),
-        o.students.length ? h("table", {}, h("thead", {}, h("tr", {}, ...["Student", "Level", "Quests", "XP", "Streak", "Weakest", "Last active"].map((t) => h("th", {}, t)))),
+        o.students.length ? h("table", {}, h("thead", {}, h("tr", {}, ...["Student", "Rank", "Skills", "Quests", "XP", "Streak", "Weakest", "Last active"].map((t) => h("th", {}, t)))),
           h("tbody", {}, ...o.students.map((s) => h("tr", {},
             h("td", {}, h("a", { href: "#", onclick: (e) => { e.preventDefault(); swap(renderLevelsStudent(s.id, home)); } }, s.name), h("div", { class: "muted small" }, s.section)),
-            h("td", {}, s.placed ? `${s.level} ${s.levelName}` : h("span", { class: "muted" }, "not placed"), h("div", { class: "muted small" }, `≈ ${s.band}`)),
+            h("td", {}, h("span", { class: "row nowrap" }, s.placed ? rankEl(s.level, 28) : null, h("span", {}, s.placed ? s.levelName : h("span", { class: "muted" }, "not placed"), h("div", { class: "muted small" }, `≈ ${s.band}`)))),
+            h("td", {}, h("span", { class: `heat ${s.mastered === s.skillsTotal ? "h2" : s.mastered ? "h1" : "h0"}` }, `${s.mastered}/${s.skillsTotal}`)),
             h("td", {}, `${s.questsPassed}/${s.questsTotal}`, s.challengePassed ? " ✓" : ""),
             h("td", {}, s.xp), h("td", {}, s.streak ? `🔥 ${s.streak}` : "–"),
             h("td", {}, s.weakest ? [s.weakest.label, " ", heat(s.weakest.accuracy, 0)] : h("span", { class: "muted" }, "–")),

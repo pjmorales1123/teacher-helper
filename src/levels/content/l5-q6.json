@@ -1,0 +1,42 @@
+{
+  "id": "l5-q6", "level": 5, "kind": "quest", "order": 6,
+  "title": "The Captain's Call",
+  "tip": {
+    "skill": "point-of-view", "title": "What the narrator cannot see",
+    "text": "Every narrator has a limit. A FIRST-PERSON narrator (I, we) can only report what they saw, felt, or guessed, and they may be biased or protecting themselves. A THIRD-PERSON LIMITED narrator (he, she) follows ONE character's mind, so other characters' thoughts stay hidden unless they speak or act. As you read, mark which thoughts you are given and which you are only guessing at. Then ask: if the quiet character told this story, what would we learn, and what would we lose?"
+  },
+  "passage": {
+    "title": "The Captain's Call",
+    "text": "Reign read the lineup again. It was her own handwriting, but it looked like someone else's. Tin's name was not on it.\n\nThe finals were in two hours. The whole crowd would be there: the teachers, the barangay captain, and the scouts from the city division who picked players for the regional team. Tin had talked about those scouts for months. She had spent her merienda money on knee pads.\n\nThat was the problem. Reign had seen Tin land wrong in Tuesday's practice. Tin had laughed it off and limped to the water station when she thought no one was watching. Yesterday she had wrapped the knee under her socks. Reign noticed because captains notice. One more bad landing and Tin might not play for a year, scouts or no scouts.\n\nReign posted the lineup on the gym wall and walked away before anyone could read it. Behind her she heard the chatter stop, then start again, lower. She did not turn around. If she turned around, she would see Tin's face, and she would change her mind.\n\nThe game went five sets. They lost the last one by two points. In the locker room nobody talked. Tin sat at the far end, knee pads still in her bag, looking at the floor as if the answer was written there.\n\nReign wanted to explain. The words were ready: I saw you limping. I did it for you. But Tin would hear something else: You did not trust me. Tin always heard what was behind the words, not the words themselves. That was what made her a good setter, and a hard friend.\n\nSo Reign said nothing. She picked up her bag. The lineup was still on the wall, fluttering a little, like it wanted to come down."
+  },
+  "words": [
+    { "word": "lineup", "meaning": "the list of players chosen to start a game", "example": "Coach changed the lineup after two players got sick." },
+    { "word": "scouts", "meaning": "people sent to find talented players for a bigger team", "example": "Scouts from Manila watched the rap battle finals." },
+    { "word": "chatter", "meaning": "quick, light talking by many people", "example": "The chatter in the jeepney stopped when the driver braked hard." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "point-of-view", "prompt": "Who tells this story, and whose thoughts do we get?",
+      "choices": ["Tin tells it in first person.", "Reign tells it in first person using \"I.\"", "A third-person narrator who follows only Reign's thoughts.", "A narrator who knows what every player is thinking."], "answer": 2,
+      "why": "The story uses \"Reign\" and \"she,\" and we get only Reign's thoughts (\"Reign wanted to explain\"). Tin's thoughts are never given directly." },
+    { "id": "i2", "type": "mc", "skill": "point-of-view", "prompt": "Which of these can the narrator NOT tell us for certain?",
+      "choices": ["What Tin is actually thinking in the locker room", "Why Reign left Tin off the lineup", "Whether Reign saw Tin limp", "How many sets the game went"], "answer": 0,
+      "why": "We only see Tin from the outside: \"looking at the floor.\" What Tin \"would hear\" is Reign's guess, not Tin's real thought." },
+    { "id": "i3", "type": "mc", "skill": "evidence", "prompt": "Which sentence from the text BEST supports the idea that Tin was hiding an injury?",
+      "choices": ["\"Tin had talked about those scouts for months.\"", "\"The finals were in two hours.\"", "\"She had spent her merienda money on knee pads.\"", "\"Yesterday she had wrapped the knee under her socks.\""], "answer": 3,
+      "why": "Wrapping the knee \"under her socks\" shows both the injury and the effort to hide it. Knee pads and scouts show Tin cared, not that she was hurt." },
+    { "id": "i4", "type": "mc", "skill": "context-clues", "prompt": "\"Tin had laughed it off and limped to the water station when she thought no one was watching.\" What does laughed it off mean?",
+      "choices": ["Told a joke about the coach", "Acted like it was nothing serious", "Cried quietly", "Asked to be taken out of practice"], "answer": 1,
+      "why": "She laughed in front of others but limped when she thought no one saw. The laugh was a cover for the pain." },
+    { "id": "i5", "type": "short", "skill": "context-clues", "prompt": "\"Behind her she heard the chatter stop, then start again, lower.\" In one word, what is chatter?",
+      "accept": ["talking", "talk", "conversation", "chatting", "noise"], "why": "It stops when the team reads the lineup and starts again \"lower,\" so chatter is the players' talking." },
+    { "id": "i6", "type": "mc", "skill": "evidence", "prompt": "Which sentence BEST supports the idea that Reign is not fully sure of her own decision?",
+      "choices": ["\"If she turned around, she would see Tin's face, and she would change her mind.\"", "\"Reign noticed because captains notice.\"", "\"The game went five sets.\"", "\"Reign posted the lineup on the gym wall.\""], "answer": 0,
+      "why": "She avoids looking back because one look would make her change her mind. That proves doubt; the other sentences show confidence or plain events." },
+    { "id": "i7", "type": "mc", "skill": "figurative", "prompt": "\"The lineup was still on the wall, fluttering a little, like it wanted to come down.\" What does this simile suggest?",
+      "choices": ["The gym was very windy.", "The paper was old and torn.", "Reign's decision feels shaky, as if part of her wants to take it back.", "The team will post a new lineup tomorrow."], "answer": 2,
+      "why": "The paper \"wanting to come down\" mirrors Reign, who \"wanted to explain\" but \"said nothing.\" The simile shows her unsettled feeling, not the weather." },
+    { "id": "i8", "type": "mc", "skill": "point-of-view", "prompt": "If this story were told from Tin's point of view, what would MOST likely change?",
+      "choices": ["We would learn the final score.", "We would know whether Tin felt betrayed or understood, but we would not know Reign's reason.", "We would know that Reign saw the limp on Tuesday.", "Nothing would change."], "answer": 1,
+      "why": "A narrator inside Tin's mind would give her feelings in the locker room but could only guess at Reign's reason, since Reign \"said nothing.\"" }
+  ]
+}

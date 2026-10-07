@@ -1,0 +1,43 @@
+{
+  "id": "l4-q6", "level": 4, "kind": "quest", "order": 6,
+  "title": "The Night the Power Died",
+  "tip": {
+    "skill": "cause-effect", "title": "Follow the signal words",
+    "text": "A cause is why something happens; an effect is what happens because of it. Writers mark these links with signal words: because, since, so, as a result, led to, that is why. When you see one, stop and ask which side is the cause and which is the effect. For example, \"Because the jeepney broke down, Ana walked to school\" means the breakdown is the cause and the walk is the effect. In a story, effects often become new causes, so keep following the chain to the end."
+  },
+  "passage": {
+    "title": "The Night the Power Died",
+    "text": "The brownout hit Barangay San Roque at six in the evening, right when the sari-sari store was busiest. Because the lights died, Marco lit two candles and kept selling. Fifteen years old, he had run the counter every weekend since his mother's knee surgery.\n\nAt first, nobody minded the dark. Then the phones started dying. People who usually bought load through an app could not open it, since the cell tower's backup power had failed too. As a result, a line formed at Marco's counter. He sold load the old way, typing numbers into the store's retailer phone.\n\nBy eight, that phone showed a red battery. Marco felt his stomach drop. Without the retailer phone, there was no store. He thought of his cousin Jen, whose family ran a small generator two streets away for their ice business. He grabbed his bike.\n\nJen let him charge for twenty minutes while her father complained about the price of diesel. \"Charge me a hundred for the fuel,\" Marco said, and he meant it. He pedaled back with a full battery and a plan.\n\nSince the line had grown, he set a rule: load first, candles and snacks second. The crowd moved faster. When the lights came back at eleven, the cash box held almost three times a normal Saturday's sales.\n\nHis mother counted it twice. \"The brownout did this?\" she asked.\n\n\"The brownout started it,\" Marco said. \"The bike did the rest.\""
+  },
+  "words": [
+    { "word": "brownout", "meaning": "a time when the electricity goes out in an area", "example": "The brownout lasted all afternoon, so the fans stopped." },
+    { "word": "retailer", "meaning": "a person or shop that sells goods directly to customers", "example": "The retailer buys rice by the sack and sells it by the kilo." },
+    { "word": "generator", "meaning": "a machine that makes electricity, often using fuel", "example": "The clinic turned on the generator when the power failed." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "multiple-meaning", "prompt": "\"He had run the counter every weekend.\" What does run mean here?",
+      "choices": ["To move quickly on foot", "To manage or operate", "To flow like water", "To compete in an election"], "answer": 1,
+      "why": "A counter in a store cannot be run on foot; the sentence means Marco managed the store's selling." },
+    { "id": "i2", "type": "mc", "skill": "cause-effect", "prompt": "According to paragraph 2, what caused the line to form at Marco's counter?",
+      "choices": ["People wanted candles for the dark.", "The store was the only one open in the barangay.", "Phones were dying and the load app would not open, so people needed load the old way.", "Marco was selling load at a discount."], "answer": 2,
+      "why": "The text says the phones started dying, the app could not open, and \"As a result, a line formed at Marco's counter.\"" },
+    { "id": "i3", "type": "mc", "skill": "purpose", "prompt": "Why did the author include the detail about Marco's mother's knee surgery?",
+      "choices": ["To show that the family is poor", "To explain why a fifteen-year-old runs the store on weekends", "To make readers feel sad about the brownout", "To describe the hospital in San Roque"], "answer": 1,
+      "why": "The sentence links the surgery to Marco running the counter: he has done it \"since his mother's knee surgery.\"" },
+    { "id": "i4", "type": "order", "skill": "cause-effect", "prompt": "Put the chain of causes and effects in the order they happened.",
+      "steps": ["The brownout hit the barangay at six in the evening.", "Phones died and the load app would not open, so a line formed.", "The retailer phone showed a red battery.", "Marco biked to Jen's house to charge the phone.", "He set the rule \"load first\" and the crowd moved faster."],
+      "why": "Each event causes the next: the brownout kills the phones, the line drains the retailer phone, the red battery sends Marco to Jen's, and the full battery lets him set his rule." },
+    { "id": "i5", "type": "mc", "skill": "multiple-meaning", "prompt": "\"Charge me a hundred for the fuel,\" Marco said. What does charge mean in this sentence?",
+      "choices": ["To fill a battery with electricity", "To rush forward and attack", "To ask someone to pay an amount of money", "To accuse someone of a crime"], "answer": 2,
+      "why": "Marco is answering Jen's father's complaint about diesel, so he is offering to pay. Earlier in the same paragraph, charge means filling the battery, a different meaning." },
+    { "id": "i6", "type": "mc", "skill": "cause-effect", "prompt": "What happened because Marco set the rule \"load first, candles and snacks second\"?",
+      "choices": ["The crowd moved faster.", "The lights came back on.", "Jen's father stopped complaining.", "The retailer phone died again."], "answer": 0,
+      "why": "Right after the rule, the text says, \"The crowd moved faster.\" The rule is the cause and the faster line is the effect." },
+    { "id": "i7", "type": "mc", "skill": "purpose", "prompt": "What is the author's MAIN purpose in writing this passage?",
+      "choices": ["To inform readers about how generators work", "To persuade readers to buy load from sari-sari stores", "To explain the causes of brownouts in the Philippines", "To entertain readers with a story about a teen solving a problem"], "answer": 3,
+      "why": "The passage has a character, a problem, dialogue, and an ending. These are the marks of a story written to entertain." },
+    { "id": "i8", "type": "mc", "skill": "summary", "prompt": "Which sentence BEST summarizes the passage?",
+      "choices": ["A brownout hit San Roque and the lights came back at eleven.", "During a brownout, Marco kept the store selling load by charging the retailer phone at his cousin's generator and organizing the line, so sales tripled.", "Marco is a hardworking boy who everyone in the barangay admires.", "Jen's father complained about the price of diesel while Marco charged his phone."], "answer": 1,
+      "why": "Choice B covers the problem, the solution, and the result. Choice A leaves out Marco's actions, choice C adds an opinion, and choice D is one small detail." }
+  ]
+}

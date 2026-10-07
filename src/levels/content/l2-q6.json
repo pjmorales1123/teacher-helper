@@ -1,0 +1,46 @@
+{
+  "id": "l2-q6", "level": 2, "kind": "quest", "order": 6,
+  "title": "Four Years Away",
+  "tip": {
+    "skill": "synonyms", "title": "Swap it in and reread",
+    "text": "A SYNONYM is a word that means almost the same thing (nervous / worried). An ANTONYM is its opposite (nervous / calm). When a question asks which word means the same as a word in the text, take each choice, swap it into the sentence in place of that word, and reread the sentence. The choice that keeps the same meaning without sounding strange is your answer. Try it: \"Liza felt nervous\" becomes \"Liza felt worried\" (same meaning, so it is a synonym), but \"Liza felt calm\" flips the meaning (so it is an antonym)."
+  },
+  "passage": {
+    "title": "Four Years Away",
+    "text": "Liza's mother had worked in Dubai for four years. Every Sunday they talked on video. Her mother always asked the same things: Did you eat? How are your grades? Liza always gave the same short answers. Then, in March, her mother came home for good.\n\nAt the airport, Liza felt nervous. She had planned a big hug. But when her mother walked out with two huge boxes, Liza just stood there. Her mother looked older and thinner. They hugged, but it felt awkward, like hugging a tita you only see at fiestas.\n\nThe first week was quiet. Her mother did not know which jeepney went to the new mall. She did not know how to pay with a phone app. She still cooked like Liza was twelve.\n\nSo Liza became the teacher. She showed her mother the jeepney routes, the apps, and the street food stalls. Slowly, the silence filled up with talk. By June, Sunday calls were only a memory. Now they talked every night in the kitchen, with no screen between them."
+  },
+  "words": [
+    { "word": "nervous", "meaning": "worried and a little afraid about what will happen", "example": "He was nervous before the oral exam." },
+    { "word": "awkward", "meaning": "uncomfortable and not natural", "example": "There was an awkward pause when nobody knew what to say." },
+    { "word": "memory", "meaning": "something you remember from the past", "example": "The fiesta last year is a happy memory." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "summary", "prompt": "Which sentence BEST summarizes paragraph 1?",
+      "choices": ["Liza's mother always asked if she had eaten.", "After four years of short Sunday video calls from Dubai, Liza's mother came home for good.", "Liza had good grades while her mother was away.", "Video calls are not a good way to talk to family."], "answer": 1,
+      "why": "It covers the four years, the Sunday calls, and the big change at the end. The first is a small detail, the third is not in the text, and the last is an opinion." },
+    { "id": "i2", "type": "mc", "skill": "synonyms", "prompt": "Which word means almost the same as \"nervous\" in \"Liza felt nervous\" (paragraph 2)?",
+      "choices": ["calm", "sleepy", "worried", "angry"], "answer": 2,
+      "why": "Swap it in: \"Liza felt worried\" keeps the meaning. \"Calm\" is the antonym, and \"sleepy\" and \"angry\" change the feeling." },
+    { "id": "i3", "type": "mc", "skill": "synonyms", "prompt": "Which word means almost the same as \"huge\" in \"two huge boxes\" (paragraph 2)?",
+      "choices": ["big", "heavy", "old", "tiny"], "answer": 0,
+      "why": "\"Two big boxes\" means the same thing. \"Tiny\" is the opposite, and \"heavy\" and \"old\" are about weight and age, not size." },
+    { "id": "i4", "type": "mc", "skill": "inference", "prompt": "Why did the hug feel awkward?",
+      "choices": ["Liza was angry at her mother for leaving.", "The boxes were in the way.", "Her mother did not want to hug her.", "They had been apart so long that they felt almost like strangers."], "answer": 3,
+      "why": "The clue is \"like hugging a tita you only see at fiestas.\" Four years of short calls had made them feel distant, even though both wanted the hug." },
+    { "id": "i5", "type": "mc", "skill": "cause-effect", "prompt": "Why did Liza's mother not know how to pay with a phone app?",
+      "choices": ["She had been away for four years, and things had changed.", "She did not own a phone.", "Liza had hidden the app from her.", "The app was only for students."], "answer": 0,
+      "why": "The text lists the things she did not know (the jeepney route, the app) right after saying she had been in Dubai for four years. The barangay changed while she was gone." },
+    { "id": "i6", "type": "mc", "skill": "synonyms", "prompt": "Which word is the OPPOSITE of \"quiet\" in \"The first week was quiet\" (paragraph 3)?",
+      "choices": ["silent", "noisy", "slow", "calm"], "answer": 1,
+      "why": "Swap it in: \"The first week was noisy\" flips the meaning, so noisy is the antonym. \"Silent\" and \"calm\" are synonyms of quiet." },
+    { "id": "i7", "type": "short", "skill": "synonyms", "prompt": "In paragraph 4, which one word means almost the same as \"quiet\"? Write the word.",
+      "accept": ["silence", "silent", "the silence"],
+      "why": "\"Slowly, the silence filled up with talk.\" Silence is the quiet between Liza and her mother in paragraph 3." },
+    { "id": "i8", "type": "mc", "skill": "cause-effect", "prompt": "What happened BECAUSE Liza became the teacher?",
+      "choices": ["Her mother went back to Dubai.", "Her mother stopped cooking.", "They started talking every night, and the silence was gone.", "Liza's grades went up."], "answer": 2,
+      "why": "\"So Liza became the teacher... Slowly, the silence filled up with talk... Now they talked every night in the kitchen.\"" },
+    { "id": "i9", "type": "mc", "skill": "summary", "prompt": "Which sentence BEST summarizes the whole passage?",
+      "choices": ["Liza taught her mother how to use a phone app.", "When Liza's mother came home after four years abroad, they felt like strangers, but Liza taught her the new things in town and they grew close again.", "Liza's mother brought home two huge boxes from Dubai.", "Parents should never work abroad for too long."], "answer": 1,
+      "why": "It tells who, the problem (feeling like strangers), what Liza did, and how it ended. The others are a single detail or a lesson, not a summary." }
+  ]
+}

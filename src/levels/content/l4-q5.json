@@ -1,0 +1,43 @@
+{
+  "id": "l4-q5", "level": 4, "kind": "quest", "order": 5,
+  "title": "Reading the Signal Number",
+  "tip": {
+    "skill": "summary", "title": "Topic plus three key points",
+    "text": "To summarize an information text, name the TOPIC in a few words, then pick the THREE most important points the author makes about it. Leave out examples, numbers used only to illustrate, and your own opinions. Test each point by asking: if I cut this, would the reader still understand the main message? A good summary of a text about jeepney fares might be: \"Jeepney fares are set by the government, based on fuel prices, and drivers must post the rates.\" Short, in order, and only the big ideas."
+  },
+  "passage": {
+    "title": "How a Typhoon Signal Is Decided",
+    "text": "When a storm forms over the Pacific, the whole country waits for one number: the signal. Tropical Cyclone Wind Signals run from 1 to 5. The number is not a guess. It is decided by weather scientists at PAGASA, the national weather agency, through a clear process.\n\nFirst, the scientists track the storm. Satellites, radar, and ships report its position, speed, and wind strength. From this data, they draw its likely path on a map, called the track.\n\nSecond, they estimate how strong the winds will be when the storm reaches land. Signal 1 means winds of 39 to 61 kilometers per hour, enough to shake coconut fronds. Signal 3 means winds up to 117, which can tear the roofs off light houses. Signal 5 means winds above 185, the kind that flatten whole barangays.\n\nThird, they count the hours. A signal also tells how soon those winds will arrive. Signal 1 gives about 36 hours to prepare. Signal 5 gives only 12. This is why a signal can jump overnight: a storm that speeds up leaves less warning time.\n\nFinally, the signal is raised for each province, not the whole country. Local officials use the number to decide what to close. Classes stop at Signal 1 for kindergarten and at Signal 2 for all grades up to senior high. A signal is lifted only when the danger has passed.\n\nSo when you hear \"Signal 3,\" you know what is behind it: a measured wind, a counted number of hours, and a decision made from data, not fear."
+  },
+  "words": [
+    { "word": "estimate", "meaning": "to make a careful guess about a size, number, or amount", "example": "The driver can estimate the trip at forty minutes in traffic." },
+    { "word": "data", "meaning": "facts and numbers collected to be studied", "example": "The coach keeps data on every player's free throws." },
+    { "word": "lifted", "meaning": "ended or removed, usually a rule or warning", "example": "The curfew was lifted after the fiesta ended peacefully." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "purpose", "prompt": "What is the author's MAIN purpose in this passage?",
+      "choices": ["To persuade readers to stay home during typhoons", "To entertain readers with a storm story", "To explain how typhoon signal numbers are decided", "To describe the damage of one typhoon"], "answer": 2,
+      "why": "The passage walks through a process in steps (first, second, third, finally) and ends with \"a decision made from data.\" That is explaining, not persuading or telling a story." },
+    { "id": "i2", "type": "mc", "skill": "multiple-meaning", "prompt": "\"First, the scientists track the storm.\" What does track mean here?",
+      "choices": ["A path for running races", "To follow the movement of something", "A song on an album", "A mark left by a tire"], "answer": 1,
+      "why": "The next sentence says satellites and ships report the storm's position and speed, so track means to follow where it moves." },
+    { "id": "i3", "type": "mc", "skill": "summary", "prompt": "Which sentence BEST summarizes paragraph 3?",
+      "choices": ["Signal 1 winds can shake coconut fronds.", "Each signal number stands for a range of wind strength, from weak winds at 1 to destructive winds at 5.", "Signal 5 is the scariest signal and everyone should fear it.", "Scientists use satellites and radar to find the storm."], "answer": 1,
+      "why": "The paragraph's point is that signals match wind strength. Choice A is only one example, choice C adds an opinion, and choice D belongs to paragraph 2." },
+    { "id": "i4", "type": "order", "skill": "summary", "prompt": "Put the steps of deciding a signal in the order the passage gives them.",
+      "steps": ["Scientists track the storm's position, speed, and winds.", "They estimate how strong the winds will be on land.", "They count how many hours until the winds arrive.", "The signal is raised for each province and officials decide what to close."],
+      "why": "The passage marks the steps with the words First, Second, Third, and Finally." },
+    { "id": "i5", "type": "mc", "skill": "multiple-meaning", "prompt": "\"Finally, the signal is raised for each province.\" Which meaning of raised fits here?",
+      "choices": ["Lifted higher off the ground", "Brought up a child", "Officially put into effect or announced", "Increased in price"], "answer": 2,
+      "why": "The sentence is about a warning being given to a province, so raised means officially announced. The last line says a signal is \"lifted\" when the danger passes, the opposite of raised." },
+    { "id": "i6", "type": "mc", "skill": "purpose", "prompt": "Why did the author include the details about coconut fronds, roofs, and flattened barangays?",
+      "choices": ["To help readers picture how strong each wind level really is", "To scare readers into leaving their homes", "To show that PAGASA makes mistakes", "To tell a story about a barangay"], "answer": 0,
+      "why": "Numbers like 117 kilometers per hour are hard to imagine, so the author pairs each one with something readers can picture." },
+    { "id": "i7", "type": "mc", "skill": "summary", "prompt": "Which detail does NOT belong in a summary of this passage?",
+      "choices": ["Scientists use data about the storm's path, winds, and timing.", "Signals are raised per province and used to decide closures.", "Signal 1 gives about 36 hours while Signal 5 gives only 12.", "Signal numbers are decided through a clear process, not guessed."], "answer": 2,
+      "why": "The exact hours are a small supporting detail. The other choices are the main ideas of the passage." },
+    { "id": "i8", "type": "mc", "skill": "summary", "prompt": "Which sentence BEST summarizes the whole passage?",
+      "choices": ["Typhoon signals are decided by PAGASA using data on a storm's path, wind strength, and timing, and are raised by province so officials can act.", "Typhoons are very dangerous in the Philippines, especially at Signal 5.", "PAGASA uses satellites, radar, and ships at sea to watch storms over the Pacific.", "Classes are cancelled when a typhoon signal is raised in a province."], "answer": 0,
+      "why": "Only choice A names the topic and covers all the key points. Choices B, C, and D each cover one part or add a feeling not in the text." }
+  ]
+}

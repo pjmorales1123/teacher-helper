@@ -1,0 +1,42 @@
+{
+  "id": "l1-q6", "level": 1, "kind": "quest", "order": 6,
+  "title": "Round One",
+  "tip": {
+    "skill": "main-idea", "title": "Topic plus the point",
+    "text": "A main idea has two parts: the topic, and what the text says about the topic. First, name the topic in one or two words, like \"Rico's job\". Then ask: what does the text say about it? Put them together: Rico's job was hard, but it made him proud. That full sentence is the main idea, not just the topic."
+  },
+  "passage": {
+    "title": "Round One",
+    "text": "Migs wrote raps on his phone every night. He was sixteen. He had never rapped in front of people.\n\nAt the fiesta there was a rap battle on the stage. The prize was two thousand pesos. Migs signed up.\n\nFirst, the host called his name. Next, the beat started. Migs opened his mouth. Nothing came out. He forgot every line. A kid near the stage laughed.\n\nMigs looked at the kid. Then he looked at the fishball stand and the tita selling cold drinks. He started to rap about them. The lines were not on his phone. They came out anyway. The crowd got loud.\n\nHe lost in the first round. The judges wanted clean rhymes. After the show, the host found him. \"Next month, same stage,\" he said. Migs walked home with no prize. He did not stop smiling."
+  },
+  "words": [
+    { "word": "prize", "meaning": "something you win in a contest", "example": "The prize for the quiz bee was a new tablet." },
+    { "word": "judges", "meaning": "the people who decide who wins", "example": "The judges gave the dance crew a perfect score." },
+    { "word": "rhymes", "meaning": "words that end with the same sound, like 'load' and 'road'", "example": "His song has rhymes in every line." }
+  ],
+  "items": [
+    { "id": "i1", "type": "short", "skill": "details", "prompt": "Where did Migs write his raps every night? (one word)",
+      "accept": ["phone", "his phone", "cellphone", "on his phone"], "why": "The first line says, \"Migs wrote raps on his phone every night.\"" },
+    { "id": "i2", "type": "mc", "skill": "sequence", "prompt": "What happened FIRST when Migs was on stage?",
+      "choices": ["The beat started.", "The host called his name.", "A kid laughed.", "Migs forgot his lines."], "answer": 1,
+      "why": "The signal word tells you: \"First, the host called his name.\"" },
+    { "id": "i3", "type": "mc", "skill": "sequence", "prompt": "What happened right AFTER Migs forgot every line?",
+      "choices": ["The host called his name.", "Migs signed up.", "A kid near the stage laughed.", "The judges picked a winner."], "answer": 2,
+      "why": "\"He forgot every line. A kid near the stage laughed.\" The laugh comes right after." },
+    { "id": "i4", "type": "mc", "skill": "main-idea", "prompt": "What is paragraph 4 mostly about?",
+      "choices": ["The tita selling cold drinks", "Why the kid laughed", "How loud the crowd was", "Migs making up new lines about the fiesta"], "answer": 3,
+      "why": "The paragraph shows Migs looking around and rapping about what he sees. The tita and the crowd are details inside that." },
+    { "id": "i5", "type": "mc", "skill": "context-clues", "prompt": "\"The judges wanted clean rhymes.\" What does \"clean\" mean here?",
+      "choices": ["Washed with soap", "Not dirty", "Done with no mistakes", "Quiet"], "answer": 2,
+      "why": "Migs made up his lines on the spot and lost, so the judges wanted rhymes with no mistakes." },
+    { "id": "i6", "type": "order", "skill": "sequence", "prompt": "Put the events in the order they happened.",
+      "steps": ["Migs signed up for the rap battle.", "He forgot every line.", "He rapped about the fishball stand and the tita.", "He lost in the first round.", "The host told him to come back next month."],
+      "why": "The story goes: sign up, freeze on stage, rap about the crowd, lose, then the host's offer after the show." },
+    { "id": "i7", "type": "mc", "skill": "main-idea", "prompt": "Which title fits the whole passage best?",
+      "choices": ["Two Thousand Pesos", "The Kid Who Laughed", "Migs Finds His Voice", "How to Sell Cold Drinks"], "answer": 2,
+      "why": "The whole story is about Migs finding a way to rap in front of people. The prize and the kid are small parts." },
+    { "id": "i8", "type": "mc", "skill": "main-idea", "prompt": "What is this passage mostly about?",
+      "choices": ["A boy who freezes in a rap battle but finds a new way to rap", "A fiesta with many food stands", "Judges who pick the best rhymes", "A host who runs a stage"], "answer": 0,
+      "why": "Topic: Migs at the rap battle. The point: he froze, then rapped his own way and got asked back. That is the whole story." }
+  ]
+}

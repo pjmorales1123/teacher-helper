@@ -5,7 +5,9 @@ import { bad, notFound } from "../lib/http.ts";
 import type { ContentStore } from "./content.ts";
 import { checkItem, revealAnswer, toPublicItem } from "./engine.ts";
 import { SKILLS, levelMeta } from "./meta.ts";
-import { bestByQuest, getProgress } from "./repo.ts";
+import { allMastered } from "./mastery.ts";
+import { getProgress } from "./repo.ts";
+import { masteryFor } from "./view.ts";
 import { finishQuest } from "./service.ts";
 import type { Quest } from "./types.ts";
 
@@ -17,10 +19,7 @@ export function studentPlayRoutes(db: Db, store: ContentStore): Router {
     if (!q || q.kind === "placement") notFound("Quest");
     const p = getProgress(db, studentId);
     if (q.level > p.level) bad("This quest is above your level for now.");
-    if (q.kind === "challenge") {
-      const bests = bestByQuest(db, studentId);
-      if (!store.forLevel(q.level, "quest").every((x) => bests.get(x.id)?.passed)) bad("Pass every quest in this level first.");
-    }
+    if (q.kind === "challenge" && !allMastered(masteryFor(db, studentId, q.level))) bad("Master every skill in this rank first.");
     return q;
   }
 
@@ -28,7 +27,7 @@ export function studentPlayRoutes(db: Db, store: ContentStore): Router {
     const q = playable(res.locals.studentId as string, String(req.params.id));
     res.json({
       id: q.id, kind: q.kind, level: q.level, levelName: levelMeta(q.level).name, title: q.title,
-      tip: q.tip ? { ...q.tip, skillLabel: SKILLS[q.tip.skill]?.label ?? q.tip.skill } : null,
+      tip: q.tip ? { ...q.tip, skillLabel: SKILLS[q.tip.skill]?.label ?? q.tip.skill, strand: SKILLS[q.tip.skill]?.strand ?? "comprehension" } : null,
       passage: q.passage, words: q.words, items: q.items.map(toPublicItem),
     });
   });

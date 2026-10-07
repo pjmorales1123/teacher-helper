@@ -1,6 +1,7 @@
 // Quest player: tip → passage + one item at a time with instant feedback → submit.
 import { get, post } from "../../api.js";
 import { busy, h, toast } from "../../ui.js";
+import { strandEl } from "../../levels-art/index.js";
 import { itemView } from "./items.js";
 import { renderResult } from "./result.js";
 
@@ -12,7 +13,7 @@ function passageEl(p) {
 
 function tipScreen(q, onStart) {
   return h("div", { class: "card tip" },
-    h("div", { class: "muted small" }, `${q.levelName} · ${q.tip.skillLabel}`),
+    h("div", { class: "muted small row" }, strandEl(q.tip.strand, 16), `${q.levelName} · ${q.tip.skillLabel}`),
     h("h2", {}, q.tip.title), h("p", { class: "tip-text" }, q.tip.text),
     q.words.length ? h("div", { class: "words" }, h("strong", {}, "Words to watch for: "),
       ...q.words.map((w) => h("span", { class: "word", title: w.meaning }, w.word))) : null,
@@ -63,7 +64,8 @@ export async function playQuest(id, goHome) {
   async function finish() {
     try {
       const r = await post(`/api/student/levels/quests/${q.id}/submit`, { answers });
-      root.replaceWith(renderResult(q, r, goHome, () => playQuest(q.id, goHome).then((n) => root.replaceWith(n))));
+      const open = (id) => playQuest(id, goHome).then((n) => root.replaceWith(n));
+      root.replaceWith(renderResult(q, r, goHome, () => open(q.id), open));
     } catch (err) {
       toast(err.message, true);
     }

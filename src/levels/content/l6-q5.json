@@ -1,0 +1,42 @@
+{
+  "id": "l6-q5", "level": 6, "kind": "quest", "order": 5,
+  "title": "Sixteen Bars",
+  "tip": {
+    "skill": "theme", "title": "Test the theme against the whole story",
+    "text": "A theme is a statement about life, not a topic word. \"Honesty\" is a topic; \"honest words outlast clever ones\" is a theme. To find one, write a full sentence, then test it against the whole story: the beginning, the turning point, and the ending. If any part of the story works against your sentence, fix the sentence, not the story. A good theme still makes sense if you remove the characters' names."
+  },
+  "passage": {
+    "title": "Sixteen Bars",
+    "text": "The rap battle behind the covered court started at nine, after the barangay tanods stopped caring. Twenty people, two phone flashlights, one speaker on a monobloc chair. I had waited three months for this. My name on the sheet was Kidlat, and I had sixteen bars ready to bury anyone.\n\nMy opponent was a kid called Paeng. He was thin, wore a faded school polo, and held the mic like it might bite him. The crowd laughed before he even started. Easy win, I thought.\n\nI went first. I hit his shoes, his haircut, his mother's sari-sari store that sold expired chips. The crowd roared. Each line landed, and I knew it, and I leaned into every one. When I finished, Paeng was staring at the ground.\n\nThen he raised his head and started. He did not rhyme about me. He rapped about that store: how it opened at five because jeepney drivers needed coffee, how his mother kept a notebook of debts she would never collect, how the expired chips were the ones she gave free to kids whose parents were still in Saudi. His voice shook on the first bars, and then it stopped shaking. Nobody laughed. Somebody turned the speaker down so they could hear him.\n\nHe never said my name. He did not need to. By his last line I understood that I had spent sixteen bars on a woman I had never met, and he had spent sixteen bars telling the truth.\n\nThe crowd did not even vote. They just looked at me, then at him, and the host handed Paeng the two hundred pesos.\n\nI walked home past the store. The light was still on. A tricycle driver was drinking coffee at the window, and the woman inside was writing something in a notebook. I did not go in. I was not ready yet. But I bought my chips there the next morning, and I paid for them, and I have not written a line about anyone's mother since."
+  },
+  "words": [
+    { "word": "expired", "meaning": "past the date when something is safe or allowed to be used", "example": "The cashier checked whether the milk had expired." },
+    { "word": "collect", "meaning": "to get money that someone owes you", "example": "The landlord comes every first of the month to collect the rent." },
+    { "word": "landed", "meaning": "here: hit the target; had the effect the speaker wanted", "example": "Her joke landed, and even the principal laughed." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "theme", "prompt": "Which statement BEST expresses a theme of the story?",
+      "choices": ["Rap battles should be held earlier in the evening.", "Shy people always win in the end.", "Words aimed at a real person carry a real cost.", "Sari-sari stores should give away free food."], "answer": 2,
+      "why": "Kidlat's insults were about a woman he had never met; Paeng's verse makes him feel the weight of that, and he changes how he writes afterward." },
+    { "id": "i2", "type": "mc", "skill": "purpose", "prompt": "Why does the author include the detail that \"the crowd laughed before he even started\"?",
+      "choices": ["To show how little anyone expected from Paeng, so his win hits harder", "To show that the crowd was unfriendly to Kidlat", "To explain why the battle started late", "To prove that Paeng was a bad rapper"], "answer": 0,
+      "why": "The laughter sets up low expectations; later \"nobody laughed,\" and the contrast makes Paeng's verse more powerful." },
+    { "id": "i3", "type": "mc", "skill": "purpose", "prompt": "Why does the author list exactly what Kidlat attacked: \"his shoes, his haircut, his mother's sari-sari store\"?",
+      "choices": ["To make readers laugh at Paeng", "To explain how rap battles are scored", "To show that Kidlat prepared very well", "To show how cheap and personal the attacks were, before Paeng answers with something real"], "answer": 3,
+      "why": "The list moves from small things to Paeng's mother, and the next paragraph is all about that store, so the contrast is the point." },
+    { "id": "i4", "type": "short", "skill": "theme", "prompt": "By the last line, the narrator understands that Paeng \"had spent sixteen bars telling the ___.\" Which one word completes the sentence and names what beat Kidlat?",
+      "accept": ["truth", "the truth", "honesty"], "why": "The text says Paeng \"had spent sixteen bars telling the truth,\" and this is the idea the whole story turns on." },
+    { "id": "i5", "type": "mc", "skill": "compare", "prompt": "How are Kidlat's verse and Paeng's verse DIFFERENT?",
+      "choices": ["Kidlat rapped quietly; Paeng rapped loudly.", "Kidlat attacked a person he did not know; Paeng described a life he knew well.", "Kidlat rapped about his own mother; Paeng rapped about Kidlat's.", "Kidlat's verse was short; Paeng's was long."], "answer": 1,
+      "why": "Kidlat insulted \"a woman I had never met\"; Paeng rapped about his mother's store, her notebook, and the free chips." },
+    { "id": "i6", "type": "mc", "skill": "purpose", "prompt": "What is the author's MAIN purpose in writing this story?",
+      "choices": ["To inform readers about the rules of rap battles", "To persuade barangays to ban late-night battles", "To entertain with a story that makes readers think about what words cost", "To explain how to win two hundred pesos"], "answer": 2,
+      "why": "It is a narrative with a twist and an ending that changes the narrator; it does not give rules or argue for a policy." },
+    { "id": "i7", "type": "mc", "skill": "theme", "prompt": "Which of these is a TOPIC of the story, not a theme?",
+      "choices": ["Being clever is not the same as being right.", "Rap battles", "The truth can be stronger than an insult.", "Cruelty costs more than it earns."], "answer": 1,
+      "why": "A topic is one or two words that name the subject; a theme is a full statement about life that the story supports." },
+    { "id": "i8", "type": "mc", "skill": "theme", "prompt": "Test each statement against the WHOLE story, including the ending. Which one does the whole story support?",
+      "choices": ["Honesty can beat cleverness, and it can change the person who loses.", "Winning money is what matters most.", "Never enter a contest you might lose.", "Mothers should not run sari-sari stores."], "answer": 0,
+      "why": "Paeng wins with the truth, and the ending shows Kidlat paying for his chips and no longer writing about anyone's mother." }
+  ]
+}

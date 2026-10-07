@@ -1,0 +1,48 @@
+{
+  "id": "l3-q5", "level": 3, "kind": "quest", "order": 5,
+  "title": "Crew Without a Captain",
+  "tip": {
+    "skill": "evidence", "title": "Point to the line",
+    "text": "EVIDENCE is proof from the text. When a question asks which sentence supports an idea, do not answer from memory. Go back to the passage and point to the exact line that proves it. Ask yourself: does this sentence SHOW the idea, or does it only mention something nearby? For example, \"Members arrived late\" is proof that a crew was struggling, but \"Lea kept a notebook\" is not."
+  },
+  "passage": {
+    "title": "Crew Without a Captain",
+    "text": "When Kuya Ron moved to Manila for work, the Street Kings dance crew lost its captain. Nobody wanted his place. Practice at the covered court became a mess. Members arrived late, and the music was often louder than the counting.\n\nLea, the quietest member, kept a notebook. She had written down every step Ron taught. One afternoon, when the crew forgot the ending of their routine, she opened the notebook and read the counts out loud. The others listened. Slowly, the routine came back like a song you have not heard in years.\n\n\"You should lead,\" said Miguel. Lea was unsure. Her voice was soft, and she hated shouting. But the fiesta competition was two weeks away, and the crew had no plan. She agreed to try.\n\nLea did not lead the way Ron did. Ron was a drum, loud and fast. Lea was a clock, steady and exact. She started each practice on time and ended it by replaying their weakest part. Members who were careless with the counts had to redo them until they were clean.\n\nOn fiesta night, the Street Kings took second place. It was their highest finish ever. Miguel lifted Lea's notebook in the air like a trophy."
+  },
+  "words": [
+    { "word": "routine", "meaning": "a set of steps or actions done the same way every time", "example": "The cheer squad practiced its routine before the game." },
+    { "word": "steady", "meaning": "regular and not changing; firm", "example": "Keep a steady pace so you do not run out of breath." },
+    { "word": "careless", "meaning": "not paying enough attention; without care", "example": "A careless mistake cost the team the match." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "evidence", "prompt": "Which sentence from the text BEST supports the idea that the crew fell apart after Ron left?",
+      "choices": ["Members arrived late, and the music was often louder than the counting.", "Lea, the quietest member, kept a notebook.", "But the fiesta competition was two weeks away, and the crew had no plan.", "Ron was a drum, loud and fast."], "answer": 0,
+      "why": "Late members and music drowning out the counts show the practice had become \"a mess.\" The other lines are about Lea, the deadline, or Ron's style." },
+    { "id": "i2", "type": "mc", "skill": "evidence", "prompt": "Which sentence BEST supports the idea that Lea's notebook saved the routine?",
+      "choices": ["Nobody wanted his place.", "Her voice was soft, and she hated shouting.", "One afternoon, when the crew forgot the ending of their routine, she opened the notebook and read the counts out loud.", "She agreed to try."], "answer": 2,
+      "why": "This line shows the exact moment the notebook was used to recover the forgotten ending. Right after it, \"the routine came back.\"" },
+    { "id": "i3", "type": "mc", "skill": "figurative", "prompt": "\"Slowly, the routine came back like a song you have not heard in years.\" What does this simile mean?",
+      "choices": ["The crew started singing instead of dancing.", "The steps felt forgotten, but then they returned to memory.", "The routine was brand new to everyone.", "The music was very old."], "answer": 1,
+      "why": "An old song you have not heard in years feels lost, then comes back when you hear it again. The routine returned the same way." },
+    { "id": "i4", "type": "short", "skill": "word-parts", "prompt": "\"Lea was unsure.\" The word unsure is un + sure. What does the prefix un- mean? Answer in one word.",
+      "accept": ["not", "no", "opposite"], "why": "un- means not. Unsure means not sure; Lea did not feel certain she could lead." },
+    { "id": "i5", "type": "mc", "skill": "evidence", "prompt": "Which sentence BEST supports the idea that Lea did not want to lead at first?",
+      "choices": ["She had written down every step Ron taught.", "She started each practice on time and ended it by replaying their weakest part.", "Miguel lifted Lea's notebook in the air like a trophy.", "Her voice was soft, and she hated shouting."], "answer": 3,
+      "why": "This line gives Lea's reasons for hesitating. The other sentences show her preparing, leading, or being praised." },
+    { "id": "i6", "type": "mc", "skill": "figurative", "prompt": "\"Lea was a clock, steady and exact.\" What does this metaphor tell you about Lea as a leader?",
+      "choices": ["She was always late to practice.", "She was loud and fast like Ron.", "She kept things on time and precise.", "She only watched the time and never danced."], "answer": 2,
+      "why": "A clock is steady and exact, and the next sentence shows it: she started each practice on time and replayed their weakest part." },
+    { "id": "i7", "type": "mc", "skill": "compare", "prompt": "How was Lea's way of leading DIFFERENT from Ron's?",
+      "choices": ["Ron was quiet; Lea shouted at everyone.", "Lea was steady and exact; Ron was loud and fast.", "Lea taught new steps; Ron only repeated old ones.", "Both led in exactly the same way."], "answer": 1,
+      "why": "\"Ron was a drum, loud and fast. Lea was a clock, steady and exact.\" The two sentences are placed side by side to contrast them." },
+    { "id": "i8", "type": "mc", "skill": "word-parts", "prompt": "\"Members who were careless with the counts had to redo them.\" What does careless mean?",
+      "choices": ["Full of care", "Without care", "Caring again", "A person who cares"], "answer": 1,
+      "why": "The suffix -less means without. Careless members were not paying attention to the counts." },
+    { "id": "i9", "type": "mc", "skill": "evidence", "prompt": "Which sentence BEST supports the idea that Lea was strict about mistakes?",
+      "choices": ["The others listened.", "She agreed to try.", "Members who were careless with the counts had to redo them until they were clean.", "Nobody wanted his place."], "answer": 2,
+      "why": "Making members redo sloppy counts \"until they were clean\" is direct proof she did not let mistakes slide." },
+    { "id": "i10", "type": "mc", "skill": "evidence", "prompt": "Which sentence proves the crew did better than they ever had before?",
+      "choices": ["Practice at the covered court became a mess.", "It was their highest finish ever.", "Lea did not lead the way Ron did.", "The crew had no plan."], "answer": 1,
+      "why": "\"Highest finish ever\" states directly that second place beat every past result. The other lines describe problems, not results." }
+  ]
+}

@@ -4,8 +4,9 @@ import type { ContentStore } from "./content.ts";
 import { todayLocal } from "./dates.ts";
 import { skillStats, weakestSkills, type SkillStat } from "./engine.ts";
 import { SKILLS, levelMeta } from "./meta.ts";
-import { currentStreak, levelView } from "./progression.ts";
-import { bestByQuest, listAttempts, listBadges, listProgressRows } from "./repo.ts";
+import { currentStreak } from "./progression.ts";
+import { listAttempts, listBadges, listProgressRows } from "./repo.ts";
+import { viewFor } from "./view.ts";
 import type { ItemResult } from "./types.ts";
 import { listWords } from "./words.ts";
 
@@ -18,8 +19,7 @@ export function classOverview(db: Db, store: ContentStore, section?: string) {
   const allResults: ItemResult[][] = [];
   const levelCounts: Record<number, number> = {};
   const rows = listProgressRows(db, section).map((p) => {
-    const bests = bestByQuest(db, p.student_id);
-    const view = levelView(p.level, store.forLevel(p.level, "quest"), store.forLevel(p.level, "challenge"), bests);
+    const view = viewFor(db, store, p.student_id, p.level);
     const results = resultsOf(db, p.student_id);
     allResults.push(...results);
     levelCounts[p.level] = (levelCounts[p.level] ?? 0) + 1;
@@ -29,6 +29,7 @@ export function classOverview(db: Db, store: ContentStore, section?: string) {
       band: levelMeta(p.level).band, placed: Boolean(p.placed), xp: p.xp, streak: currentStreak(p, today),
       lastActive: p.last_active, questsPassed: view.quests.filter((q) => q.passed).length, questsTotal: view.quests.length,
       challengePassed: Boolean(view.challenge?.passed), attempts: results.length,
+      mastered: view.skills.filter((s) => s.mastered).length, skillsTotal: view.skills.length,
       weakest: weak ? { skill: weak.skill, label: SKILLS[weak.skill]?.label ?? weak.skill, accuracy: weak.accuracy } : null,
     };
   });
@@ -51,13 +52,12 @@ export function studentDetail(db: Db, store: ContentStore, student: { id: string
   const today = todayLocal();
   const p = listProgressRows(db).find((r) => r.student_id === student.id);
   const level = p?.level ?? 1;
-  const bests = bestByQuest(db, student.id);
   const attempts = listAttempts(db, student.id, 100);
   const titles = new Map(store.all().map((q) => [q.id, q.title]));
   return {
     student, level, levelName: levelMeta(level).name, band: levelMeta(level).band, placed: Boolean(p?.placed),
     xp: p?.xp ?? 0, streak: p ? currentStreak(p, today) : 0, lastActive: p?.last_active ?? null, reviews: p?.reviews ?? 0,
-    map: levelView(level, store.forLevel(level, "quest"), store.forLevel(level, "challenge"), bests),
+    map: viewFor(db, store, student.id, level),
     skills: skillStats(attempts.map((a) => JSON.parse(a.results) as ItemResult[]))
       .map((s) => ({ ...s, label: SKILLS[s.skill]?.label ?? s.skill, strand: SKILLS[s.skill]?.strand ?? "" })),
     attempts: attempts.slice(0, 40).map((a) => ({

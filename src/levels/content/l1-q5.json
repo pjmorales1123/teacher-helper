@@ -1,0 +1,43 @@
+{
+  "id": "l1-q5", "level": 1, "kind": "quest", "order": 5,
+  "title": "Brownout",
+  "tip": {
+    "skill": "main-idea", "title": "The title test",
+    "text": "The main idea is what the whole passage is about, not one small part. Here is a fast test: pretend you must give the passage a title. A good title covers almost every paragraph. If your title only fits one paragraph, it is a detail, not the main idea. For example, \"Jom's Sixth Shot\" is a detail, but \"The Tryout\" covers the whole story."
+  },
+  "passage": {
+    "title": "Brownout",
+    "text": "The typhoon knocked out the power on Monday night. By Tuesday, every phone on the street was dead.\n\nLyka's family runs a sari-sari store. They have a small generator for the freezer. Lyka had an idea. She ran an extension cord to the counter. On a box she wrote, \"Charging, ten pesos.\"\n\nBy noon, twenty phones sat on the counter. Neighbors waited on the bench. Lyka sold hot coffee while they waited. Her brother put tape with names on each phone.\n\nThe power stayed off for three days. Tita Nena called her son in Dubai from the bench. A tricycle driver charged his phone before work.\n\nOn Friday the lights came back. Lyka counted the coins. It was more than a normal month. But the best part was different. For three days, the whole street had a place to go."
+  },
+  "words": [
+    { "word": "generator", "meaning": "a machine that makes electricity", "example": "The hospital turned on its generator when the power went out." },
+    { "word": "counter", "meaning": "the long table in a store where you pay or get served", "example": "She put the coins on the counter and took her change." },
+    { "word": "normal", "meaning": "usual; the way things are most of the time", "example": "On a normal day, the jeepney is full by seven." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "context-clues", "prompt": "\"The typhoon knocked out the power.\" What does \"knocked out\" mean here?",
+      "choices": ["Hit a person", "Made it stop working", "Turned it on", "Fixed it"], "answer": 1,
+      "why": "The next sentence says every phone was dead, so the power stopped working." },
+    { "id": "i2", "type": "mc", "skill": "main-idea", "prompt": "What is paragraph 2 mostly about?",
+      "choices": ["How Lyka's store has a freezer", "Where Lyka's family lives", "How much ten pesos is", "Lyka's idea to sell phone charging"], "answer": 3,
+      "why": "The paragraph builds to \"Lyka had an idea\" and the sign \"Charging, ten pesos.\" The freezer is just one detail." },
+    { "id": "i3", "type": "mc", "skill": "context-clues", "prompt": "\"They have a small generator for the freezer.\" What is a generator?",
+      "choices": ["A machine that makes electricity", "A kind of freezer", "A big box", "A person who sells things"], "answer": 0,
+      "why": "The power is out, but the freezer and the phones still get electricity. The generator makes it." },
+    { "id": "i4", "type": "order", "skill": "sequence", "prompt": "Put the events in the order they happened.",
+      "steps": ["The typhoon knocked out the power.", "Lyka ran an extension cord to the counter.", "Twenty phones sat on the counter by noon.", "Tita Nena called her son in Dubai.", "The lights came back on Friday."],
+      "why": "The story goes Monday night, then Lyka's idea, then noon, then the three days, then Friday." },
+    { "id": "i5", "type": "mc", "skill": "sequence", "prompt": "What happened right AFTER Lyka wrote the sign?",
+      "choices": ["The lights came back.", "Phones filled the counter.", "The typhoon hit.", "Lyka counted the coins."], "answer": 1,
+      "why": "Right after the sign, the text says, \"By noon, twenty phones sat on the counter.\"" },
+    { "id": "i6", "type": "mc", "skill": "main-idea", "prompt": "Which sentence states the main idea of paragraph 3?",
+      "choices": ["Neighbors waited on the bench.", "Lyka sold hot coffee while they waited.", "By noon, twenty phones sat on the counter.", "Her brother put tape with names on each phone."], "answer": 2,
+      "why": "The paragraph is about how many people came to charge. The other sentences are small details about the waiting and the tape." },
+    { "id": "i7", "type": "mc", "skill": "main-idea", "prompt": "Which title fits the whole passage best?",
+      "choices": ["How to Fix a Generator", "The Store That Kept the Street Going", "Tita Nena's Phone Call", "Hot Coffee for Sale"], "answer": 1,
+      "why": "Every paragraph is about the store helping the street during the brownout. The other titles fit only one detail." },
+    { "id": "i8", "type": "mc", "skill": "main-idea", "prompt": "What is this passage mostly about?",
+      "choices": ["A typhoon that hit a town", "A girl who hated brownouts", "A store that helped its street during a brownout", "How much money a store made in a week"], "answer": 2,
+      "why": "The last line says it: \"the whole street had a place to go.\" The money is only one part." }
+  ]
+}

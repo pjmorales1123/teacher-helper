@@ -2,6 +2,7 @@
 import { daysBetween } from "./dates.ts";
 import type { GradeOutcome } from "./engine.ts";
 import { COMBO_FROM, MAX_LEVEL, XP, levelMeta, stars } from "./meta.ts";
+import { allMastered, nextUp, type NextUp, type SkillMastery } from "./mastery.ts";
 import type { BestRow } from "./repo.ts";
 import type { Progress, Quest } from "./types.ts";
 
@@ -31,17 +32,19 @@ export interface LevelView {
   name: string;
   quests: QuestStatus[];
   challenge: (QuestStatus & { unlocked: boolean }) | null;
+  skills: SkillMastery[];
+  nextUp: NextUp | null;
   maxLevel: boolean;
 }
 
-export function levelView(level: number, quests: Quest[], challenges: Quest[], bests: Map<string, BestRow>): LevelView {
+/** The level as a student sees it. The Challenge unlocks once every focus skill of the level is mastered. */
+export function levelView(level: number, quests: Quest[], challenges: Quest[], bests: Map<string, BestRow>, skills: SkillMastery[]): LevelView {
   const qs = quests.map((q) => questStatus(q, bests.get(q.id)));
   const c = challenges[0];
-  const unlocked = qs.length > 0 && qs.every((q) => q.passed);
   return {
     level, name: levelMeta(level).name, quests: qs,
-    challenge: c ? { ...questStatus(c, bests.get(c.id)), unlocked } : null,
-    maxLevel: level >= MAX_LEVEL,
+    challenge: c ? { ...questStatus(c, bests.get(c.id)), unlocked: allMastered(skills) } : null,
+    skills, nextUp: nextUp(quests, c, skills, bests), maxLevel: level >= MAX_LEVEL,
   };
 }
 

@@ -1,0 +1,42 @@
+{
+  "id": "l5-q5", "level": 5, "kind": "quest", "order": 5,
+  "title": "More Than a Game",
+  "tip": {
+    "skill": "evidence", "title": "Proves, not just mentions",
+    "text": "When a question asks which sentence BEST supports an idea, you are ranking proof, not picking any sentence on the topic. The STRONGEST support is specific and checkable: a number, a study, a record, a direct result. The WEAKEST is one person's feeling, a vague opinion, or a sentence that only mentions the topic without proving anything. Ask: does this quote PROVE the claim, or just talk near it? If the claim is \"games build skill,\" a test score from 2,000 players proves it; one player saying \"I feel smarter\" only mentions it."
+  },
+  "passage": {
+    "title": "More Than a Game",
+    "text": "Every afternoon, the computer shop near the school fills up before the bell even stops ringing. Parents call it a waste of load and time. But some researchers are starting to disagree.\n\nOne study of about 2,000 teenagers, which our science teacher shared in class, found that those who played strategy games for about an hour a day scored higher on problem-solving tests than those who did not play at all. The games did not make them smarter overnight. Instead, players practiced planning several moves ahead, and that habit showed up in their schoolwork.\n\nOnline games also teach teamwork, though not always politely. In a five-player match, nobody wins alone. A survey of Filipino high school players reported that 70 percent said they had learned to communicate faster and more clearly because of in-game chat. One player from Cebu said, \"You learn to say what you need in five words, because there is no time for ten.\"\n\nStill, the warnings are not empty. The same study found that teenagers who played more than three hours a day slept less and were more irritable the next morning. Their grades dropped, not because games are evil, but because sleep is not optional. Time is the ingredient that turns a tool into a trap.\n\nSo the real question is not whether games are good or bad. It is how much, and what kind. One hour of a game that makes you think is practice. Four hours of anything, even studying, will leave you drained. Parents who ban the computer shop completely may be throwing away a skill along with the risk."
+  },
+  "words": [
+    { "word": "strategy", "meaning": "a careful plan for reaching a goal", "example": "Our strategy was to save load for emergencies only." },
+    { "word": "irritable", "meaning": "easily annoyed; quick to get angry", "example": "Kuya gets irritable when he skips breakfast." },
+    { "word": "drained", "meaning": "completely tired, with no energy left", "example": "After the fiesta cleanup, everyone was drained." }
+  ],
+  "items": [
+    { "id": "i1", "type": "mc", "skill": "evidence", "prompt": "Which sentence from the text BEST supports the idea that games can improve problem-solving?",
+      "choices": ["\"Parents call it a waste of load and time.\"", "\"The games did not make them smarter overnight.\"", "\"In a five-player match, nobody wins alone.\"", "\"One study of about 2,000 teenagers, which our science teacher shared in class, found that those who played strategy games for about an hour a day scored higher on problem-solving tests.\""], "answer": 3,
+      "why": "It names a large study and a measured result on problem-solving tests. The other sentences are an opinion, a limit, or about teamwork." },
+    { "id": "i2", "type": "mc", "skill": "evidence", "prompt": "Which sentence BEST supports the claim that games teach players to communicate?",
+      "choices": ["\"Online games also teach teamwork, though not always politely.\"", "\"A survey of Filipino high school players reported that 70 percent said they had learned to communicate faster and more clearly.\"", "\"Every afternoon, the computer shop near the school fills up.\"", "\"Sleep is not optional.\""], "answer": 1,
+      "why": "The survey gives a number (70 percent) and names the skill directly. The first choice only states the claim; it does not prove it." },
+    { "id": "i3", "type": "mc", "skill": "evidence", "prompt": "Which of these is the WEAKEST support for the idea that games build teamwork?",
+      "choices": ["\"A survey of Filipino high school players reported that 70 percent...\"", "\"The same study found that teenagers who played more than three hours a day slept less.\"", "\"One player from Cebu said, 'You learn to say what you need in five words.'\"", "\"One study of about 2,000 teenagers, which our science teacher shared in class, found...\""], "answer": 2,
+      "why": "One player's experience is a single example, not proof. Surveys and studies cover thousands of people and can be checked." },
+    { "id": "i4", "type": "mc", "skill": "evidence", "prompt": "Which sentence BEST supports the idea that too much gaming harms students?",
+      "choices": ["\"The same study found that teenagers who played more than three hours a day slept less and were more irritable the next morning.\"", "\"Still, the warnings are not empty.\"", "\"Parents call it a waste of load and time.\"", "\"It is how much, and what kind.\""], "answer": 0,
+      "why": "It reports an actual finding: less sleep and irritability after three hours a day. \"The warnings are not empty\" only mentions harm without showing it." },
+    { "id": "i5", "type": "mc", "skill": "point-of-view", "prompt": "What is the author's attitude toward parents who ban the computer shop?",
+      "choices": ["They are completely right.", "They are foolish and should be ignored.", "Their worry makes sense, but a total ban may throw away something useful.", "They do not care about their children."], "answer": 2,
+      "why": "The author admits \"the warnings are not empty\" but ends by saying a full ban \"may be throwing away a skill along with the risk.\"" },
+    { "id": "i6", "type": "mc", "skill": "point-of-view", "prompt": "Which sentence shows the author's OPINION rather than a reported fact?",
+      "choices": ["\"One study of about 2,000 teenagers, which our science teacher shared in class, found...\"", "\"One hour of a game that makes you think is practice.\"", "\"70 percent said they had learned to communicate faster.\"", "\"Their grades dropped.\""], "answer": 1,
+      "why": "Calling one hour \"practice\" is the author's judgment. The other choices report what studies and surveys found." },
+    { "id": "i7", "type": "mc", "skill": "figurative", "prompt": "\"Time is the ingredient that turns a tool into a trap.\" What does this metaphor mean?",
+      "choices": ["Games are only fun at certain times of day.", "Cooking takes a long time.", "The amount of time spent decides whether a game helps you or hurts you.", "Traps are made of tools."], "answer": 2,
+      "why": "The paragraph contrasts one hour (a tool that builds skill) with three or more hours (sleep loss, falling grades). Time is what changes one into the other." },
+    { "id": "i8", "type": "short", "skill": "context-clues", "prompt": "\"Four hours of anything, even studying, will leave you drained.\" In one word, what does drained mean here?",
+      "accept": ["tired", "exhausted", "weak", "empty"], "why": "The clue is the earlier sentence about players who \"slept less\" after long hours; drained means used up and tired." }
+  ]
+}

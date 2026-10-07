@@ -1,14 +1,14 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { loadBuiltIn } from "./content.ts";
-import { LEVELS } from "./meta.ts";
+import { LEVELS, LEVEL_SKILLS } from "./meta.ts";
 import { validateQuest } from "./validate.ts";
 
 describe("built-in LEVELS content", () => {
   const quests = loadBuiltIn();
-  it("has four quests and one challenge per level, plus a placement test", () => {
+  it("has six quests and one challenge per level, plus a placement test", () => {
     for (const { level } of LEVELS) {
-      assert.ok(quests.filter((q) => q.level === level && q.kind === "quest").length >= 4, `level ${level} quests`);
+      assert.ok(quests.filter((q) => q.level === level && q.kind === "quest").length >= 6, `level ${level} quests`);
       assert.equal(quests.filter((q) => q.level === level && q.kind === "challenge").length, 1, `level ${level} challenge`);
     }
     const placement = quests.filter((q) => q.kind === "placement");
@@ -16,6 +16,16 @@ describe("built-in LEVELS content", () => {
     for (const { level } of LEVELS) {
       assert.ok(placement[0]!.items.filter((i) => i.level === level).length >= 3, `placement items for level ${level}`);
     }
+  });
+  it("covers every focus skill with 7+ items across 2+ quests, so mastery is reachable", () => {
+    for (const { level } of LEVELS) {
+      for (const skill of LEVEL_SKILLS[level]!) {
+        const qs = quests.filter((q) => q.level === level && q.kind === "quest" && q.items.some((i) => i.skill === skill));
+        const items = qs.reduce((n, q) => n + q.items.filter((i) => i.skill === skill).length, 0);
+        assert.ok(qs.length >= 2 && items >= 7, `level ${level} ${skill}: ${items} items in ${qs.length} quests`);
+      }
+    }
+    assert.equal(new Set(quests.map((q) => q.title)).size, quests.length, "titles are unique");
   });
   it("gives every quest 2+ words and every challenge 10 items", () => {
     for (const q of quests) {
