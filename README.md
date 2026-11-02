@@ -11,7 +11,7 @@
 - AI runs through the host PC's logged-in `claude` or `codex` subscription CLI, not an API.
 
 ## Status
-Design phase. See `docs/brief.md`. No code yet.
+Design phase. See `docs/brief.md` (grading app) and `docs/guro-buddy/` (AI-first document editor plan). No code yet.
 
 ## Planned structure
 ```
