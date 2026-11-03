@@ -49,8 +49,9 @@ OPS ("ops"):
   Formulas that refer to moved cells are updated automatically.
 - {"op":"addSheet","text":"Quarter 2"}  - {"op":"renameSheet","target":"0","text":"Written Works"}
 COLUMN WIDTHS and MERGED under each sheet show the current layout.
-When a turn inserts or deletes rows or columns, everything in it is applied in the listed order after approval: put the
-insert/delete first, then fill the new cells with "cells" ops using addresses as they will be AFTER the insert. Use no text edits then.`,
+When a turn inserts or deletes rows or columns, or adds a sheet, everything in it is applied in the listed order after
+approval: put the insert/delete/addSheet first, then fill cells with "cells" ops using addresses as they will be AFTER it
+(a new sheet's index is the current number of sheets). Use no text edits then.`,
   pptx: `The document is a PowerPoint deck. Each text box is "[ID] (shape name, size at position, font, fits ~N chars) text" under its slide.
 Lines inside a box are separated by " / ". Slide notes are shown as NOTES.
 TEXT EDITS ("edits"): target = box ID, find = exact substring within ONE line, replace = new text (no line breaks).

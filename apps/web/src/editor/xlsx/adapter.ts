@@ -8,7 +8,8 @@ import { cellsToInputs, runXlsxOp } from './ops';
 
 type Ref = { current: XlsxEditorApi | null };
 const READ_RANGE = 'A1:AZ400';
-const SHIFTING = new Set(['insertRows', 'deleteRows', 'insertColumns', 'deleteColumns']);
+// These change what addresses exist (rows, columns, a new sheet), so the whole turn applies in order after approval.
+const SHIFTING = new Set(['insertRows', 'deleteRows', 'insertColumns', 'deleteColumns', 'addSheet']);
 /** "0!A1:H9" -> "Written Works A1:H9" for the approval list. */
 const sheetNamer = (names: string[]) => (t: string) => t.replace(/^(\d+)!/, (_, i) => `${names[Number(i)] ?? `Sheet ${i}`} `);
 

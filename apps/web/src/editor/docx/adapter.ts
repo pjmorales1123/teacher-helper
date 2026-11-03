@@ -5,6 +5,7 @@ import { AI_AUTHOR, runEach, type EngineHandle, type ProposeReport } from '../en
 import { buildDocxContext, type CellMap } from './context';
 import { runDocxOp } from './ops';
 import { renderDocxPages } from './render';
+import { fixTargets } from './targets';
 import { prepareNewParagraphs, removeEmptyCreated, type Created } from './paragraphs';
 import { planDocxEdits, type PlannedProposal } from './plan';
 
@@ -69,10 +70,11 @@ export function createDocxHandle(ref: Ref): EngineHandle {
       return { context: ctx.text, selection: sel?.selectedText || undefined };
     },
 
-    async propose(result: AiResult, turnId: string): Promise<ProposeReport> {
-      const { proposals, inserts } = planDocxEdits(result.edits, turnId);
+    async propose(raw: AiResult, turnId: string): Promise<ProposeReport> {
       const all = await editor().readParagraphs({ view: 'accepted' });
       const texts = new Map(all.ok ? all.paragraphs.map((p) => [p.paraId, p.text]) : []);
+      const result = fixTargets(raw, (id) => texts.has(id) || cells.has(id));
+      const { proposals, inserts } = planDocxEdits(result.edits, turnId);
       const namer = (id: string) => {
         const cell = /^T(\d+)\.R(\d+)\.C(\d+)$/.exec(id);
         if (cell) return `table ${cell[1]} row ${cell[2]} column ${cell[3]}`;
