@@ -41,6 +41,8 @@ export interface AiTurnRequest {
   /** View step: rendered pages/slides as PNG data URLs, and the request being checked. */
   review?: boolean;
   images?: string[];
+  /** Spoken through the voice assistant: runs on the fast voice model and may contain mishearings. */
+  voice?: boolean;
 }
 
 /** Events sent to the browser over Server-Sent Events. */

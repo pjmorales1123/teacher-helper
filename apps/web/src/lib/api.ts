@@ -39,6 +39,8 @@ export const api = {
   clearMessages: (id: string) => fetch(`/api/documents/${id}/messages`, { method: 'DELETE' }).then((r) => json<void>(r)),
   aiStatus: () => fetch('/api/ai/status').then((r) => json<AiStatus>(r)),
   browse: (path?: string) => fetch(`/api/files/browse${path ? `?path=${encodeURIComponent(path)}` : ''}`).then((r) => json<FolderListing>(r)),
+  voiceStatus: () => fetch('/api/voice/status').then((r) => json<{ available: boolean; worker: string; reason?: string }>(r)),
+  voiceSession: () => fetch('/api/voice/session', { method: 'POST' }).then((r) => json<{ token: string; model: string; baseUrl?: string }>(r)),
   folders: () => fetch('/api/settings/folders').then((r) => json<{ allowed: string[]; suggested: string[] }>(r)),
   setFolders: (allowed: string[]) =>
     fetch('/api/settings/folders', { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ allowed }) })

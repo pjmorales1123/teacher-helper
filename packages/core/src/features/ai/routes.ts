@@ -32,7 +32,7 @@ export function aiRoutes(app: FastifyInstance, cfg: Config, store: DocumentStore
       ...body, kind: doc.kind, mode: body.mode === 'ask' ? 'ask' : 'edit',
       prompt: body.prompt.slice(0, 4000), context: body.context.slice(0, MAX_CONTEXT),
       selection: typeof body.selection === 'string' ? body.selection.slice(0, 8000) : undefined,
-      review: body.review === true,
+      review: body.review === true, voice: body.voice === true,
       images: Array.isArray(body.images) ? body.images.filter((x) => typeof x === 'string' && /^data:image\/(png|jpeg);base64,/.test(x)).slice(0, 20) : [],
     };
     const files = (turn.images ?? []).map((url, i) => ({ name: `page-${i + 1}.${url.startsWith('data:image/jpeg') ? 'jpg' : 'png'}`, data: Buffer.from(url.slice(url.indexOf(',') + 1), 'base64') }));
@@ -51,7 +51,7 @@ export function aiRoutes(app: FastifyInstance, cfg: Config, store: DocumentStore
     running++;
     try {
       send({ type: 'status', text: turn.review ? 'Checking the result…' : 'Reading your document…' });
-      const out = await runCli(cfg, { system: systemPrompt(doc.kind, turn.mode, allowed, turn.review), message: userMessage(turn, recent), emit: send, signal: ctrl.signal, folders: allowed, files });
+      const out = await runCli(turn.voice ? { ...cfg, aiModel: cfg.voiceModel } : cfg, { system: systemPrompt(doc.kind, turn.mode, allowed, turn.review), message: userMessage(turn, recent), emit: send, signal: ctrl.signal, folders: allowed, files });
       const result = out.isError ? null : normalizeResult(out.structured, turn.mode, doc.kind);
       if (!result) throw new Error(friendly(out.text));
       history.add(doc.id, 'user', turn.review ? `Check the result of: ${turn.prompt}` : turn.prompt);

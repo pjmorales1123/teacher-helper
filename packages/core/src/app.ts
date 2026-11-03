@@ -11,6 +11,7 @@ import { aiRoutes } from './features/ai/routes.ts';
 import { aiStatusRoute } from './features/ai/status.ts';
 import { createFolderSettings } from './features/files/folders.ts';
 import { fileRoutes } from './features/files/routes.ts';
+import { voiceRoutes } from './features/voice/routes.ts';
 
 /** Builds the HTTP app. Kept separate from server.ts so tests can call app.inject(). */
 export async function buildApp(cfg: Config, opts: { logger?: boolean } = {}) {
@@ -27,6 +28,7 @@ export async function buildApp(cfg: Config, opts: { logger?: boolean } = {}) {
   const folders = createFolderSettings(db);
   aiRoutes(app, cfg, store, createHistory(db), folders);
   fileRoutes(app, folders);
+  voiceRoutes(app, cfg);
   aiStatusRoute(app, cfg);
   app.get('/api/health', async () => ({ ok: true }));
 

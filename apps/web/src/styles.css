@@ -91,3 +91,14 @@ button.link.danger { color: var(--err); }
 .picker-actions { display: flex; gap: 6px; }
 .msg-review { border-left: 3px solid var(--accent); } .msg-tag { font-size: 11px; font-weight: 700; color: var(--accent); margin-bottom: 4px; text-transform: uppercase; letter-spacing: .03em; }
 button.link.check { padding: 4px 0; font-size: 12.5px; }
+/* Voice assistant */
+.voice { border-bottom: 1px solid var(--line); padding: 8px 12px; display: grid; gap: 6px; }
+.voice.off small { color: var(--muted, #667); font-size: 11.5px; }
+.voice-row { display: flex; align-items: center; gap: 10px; }
+.voice-btn { display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 6px 14px; font-weight: 600; }
+.voice-btn.listening, .voice-btn.speaking, .voice-btn.connecting { background: #b91c1c; color: #fff; border-color: #b91c1c; }
+.voice-dot { width: 10px; height: 10px; border-radius: 50%; background: currentColor; opacity: .35; transition: transform 80ms linear; }
+.voice.on .voice-dot { opacity: 1; }
+.voice-state { font-size: 12.5px; color: var(--muted, #667); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.voice-log { max-height: 170px; overflow: auto; display: grid; gap: 4px; font-size: 12.5px; background: rgba(0,0,0,.03); border-radius: 8px; padding: 6px 8px; }
+.voice-log p { margin: 0; overflow-wrap: anywhere; white-space: normal; } .voice-log p b { margin-right: 4px; } .cap.live { opacity: .65; } .cap.ai b { color: #1d4ed8; } .cap.work { color: #92400e; }

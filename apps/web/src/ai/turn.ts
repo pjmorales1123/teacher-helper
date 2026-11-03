@@ -18,13 +18,13 @@ export interface TurnOutcome { result: AiResult; ms: number; report?: ProposeRep
  */
 export async function runTurn(
   handle: EngineHandle, docId: string, prompt: string, mode: AiMode, review: boolean,
-  turnId: string, cb: TurnCallbacks, signal: AbortSignal,
+  turnId: string, cb: TurnCallbacks, signal: AbortSignal, voice = false,
 ): Promise<TurnOutcome | null> {
   cb.status(review ? 'Looking at the pages…' : 'Reading your document…');
   const images = review ? await handle.render() : undefined;
   const { context, selection } = await handle.snapshot();
   let done: Done | null = null;
-  await streamTurn({ docId, mode, prompt, context, selection, review, images }, (e) => {
+  await streamTurn({ docId, mode, prompt, context, selection, review, images, voice }, (e) => {
     if (e.type === 'status') cb.status(e.text);
     else if (e.type === 'delta') cb.delta(e.text);
     else if (e.type === 'error') cb.error(e.message);

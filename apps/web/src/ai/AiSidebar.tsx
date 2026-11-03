@@ -6,6 +6,7 @@ import { FilesPanel } from './FilesPanel';
 import { Message } from './Message';
 import { QUICK_PROMPTS } from './prompts';
 import { useAiChat } from './useAiChat';
+import { VoiceBar } from '../voice/VoiceBar';
 
 const PLACEHOLDER: Record<DocKind, Record<AiMode, string>> = {
   docx: { edit: 'e.g. "Make the objectives SMART"', ask: 'e.g. "What is missing in this DLL?"' },
@@ -13,10 +14,10 @@ const PLACEHOLDER: Record<DocKind, Record<AiMode, string>> = {
   pptx: { edit: 'e.g. "Add a slide summary to slide 4"', ask: 'e.g. "Is this deck too wordy?"' },
 };
 
-interface Props { docId: string; kind: DocKind; handle: EngineHandle | null }
+interface Props { docId: string; kind: DocKind; name: string; handle: EngineHandle | null; onSave: () => Promise<unknown> }
 
 /** The Claude-style side panel: ask about the open file or have the AI propose edits. */
-export function AiSidebar({ docId, kind, handle }: Props) {
+export function AiSidebar({ docId, kind, name, handle, onSave }: Props) {
   const chat = useAiChat(docId, handle);
   const [mode, setMode] = useState<AiMode>('edit');
   const [text, setText] = useState('');
@@ -51,6 +52,8 @@ export function AiSidebar({ docId, kind, handle }: Props) {
           </button>
         ))}
       </div>
+
+      <VoiceBar kind={kind} name={name} handle={handle} chat={chat} save={onSave} />
 
       <div className="ai-log">
         {chat.messages.length === 0 && (

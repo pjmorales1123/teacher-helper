@@ -25,6 +25,9 @@ The grading app from `docs/brief.md` will become a feature of the same backend l
   It can also place pictures from those folders (school logo, figures).
 - It knows DepEd conventions (DO 016 s. 2026 ILAW lesson plans, DepEd Manual of Style, action
   research format, class records) from `packages/core/skills/`. See `docs/guro-buddy/07-ai-operations.md`.
+- **Voice assistant (optional):** press Talk and speak (English, Filipino, Taglish). Gemini Live talks with you and hands
+  every edit to Claude (Haiku by default) in the background; changes land as suggestions you approve by voice or click.
+  Needs `GEMINI_API_KEY` in `.env`. See `docs/guro-buddy/08-voice.md`.
 
 ## Requirements
 - Node.js 22.13 or newer.

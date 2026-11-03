@@ -37,7 +37,7 @@ export function EditorPage({ id, onBack }: { id: string; onBack: () => void }) {
               onSaveRequest={onSaveRequest} onDirty={doc.markDirty} onError={onError} />
           </Suspense>
         </main>
-        <AiSidebar docId={id} kind={doc.meta.kind} handle={handle} />
+        <AiSidebar docId={id} kind={doc.meta.kind} name={doc.meta.name} handle={handle} onSave={() => doc.doSave()} />
       </div>
     </div>
   );

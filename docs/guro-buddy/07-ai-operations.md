@@ -17,15 +17,17 @@ file reopened in python-docx, openpyxl and python-pptx.
 | - | - | - |
 | Word | Text fixes, new paragraphs (with styles), filling table cells | Paragraph style, bold/italic/underline/size/font/color/highlight on exact text (also inside table cells), alignment, line spacing, spacing before/after, first-line indent, lists, tables with content, delete paragraphs, page size/orientation/margins, page breaks, keep with next / keep lines together / start on new page, signatory blocks, pictures before or after a paragraph |
 | Excel | Cell values and formulas, blocks of cells | Bold, fonts, colors, fills, alignment, wrap, borders, number formats |
-| PowerPoint | Text, text formatting, alignment, shape fill, resizing or moving a box, speaker notes | Rewrite a box line by line (add or remove bullets), copy a slide with new text, move or delete slides, place a picture |
+| PowerPoint | Text, text formatting, alignment, shape fill, resizing or moving a box, speaker notes | Rewrite a box line by line (add or remove bullets), copy a slide with new text, move or delete slides, place a picture, new text boxes and shapes, new slides in the deck's own design, remove a box |
+| Excel (structure) | | Column widths, row heights, merge/unmerge, insert/delete rows and columns, add/rename sheets. A turn that inserts or deletes rows runs as one ordered list after approval, so later addresses stay right |
 
 The checklist has **Retry** for failed items. Applying settles suggestions the teacher already
 accepted or rejected first, so a decided suggestion never blocks formatting.
 
 ## The view step (checking its own work)
 After the teacher applies changes (or accepts all suggestions), the app renders what the teacher sees and sends the images
-to the AI with the original request: Word page canvases (up to 6 pages), slides touched by the turn (painted with the deck's
-own renderer, pictures included), or the active sheet. The AI compares them with the request and with professional layout
+to the AI with the original request: Word page canvases (up to 20 pages, as ~1000 px JPEGs; each page is read once it stops changing, and
+the canvas is looked up again because the editor replaces it after a picture is added), slides touched by the turn (painted
+with the deck's own renderer, pictures included), or every sheet (up to 4). The AI compares them with the request and with professional layout
 rules (nothing split across pages, text inside its box, pictures not covering text, consistent alignment). Fixes come back
 through the same approval flow. "Check again" runs it on demand. The AI is told never to re-add something the document
 context shows exists, so a rendering gap cannot cause duplicates.
@@ -56,8 +58,9 @@ Pictures for the image ops are served only from allowed folders (`/api/files/ima
 Teachers or schools can add their own `.md` files to that folder.
 
 ## Engine mode decision
-Word and PowerPoint run BetterOffice with `legacySyncApi` (in-thread). The default worker API cannot
-set an exact selection in Word or add paragraphs and copy slides in PowerPoint. The sync API is
+Word, PowerPoint and Excel run BetterOffice with `legacySyncApi` (in-thread). The default worker API cannot
+set an exact selection in Word, add paragraphs and copy slides in PowerPoint, or change sheet structure in Excel
+(Excel structure uses the workbook handle's raw op list: `setColWidth`, `mergeCells`, `insertRows`, ...). The sync API is
 deprecated and removed in 0.6, so the packages are pinned at 0.5.1. Revisit when 0.6 ships.
 React StrictMode is off: its dev-only double mount left the Word command store bound to a discarded
 editor.
@@ -78,13 +81,20 @@ editor.
   capitalized names, positions) kept together on one page, headings kept with the text after them.
 - **Slides:** renamed pills widened to fit at 16 pt without covering text; a logo placed in an empty corner of slide 1.
 
+## Verified after "make the not-possible possible" (Nov 2026)
+- **Excel:** "insert 2 rows for a title merged across the table, bold 14 pt, widen the Learner column, add Zamora, Luis with
+  the same formulas": rows inserted, A1:G1 merged and styled, column A 28 characters, new row with SUM/ROUND formulas,
+  and the Summary sheet's ranges extended to row 12. Styling a merged range styles only the visible cell.
+- **Slides:** a yellow note box and an accent bar on slide 2 and a new "Exit Ticket" slide copied from the deck's
+  Title and Content design with 3 bullets. Engine quirk found: a new text color only shows live when written with a
+  leading `#` (the saved file is the same either way).
+- **Word:** a flower photo floated at the right of the first objective, 1.6" wide, text wrapping; the check saw it.
+
 ## Known limits
 - Page setup is refused while a suggestion sits on the last paragraph of the document. The message
   asks the teacher to accept or reject it, then Retry.
-- No column widths, merged cells or row insertion in Excel. No new text boxes in PowerPoint (pictures are supported).
 - Word table header cells can take a paragraph style; per-cell shading is not wired yet.
-- A copied slide keeps the original's speaker notes until the AI is asked to change them.
-- The view step sees at most 6 pages or slides per check, and only the active sheet in Excel.
-- Pictures in Word are inline (in their own paragraph). Floating pictures with text wrap are not placed by the AI.
+- A copied slide keeps the original's speaker notes until the AI is asked to change them (new slides start empty).
+- The view step sees at most 20 pages, 6 slides and 4 sheets per check.
 - In development the file server starts through the `tsx` loader; the packaged app must ship it as a subcommand of the
-  backend executable. The Tauri app should replace typed folder paths with the native folder picker.
+  backend executable. In the browser version the folder picker is the app's own; the Tauri app can use the native one.

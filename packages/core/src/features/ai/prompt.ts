@@ -47,6 +47,7 @@ export function userMessage(req: AiTurnRequest, history: { role: string; text: s
     : '';
   const sel = req.selection?.trim() ? `The teacher has selected this text:\n"""${req.selection.trim()}"""\n\n` : '';
   const pages = req.review && req.images?.length ? `Rendered pages to check: ${req.images.map((u, i) => `page-${i + 1}.${u.startsWith('data:image/jpeg') ? 'jpg' : 'png'}`).join(', ')}\n\n` : '';
+  const spoken = req.voice ? 'The teacher said this aloud; a voice assistant passed it on, so names or numbers may be misheard. Match names to the document. Keep "reply" to one or two short sentences: it is read aloud.\n' : '';
   const ask = req.review ? `The teacher's request that was carried out: ${req.prompt}` : `Teacher's request: ${req.prompt}`;
-  return `${past}${sel}${pages}${ask}\n\n<document>\n${req.context}\n</document>`;
+  return `${past}${sel}${pages}${spoken}${ask}\n\n<document>\n${req.context}\n</document>`;
 }
