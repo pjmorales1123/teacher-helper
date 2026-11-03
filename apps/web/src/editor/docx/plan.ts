@@ -1,6 +1,7 @@
 import type { AiEdit } from '../../lib/types';
 
-export interface PlannedProposal { id: string; edit: AiEdit; paraId: string; find: string; text: string }
+/** `story` is set for paragraphs inside a table cell (each cell is its own story). */
+export interface PlannedProposal { id: string; edit: AiEdit; paraId: string; find: string; text: string; story?: string }
 export interface PlannedInsert { edit: AiEdit; paraId: string; paragraphs: { text: string; styleId?: string }[] }
 
 const STYLE_PREFIX = /^\{([\w .-]{1,60})\}\s?/;

@@ -37,6 +37,7 @@ export function aiRoutes(app: FastifyInstance, cfg: Config, store: DocumentStore
     };
     const files = (turn.images ?? []).map((url, i) => ({ name: `page-${i + 1}.${url.startsWith('data:image/jpeg') ? 'jpg' : 'png'}`, data: Buffer.from(url.slice(url.indexOf(',') + 1), 'base64') }));
     const allowed = folders.list();
+    const web = folders.web() && !turn.review;
     const recent = history.recent(doc.id);
 
     reply.hijack();
@@ -51,7 +52,10 @@ export function aiRoutes(app: FastifyInstance, cfg: Config, store: DocumentStore
     running++;
     try {
       send({ type: 'status', text: turn.review ? 'Checking the result…' : 'Reading your document…' });
-      const out = await runCli(turn.voice ? { ...cfg, aiModel: cfg.voiceModel } : cfg, { system: systemPrompt(doc.kind, turn.mode, allowed, turn.review), message: userMessage(turn, recent), emit: send, signal: ctrl.signal, folders: allowed, files });
+      const out = await runCli(turn.voice ? { ...cfg, aiModel: cfg.voiceModel } : cfg, {
+        system: systemPrompt(doc.kind, turn.mode, { folders: allowed, review: turn.review, web, docText: `${doc.name}\n${turn.context}` }),
+        message: userMessage(turn, recent), emit: send, signal: ctrl.signal, folders: allowed, files, web,
+      });
       const result = out.isError ? null : normalizeResult(out.structured, turn.mode, doc.kind);
       if (!result) throw new Error(friendly(out.text));
       history.add(doc.id, 'user', turn.review ? `Check the result of: ${turn.prompt}` : turn.prompt);

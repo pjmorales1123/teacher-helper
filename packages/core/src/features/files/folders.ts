@@ -18,6 +18,15 @@ export function createFolderSettings(db: Db) {
       const row = db.prepare('SELECT value FROM settings WHERE key = ?').get(KEY) as { value: string } | undefined;
       return row ? (JSON.parse(row.value) as string[]) : [];
     },
+    /** Whether the AI may search the web (off until the teacher turns it on). */
+    web(): boolean {
+      const row = db.prepare('SELECT value FROM settings WHERE key = ?').get('webResearch') as { value: string } | undefined;
+      return row?.value === 'true';
+    },
+    setWeb(on: boolean): boolean {
+      db.prepare('INSERT INTO settings (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value').run('webResearch', String(on === true));
+      return on === true;
+    },
     set(folders: string[]): string[] {
       const clean = [...new Set(folders.filter((f) => typeof f === 'string' && isAbsolute(f) && existsSync(f) && statSync(f).isDirectory()).map((f) => realpathSync(f)))];
       db.prepare('INSERT INTO settings (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value').run(KEY, JSON.stringify(clean));

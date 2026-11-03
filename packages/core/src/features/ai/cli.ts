@@ -11,6 +11,8 @@ export interface CliRun {
   system: string; message: string; emit: (e: AiEvent) => void; signal: AbortSignal;
   /** Folders the teacher allowed the AI to read. */
   folders?: string[];
+  /** Web research allowed for this turn (teacher's setting). */
+  web?: boolean;
   /** Files written into the turn folder before the run, e.g. page-1.png for the view step. */
   files?: { name: string; data: Buffer }[];
 }
@@ -32,7 +34,7 @@ export async function runCli(cfg: Config, run: CliRun): Promise<CliOutput> {
 }
 
 function runClaude(cfg: Config, cwd: string, run: CliRun): Promise<CliOutput> {
-  const args = claudeArgs(cfg, run.system, run.folders ?? [], (run.files ?? []).length > 0);
+  const args = claudeArgs(cfg, run.system, run.folders ?? [], (run.files ?? []).length > 0, run.web === true);
   const parser = createClaudeStreamParser(run.emit);
   return spawnLines('claude', args, cwd, run, parser.line).then(({ stderr }) => {
     const f = parser.final();

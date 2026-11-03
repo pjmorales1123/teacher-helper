@@ -41,10 +41,11 @@ export const api = {
   browse: (path?: string) => fetch(`/api/files/browse${path ? `?path=${encodeURIComponent(path)}` : ''}`).then((r) => json<FolderListing>(r)),
   voiceStatus: () => fetch('/api/voice/status').then((r) => json<{ available: boolean; worker: string; reason?: string }>(r)),
   voiceSession: () => fetch('/api/voice/session', { method: 'POST' }).then((r) => json<{ token: string; model: string; baseUrl?: string }>(r)),
-  folders: () => fetch('/api/settings/folders').then((r) => json<{ allowed: string[]; suggested: string[] }>(r)),
+  setWeb: (web: boolean) => fetch('/api/settings/web', { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ web }) }).then((r) => json<{ web: boolean }>(r)),
+  folders: () => fetch('/api/settings/folders').then((r) => json<{ allowed: string[]; suggested: string[]; web?: boolean }>(r)),
   setFolders: (allowed: string[]) =>
     fetch('/api/settings/folders', { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ allowed }) })
-      .then((r) => json<{ allowed: string[]; suggested: string[] }>(r)),
+      .then((r) => json<{ allowed: string[]; suggested: string[]; web?: boolean }>(r)),
 };
 
 export interface FolderListing { path: string; parent: string | null; home: string; roots: string[]; folders: { name: string; path: string }[] }

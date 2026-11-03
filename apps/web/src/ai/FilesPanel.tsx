@@ -13,8 +13,10 @@ export function FilesPanel() {
   const [custom, setCustom] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [picking, setPicking] = useState(false);
+  const [web, setWeb] = useState(false);
 
-  useEffect(() => { api.folders().then((f) => { setAllowed(f.allowed); setSuggested(f.suggested); }, () => {}); }, []);
+  useEffect(() => { api.folders().then((f) => { setAllowed(f.allowed); setSuggested(f.suggested); setWeb(f.web === true); }, () => {}); }, []);
+  const toggleWeb = () => { const next = !web; setWeb(next); api.setWeb(next).then((r) => setWeb(r.web), () => setWeb(!next)); };
 
   const save = async (next: string[]) => {
     setError(null);
@@ -37,7 +39,7 @@ export function FilesPanel() {
   return (
     <div className="files">
       <button className={`files-btn ${allowed.length ? 'on' : ''}`} onClick={() => setOpen((o) => !o)} title="Folders the AI may read">
-        Files{allowed.length ? ` · ${allowed.length}` : ''}
+        Files{allowed.length ? ` · ${allowed.length}` : ''}{web ? ' · web' : ''}
       </button>
       {open && (
         <div className="files-pop">
@@ -53,6 +55,8 @@ export function FilesPanel() {
             <input value={custom} onChange={(e) => setCustom(e.target.value)} placeholder="Or type a path, e.g. D:\School Files" onKeyDown={(e) => e.key === 'Enter' && add()} />
             <button onClick={add}>Add</button>
           </div>
+          <label className="files-web"><input type="checkbox" checked={web} onChange={toggleWeb} /> Let the AI search the web for facts it lacks
+            (DepEd orders, curriculum, real citations). It names its sources; DepEd sites first.</label>
           {error && <p className="error">{error}</p>}
           <button className="link" onClick={() => setOpen(false)}>Done</button>
         </div>

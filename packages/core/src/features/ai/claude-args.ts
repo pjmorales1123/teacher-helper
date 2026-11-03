@@ -18,18 +18,21 @@ export function readRule(folder: string): string {
 
 /**
  * Flags for one turn. The AI may only use: our two read-only file tools, and the built-in Read tool
- * inside the turn folder (page images) and the folders the teacher allowed. Everything else is denied.
+ * inside the turn folder (page images) and the folders the teacher allowed, plus web search/fetch when the teacher
+ * turned web research on. Everything else is denied.
  */
-export function claudeArgs(cfg: Config, system: string, folders: string[], hasImages: boolean): string[] {
+export function claudeArgs(cfg: Config, system: string, folders: string[], hasImages: boolean, web = false): string[] {
   const args = [
     '-p', '--output-format', 'stream-json', '--verbose', '--include-partial-messages',
     '--setting-sources', '', '--strict-mcp-config', '--no-session-persistence',
     '--model', cfg.aiModel, '--system-prompt', system, '--json-schema', JSON.stringify(RESULT_SCHEMA),
   ];
   const canRead = folders.length > 0 || hasImages;
-  args.push('--tools', canRead ? 'Read' : '');
-  if (!canRead) return args;
-  const allow = ['Read(./**)', ...folders.map(readRule)];
+  const tools = [...(canRead ? ['Read'] : []), ...(web ? ['WebSearch', 'WebFetch'] : [])];
+  args.push('--tools', tools.join(','));
+  if (!tools.length) return args;
+  // Web research (opt-in): search and read pages only; nothing is written or run.
+  const allow = [...(canRead ? ['Read(./**)', ...folders.map(readRule)] : []), ...(web ? ['WebSearch', 'WebFetch'] : [])];
   if (folders.length) {
     const server = { type: 'stdio', command: process.execPath, args: [...loaderArgs(), MCP_SERVER], env: { GURO_READ_DIRS: JSON.stringify(folders) } };
     args.push('--mcp-config', JSON.stringify({ mcpServers: { files: server } }));

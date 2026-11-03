@@ -5,7 +5,7 @@ import { AI_AUTHOR, runEach, type EngineHandle, type ProposeReport } from '../en
 import { buildDocxContext, type CellMap } from './context';
 import { runDocxOp } from './ops';
 import { renderDocxPages } from './render';
-import { prepareNewParagraphs, removeEmptyCreated } from './paragraphs';
+import { prepareNewParagraphs, removeEmptyCreated, type Created } from './paragraphs';
 import { planDocxEdits, type PlannedProposal } from './plan';
 
 type Ref = { current: DocxEditorRef | null };
@@ -18,7 +18,7 @@ const ensure = <T extends { ok: boolean }>(r: T, what: string): Extract<T, { ok:
 
 /** Word adapter: paragraphs become "[paraId] <Style> text" lines; edits become reviewable proposals. */
 export function createDocxHandle(ref: Ref): EngineHandle {
-  const created = new Map<string, string>();
+  const created = new Map<string, Created>();
   let cells: CellMap = new Map();
   const editor = () => {
     if (!ref.current) throw new Error('The document is still loading.');
@@ -34,7 +34,8 @@ export function createDocxHandle(ref: Ref): EngineHandle {
     let pending = list;
     while (pending.length) {
       const proposals = pending.map((p) => {
-        const loc = cells.get(p.paraId) ?? { story: STORY, paraId: p.paraId }; // table cells have their own story
+        // Table cells are their own stories: a cell id maps to its first paragraph; new cell lines carry their story.
+        const loc = cells.get(p.paraId) ?? { story: p.story ?? STORY, paraId: p.paraId };
         const base = { id: p.id, paragraph: { kind: 'session' as const, sessionId, ...loc }, suggest: suggest() };
         return p.find
           ? { ...base, op: 'replaceText' as const, search: p.find, replaceWith: p.text, occurrence: 'first' as const }
@@ -78,7 +79,7 @@ export function createDocxHandle(ref: Ref): EngineHandle {
         return texts.get(id) ? `“${short(texts.get(id)!, 32)}”` : id;
       };
       const failed: { edit: AiEdit; reason: string }[] = [];
-      const fills = await prepareNewParagraphs(editor(), inserts, turnId, created, failed);
+      const fills = await prepareNewParagraphs(editor(), inserts, turnId, created, failed, cells);
       const staged = await stageProposals([...proposals, ...fills], failed);
       await removeEmptyCreated(editor(), created);
       return {

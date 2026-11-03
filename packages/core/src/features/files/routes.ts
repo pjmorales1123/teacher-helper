@@ -8,11 +8,13 @@ const IMAGE_TYPES: Record<string, string> = { '.png': 'image/png', '.jpg': 'imag
 
 /** Folder permissions for the AI, and image bytes for placing pictures from those folders. */
 export function fileRoutes(app: FastifyInstance, folders: FolderSettings) {
-  app.get('/api/settings/folders', async () => ({ allowed: folders.list(), suggested: suggestedFolders() }));
+  app.get('/api/settings/folders', async () => ({ allowed: folders.list(), suggested: suggestedFolders(), web: folders.web() }));
+
+  app.put<{ Body: { web?: boolean } }>('/api/settings/web', async (req) => ({ web: folders.setWeb(req.body?.web === true) }));
 
   app.put<{ Body: { allowed?: string[] } }>('/api/settings/folders', async (req, reply) => {
     if (!Array.isArray(req.body?.allowed)) return reply.code(400).send({ error: 'Send { allowed: string[] }.' });
-    return { allowed: folders.set(req.body.allowed), suggested: suggestedFolders() };
+    return { allowed: folders.set(req.body.allowed), suggested: suggestedFolders(), web: folders.web() };
   });
 
   app.get<{ Querystring: { path?: string } }>('/api/files/browse', async (req) => browseFolders(req.query.path));
