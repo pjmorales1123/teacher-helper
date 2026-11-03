@@ -1,10 +1,12 @@
+import type { DocKind } from '../documents/kinds.ts';
+import { normalizeOps, OP_ITEM_SCHEMA } from './ops-schema.ts';
 import type { AiMode, AiResult } from './types.ts';
 
 /** JSON Schema the CLI must satisfy. Same shape for Word, Excel and PowerPoint. */
 export const RESULT_SCHEMA = {
   type: 'object',
   additionalProperties: false,
-  required: ['reply', 'edits'],
+  required: ['reply', 'edits', 'ops'],
   properties: {
     reply: { type: 'string', description: 'Answer to the teacher, plain text, short.' },
     edits: {
@@ -21,11 +23,12 @@ export const RESULT_SCHEMA = {
         },
       },
     },
+    ops: { type: 'array', items: OP_ITEM_SCHEMA },
   },
 } as const;
 
 /** Defensive check of whatever came back, so the UI never receives a malformed edit. */
-export function normalizeResult(raw: unknown, mode: AiMode): AiResult | null {
+export function normalizeResult(raw: unknown, mode: AiMode, kind: DocKind): AiResult | null {
   if (!raw || typeof raw !== 'object') return null;
   const r = raw as Record<string, unknown>;
   if (typeof r.reply !== 'string') return null;
@@ -41,5 +44,7 @@ export function normalizeResult(raw: unknown, mode: AiMode): AiResult | null {
     }))
     .filter((e) => e.find !== e.replace)
     .slice(0, 200);
-  return { reply: r.reply, edits: mode === 'ask' ? [] : edits };
+  if (mode === 'ask') return { reply: r.reply, edits: [], ops: [] };
+  const { ops, dropped } = normalizeOps(r.ops, kind);
+  return { reply: r.reply, edits, ops, ...(dropped.length ? { dropped } : {}) };
 }

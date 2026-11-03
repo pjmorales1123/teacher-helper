@@ -1,5 +1,5 @@
 import type { DocxEditorRef } from '@betteroffice/docx-react';
-import type { ProposeReport } from '../engine';
+import type { AiEdit } from '../../lib/types';
 import type { PlannedInsert, PlannedProposal } from './plan';
 
 const STORY = 'body';
@@ -11,16 +11,19 @@ const STORY = 'body';
  */
 export async function prepareNewParagraphs(
   ed: DocxEditorRef, inserts: PlannedInsert[], turnId: string,
-  created: Map<string, string>, failed: ProposeReport['failed'],
+  created: Map<string, string>, failed: { edit: AiEdit; reason: string }[],
 ): Promise<PlannedProposal[]> {
   const fills: PlannedProposal[] = [];
   for (const [i, ins] of inserts.entries()) {
-    const read = await ed.readParagraphs({ view: 'accepted', paraIds: [] });
+    const read = await ed.readParagraphs({ view: 'accepted', paraIds: [ins.paraId] });
     if (!read.ok) { failed.push({ edit: ins.edit, reason: 'document busy' }); continue; }
+    // New text after a heading is body text unless the AI named a style; never inherit a heading style.
+    const anchorStyle = read.paragraphs[0]?.styleId ?? '';
+    const fallback = /^(Heading|Title|Subtitle|TOC)/i.test(anchorStyle) ? 'Normal' : undefined;
     const res = await ed.applyEdits({
       expectVersion: read.version, source: 'agent',
       steps: [{ op: 'insertParagraphs', target: { story: STORY, paraId: ins.paraId }, at: 'end',
-        paragraphs: ins.paragraphs.map((p) => ({ text: '', ...(p.styleId ? { styleId: p.styleId } : {}) })) }],
+        paragraphs: ins.paragraphs.map((p) => ({ text: '', ...((p.styleId ?? fallback) ? { styleId: p.styleId ?? fallback } : {}) })) }],
     });
     if (!res.ok) { failed.push({ edit: ins.edit, reason: `new paragraphs: ${res.failure.code}` }); continue; }
     res.receipts[0].newParagraphs.forEach((np, k) => {

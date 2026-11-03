@@ -57,7 +57,7 @@ export function AiSidebar({ docId, kind, handle }: Props) {
             {QUICK_PROMPTS[kind].map((p) => <button key={p} className="chip" onClick={() => submit(p)} disabled={!handle}>{p}</button>)}
           </div>
         )}
-        {chat.messages.map((m) => <Message key={m.key} m={m} />)}
+        {chat.messages.map((m) => <Message key={m.key} m={m} busy={chat.busy} onApply={chat.apply} />)}
         {chat.status && <div className="ai-status">{chat.status}</div>}
         <div ref={end} />
       </div>

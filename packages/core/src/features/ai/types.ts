@@ -10,7 +10,21 @@ export interface AiEdit {
   why?: string;
 }
 
-export interface AiResult { reply: string; edits: AiEdit[] }
+/** A structured operation (formatting, structure). Fields are optional; ops-schema.ts validates per op. */
+export interface AiOp {
+  op: string;
+  target?: string; to?: string; find?: string; text?: string; why?: string;
+  lines?: string[]; rows?: string[][];
+  styleId?: string; bold?: boolean; italic?: boolean; underline?: boolean; fontSize?: number; fontFamily?: string;
+  color?: string; highlight?: string; fill?: string;
+  align?: 'left' | 'center' | 'right' | 'justify'; valign?: 'top' | 'middle' | 'bottom';
+  lineSpacing?: number; list?: 'bullet' | 'numbered'; border?: 'all' | 'outer' | 'inner' | 'bottom' | 'none';
+  wrap?: boolean; numberFormat?: string; slide?: number; position?: number;
+  orientation?: 'portrait' | 'landscape'; paper?: 'A4' | 'Letter' | 'Legal';
+  margins?: { top?: number; bottom?: number; left?: number; right?: number };
+}
+
+export interface AiResult { reply: string; edits: AiEdit[]; ops: AiOp[]; dropped?: { op: string; reason: string }[] }
 
 export interface AiTurnRequest {
   docId: string;

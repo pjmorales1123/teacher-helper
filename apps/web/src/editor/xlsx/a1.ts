@@ -17,3 +17,14 @@ export function parseTarget(target: string, names: string[]): { sheet: number; r
   if (sheet < 0 || sheet >= names.length) return null;
   return { sheet, ...cell, a1: target.slice(bang + 1).toUpperCase() };
 }
+
+/** "0!A1:G1" or "Sheet1!B2" -> sheet index and the A1 range text (single cells become "B2:B2"). */
+export function parseRange(target: string, names: string[]): { sheet: number; a1: string } | null {
+  const bang = target.lastIndexOf('!');
+  const sheetPart = bang >= 0 ? target.slice(0, bang).replace(/^'|'$/g, '') : '0';
+  const [from, to = from] = (bang >= 0 ? target.slice(bang + 1) : target).toUpperCase().split(':');
+  if (!parseA1(from) || !parseA1(to)) return null;
+  const sheet = /^\d+$/.test(sheetPart) ? Number(sheetPart) : names.indexOf(sheetPart);
+  if (sheet < 0 || sheet >= names.length) return null;
+  return { sheet, a1: `${from}:${to}` };
+}

@@ -13,7 +13,21 @@ export interface DocumentMeta {
 export interface VersionMeta { version: number; size: number; note: string | null; created_at: string }
 
 export interface AiEdit { target: string; find: string; replace: string; why?: string }
-export interface AiResult { reply: string; edits: AiEdit[] }
+/** A structured operation from the AI (formatting, tables, slides). The server validated it per format. */
+export interface AiOp {
+  op: string;
+  target?: string; to?: string; find?: string; text?: string; why?: string;
+  lines?: string[]; rows?: string[][];
+  styleId?: string; bold?: boolean; italic?: boolean; underline?: boolean; fontSize?: number; fontFamily?: string;
+  color?: string; highlight?: string; fill?: string;
+  align?: 'left' | 'center' | 'right' | 'justify'; valign?: 'top' | 'middle' | 'bottom';
+  lineSpacing?: number; list?: 'bullet' | 'numbered'; border?: 'all' | 'outer' | 'inner' | 'bottom' | 'none';
+  wrap?: boolean; numberFormat?: string; slide?: number; position?: number;
+  orientation?: 'portrait' | 'landscape'; paper?: 'A4' | 'Letter' | 'Legal';
+  margins?: { top?: number; bottom?: number; left?: number; right?: number };
+}
+
+export interface AiResult { reply: string; edits: AiEdit[]; ops: AiOp[]; dropped?: { op: string; reason: string }[] }
 export type AiMode = 'ask' | 'edit';
 
 export interface ChatMessage { id: number; role: 'user' | 'assistant'; text: string; edits: AiEdit[]; created_at: string }

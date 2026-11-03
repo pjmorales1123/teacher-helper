@@ -34,7 +34,7 @@ test('error results and junk lines are handled', () => {
 
 test('normalizeResult drops malformed and no-op edits, and all edits in ask mode', () => {
   const raw = { reply: 'ok', edits: [{ target: 'p:1', find: 'teh', replace: 'the' }, { target: 'p:2', find: 'a', replace: 'a' }, { target: 3 }, null] };
-  assert.deepEqual(normalizeResult(raw, 'edit')?.edits, [{ target: 'p:1', find: 'teh', replace: 'the' }]);
-  assert.deepEqual(normalizeResult(raw, 'ask')?.edits, []);
-  assert.equal(normalizeResult({ edits: [] }, 'edit'), null);
+  assert.deepEqual(normalizeResult(raw, 'edit', 'docx')?.edits, [{ target: 'p:1', find: 'teh', replace: 'the' }]);
+  assert.deepEqual(normalizeResult(raw, 'ask', 'docx')?.edits, []);
+  assert.equal(normalizeResult({ edits: [] }, 'edit', 'docx'), null);
 });

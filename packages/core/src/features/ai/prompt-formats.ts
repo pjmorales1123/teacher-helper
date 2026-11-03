@@ -1,0 +1,45 @@
+import type { DocKind } from '../documents/kinds.ts';
+
+/** What the model may do per format: text "edits" (reviewed in the document) and structured "ops". */
+export const FORMAT_GUIDE: Record<DocKind, string> = {
+  docx: `The document is a Word file. Paragraphs are shown as "[ID] <StyleId> {list|align} text".
+Tables are shown as "[TABLE after ID] rows" and are read-only context.
+TEXT EDITS ("edits"): target = paragraph ID, find = exact substring (copy it exactly, keep it short but unique),
+replace = new text. find = "" appends. To add NEW paragraphs after a paragraph use find = "" and start replace
+with a newline; each further line is a new paragraph; start a line with {StyleId} to set its style.
+OPS ("ops"), applied only after the teacher approves them:
+- {"op":"style","target":ID,"styleId":"Heading1"} set a paragraph style (use only styles listed under STYLES).
+- {"op":"format","target":ID,"find":"text","bold":true,"italic":..,"underline":..,"fontSize":12,"fontFamily":"Arial","color":"#1F4E79","highlight":"#FFFF00"}
+  formats that text (omit find to format the whole paragraph).
+- {"op":"paragraph","target":ID,"align":"left|center|right|justify","lineSpacing":1.15,"list":"bullet|numbered"}
+- {"op":"table","target":ID,"rows":[["Header 1","Header 2"],["a","b"]],"styleId":"<style for header cells, optional>"}
+  inserts a table AFTER the paragraph. First row is the header.
+- {"op":"delete","target":ID,"to":ID2} deletes paragraphs from target through to (to is optional).
+- {"op":"pageSetup","paper":"A4|Letter|Legal","orientation":"portrait|landscape","margins":{"top":1,"bottom":1,"left":1,"right":1}} inches.
+- {"op":"pageBreak","target":ID} page break after the paragraph.
+Prefer styles over manual formatting: turn fake headings (bold Normal text) into Heading styles.`,
+  xlsx: `The document is an Excel workbook. Each sheet is listed row by row as ADDRESS=value pairs; formulas show as
+ADDRESS={formula}→result. Sheet index starts at 0.
+TEXT EDITS ("edits"): target = "SheetIndex!A1", find = the cell's current display text ("" if empty), replace = what a user
+would type (formulas start with "="). Never overwrite a formula with a plain number unless asked.
+OPS ("ops"):
+- {"op":"cells","target":"0!B2","rows":[["1","2"],["=SUM(B2:C2)","x"]]} fills a block starting at target (reviewed in the sheet).
+- {"op":"style","target":"0!A1:G1","bold":true,"italic":..,"fontSize":11,"fontFamily":"Calibri","color":"#000000","fill":"#DDEBF7",
+  "align":"left|center|right","valign":"top|middle|bottom","wrap":true,"border":"all|outer|inner|bottom|none"}
+- {"op":"numberFormat","target":"0!F2:G9","numberFormat":"0.00"} (or "number","percent","currency","date", or a pattern).`,
+  pptx: `The document is a PowerPoint deck. Each text box is "[ID] (shape name, size, font, fits ~N chars) text" under its slide.
+Lines inside a box are separated by " / ". Slide notes are shown as NOTES.
+TEXT EDITS ("edits"): target = box ID, find = exact substring within ONE line, replace = new text (no line breaks).
+OPS ("ops"):
+- {"op":"bullets","target":ID,"lines":["line 1","line 2"]} replaces ALL lines of a box (use this to add, remove or reorder bullets).
+- {"op":"format","target":ID,"find":"text","bold":true,"italic":..,"underline":..,"fontSize":24,"color":"#1F4E79","fontFamily":".."} (omit find for the whole box).
+- {"op":"align","target":ID,"align":"left|center|right|justify"}
+- {"op":"fill","target":ID,"fill":"#1F4E79"} shape background color.
+- {"op":"notes","slide":3,"text":"speaker notes"} replaces the notes of slide 3.
+- {"op":"duplicateSlide","slide":13,"rows":[["T6","Parts 2 and 3 · Reason and Evidence"],["T8","line 1","line 2"]]} inserts a copy of
+  slide 13 right after it, then sets text in the COPY: each row is a box number from the original slide followed by its new lines.
+  Boxes you do not list keep the original text, so list every box that must change.
+- {"op":"deleteSlide","slide":5}  - {"op":"moveSlide","slide":5,"position":2}
+All IDs and slide numbers always refer to the deck as shown (before any slide is added, moved or deleted).
+Respect "fits ~N chars": never exceed it. Keep labels short.`,
+};

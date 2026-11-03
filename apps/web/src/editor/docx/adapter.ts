@@ -1,6 +1,9 @@
 import type { DocxEditorRef } from '@betteroffice/docx-react';
-import type { AiEdit } from '../../lib/types';
-import { AI_AUTHOR, clip, type EngineHandle, type ProposeReport } from '../engine';
+import type { AiEdit, AiResult } from '../../lib/types';
+import { describeOp, short } from '../describe';
+import { AI_AUTHOR, runEach, type EngineHandle, type ProposeReport } from '../engine';
+import { buildDocxContext } from './context';
+import { runDocxOp } from './ops';
 import { prepareNewParagraphs, removeEmptyCreated } from './paragraphs';
 import { planDocxEdits, type PlannedProposal } from './plan';
 
@@ -23,7 +26,7 @@ export function createDocxHandle(ref: Ref): EngineHandle {
   const suggest = () => ({ author: AI_AUTHOR, date: new Date().toISOString() });
 
   /** Host proposals are atomic per round: drop a refused one and retry the rest. */
-  async function stageProposals(list: PlannedProposal[], failed: ProposeReport['failed']): Promise<number> {
+  async function stageProposals(list: PlannedProposal[], failed: { edit: AiEdit; reason: string }[]): Promise<number> {
     const ed = editor();
     const { sessionId } = await ed.getParagraphIdentities();
     let pending = list;
@@ -44,22 +47,41 @@ export function createDocxHandle(ref: Ref): EngineHandle {
     return 0;
   }
 
+  /** Turns accepted/rejected suggestions into plain text and removes emptied new paragraphs. */
+  async function settle() {
+    const ed = editor();
+    const snap = await ed.getProposals();
+    const settled = snap.proposals.filter((p) => p.state !== 'proposed').map((p) => p.id);
+    if (settled.length) ensure(await ed.withdrawProposals({ expectVersion: snap.version, ids: settled }), 'Settling proposals');
+    await removeEmptyCreated(ed, created);
+  }
+
   return {
     async snapshot() {
       const ed = editor();
-      const read = ensure(await ed.readParagraphs({ view: 'accepted' }), 'Reading the document');
-      const lines = read.paragraphs.map((p) => `[${p.paraId}]${p.styleId ? ` <${p.styleId}>` : ''} ${p.text}`);
       const sel = await ed.readSelectionInfo().catch(() => null);
-      return { context: clip(lines.join('\n')), selection: sel?.selectedText || undefined };
+      return { context: await buildDocxContext(ed), selection: sel?.selectedText || undefined };
     },
 
-    async propose(edits: AiEdit[], turnId: string): Promise<ProposeReport> {
-      const { proposals, inserts } = planDocxEdits(edits, turnId);
-      const failed: ProposeReport['failed'] = [];
+    async propose(result: AiResult, turnId: string): Promise<ProposeReport> {
+      const { proposals, inserts } = planDocxEdits(result.edits, turnId);
+      const all = await editor().readParagraphs({ view: 'accepted' });
+      const texts = new Map(all.ok ? all.paragraphs.map((p) => [p.paraId, p.text]) : []);
+      const namer = (id: string) => (texts.get(id) ? `“${short(texts.get(id)!, 32)}”` : id);
+      const failed: { edit: AiEdit; reason: string }[] = [];
       const fills = await prepareNewParagraphs(editor(), inserts, turnId, created, failed);
       const staged = await stageProposals([...proposals, ...fills], failed);
       await removeEmptyCreated(editor(), created);
-      return { staged, failed };
+      return {
+        staged,
+        pending: result.ops.map((op, i) => ({ id: `${turnId}-op${i}`, label: describeOp(op, namer), op })),
+        failed: failed.map((f) => ({ label: `${f.edit.target}: “${f.edit.find || f.edit.replace}”`, reason: f.reason })),
+      };
+    },
+
+    async applyPending(changes) {
+      await settle(); // decided suggestions become plain text first, so they never block formatting
+      return runEach(changes, (op) => runDocxOp(editor(), op));
     },
 
     async decideAll(accept: boolean) {
@@ -76,11 +98,7 @@ export function createDocxHandle(ref: Ref): EngineHandle {
 
     async save() {
       const ed = editor();
-      // Settle decided proposals; undecided ones stay as tracked changes Word can review.
-      const snap = await ed.getProposals();
-      const settled = snap.proposals.filter((p) => p.state !== 'proposed').map((p) => p.id);
-      if (settled.length) ensure(await ed.withdrawProposals({ expectVersion: snap.version, ids: settled }), 'Settling proposals');
-      await removeEmptyCreated(ed, created);
+      await settle(); // undecided suggestions stay as tracked changes Word can review
       const bytes = await ed.save();
       if (!bytes) throw new Error('The editor could not export the document.');
       return new Uint8Array(bytes);

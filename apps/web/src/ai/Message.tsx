@@ -1,7 +1,10 @@
+import { PendingList } from './PendingList';
 import type { UiMessage } from './useAiChat';
 
-/** One chat bubble. Assistant bubbles show what happened to their proposed edits. */
-export function Message({ m }: { m: UiMessage }) {
+interface Props { m: UiMessage; busy: boolean; onApply: (key: string, ids: string[]) => void }
+
+/** One chat bubble. Assistant bubbles show suggestions placed, changes awaiting approval, and failures. */
+export function Message({ m, busy, onApply }: Props) {
   if (m.role === 'user') return <div className="msg msg-user">{m.text}</div>;
   const r = m.report;
   return (
@@ -11,10 +14,11 @@ export function Message({ m }: { m: UiMessage }) {
       {r && (
         <div className="msg-report">
           {r.staged > 0 && <div className="ok">✓ {r.staged} suggestion{r.staged > 1 ? 's' : ''} added to the document for your review.</div>}
+          {r.pending.length > 0 && <PendingList items={r.pending} state={m.pendingState ?? {}} busy={busy} onApply={(ids) => onApply(m.key, ids)} />}
           {r.failed.length > 0 && (
             <details>
-              <summary>{r.failed.length} could not be placed</summary>
-              <ul>{r.failed.map((f, i) => <li key={i}><code>{f.edit.target}</code> {f.edit.find ? `“${f.edit.find}” → ` : '+ '}“{f.edit.replace}” ({f.reason})</li>)}</ul>
+              <summary>{r.failed.length} could not be done</summary>
+              <ul>{r.failed.map((f, i) => <li key={i}>{f.label} ({f.reason})</li>)}</ul>
             </details>
           )}
         </div>

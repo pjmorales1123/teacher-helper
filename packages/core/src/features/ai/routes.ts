@@ -47,7 +47,7 @@ export function aiRoutes(app: FastifyInstance, cfg: Config, store: DocumentStore
     try {
       send({ type: 'status', text: 'Reading your document…' });
       const out = await runCli(cfg, { system: systemPrompt(doc.kind, turn.mode), message: userMessage(turn, recent), emit: send, signal: ctrl.signal });
-      const result = out.isError ? null : normalizeResult(out.structured, turn.mode);
+      const result = out.isError ? null : normalizeResult(out.structured, turn.mode, doc.kind);
       if (!result) throw new Error(friendly(out.text));
       history.add(doc.id, 'user', turn.prompt);
       history.add(doc.id, 'assistant', result.reply, result.edits);

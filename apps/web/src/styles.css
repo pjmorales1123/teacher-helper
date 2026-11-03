@@ -71,3 +71,10 @@ button.link.danger { color: var(--err); }
 .ai-compose textarea { width: 100%; resize: vertical; font: inherit; padding: 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--text); }
 .ai-actions { display: flex; justify-content: flex-end; gap: 6px; margin-top: 6px; }
 @media (max-width: 900px) { .ai { width: 300px; } }
+.pending { margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 8px; background: var(--panel); }
+.pending-head { font-weight: 600; font-size: 12px; margin-bottom: 4px; }
+.pending ul { list-style: none; padding: 0; margin: 0 0 8px; display: grid; gap: 4px; }
+.pending li { font-size: 12.5px; line-height: 1.35; }
+.pending li label { display: flex; gap: 6px; align-items: flex-start; cursor: pointer; }
+.pending li.applied { color: var(--ok); } .pending li.skipped { color: var(--muted); } .pending li.failed { color: var(--err); }
+.pending button { width: 100%; }

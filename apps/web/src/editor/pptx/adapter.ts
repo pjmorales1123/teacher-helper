@@ -1,70 +1,71 @@
-import type { PptxAsyncEditorApi } from '@betteroffice/pptx-react';
-import type { AiEdit } from '../../lib/types';
-import { clip, type EngineHandle, type ProposeReport } from '../engine';
+import type { PptxEditorApi } from '@betteroffice/pptx-react';
+import type { AiResult } from '../../lib/types';
+import { clip, runEach, type EngineHandle, type ProposeReport } from '../engine';
+import { deckContext, readDeck } from './deck';
+import { runPptxChange } from './ops';
+import { planPptx, type SlideChange } from './plan';
 
-type Ref = { current: PptxAsyncEditorApi | null };
-interface Box { id: string; slide: number; storyId: string; text: string }
+type Ref = { current: PptxEditorApi | null };
+const AGENT = 'guro-buddy';
 
-/** PowerPoint adapter: text boxes get short ids like "S2.T1"; edits become slide proposals shown on the canvas. */
+/** PowerPoint adapter on the in-thread engine: text and formatting are canvas proposals; structure waits for approval. */
 export function createPptxHandle(ref: Ref): EngineHandle {
   const api = () => {
     if (!ref.current) throw new Error('The presentation is still loading.');
     return ref.current;
   };
-
-  /** Deterministic ids: the same deck read twice gives the same ids. */
-  async function boxes(): Promise<{ boxes: Box[]; titles: (string | null | undefined)[] }> {
-    const access = await api().handleAsync();
-    const read = await access.readContent();
-    if (!read.ok) throw new Error('Could not read the slides.');
-    const order = new Map(read.slides.map((s, i) => [s.id, i + 1]));
-    const counters = new Map<number, number>();
-    const list = read.stories.map((st) => {
-      const slide = order.get(st.slideId) ?? 0;
-      const n = (counters.get(slide) ?? 0) + 1;
-      counters.set(slide, n);
-      return { id: `S${slide}.T${n}`, slide, storyId: st.storyId, text: st.text };
-    });
-    return { boxes: list, titles: read.slides.map((s) => s.title) };
-  }
+  const changes = new Map<string, SlideChange>();
 
   return {
     async snapshot() {
-      const { boxes: list, titles } = await boxes();
-      const lines = titles.map((t, i) => {
-        const own = list.filter((b) => b.slide === i + 1).map((b) => `[${b.id}] ${b.text.replace(/\n/g, ' / ')}`);
-        return `## Slide ${i + 1}${t ? `: ${t}` : ''}\n${own.join('\n') || '(no text)'}`;
-      });
-      return { context: clip(`Lines inside a text box are separated by " / " here. A find may not span two lines.\n\n${lines.join('\n\n')}`) };
+      const ctx = deckContext(readDeck(api().handle));
+      return { context: clip(`A box's "fits ~N chars" is an estimate at its current font size.\n\n${ctx}`) };
     },
 
-    async propose(edits: AiEdit[], turnId: string): Promise<ProposeReport> {
-      const { boxes: list } = await boxes();
-      const failed: ProposeReport['failed'] = [];
-      const staged = [];
-      for (const edit of edits) {
-        const box = list.find((b) => b.id === edit.target);
-        if (!box) { failed.push({ edit, reason: 'unknown text box' }); continue; }
-        if (/[\r\n]/.test(edit.replace)) { failed.push({ edit, reason: 'new lines cannot be added to slides yet; add the line yourself' }); continue; }
-        const find = edit.find.replace(/ \/ /g, '\n');
-        const start = find ? box.text.indexOf(find) : box.text.length;
-        if (start < 0) { failed.push({ edit, reason: 'text not found' }); continue; }
-        staged.push({ type: 'replaceText' as const, storyId: box.storyId, start, end: start + find.length, text: edit.replace });
+    async propose(result: AiResult, turnId: string): Promise<ProposeReport> {
+      const h = api().handle;
+      const plan = planPptx(result, readDeck(h), turnId);
+      const failed = [...plan.failed];
+      let staged = 0;
+      if (plan.proposals.length) {
+        try {
+          h.propose(AGENT, `AI turn ${turnId}`, plan.proposals.map((p) => p.edit));
+          staged = plan.proposals.length;
+        } catch {
+          // One bad edit refuses the whole group: retry one by one so the good ones still land.
+          for (const p of plan.proposals) {
+            try { h.propose(AGENT, `AI turn ${turnId}`, [p.edit]); staged += 1; } catch (e) { failed.push({ label: p.label, reason: (e as Error).message }); }
+          }
+        }
+        api().refreshProposals();
+        await api().commands.execute('proposalsPanel', { open: true }).catch(() => undefined);
       }
-      if (!staged.length) return { staged: 0, failed };
-      const access = await api().handleAsync();
-      await access.propose('guro-buddy', `AI turn ${turnId}`, staged);
-      await api().refreshProposals();
-      return { staged: staged.length, failed };
+      plan.pending.forEach((c) => changes.set(c.id, c));
+      return { staged, pending: plan.pending, failed };
+    },
+
+    async applyPending(list) {
+      const h = api().handle;
+      // Structure last: text rewrites first, then copies, moves and deletes.
+      const rank = (op: string) => ['bullets', 'duplicateSlide', 'moveSlide', 'deleteSlide'].indexOf(op);
+      const ordered = [...list].sort((a, b) => rank(a.op.op) - rank(b.op.op));
+      const report = await runEach(ordered, async (op) => {
+        const c = [...changes.values()].find((x) => x.op === op);
+        if (!c) throw new Error('This change is out of date. Ask again.');
+        runPptxChange(h, c);
+      });
+      api().refresh();
+      return report;
     },
 
     async decideAll(accept: boolean) {
-      const access = await api().handleAsync();
-      for (const prop of await access.listProposals()) {
-        if (prop.agentId !== 'guro-buddy') continue;
-        if (accept) await access.acceptProposal(prop.id, { force: true }); else await access.rejectProposal(prop.id);
+      const h = api().handle;
+      for (const p of h.listProposals()) {
+        if (p.agentId !== AGENT) continue;
+        if (accept) h.acceptProposal(p.id, { force: true }); else h.rejectProposal(p.id);
       }
-      await api().refreshProposals();
+      api().refreshProposals();
+      api().refresh();
     },
 
     async save() {
