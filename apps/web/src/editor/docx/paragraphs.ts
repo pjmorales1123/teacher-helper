@@ -19,8 +19,8 @@ export async function prepareNewParagraphs(
     // A cell id like "T2.R3.C2" means: add the lines inside that cell, after its last paragraph.
     const cell = cells.get(ins.paraId);
     const loc = cell ?? { story: STORY, paraId: ins.paraId };
-    const read = await ed.readParagraphs({ view: 'accepted', story: loc.story, ...(cell ? {} : { paraIds: [ins.paraId] }) } as Parameters<DocxEditorRef['readParagraphs']>[0]);
-    if (!read.ok) { failed.push({ edit: ins.edit, reason: 'document busy' }); continue; }
+    const read = await ed.readParagraphs((cell ? { view: 'accepted', story: loc.story } : { view: 'accepted', paraIds: [ins.paraId] }) as Parameters<DocxEditorRef['readParagraphs']>[0]);
+    if (!read.ok) { failed.push({ edit: ins.edit, reason: `could not read the paragraph (${(read as { failure?: { code?: string } }).failure?.code ?? 'busy'})` }); continue; }
     if (cell) loc.paraId = read.paragraphs[read.paragraphs.length - 1]?.paraId ?? cell.paraId;
     // New text after a heading is body text unless the AI named a style; never inherit a heading style.
     const anchorStyle = read.paragraphs[0]?.styleId ?? '';
@@ -49,7 +49,7 @@ export async function removeEmptyCreated(ed: DocxEditorRef, created: Map<string,
   const live = new Set((await ed.getProposals()).proposals.map((p) => p.id));
   for (const story of new Set([...created.values()].map((c) => c.story))) {
     const ids = [...created].filter(([, c]) => c.story === story).map(([pid]) => pid);
-    const read = await ed.readParagraphs({ view: 'accepted', story, paraIds: ids } as Parameters<DocxEditorRef['readParagraphs']>[0]);
+    const read = await ed.readParagraphs((story === STORY ? { view: 'accepted', paraIds: ids } : { view: 'accepted', story }) as Parameters<DocxEditorRef['readParagraphs']>[0]);
     if (!read.ok) continue;
     for (const p of read.paragraphs) {
       const owner = created.get(p.paraId);
