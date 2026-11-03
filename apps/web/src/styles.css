@@ -103,3 +103,4 @@ button.link.check { padding: 4px 0; font-size: 12.5px; }
 .voice-log { max-height: 170px; overflow: auto; display: grid; gap: 4px; font-size: 12.5px; background: rgba(0,0,0,.03); border-radius: 8px; padding: 6px 8px; }
 .voice-log p { margin: 0; overflow-wrap: anywhere; white-space: normal; } .voice-log p b { margin-right: 4px; } .cap.live { opacity: .65; } .cap.ai b { color: #1d4ed8; } .cap.work { color: #92400e; }
 .files-web { border-top: 1px solid var(--line); padding-top: 6px; }
+.new-files { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 12px 0; }

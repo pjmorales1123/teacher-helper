@@ -95,6 +95,29 @@ def deck():
     p.save(OUT / "flower-lesson.pptx")
 
 
+def blanks():
+    """Empty starting files for "New Word/Excel/PowerPoint": A4, 1-inch margins, Arial 12; a 16:9 title slide."""
+    from docx.shared import Inches
+    from pptx.util import Inches as PI
+    out = OUT.parent / "blank"
+    out.mkdir(exist_ok=True)
+    d = Document()
+    for s in d.sections:
+        s.page_width, s.page_height = Inches(8.27), Inches(11.69)
+        s.left_margin = s.right_margin = s.top_margin = s.bottom_margin = Inches(1)
+    d.styles["Normal"].font.name = "Arial"
+    d.styles["Normal"].font.size = Pt(12)
+    d.add_paragraph("")
+    d.save(out / "blank.docx")
+    wb = Workbook()
+    wb.active.title = "Sheet1"
+    wb.save(out / "blank.xlsx")
+    p = Presentation()
+    p.slide_width, p.slide_height = PI(13.333), PI(7.5)
+    p.slides.add_slide(p.slide_layouts[0])
+    p.save(out / "blank.pptx")
+
+
 if __name__ == "__main__":
-    lesson_plan(); class_record(); deck()
+    lesson_plan(); class_record(); deck(); blanks()
     print("wrote", sorted(x.name for x in OUT.iterdir()))

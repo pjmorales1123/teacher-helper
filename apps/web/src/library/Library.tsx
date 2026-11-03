@@ -4,6 +4,11 @@ import type { DocumentMeta } from '../lib/types';
 import { UploadZone } from './UploadZone';
 
 const SAMPLES = ['lesson-plan.docx', 'class-record.xlsx', 'flower-lesson.pptx'];
+const NEW_FILES = [
+  { label: 'Word document', file: 'blank.docx', name: 'New document.docx' },
+  { label: 'Excel workbook', file: 'blank.xlsx', name: 'New workbook.xlsx' },
+  { label: 'PowerPoint deck', file: 'blank.pptx', name: 'New presentation.pptx' },
+];
 const KIND_LABEL = { docx: 'Document', xlsx: 'Spreadsheet', pptx: 'Presentation' } as const;
 
 /** Home screen: upload files, open recent ones, try the samples. */
@@ -29,6 +34,12 @@ export function Library({ onOpen }: { onOpen: (id: string) => void }) {
     await upload([new File([blob], name)]);
   };
 
+  /** An empty file (A4, 1-inch margins, Arial 12) the teacher can fill by typing or by asking the AI. */
+  const createNew = async (file: string, name: string) => {
+    const blob = await (await fetch(`/blank/${file}`)).blob();
+    await upload([new File([blob], name)]);
+  };
+
   const remove = async (d: DocumentMeta) => {
     if (!confirm(`Delete "${d.name}" and all its saved versions?`)) return;
     await api.remove(d.id).catch((e: Error) => setError(e.message));
@@ -41,6 +52,7 @@ export function Library({ onOpen }: { onOpen: (id: string) => void }) {
         <h1>Guro Buddy</h1>
         <p>An AI-first editor for lesson plans, class records and slides. Your files stay on this computer.</p>
       </header>
+      <div className="new-files">Start new: {NEW_FILES.map((n) => <button key={n.file} className="primary" onClick={() => createNew(n.file, n.name)} disabled={busy}>{n.label}</button>)}</div>
       <UploadZone busy={busy} onFiles={upload} />
       <div className="samples">Try a sample: {SAMPLES.map((s) => <button key={s} className="chip" onClick={() => trySample(s)} disabled={busy}>{s}</button>)}</div>
       {error && <p className="error">{error}</p>}

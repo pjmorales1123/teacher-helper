@@ -3,11 +3,13 @@
  * It speaks the same WebSocket protocol: after it hears ~1 s of audio it "transcribes" MOCK_SAY, calls
  * edit_document with it, reports the result, then calls apply_changes. Every tool result is printed as JSON.
  * Usage: MOCK_SAY="Make the title bold" node scripts/mock-gemini-live.mjs [port]
+ * With MOCK_SAY_FILE the request is read from that file at each new session (for running many scenarios).
  */
+import { readFileSync } from 'node:fs';
 import { WebSocketServer } from 'ws';
 
 const port = Number(process.argv[2] ?? 8765);
-const say = process.env.MOCK_SAY ?? 'Make the title bold and centered.';
+const sayNow = () => (process.env.MOCK_SAY_FILE ? readFileSync(process.env.MOCK_SAY_FILE, 'utf8').trim() : process.env.MOCK_SAY ?? 'Make the title bold and centered.');
 const silence = Buffer.alloc(4800).toString('base64'); // 100 ms of 24 kHz PCM16
 const wss = new WebSocketServer({ port });
 console.log(`mock gemini live on ${port}`);
@@ -16,6 +18,7 @@ wss.on('connection', (ws, req) => {
   console.log('CONNECT', req.url?.split('?')[0]);
   const send = (m) => ws.send(JSON.stringify(m));
   let chunks = 0;
+  const say = sayNow();
   let step = 0;
   const speak = (text) => {
     send({ serverContent: { outputTranscription: { text }, modelTurn: { parts: [{ inlineData: { mimeType: 'audio/pcm;rate=24000', data: silence } }] } } });
