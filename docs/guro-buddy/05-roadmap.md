@@ -1,6 +1,9 @@
 # Roadmap, spikes, risks, open decisions
 
 ## Phase 0: spikes (2 weeks, throwaway code)
+
+**Status:** BetterOffice and the `claude -p` streaming path passed; see `06-backbone-status.md`.
+Whisper and Tauri packaging spikes are still open.
 | Spike | Pass condition |
 | - | - |
 | BetterOffice on real files | Opens 10 DepEd docx/xlsx/pptx samples with acceptable fidelity; propose/accept API works; WASM load < 1 s |

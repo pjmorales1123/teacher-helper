@@ -1,4 +1,5 @@
 # Teacher Helper
-Self-hosted teacher grading app (DepEd DO 015 s. 2026). Status: design phase, no code.
+Guro Buddy: AI-first docx/xlsx/pptx editor for DepEd teachers, plus the planned grading app (DO 015 s. 2026). Status: working backbone (web + core), no Tauri shell yet.
 Read `docs/brief.md` first, then `docs/guro-buddy/00-overview.md` for the desktop editor plan. Follow global rules: modular files (<150 lines), no secrets in code, `.env` only.
+Run: `npm install && npm run build && npm start`. Tests: `npm test`, `npm run typecheck`, `npm run smoke`.
 Constraints: AI via subscription CLI (`claude -p` / `codex exec`), never an API key. Teacher approves every grade; AI only drafts.

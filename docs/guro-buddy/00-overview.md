@@ -1,6 +1,6 @@
 # Guro Buddy: AI-first document editor for teachers
 
-**Status:** plan (no code). Companion to the grading app in `docs/brief.md`.
+**Status:** working backbone, see `06-backbone-status.md`. Companion to the grading app in `docs/brief.md`.
 
 ## One-line pitch
 An installable desktop app (Windows first) that opens, edits and saves
@@ -43,6 +43,7 @@ own `claude` (or `codex`) subscription CLI is the brain.
 | `03-ai-layer.md` | How the CLI is driven, document tools, proposals, sessions, limits |
 | `04-workflows.md` | The three v1 workflows end to end |
 | `05-roadmap.md` | Phases, spikes, risks, open decisions |
+| `06-backbone-status.md` | What is built and verified now, engine limits, deviations |
 
 ## Relationship to Teacher Helper (grading app)
 Same repo, same Node/TypeScript + SQLite backend, same AI adapter. The

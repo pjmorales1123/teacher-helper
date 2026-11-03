@@ -1,0 +1,21 @@
+{
+  "name": "guro-buddy",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/core",
+    "apps/web"
+  ],
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "npm run build -w @guro/web",
+    "start": "npm run start -w @guro/core",
+    "test": "npm test -w @guro/core && node --test --experimental-strip-types apps/web/src/editor/docx/plan.test.ts",
+    "typecheck": "npm run typecheck -w @guro/core && npm run typecheck -w @guro/web",
+    "smoke": "node scripts/smoke.cjs",
+    "samples": "python3 scripts/make_samples.py"
+  },
+  "engines": {
+    "node": ">=22.13"
+  }
+}
