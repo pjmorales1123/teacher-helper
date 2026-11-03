@@ -6,6 +6,16 @@ import type { Box, DeckSlide } from './deck';
 
 const ALIGN = { left: 'l', center: 'ctr', right: 'r', justify: 'just' } as const;
 
+/**
+ * The context shows line breaks as " / ", but real text can contain " / " too (e.g. "12 / 29").
+ * Try the text as written first, then with " / " read as a line break. Returns "" when not found.
+ */
+export function locate(text: string, find: string): string {
+  if (!find || text.includes(find)) return find;
+  const asLines = find.replace(/ \/ /g, '\n');
+  return text.includes(asLines) ? asLines : find;
+}
+
 /** Pending slide changes carry ids resolved now, so the order they are approved in never matters. */
 export type SlideChange = PendingChange & { ref: { storyId?: string; slideId?: string; rows?: string[][] } };
 
@@ -22,7 +32,7 @@ export function planPptx(result: AiResult, deck: DeckSlide[], turnId: string) {
     const box = boxes.get(e.target);
     const label = `${e.target}: “${e.find || e.replace}”`;
     if (!box) { failed.push({ label, reason: 'unknown text box' }); continue; }
-    const find = e.find.replace(/ \/ /g, '\n');
+    const find = locate(box.text, e.find);
     const start = find ? box.text.indexOf(find) : box.text.length;
     if (start < 0) { failed.push({ label, reason: 'text not found' }); continue; }
     const next = box.text.slice(0, start) + e.replace + box.text.slice(start + find.length);
@@ -37,12 +47,13 @@ export function planPptx(result: AiResult, deck: DeckSlide[], turnId: string) {
     if (op.target && !box) { failed.push({ label, reason: 'unknown text box' }); continue; }
     if (op.slide && !slide) { failed.push({ label, reason: `there is no slide ${op.slide}` }); continue; }
     if (op.op === 'format' && box) {
-      const start = op.find ? box.text.indexOf(op.find) : 0;
+      const found = op.find ? locate(box.text, op.find) : '';
+      const start = op.find ? box.text.indexOf(found) : 0;
       if (start < 0) { failed.push({ label, reason: 'text not found' }); continue; }
       const patch = { ...(op.bold !== undefined && { bold: op.bold }), ...(op.italic !== undefined && { italic: op.italic }),
         ...(op.underline !== undefined && { underline: op.underline ? 'sng' : 'none' }), ...(op.fontSize && { fontSizePt: op.fontSize }),
         ...(op.color && { color: op.color }), ...(op.fontFamily && { fontFamily: op.fontFamily }) };
-      proposals.push({ label, edit: { type: 'formatText', storyId: box.storyId, start, end: op.find ? start + op.find.length : box.text.length, patch } });
+      proposals.push({ label, edit: { type: 'formatText', storyId: box.storyId, start, end: op.find ? start + found.length : box.text.length, patch } });
     } else if (op.op === 'align' && box && op.align) {
       proposals.push({ label, edit: { type: 'setParagraphAlignment', storyId: box.storyId, start: 0, end: box.text.length, alignment: ALIGN[op.align] } });
     } else if (op.op === 'fill' && box && op.fill) {

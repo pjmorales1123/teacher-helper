@@ -30,8 +30,8 @@ contract (`apps/web/src/editor/engine.ts`) as the seam in case an engine must be
 Engine limits found, and how the code handles them:
 - **Word:** new paragraphs cannot be tracked insertions. The adapter inserts empty styled
   paragraphs, fills them through normal proposals, and deletes them again if rejected.
-- **PowerPoint:** no line breaks in proposed or direct text edits, so the AI cannot add bullets
-  or slides yet. The prompt tells the AI this, and it explains the manual step to the teacher.
+- **PowerPoint:** the async API cannot add line breaks or slides. Superseded: the editor now runs in
+  sync mode and supports bullets and slide copies; see `07-ai-operations.md`.
 - **Excel:** proposals are per batch, not per cell; the editor's proposals panel decides them.
 
 ## Deviations from the plan
@@ -52,6 +52,6 @@ Engine limits found, and how the code handles them:
 2. Per-launch token on the local API; today it relies on binding to `127.0.0.1`.
 3. Codex adapter is written but untested (no `codex` CLI in the test environment).
 4. Citations that jump to a paragraph or cell from the chat.
-5. New bullets and slides in PowerPoint once the engine allows paragraph breaks.
+5. Done since: formatting and structure operations, see `07-ai-operations.md`.
 6. Voice grading (whisper.cpp sidecar) and the grading features from the brief.
 7. Blank "New document" templates; today every file starts from an upload.

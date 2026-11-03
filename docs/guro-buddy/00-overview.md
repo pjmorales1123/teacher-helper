@@ -44,6 +44,7 @@ own `claude` (or `codex`) subscription CLI is the brain.
 | `04-workflows.md` | The three v1 workflows end to end |
 | `05-roadmap.md` | Phases, spikes, risks, open decisions |
 | `06-backbone-status.md` | What is built and verified now, engine limits, deviations |
+| `07-ai-operations.md` | AI formatting/structure operations, DepEd knowledge, verified scenarios |
 
 ## Relationship to Teacher Helper (grading app)
 Same repo, same Node/TypeScript + SQLite backend, same AI adapter. The

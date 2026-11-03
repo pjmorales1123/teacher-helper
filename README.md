@@ -16,6 +16,11 @@ The grading app from `docs/brief.md` will become a feature of the same backend l
   - Excel: cell changes appear as ghost values; formulas and formatting are kept.
   - PowerPoint: text changes appear as slide proposals.
   - **Accept all** / **Reject all** in the sidebar, or decide one by one in the editor.
+- The AI also handles formatting and structure: styles, fonts, colors, alignment, spacing, lists,
+  tables, page setup (Word); styles, borders, number formats (Excel); bullets, slide copies, notes,
+  moves and deletes (PowerPoint). Those changes wait in the chat until you tick and apply them.
+- It knows DepEd conventions (DO 016 s. 2026 ILAW lesson plans, DepEd Manual of Style, action
+  research format, class records) from `packages/core/skills/`. See `docs/guro-buddy/07-ai-operations.md`.
 
 ## Requirements
 - Node.js 22.13 or newer.
@@ -45,7 +50,8 @@ npm test
 ```bash
 npm run typecheck
 ```
-With the app running, a browser smoke test (add `--ai` to include one AI edit):
+With the app running, a browser smoke test (add `--ai` to include one AI edit).
+`scripts/scenario.cjs` runs a full AI editing scenario and saves screenshots:
 ```bash
 npm run smoke
 ```

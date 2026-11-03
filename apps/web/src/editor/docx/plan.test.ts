@@ -1,4 +1,4 @@
-// Run with: node --test --experimental-strip-types apps/web/src/editor/docx/plan.test.ts
+// Run with: npm test (root)
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { parseLine, planDocxEdits } from './plan.ts';

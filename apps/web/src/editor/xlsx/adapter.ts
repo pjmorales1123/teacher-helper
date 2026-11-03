@@ -7,6 +7,8 @@ import { cellsToInputs, runXlsxOp } from './ops';
 
 type Ref = { current: XlsxAsyncEditorApi | null };
 const READ_RANGE = 'A1:AZ400';
+/** "0!A1:H9" -> "Written Works A1:H9" for the approval list. */
+const sheetNamer = (names: string[]) => (t: string) => t.replace(/^(\d+)!/, (_, i) => `${names[Number(i)] ?? `Sheet ${i}`} `);
 
 /** Excel adapter: sheets become row lines with cell addresses and formulas; edits become cell proposals. */
 export function createXlsxHandle(ref: Ref): EngineHandle {
@@ -57,7 +59,7 @@ export function createXlsxHandle(ref: Ref): EngineHandle {
       }
       const pending = [];
       for (const [i, op] of result.ops.entries()) {
-        if (op.op !== 'cells') { pending.push({ id: `${turnId}-op${i}`, label: describeOp(op), op }); continue; }
+        if (op.op !== 'cells') { pending.push({ id: `${turnId}-op${i}`, label: describeOp(op, sheetNamer(names)), op }); continue; }
         try { staged.push(...cellsToInputs(op, names)); } catch (e) { failed.push({ label: describeOp(op), reason: (e as Error).message }); }
       }
       if (staged.length) {
