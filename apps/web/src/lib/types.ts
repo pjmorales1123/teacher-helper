@@ -25,6 +25,8 @@ export interface AiOp {
   wrap?: boolean; numberFormat?: string; slide?: number; position?: number;
   orientation?: 'portrait' | 'landscape'; paper?: 'A4' | 'Letter' | 'Legal';
   margins?: { top?: number; bottom?: number; left?: number; right?: number };
+  path?: string; width?: number; height?: number; left?: number; top?: number; placement?: 'before' | 'after';
+  keepWithNext?: boolean; keepTogether?: boolean; pageBreakBefore?: boolean; spaceBefore?: number; spaceAfter?: number; indent?: number;
 }
 
 export interface AiResult { reply: string; edits: AiEdit[]; ops: AiOp[]; dropped?: { op: string; reason: string }[] }

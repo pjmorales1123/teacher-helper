@@ -2,8 +2,9 @@ import type { DocxEditorRef } from '@betteroffice/docx-react';
 import type { AiEdit, AiResult } from '../../lib/types';
 import { describeOp, short } from '../describe';
 import { AI_AUTHOR, runEach, type EngineHandle, type ProposeReport } from '../engine';
-import { buildDocxContext } from './context';
+import { buildDocxContext, type CellMap } from './context';
 import { runDocxOp } from './ops';
+import { renderDocxPages } from './render';
 import { prepareNewParagraphs, removeEmptyCreated } from './paragraphs';
 import { planDocxEdits, type PlannedProposal } from './plan';
 
@@ -18,6 +19,7 @@ const ensure = <T extends { ok: boolean }>(r: T, what: string): Extract<T, { ok:
 /** Word adapter: paragraphs become "[paraId] <Style> text" lines; edits become reviewable proposals. */
 export function createDocxHandle(ref: Ref): EngineHandle {
   const created = new Map<string, string>();
+  let cells: CellMap = new Map();
   const editor = () => {
     if (!ref.current) throw new Error('The document is still loading.');
     return ref.current;
@@ -32,7 +34,8 @@ export function createDocxHandle(ref: Ref): EngineHandle {
     let pending = list;
     while (pending.length) {
       const proposals = pending.map((p) => {
-        const base = { id: p.id, paragraph: { kind: 'session' as const, sessionId, story: STORY, paraId: p.paraId }, suggest: suggest() };
+        const loc = cells.get(p.paraId) ?? { story: STORY, paraId: p.paraId }; // table cells have their own story
+        const base = { id: p.id, paragraph: { kind: 'session' as const, sessionId, ...loc }, suggest: suggest() };
         return p.find
           ? { ...base, op: 'replaceText' as const, search: p.find, replaceWith: p.text, occurrence: 'first' as const }
           : { ...base, op: 'insertText' as const, at: 'end' as const, text: p.text };
@@ -60,14 +63,20 @@ export function createDocxHandle(ref: Ref): EngineHandle {
     async snapshot() {
       const ed = editor();
       const sel = await ed.readSelectionInfo().catch(() => null);
-      return { context: await buildDocxContext(ed), selection: sel?.selectedText || undefined };
+      const ctx = await buildDocxContext(ed);
+      cells = ctx.cells;
+      return { context: ctx.text, selection: sel?.selectedText || undefined };
     },
 
     async propose(result: AiResult, turnId: string): Promise<ProposeReport> {
       const { proposals, inserts } = planDocxEdits(result.edits, turnId);
       const all = await editor().readParagraphs({ view: 'accepted' });
       const texts = new Map(all.ok ? all.paragraphs.map((p) => [p.paraId, p.text]) : []);
-      const namer = (id: string) => (texts.get(id) ? `“${short(texts.get(id)!, 32)}”` : id);
+      const namer = (id: string) => {
+        const cell = /^T(\d+)\.R(\d+)\.C(\d+)$/.exec(id);
+        if (cell) return `table ${cell[1]} row ${cell[2]} column ${cell[3]}`;
+        return texts.get(id) ? `“${short(texts.get(id)!, 32)}”` : id;
+      };
       const failed: { edit: AiEdit; reason: string }[] = [];
       const fills = await prepareNewParagraphs(editor(), inserts, turnId, created, failed);
       const staged = await stageProposals([...proposals, ...fills], failed);
@@ -81,8 +90,10 @@ export function createDocxHandle(ref: Ref): EngineHandle {
 
     async applyPending(changes) {
       await settle(); // decided suggestions become plain text first, so they never block formatting
-      return runEach(changes, (op) => runDocxOp(editor(), op));
+      return runEach(changes, (op) => runDocxOp(editor(), op, cells));
     },
+
+    render: () => renderDocxPages(),
 
     async decideAll(accept: boolean) {
       const ed = editor();

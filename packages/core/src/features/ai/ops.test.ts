@@ -33,3 +33,8 @@ test('normalizeResult carries ops in edit mode and strips them in ask mode', () 
   assert.equal(normalizeResult(raw, 'edit', 'docx')?.ops.length, 1);
   assert.equal(normalizeResult(raw, 'ask', 'docx')?.ops.length, 0);
 });
+
+test('cross-format synonyms are mapped instead of dropped', () => {
+  const r = checkOp({ op: 'align', target: 'T1.R2.C2', align: 'center' }, 'docx');
+  assert.ok('op' in r && r.op.op === 'paragraph');
+});

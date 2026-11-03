@@ -1,5 +1,5 @@
 import type { TextParagraphDraft } from '@betteroffice/pptx';
-import type { Handle } from './deck';
+import { EMU_PER_IN, type Handle } from './deck';
 import type { SlideChange } from './plan';
 
 /** Rewrites a text box line by line, keeping each line's bullet, alignment and run style from the original. */
@@ -18,6 +18,24 @@ function slideIndex(h: Handle, slideId: string): number {
   const i = h.snapshot().slides.findIndex((s) => s.id === slideId);
   if (i < 0) throw new Error('That slide no longer exists.');
   return i;
+}
+
+/** A picture from an allowed folder, keeping its proportions; centered when no position is given. */
+export async function addPicture(h: Handle, c: SlideChange): Promise<void> {
+  const { op, ref } = c;
+  const res = await fetch(`/api/files/image?path=${encodeURIComponent(op.path!)}`);
+  if (!res.ok) throw new Error('That picture is not in the folders Guro Buddy may read.');
+  const blob = await res.blob();
+  const bmp = await createImageBitmap(blob);
+  const bytes = new Uint8Array(await blob.arrayBuffer());
+  let bin = '';
+  for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+  const snap = h.snapshot();
+  const w = Math.round((op.width ?? 3) * EMU_PER_IN);
+  const ht = Math.round((w * bmp.height) / bmp.width);
+  const x = op.left !== undefined ? Math.round(op.left * EMU_PER_IN) : Math.round((snap.widthEmu - w) / 2);
+  const y = op.top !== undefined ? Math.round(op.top * EMU_PER_IN) : Math.round((snap.heightEmu - ht) / 2);
+  h.addPicture(ref.slideId!, { name: op.path!.split(/[\\/]/).pop() ?? 'Picture', rect: { x, y, width: w, height: ht }, contentType: blob.type || 'image/png', mediaBase64: btoa(bin) });
 }
 
 /** Applies one approved structural slide change. */

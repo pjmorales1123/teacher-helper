@@ -6,7 +6,7 @@ export type AiEvent =
   | { type: 'done'; result: AiResult; costUsd?: number; ms: number }
   | { type: 'error'; message: string };
 
-export interface TurnInput { docId: string; mode: AiMode; prompt: string; context: string; selection?: string }
+export interface TurnInput { docId: string; mode: AiMode; prompt: string; context: string; selection?: string; review?: boolean; images?: string[] }
 
 /** POSTs a turn and reads the Server-Sent Events stream, calling onEvent for each event. */
 export async function streamTurn(input: TurnInput, onEvent: (e: AiEvent) => void, signal: AbortSignal) {

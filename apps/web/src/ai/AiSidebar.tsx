@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { api } from '../lib/api';
 import type { AiMode, AiStatus, DocKind } from '../lib/types';
 import type { EngineHandle } from '../editor/engine';
+import { FilesPanel } from './FilesPanel';
 import { Message } from './Message';
 import { QUICK_PROMPTS } from './prompts';
 import { useAiChat } from './useAiChat';
@@ -38,6 +39,7 @@ export function AiSidebar({ docId, kind, handle }: Props) {
     <aside className="ai">
       <header className="ai-head">
         <strong>Guro Buddy AI</strong>
+        <FilesPanel />
         <span className={`ai-cli ${cli?.installed ? 'on' : 'off'}`} title={cli?.version ?? ''}>
           {cli ? (cli.installed ? `${cli.backend} · ${cli.model}` : `${cli.backend} not found`) : '…'}
         </span>
@@ -57,15 +59,15 @@ export function AiSidebar({ docId, kind, handle }: Props) {
             {QUICK_PROMPTS[kind].map((p) => <button key={p} className="chip" onClick={() => submit(p)} disabled={!handle}>{p}</button>)}
           </div>
         )}
-        {chat.messages.map((m) => <Message key={m.key} m={m} busy={chat.busy} onApply={chat.apply} />)}
+        {chat.messages.map((m) => <Message key={m.key} m={m} busy={chat.busy} onApply={chat.apply} onCheck={chat.check} />)}
         {chat.status && <div className="ai-status">{chat.status}</div>}
         <div ref={end} />
       </div>
 
       {handle?.decideAll && (
         <div className="ai-decide">
-          <button onClick={() => handle.decideAll!(true)}>Accept all suggestions</button>
-          <button onClick={() => handle.decideAll!(false)}>Reject all</button>
+          <button onClick={() => chat.decideAll(true)} disabled={chat.busy}>Accept all suggestions</button>
+          <button onClick={() => chat.decideAll(false)} disabled={chat.busy}>Reject all</button>
         </div>
       )}
 

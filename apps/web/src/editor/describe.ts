@@ -11,7 +11,8 @@ function formatBits(op: AiOp): string {
   const bits = [op.bold && 'bold', op.italic && 'italic', op.underline && 'underline', op.fontSize && `${op.fontSize} pt`,
     op.fontFamily, op.color && `color #${op.color}`, op.highlight && `highlight #${op.highlight}`, op.fill && `fill #${op.fill}`,
     op.align && `align ${op.align}`, op.valign && `v-align ${op.valign}`, op.wrap && 'wrap text', op.border && `${op.border} borders`,
-    op.lineSpacing && `line spacing ${op.lineSpacing}`, op.list && `${op.list} list`, op.styleId && `style ${op.styleId}`];
+    op.lineSpacing && `line spacing ${op.lineSpacing}`, op.spaceBefore !== undefined && `${op.spaceBefore} pt before`, op.spaceAfter !== undefined && `${op.spaceAfter} pt after`,
+    op.indent !== undefined && `first-line indent ${op.indent}"`, op.keepWithNext && 'keep with next', op.keepTogether && 'keep lines together', op.pageBreakBefore && 'start on a new page', op.list && `${op.list} list`, op.styleId && `style ${op.styleId}`];
   return bits.filter(Boolean).join(', ');
 }
 
@@ -26,6 +27,10 @@ export function describeOp(op: AiOp, namer?: Namer): string {
     case 'delete': return `Delete ${tgt(op.target)}${op.to ? ` through ${tgt(op.to)}` : ''}`;
     case 'pageSetup': return `Page setup: ${[op.paper, op.orientation, op.margins && `margins ${Object.entries(op.margins).map(([k, v]) => `${k} ${v}"`).join(' ')}`].filter(Boolean).join(', ')}`;
     case 'pageBreak': return `Page break after ${tgt(op.target)}`;
+    case 'signatories': return `Signatories after ${tgt(op.target)}: ${op.rows?.[0]?.length} side by side (${short(op.rows?.find((r) => r.some((c) => /[A-Z]{3}/.test(c) && !/[a-z]/.test(c)))?.join(', ') ?? '', 60)})`;
+    case 'resize': return `Resize ${tgt(op.target)}${op.width ? ` to ${op.width}" wide` : ''}${op.height ? `, ${op.height}" tall` : ''}${op.left !== undefined || op.top !== undefined ? ', moved' : ''}`;
+    case 'image': if (op.slide) return `Picture ${short(op.path?.split(/[\\/]/).pop() ?? '', 40)} on slide ${op.slide}${op.width ? `, ${op.width}" wide` : ''}`;
+      return `Picture ${short(op.path?.split(/[\\/]/).pop() ?? '', 40)} ${op.placement === 'before' ? 'before' : 'after'} ${tgt(op.target)}${op.width ? `, ${op.width}" wide` : ''}, ${op.align ?? 'center'}`;
     case 'cells': return `Fill ${op.rows?.length}×${op.rows?.[0]?.length} cells from ${op.target}`;
     case 'numberFormat': return `Number format ${op.numberFormat} on ${op.target}`;
     case 'align': return `Align ${tgt(op.target)} ${op.align}`;

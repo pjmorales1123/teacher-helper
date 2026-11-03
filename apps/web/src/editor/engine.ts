@@ -25,6 +25,8 @@ export interface EngineHandle {
   propose(result: AiResult, turnId: string): Promise<ProposeReport>;
   /** Apply pending changes the teacher approved, in order. Each one is a normal undo step. */
   applyPending(changes: PendingChange[]): Promise<ApplyReport>;
+  /** View step: the pages/slides/sheet as the teacher sees them, as PNG data URLs (most relevant first). */
+  render(): Promise<string[]>;
   /** Accept or reject every pending AI suggestion, when the engine supports it. */
   decideAll?(accept: boolean): Promise<void>;
   /** Serialize to Office bytes, settling any decided suggestions first. */

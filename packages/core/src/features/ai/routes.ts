@@ -1,6 +1,7 @@
 import type { FastifyInstance } from 'fastify';
 import type { Config } from '../../config.ts';
 import type { DocumentStore } from '../documents/store.ts';
+import type { FolderSettings } from '../files/folders.ts';
 import { runCli } from './cli.ts';
 import type { History } from './history.ts';
 import { systemPrompt, userMessage } from './prompt.ts';
@@ -12,7 +13,7 @@ let running = 0;
 const MAX_PARALLEL = 2;
 
 /** POST /api/ai/turn streams Server-Sent Events: status, delta, then done or error. */
-export function aiRoutes(app: FastifyInstance, cfg: Config, store: DocumentStore, history: History) {
+export function aiRoutes(app: FastifyInstance, cfg: Config, store: DocumentStore, history: History, folders: FolderSettings) {
   app.get<{ Params: { id: string } }>('/api/documents/:id/messages', async (req) => history.list(req.params.id));
   app.delete<{ Params: { id: string } }>('/api/documents/:id/messages', async (req, reply) => {
     history.clear(req.params.id);
@@ -31,7 +32,11 @@ export function aiRoutes(app: FastifyInstance, cfg: Config, store: DocumentStore
       ...body, kind: doc.kind, mode: body.mode === 'ask' ? 'ask' : 'edit',
       prompt: body.prompt.slice(0, 4000), context: body.context.slice(0, MAX_CONTEXT),
       selection: typeof body.selection === 'string' ? body.selection.slice(0, 8000) : undefined,
+      review: body.review === true,
+      images: Array.isArray(body.images) ? body.images.filter((x) => typeof x === 'string' && x.startsWith('data:image/png;base64,')).slice(0, 8) : [],
     };
+    const files = (turn.images ?? []).map((url, i) => ({ name: `page-${i + 1}.png`, data: Buffer.from(url.slice(url.indexOf(',') + 1), 'base64') }));
+    const allowed = folders.list();
     const recent = history.recent(doc.id);
 
     reply.hijack();
@@ -45,11 +50,11 @@ export function aiRoutes(app: FastifyInstance, cfg: Config, store: DocumentStore
     const started = Date.now();
     running++;
     try {
-      send({ type: 'status', text: 'Reading your document…' });
-      const out = await runCli(cfg, { system: systemPrompt(doc.kind, turn.mode), message: userMessage(turn, recent), emit: send, signal: ctrl.signal });
+      send({ type: 'status', text: turn.review ? 'Checking the result…' : 'Reading your document…' });
+      const out = await runCli(cfg, { system: systemPrompt(doc.kind, turn.mode, allowed, turn.review), message: userMessage(turn, recent), emit: send, signal: ctrl.signal, folders: allowed, files });
       const result = out.isError ? null : normalizeResult(out.structured, turn.mode, doc.kind);
       if (!result) throw new Error(friendly(out.text));
-      history.add(doc.id, 'user', turn.prompt);
+      history.add(doc.id, 'user', turn.review ? `Check the result of: ${turn.prompt}` : turn.prompt);
       history.add(doc.id, 'assistant', result.reply, result.edits);
       send({ type: 'done', result, costUsd: out.costUsd, ms: Date.now() - started });
     } catch (err) {

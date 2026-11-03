@@ -5,8 +5,8 @@ import { locate, planPptx } from './plan.ts';
 
 const deck: DeckSlide[] = [{
   n: 1, id: 'sl1', title: 'Parts', notes: '', layout: 'Title', boxes: [
-    { id: 'S1.T1', slide: 1, slideId: 'sl1', shapeId: 'sh1', storyId: 'st1', text: 'Parts of a Flower', name: 'Title', wIn: 8, hIn: 1, fontPt: 40, capacity: 26 },
-    { id: 'S1.T2', slide: 1, slideId: 'sl1', shapeId: 'sh2', storyId: 'st2', text: 'Stamen\nPistil', name: 'Body', wIn: 8, hIn: 4, fontPt: 24, capacity: 200 },
+    { id: 'S1.T1', slide: 1, slideId: 'sl1', shapeId: 'sh1', storyId: 'st1', text: 'Parts of a Flower', name: 'Title', wIn: 8, hIn: 1, xIn: 1, yIn: 0.5, fontPt: 40, capacity: 26 },
+    { id: 'S1.T2', slide: 1, slideId: 'sl1', shapeId: 'sh2', storyId: 'st2', text: 'Stamen\nPistil', name: 'Body', wIn: 8, hIn: 4, xIn: 1, yIn: 2, fontPt: 24, capacity: 200 },
   ],
 }];
 const result = (over: object) => ({ reply: '', edits: [], ops: [], ...over });
@@ -18,7 +18,7 @@ test('capacity grows with box size and shrinks with font size', () => {
 
 test('context lists boxes with size, font, capacity and notes', () => {
   const c = deckContext(deck);
-  assert.match(c, /\[S1\.T2\] \(Body, 8\.0x4\.0in, 24pt, fits ~200 chars\) Stamen \/ Pistil/);
+  assert.match(c, /\[S1\.T2\] \(Body, 8\.0x4\.0in at 1\.0,2\.0, 24pt, fits ~200 chars\) Stamen \/ Pistil/);
   assert.match(c, /NOTES: \(none\)/);
 });
 
@@ -48,4 +48,18 @@ test('formatting, notes and fills are proposals; structure is pending; unknown t
 test('" / " is literal text when the box contains it, otherwise a line break', () => {
   assert.equal(locate('2 / 29', '2 / 29'), '2 / 29');
   assert.equal(locate('Stamen\nPistil', 'Stamen / Pistil'), 'Stamen\nPistil');
+});
+
+test('formatting a box in the same turn as replacing its text covers the new text', () => {
+  const p = planPptx(result({ edits: [{ target: 'S1.T1', find: 'Parts of a Flower', replace: 'Flower Parts and What They Do' }],
+    ops: [{ op: 'format', target: 'S1.T1', fontSize: 28 }] }), deck, 't');
+  const f = p.proposals[1].edit as { start: number; end: number };
+  assert.deepEqual([f.start, f.end], [0, 'Flower Parts and What They Do'.length]);
+});
+
+test('resize keeps unspecified sides and becomes a canvas proposal; slide pictures wait for approval', () => {
+  const p = planPptx(result({ ops: [{ op: 'resize', target: 'S1.T1', width: 9 }, { op: 'image', slide: 1, path: '/p/a.png' }] }), deck, 't');
+  const r = p.proposals[0].edit as { type: string; rect: { x: number; width: number; height: number } };
+  assert.deepEqual([r.type, r.rect.x, r.rect.width, r.rect.height], ['setShapeRect', 914400, 9 * 914400, 914400]);
+  assert.equal(p.pending[0].op.op, 'image');
 });

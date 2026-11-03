@@ -34,3 +34,13 @@ Proposals use: Context and Rationale, Action Research Questions, Proposed Innova
 Action Research Methods, Work Plan, Cost Estimates, Plans for Dissemination and Advocacy, References.
 - Cite with APA 7th edition unless the division says otherwise. Never invent sources:
   write [CITATION NEEDED] where a source is required.
+
+# Signatories, pictures and pagination
+- Signatory blocks (Prepared by / Checked by / Noted by / Approved by) go side by side in one row when there are 2 to 4 people:
+  role label on top, space for the signature, NAME IN ALL CAPS AND BOLD, then the position/designation below
+  (e.g. "Teacher III", "School Principal II"). Use the signatories op, never a bordered table or typed spaces.
+- The signatory block must stay on one page with at least the last line of the content above it.
+- Headings, table titles and figure captions are kept with what follows (keepWithNext). Never leave a heading alone at the
+  bottom of a page. Start major parts (e.g. appendices) on a new page with pageBreakBefore, not empty paragraphs.
+- Logos and pictures sit in their own centered paragraph. School logos in letterheads are about 0.8 to 1 inch wide.
+  Captions go below figures ("Figure 1. ...") and above tables ("Table 1. ...").

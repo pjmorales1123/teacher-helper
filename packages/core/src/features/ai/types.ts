@@ -22,6 +22,8 @@ export interface AiOp {
   wrap?: boolean; numberFormat?: string; slide?: number; position?: number;
   orientation?: 'portrait' | 'landscape'; paper?: 'A4' | 'Letter' | 'Legal';
   margins?: { top?: number; bottom?: number; left?: number; right?: number };
+  path?: string; width?: number; height?: number; left?: number; top?: number; placement?: 'before' | 'after';
+  keepWithNext?: boolean; keepTogether?: boolean; pageBreakBefore?: boolean; spaceBefore?: number; spaceAfter?: number; indent?: number;
 }
 
 export interface AiResult { reply: string; edits: AiEdit[]; ops: AiOp[]; dropped?: { op: string; reason: string }[] }
@@ -34,6 +36,9 @@ export interface AiTurnRequest {
   /** Document snapshot rendered by the client with stable ids, e.g. "[p:1A2B] text". */
   context: string;
   selection?: string;
+  /** View step: rendered pages/slides as PNG data URLs, and the request being checked. */
+  review?: boolean;
+  images?: string[];
 }
 
 /** Events sent to the browser over Server-Sent Events. */

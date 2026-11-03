@@ -3,9 +3,9 @@ import type { AiOp } from './types.ts';
 
 /** Structured operations each engine can perform, beyond plain text edits. */
 export const OPS_BY_KIND: Record<DocKind, readonly string[]> = {
-  docx: ['style', 'format', 'paragraph', 'table', 'delete', 'pageSetup', 'pageBreak'],
+  docx: ['style', 'format', 'paragraph', 'table', 'delete', 'pageSetup', 'pageBreak', 'signatories', 'image'],
   xlsx: ['cells', 'style', 'numberFormat'],
-  pptx: ['format', 'align', 'notes', 'fill', 'bullets', 'duplicateSlide', 'deleteSlide', 'moveSlide'],
+  pptx: ['format', 'align', 'notes', 'fill', 'bullets', 'duplicateSlide', 'deleteSlide', 'moveSlide', 'resize', 'image'],
 };
 
 const str = { type: 'string' } as const;
@@ -28,7 +28,8 @@ export const OP_ITEM_SCHEMA = {
     valign: { type: 'string', enum: ['top', 'middle', 'bottom'] },
     lineSpacing: num, list: { type: 'string', enum: ['bullet', 'numbered'] },
     border: { type: 'string', enum: ['all', 'outer', 'inner', 'bottom', 'none'] },
-    wrap: bool, numberFormat: str, slide: num, position: num,
+    wrap: bool, numberFormat: str, slide: num, position: num, path: str, width: num, height: num, left: num, top: num, placement: { type: 'string', enum: ['before', 'after'] },
+    keepWithNext: bool, keepTogether: bool, pageBreakBefore: bool, spaceBefore: num, spaceAfter: num, indent: num,
     orientation: { type: 'string', enum: ['portrait', 'landscape'] },
     paper: { type: 'string', enum: ['A4', 'Letter', 'Legal'] },
     margins: { type: 'object', additionalProperties: false, properties: { top: num, bottom: num, left: num, right: num } },
@@ -36,12 +37,15 @@ export const OP_ITEM_SCHEMA = {
 } as const;
 
 const HEX = /^#?([0-9a-f]{6})$/i;
-const needsTarget = new Set(['style', 'format', 'paragraph', 'table', 'delete', 'pageBreak', 'cells', 'numberFormat', 'align', 'fill', 'bullets']);
+const needsTarget = new Set(['signatories', 'resize', 'style', 'format', 'paragraph', 'table', 'delete', 'pageBreak', 'cells', 'numberFormat', 'align', 'fill', 'bullets']);
 
 /** Returns a cleaned op, or a reason it was dropped. Never trusts the model's output shape. */
 export function checkOp(raw: unknown, kind: DocKind): { op: AiOp } | { reason: string } {
   if (!raw || typeof raw !== 'object') return { reason: 'not an object' };
   const o = { ...(raw as Record<string, unknown>) } as AiOp & Record<string, unknown>;
+  // Harmless synonyms across formats: "align" in Word is a paragraph op, "paragraph" with align on slides is "align".
+  if (kind === 'docx' && o.op === 'align') o.op = 'paragraph';
+  if (kind === 'pptx' && o.op === 'paragraph' && o.align) o.op = 'align';
   if (!OPS_BY_KIND[kind].includes(o.op)) return { reason: `"${o.op}" is not available for ${kind}` };
   if (needsTarget.has(o.op) && typeof o.target !== 'string') return { reason: `${o.op} needs a target` };
   for (const key of ['color', 'highlight', 'fill'] as const) {
@@ -60,6 +64,17 @@ export function checkOp(raw: unknown, kind: DocKind): { op: AiOp } | { reason: s
   if (o.op === 'notes' && (typeof o.slide !== 'number' || typeof o.text !== 'string')) return { reason: 'notes needs slide and text' };
   if (['duplicateSlide', 'deleteSlide', 'moveSlide'].includes(o.op) && typeof o.slide !== 'number') return { reason: `${o.op} needs slide` };
   if (o.op === 'moveSlide' && typeof o.position !== 'number') return { reason: 'moveSlide needs position' };
+  if (o.op === 'signatories' && !(Array.isArray(o.rows) && o.rows.length >= 2 && o.rows.length <= 8 && o.rows.every((r) => Array.isArray(r) && r.length >= 1 && r.length <= 4 && r.length === o.rows![0].length))) {
+    return { reason: 'signatories needs 2 to 8 rows of 1 to 4 equal columns' };
+  }
+  if (o.op === 'image' && kind === 'docx' && typeof o.target !== 'string') return { reason: 'image needs a target paragraph' };
+  if (o.op === 'image' && kind === 'pptx' && typeof o.slide !== 'number') return { reason: 'image needs a slide number' };
+  if (o.op === 'resize' && o.width === undefined && o.height === undefined && o.left === undefined && o.top === undefined) return { reason: 'resize needs width, height, left or top' };
+  for (const k of ['height', 'left', 'top'] as const) if (o[k] !== undefined && !(o[k]! >= 0 && o[k]! <= 20)) return { reason: `${k} must be 0 to 20 inches` };
+  if (o.op === 'image' && (typeof o.path !== 'string' || !/\.(png|jpe?g|gif|webp)$/i.test(o.path))) return { reason: 'image needs the full path of a picture file' };
+  if (o.width !== undefined && !(o.width > 0.2 && o.width <= 9)) return { reason: 'width must be 0.2 to 9 inches' };
+  for (const k of ['spaceBefore', 'spaceAfter'] as const) if (o[k] !== undefined && !(o[k]! >= 0 && o[k]! <= 72)) return { reason: `${k} must be 0 to 72 pt` };
+  if (o.indent !== undefined && !(o.indent >= -1 && o.indent <= 3)) return { reason: 'indent must be -1 to 3 inches' };
   if (o.op === 'style' && kind === 'docx' && typeof o.styleId !== 'string') return { reason: 'style needs styleId' };
   if (o.margins) {
     for (const v of Object.values(o.margins)) if (!(typeof v === 'number' && v >= 0.3 && v <= 3)) return { reason: 'margins must be 0.3 to 3 inches' };

@@ -1,7 +1,8 @@
 import type { DocxEditorRef } from '@betteroffice/docx-react';
 import type { AiOp } from '../../lib/types';
 import { caretAtEnd, command, selectInParagraph, selectRange, setToggle } from './select';
-import { paragraphText, STORY, styleIds, syncParts, tableCells, tick, version } from './session';
+import { image, signatories } from './blocks';
+import { paragraphText, setAttrs, STORY, styleIds, syncParts, tableCells, tick, version } from './session';
 
 const ALIGN = { left: 'left', center: 'center', right: 'right', justify: 'both' } as const;
 const PAPER = { A4: [11906, 16838], Letter: [12240, 15840], Legal: [12240, 20160] } as const;
@@ -31,6 +32,16 @@ async function paragraph(ed: DocxEditorRef, op: AiOp) {
     const r = await ed.readParagraphs({ view: 'accepted', paraIds: [op.target!] });
     if (r.ok && !r.paragraphs[0]?.list) await command(ed, op.list === 'bullet' ? 'bulletList' : 'numberedList', null);
   }
+  const typed = {
+    ...(op.spaceBefore !== undefined && { spaceBefore: Math.round(op.spaceBefore * 20) }),
+    ...(op.spaceAfter !== undefined && { spaceAfter: Math.round(op.spaceAfter * 20) }),
+    ...(op.indent !== undefined && { indentFirstLine: Math.round(op.indent * 1440) }),
+  };
+  const other = {
+    ...(op.keepWithNext !== undefined && { keepNext: op.keepWithNext }), ...(op.keepTogether !== undefined && { keepLines: op.keepTogether }),
+    ...(op.pageBreakBefore !== undefined && { pageBreakBefore: op.pageBreakBefore }),
+  };
+  if (Object.keys(typed).length || Object.keys(other).length) await setAttrs(ed, op.target!, typed, other);
 }
 
 async function table(ed: DocxEditorRef, op: AiOp) {
@@ -90,8 +101,28 @@ async function pageSetup(ed: DocxEditorRef, op: AiOp) {
   }
 }
 
+/** Formatting inside a table cell goes straight to the session (cells have their own story). */
+async function cellOp(ed: DocxEditorRef, op: AiOp, loc: { story: string; paraId: string }) {
+  const { pe, ses } = syncParts(ed);
+  const text = await paragraphText(ed, loc.paraId, loc.story);
+  const start = op.find ? text.indexOf(op.find) : 0;
+  if (start < 0) throw new Error(`“${op.find}” is not in that cell any more.`);
+  const range = { story: loc.story, start: { paraId: loc.paraId, offset: start }, end: { paraId: loc.paraId, offset: op.find ? start + op.find.length : text.length } };
+  if (op.op === 'format') {
+    ses.formatRange(range, { ...(op.bold !== undefined && { bold: op.bold }), ...(op.italic !== undefined && { italic: op.italic }),
+      ...(op.underline !== undefined && { underline: op.underline }), ...(op.fontSize && { fontSize: op.fontSize }),
+      ...(op.color && { color: { rgb: op.color } }), ...(op.highlight && { highlight: op.highlight }), ...(op.fontFamily && { fontFamily: { ascii: op.fontFamily, hAnsi: op.fontFamily } }) });
+  } else if (op.op === 'paragraph' && op.align) {
+    ses.setParagraphAttrs(range, { alignment: ALIGN[op.align] });
+  } else throw new Error(`"${op.op}" cannot be used inside a table cell.`);
+  pe.syncYrsInputState(true);
+  await tick();
+}
+
 /** Applies one approved Word operation. Throws with a teacher-readable reason on failure. */
-export async function runDocxOp(ed: DocxEditorRef, op: AiOp): Promise<void> {
+export async function runDocxOp(ed: DocxEditorRef, op: AiOp, cells: Map<string, { story: string; paraId: string }> = new Map()): Promise<void> {
+  const cell = op.target ? cells.get(op.target) : undefined;
+  if (cell) return cellOp(ed, op, cell);
   switch (op.op) {
     case 'style':
       if (!styleIds(ed).includes(op.styleId!)) throw new Error(`This document has no "${op.styleId}" style.`);
@@ -103,6 +134,8 @@ export async function runDocxOp(ed: DocxEditorRef, op: AiOp): Promise<void> {
       return edit(ed, [{ op: 'deleteParagraphs', story: STORY, firstParaId: op.target, lastParaId: op.to ?? op.target }]);
     case 'pageSetup': return pageSetup(ed, op);
     case 'pageBreak': await caretAtEnd(ed, op.target!); return command(ed, 'insertPageBreak', null);
+    case 'signatories': await paragraphText(ed, op.target!); return signatories(ed, op);
+    case 'image': await paragraphText(ed, op.target!); return image(ed, op);
     default: throw new Error(`Word cannot do "${op.op}".`);
   }
 }

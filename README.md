@@ -19,6 +19,10 @@ The grading app from `docs/brief.md` will become a feature of the same backend l
 - The AI also handles formatting and structure: styles, fonts, colors, alignment, spacing, lists,
   tables, page setup (Word); styles, borders, number formats (Excel); bullets, slide copies, notes,
   moves and deletes (PowerPoint). Those changes wait in the chat until you tick and apply them.
+- It checks its own work: after changes are applied it looks at the rendered pages/slides, compares them with your request,
+  and proposes fixes (things split across pages, text overflowing, pictures covering text). "Check the result" re-runs it.
+- It can open files on your computer in folders you allow (Files button): "fill this table with the results in my quiz file".
+  It can also place pictures from those folders (school logo, figures).
 - It knows DepEd conventions (DO 016 s. 2026 ILAW lesson plans, DepEd Manual of Style, action
   research format, class records) from `packages/core/skills/`. See `docs/guro-buddy/07-ai-operations.md`.
 

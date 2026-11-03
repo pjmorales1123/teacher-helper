@@ -73,6 +73,14 @@ export function createXlsxHandle(ref: Ref): EngineHandle {
 
     applyPending: (changes) => runEach(changes, (op) => runXlsxOp(api(), op)),
 
+    async render() {
+      const png = await api().renderRangePng({ scale: 1 });
+      const bytes = png instanceof Uint8Array ? png : new Uint8Array(png as unknown as ArrayBuffer);
+      let bin = '';
+      for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+      return [`data:image/png;base64,${btoa(bin)}`];
+    },
+
     async decideAll(accept: boolean) {
       for (const proposalId of [...proposalIds]) {
         const r = accept

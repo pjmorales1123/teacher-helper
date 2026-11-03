@@ -9,6 +9,8 @@ import { documentRoutes } from './features/documents/routes.ts';
 import { createHistory } from './features/ai/history.ts';
 import { aiRoutes } from './features/ai/routes.ts';
 import { aiStatusRoute } from './features/ai/status.ts';
+import { createFolderSettings } from './features/files/folders.ts';
+import { fileRoutes } from './features/files/routes.ts';
 
 /** Builds the HTTP app. Kept separate from server.ts so tests can call app.inject(). */
 export async function buildApp(cfg: Config, opts: { logger?: boolean } = {}) {
@@ -22,7 +24,9 @@ export async function buildApp(cfg: Config, opts: { logger?: boolean } = {}) {
 
   const store = createDocumentStore(db, cfg.dataDir);
   documentRoutes(app, store);
-  aiRoutes(app, cfg, store, createHistory(db));
+  const folders = createFolderSettings(db);
+  aiRoutes(app, cfg, store, createHistory(db), folders);
+  fileRoutes(app, folders);
   aiStatusRoute(app, cfg);
   app.get('/api/health', async () => ({ ok: true }));
 

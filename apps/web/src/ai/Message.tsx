@@ -1,14 +1,15 @@
 import { PendingList } from './PendingList';
 import type { UiMessage } from './useAiChat';
 
-interface Props { m: UiMessage; busy: boolean; onApply: (key: string, ids: string[]) => void }
+interface Props { m: UiMessage; busy: boolean; onApply: (key: string, ids: string[]) => void; onCheck: (key: string) => void }
 
 /** One chat bubble. Assistant bubbles show suggestions placed, changes awaiting approval, and failures. */
-export function Message({ m, busy, onApply }: Props) {
+export function Message({ m, busy, onApply, onCheck }: Props) {
   if (m.role === 'user') return <div className="msg msg-user">{m.text}</div>;
   const r = m.report;
   return (
-    <div className="msg msg-ai">
+    <div className={`msg msg-ai${m.review ? ' msg-review' : ''}`}>
+      {m.review && <div className="msg-tag">Checked the result</div>}
       {m.text ? <div className="msg-text">{m.text}</div> : m.streaming ? <div className="msg-dots">…</div> : null}
       {m.error && <div className="msg-error">{m.error}</div>}
       {r && (
@@ -24,6 +25,9 @@ export function Message({ m, busy, onApply }: Props) {
         </div>
       )}
       {!r && m.edits.length > 0 && !m.streaming && <div className="msg-meta">{m.edits.length} edit(s) suggested in an earlier session.</div>}
+      {r && !m.review && !m.streaming && (
+        <button className="link check" disabled={busy} onClick={() => onCheck(m.key)}>{m.checked ? 'Check again' : 'Check the result'}</button>
+      )}
       {m.meta && <div className="msg-meta">{m.meta}</div>}
     </div>
   );

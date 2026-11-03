@@ -2,7 +2,7 @@ import type { ProposalEdit } from '@betteroffice/pptx';
 import type { AiOp, AiResult } from '../../lib/types';
 import { describeOp, short } from '../describe';
 import type { PendingChange, ProposeReport } from '../engine';
-import type { Box, DeckSlide } from './deck';
+import { EMU_PER_IN, type Box, type DeckSlide } from './deck';
 
 const ALIGN = { left: 'l', center: 'ctr', right: 'r', justify: 'just' } as const;
 
@@ -26,16 +26,21 @@ export function planPptx(result: AiResult, deck: DeckSlide[], turnId: string) {
   const pending: SlideChange[] = [];
   const failed: ProposeReport['failed'] = [];
   const namer = (id: string) => { const b = boxes.get(id); return b ? `slide ${b.slide} “${short(b.text.split('\n')[0], 28)}”` : id; };
+  // Proposals in one group apply in order, so later ranges must use the text as earlier edits leave it.
+  const current = new Map(deck.flatMap((s) => s.boxes).map((b) => [b.storyId, b.text]));
+  const textOf = (b: Box) => current.get(b.storyId) ?? b.text;
   const add = (op: AiOp, ref: SlideChange['ref']) => pending.push({ id: `${turnId}-p${pending.length}`, label: describeOp(op, namer), op, ref });
 
   for (const e of result.edits) {
     const box = boxes.get(e.target);
     const label = `${e.target}: “${e.find || e.replace}”`;
     if (!box) { failed.push({ label, reason: 'unknown text box' }); continue; }
-    const find = locate(box.text, e.find);
-    const start = find ? box.text.indexOf(find) : box.text.length;
+    const text = textOf(box);
+    const find = locate(text, e.find);
+    const start = find ? text.indexOf(find) : text.length;
     if (start < 0) { failed.push({ label, reason: 'text not found' }); continue; }
-    const next = box.text.slice(0, start) + e.replace + box.text.slice(start + find.length);
+    const next = text.slice(0, start) + e.replace + text.slice(start + find.length);
+    current.set(box.storyId, next);
     if (/[\r\n]/.test(e.replace)) { add({ op: 'bullets', target: box.id, lines: next.split(/\r?\n/) }, { storyId: box.storyId }); continue; }
     proposals.push({ label, edit: { type: 'replaceText', storyId: box.storyId, start, end: start + find.length, text: e.replace } });
   }
@@ -47,19 +52,26 @@ export function planPptx(result: AiResult, deck: DeckSlide[], turnId: string) {
     if (op.target && !box) { failed.push({ label, reason: 'unknown text box' }); continue; }
     if (op.slide && !slide) { failed.push({ label, reason: `there is no slide ${op.slide}` }); continue; }
     if (op.op === 'format' && box) {
-      const found = op.find ? locate(box.text, op.find) : '';
-      const start = op.find ? box.text.indexOf(found) : 0;
+      const text = textOf(box);
+      const found = op.find ? locate(text, op.find) : '';
+      const start = op.find ? text.indexOf(found) : 0;
       if (start < 0) { failed.push({ label, reason: 'text not found' }); continue; }
       const patch = { ...(op.bold !== undefined && { bold: op.bold }), ...(op.italic !== undefined && { italic: op.italic }),
         ...(op.underline !== undefined && { underline: op.underline ? 'sng' : 'none' }), ...(op.fontSize && { fontSizePt: op.fontSize }),
         ...(op.color && { color: op.color }), ...(op.fontFamily && { fontFamily: op.fontFamily }) };
-      proposals.push({ label, edit: { type: 'formatText', storyId: box.storyId, start, end: op.find ? start + found.length : box.text.length, patch } });
+      proposals.push({ label, edit: { type: 'formatText', storyId: box.storyId, start, end: op.find ? start + found.length : text.length, patch } });
     } else if (op.op === 'align' && box && op.align) {
-      proposals.push({ label, edit: { type: 'setParagraphAlignment', storyId: box.storyId, start: 0, end: box.text.length, alignment: ALIGN[op.align] } });
+      proposals.push({ label, edit: { type: 'setParagraphAlignment', storyId: box.storyId, start: 0, end: textOf(box).length, alignment: ALIGN[op.align] } });
     } else if (op.op === 'fill' && box && op.fill) {
       proposals.push({ label, edit: { type: 'setShapeFill', slideId: box.slideId, shapeId: box.shapeId, color: op.fill } });
     } else if (op.op === 'notes' && slide) {
       proposals.push({ label, edit: { type: 'setSlideNotes', slideId: slide.id, text: op.text ?? '' } });
+    } else if (op.op === 'resize' && box) {
+      const emu = (v: number | undefined, fallback: number) => Math.round((v ?? fallback) * EMU_PER_IN);
+      proposals.push({ label, edit: { type: 'setShapeRect', slideId: box.slideId, shapeId: box.shapeId,
+        rect: { x: emu(op.left, box.xIn), y: emu(op.top, box.yIn), width: emu(op.width, box.wIn), height: emu(op.height, box.hIn) } } });
+    } else if (op.op === 'image' && slide) {
+      add(op, { slideId: slide.id });
     } else if (op.op === 'bullets' && box) {
       add(op, { storyId: box.storyId });
     } else if (['duplicateSlide', 'deleteSlide', 'moveSlide'].includes(op.op) && slide) {

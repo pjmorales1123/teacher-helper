@@ -27,6 +27,8 @@ export function createClaudeStreamParser(emit: (e: AiEvent) => void) {
           emit({ type: 'delta', text });
         }
       }
+    } else if (e.type === 'assistant') {
+      for (const c of e.message?.content ?? []) if (c?.type === 'tool_use' && c.name !== 'StructuredOutput') emit({ type: 'status', text: toolStatus(c.name, c.input ?? {}) });
     } else if (e.type === 'system' && e.subtype === 'api_retry') {
       emit({ type: 'status', text: `Claude is busy (${e.error ?? 'retry'}). Retrying, attempt ${e.attempt}…` });
     } else if (e.type === 'result') {
@@ -40,4 +42,13 @@ export function createClaudeStreamParser(emit: (e: AiEvent) => void) {
   }
 
   return { line, final: () => final };
+}
+
+/** Plain-language status for what the AI is doing with a tool. */
+export function toolStatus(name: string, input: Record<string, unknown>): string {
+  const file = (p: unknown) => String(p ?? '').split(/[\\/]/).pop();
+  if (name.endsWith('find_files')) return `Searching your files for “${input.query}”…`;
+  if (name.endsWith('read_file')) return `Reading ${file(input.path)}…`;
+  if (name === 'Read') return /page-\d+\.png$/.test(String(input.file_path)) ? 'Looking at the pages…' : `Opening ${file(input.file_path)}…`;
+  return 'Working…';
 }

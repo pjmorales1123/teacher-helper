@@ -38,4 +38,8 @@ export const api = {
   messages: (id: string) => fetch(`/api/documents/${id}/messages`).then((r) => json<ChatMessage[]>(r)),
   clearMessages: (id: string) => fetch(`/api/documents/${id}/messages`, { method: 'DELETE' }).then((r) => json<void>(r)),
   aiStatus: () => fetch('/api/ai/status').then((r) => json<AiStatus>(r)),
+  folders: () => fetch('/api/settings/folders').then((r) => json<{ allowed: string[]; suggested: string[] }>(r)),
+  setFolders: (allowed: string[]) =>
+    fetch('/api/settings/folders', { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ allowed }) })
+      .then((r) => json<{ allowed: string[]; suggested: string[] }>(r)),
 };

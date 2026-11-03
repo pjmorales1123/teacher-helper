@@ -30,6 +30,7 @@ const MIGRATIONS = [
      edits_json TEXT,
      created_at TEXT NOT NULL
    )`,
+  `CREATE TABLE settings (key TEXT PRIMARY KEY, value TEXT NOT NULL)`,
 ];
 
 /** Opens (or creates) the SQLite database and applies pending migrations. */

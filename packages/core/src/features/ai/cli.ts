@@ -4,25 +4,35 @@ import { join } from 'node:path';
 import type { Config } from '../../config.ts';
 import { createClaudeStreamParser } from './claude-stream.ts';
 import { RESULT_SCHEMA } from './schema.ts';
+import { claudeArgs } from './claude-args.ts';
 import type { AiEvent } from './types.ts';
 
-export interface CliRun { system: string; message: string; emit: (e: AiEvent) => void; signal: AbortSignal }
+export interface CliRun {
+  system: string; message: string; emit: (e: AiEvent) => void; signal: AbortSignal;
+  /** Folders the teacher allowed the AI to read. */
+  folders?: string[];
+  /** Files written into the turn folder before the run, e.g. page-1.png for the view step. */
+  files?: { name: string; data: Buffer }[];
+}
 export interface CliOutput { structured: unknown; text: string; isError: boolean; costUsd?: number }
 
 /** Runs one turn through the teacher's logged-in CLI. No API key is ever used. */
 export async function runCli(cfg: Config, run: CliRun): Promise<CliOutput> {
-  // An empty working dir keeps project files and CLAUDE.md out of the AI's context.
-  const cwd = join(cfg.dataDir, 'ai-workdir');
-  await mkdir(cwd, { recursive: true });
-  return cfg.aiBackend === 'codex' ? runCodex(cfg, cwd, run) : runClaude(cfg, cwd, run);
+  // A fresh, empty folder per turn keeps project files and CLAUDE.md out of the AI's context
+  // and is the only place (besides allowed folders) the AI may read.
+  const base = join(cfg.dataDir, 'ai-workdir');
+  await mkdir(base, { recursive: true });
+  const cwd = await mkdtemp(join(base, 'turn-'));
+  try {
+    for (const f of run.files ?? []) await writeFile(join(cwd, f.name), f.data);
+    return await (cfg.aiBackend === 'codex' ? runCodex(cfg, cwd, run) : runClaude(cfg, cwd, run));
+  } finally {
+    await rm(cwd, { recursive: true, force: true });
+  }
 }
 
 function runClaude(cfg: Config, cwd: string, run: CliRun): Promise<CliOutput> {
-  const args = [
-    '-p', '--output-format', 'stream-json', '--verbose', '--include-partial-messages',
-    '--tools', '', '--setting-sources', '', '--strict-mcp-config', '--no-session-persistence',
-    '--model', cfg.aiModel, '--system-prompt', run.system, '--json-schema', JSON.stringify(RESULT_SCHEMA),
-  ];
+  const args = claudeArgs(cfg, run.system, run.folders ?? [], (run.files ?? []).length > 0);
   const parser = createClaudeStreamParser(run.emit);
   return spawnLines('claude', args, cwd, run, parser.line).then(({ stderr }) => {
     const f = parser.final();

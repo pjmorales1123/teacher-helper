@@ -78,3 +78,11 @@ button.link.danger { color: var(--err); }
 .pending li label { display: flex; gap: 6px; align-items: flex-start; cursor: pointer; }
 .pending li.applied { color: var(--ok); } .pending li.skipped { color: var(--muted); } .pending li.failed { color: var(--err); }
 .pending button { width: 100%; }
+.ai-head { gap: 8px; } .ai-head strong { flex: 1; }
+.files { position: relative; }
+.files-btn { font-size: 11px; padding: 2px 8px; border-radius: 999px; } .files-btn.on { border-color: var(--ok); color: var(--ok); }
+.files-pop { position: absolute; right: 0; top: 130%; z-index: 30; width: 320px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px; display: grid; gap: 6px; box-shadow: 0 8px 24px rgba(0,0,0,.15); }
+.files-pop p { margin: 0 0 4px; font-size: 12px; } .files-pop label { display: flex; gap: 6px; font-size: 12.5px; word-break: break-all; }
+.files-add { display: flex; gap: 6px; } .files-add input { flex: 1; min-width: 0; font: inherit; font-size: 12px; padding: 4px 6px; }
+.msg-review { border-left: 3px solid var(--accent); } .msg-tag { font-size: 11px; font-weight: 700; color: var(--accent); margin-bottom: 4px; text-transform: uppercase; letter-spacing: .03em; }
+button.link.check { padding: 4px 0; font-size: 12.5px; }

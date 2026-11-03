@@ -42,3 +42,30 @@ export function styleIds(ed: DocxEditorRef): string[] {
   const state = ed.commands.getState('paragraphStyle') as { options?: { args?: { styleId?: string } }[] };
   return (state.options ?? []).map((o) => o.args?.styleId).filter((s): s is string => !!s);
 }
+
+type Attrs = Parameters<ReturnType<typeof syncParts>['ses']['setParagraphAttrs']>[1];
+
+/** Whole-paragraph range in the session's coordinates. */
+export function wholeParagraph(paraId: string, length: number, story = STORY) {
+  return { story, start: { paraId, offset: 0 }, end: { paraId, offset: length } };
+}
+
+/**
+ * Sets paragraph properties directly on the document session. Typed fields and "other" (keepNext,
+ * keepLines, pageBreakBefore) must be separate calls or the engine drops the "other" part.
+ * Ends with a sync so the editor shows the change and saves it.
+ */
+export async function setAttrs(ed: DocxEditorRef, paraId: string, typed: Attrs, other?: Record<string, boolean | null>) {
+  const { pe, ses } = syncParts(ed);
+  const range = wholeParagraph(paraId, (await paragraphText(ed, paraId)).length);
+  if (Object.keys(typed).length) ses.setParagraphAttrs(range, typed);
+  if (other && Object.keys(other).length) ses.setParagraphAttrs(range, { other });
+  pe.syncYrsInputState(true);
+  await tick();
+}
+
+/** Usable text width of the first section in twips (page width minus side margins). */
+export function textWidthTwips(ed: DocxEditorRef): number {
+  const a = syncParts(ed).ses.listSections()[0]?.authored as Record<string, number> | undefined;
+  return a ? a.pageWidth - a.marginLeft - a.marginRight : 9360;
+}
