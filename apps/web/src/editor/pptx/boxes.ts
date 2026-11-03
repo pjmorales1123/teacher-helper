@@ -15,6 +15,15 @@ function styleOf(op: AiOp) {
     .filter(([, v]) => v !== undefined));
 }
 
+/** A blank slide with the wanted layout's background (else a content-type layout), for slides built from text boxes. */
+function insertWithLayout(h: Handle, at: number, want?: string) {
+  const layouts = h.layouts();
+  const pick = layouts.find((l) => l.name?.toLowerCase() === want)
+    ?? layouts.find((l) => /title only|blank/i.test(l.name ?? '')) ?? layouts.find((l) => !/title slide/i.test(l.name ?? ''));
+  if (pick) { try { return h.insertSlide(at, pick.id); } catch { /* id is not a part path in this deck */ } }
+  return h.insertSlide(at);
+}
+
 /** Story of a shape just added, so its lines, alignment and style can be set. */
 function storyOf(h: Handle, slideId: string, shapeId: string): string | null {
   const read = h.readContent({ slideIds: [slideId] });
@@ -32,13 +41,19 @@ function newSlide(h: Handle, op: AiOp): void {
   const read = h.readContent();
   if (!read.ok) throw new Error('Could not read the slides.');
   const storiesOf = (id: string) => read.stories.filter((st) => st.slideId === id);
+  const isTitleSlide = (name?: string | null) => /title slide|^title$/i.test(name ?? '');
   const candidates = snap.slides.filter((s) => storiesOf(s.id).length >= (op.lines?.length ? 2 : 1));
-  const tpl = candidates.find((s) => s.layout?.name?.toLowerCase() === want) ?? candidates.find((s, i) => i > 0) ?? candidates[0];
+  // Copy only a slide with the wanted layout (or any content slide when none was named): copying a title slide
+  // would put bullets in a subtitle box.
+  const tpl = want
+    ? candidates.find((s) => s.layout?.name?.toLowerCase() === want)
+    : candidates.find((s) => !isTitleSlide(s.layout?.name));
   if (!tpl) {
-    const s = h.insertSlide(at);
-    const lines = op.lines ?? [];
-    if (op.text) runBoxChange(h, { id: '', label: '', ref: { slideId: s.slideId }, op: { op: 'textBox', text: op.text, fontSize: 36, bold: true, left: 0.6, top: 0.4, width: snap.widthEmu / EMU_PER_IN - 1.2, height: 1 } });
-    if (lines.length) runBoxChange(h, { id: '', label: '', ref: { slideId: s.slideId }, op: { op: 'textBox', lines, fontSize: 24, left: 0.6, top: 1.6, width: snap.widthEmu / EMU_PER_IN - 1.2, height: snap.heightEmu / EMU_PER_IN - 2.2 } });
+    const s = insertWithLayout(h, at, want);
+    const w = snap.widthEmu / EMU_PER_IN, ht = snap.heightEmu / EMU_PER_IN;
+    const ref = { slideId: s.slideId };
+    if (op.text) runBoxChange(h, { id: '', label: '', ref, op: { op: 'textBox', text: op.text, fontSize: 36, bold: true, left: 0.6, top: 0.35, width: w - 1.2, height: 1.1 } });
+    if (op.lines?.length) runBoxChange(h, { id: '', label: '', ref, op: { op: 'textBox', lines: op.lines, list: 'bullet', fontSize: 24, left: 0.6, top: 1.6, width: w - 1.2, height: ht - 2.2 } });
     return;
   }
   const copy = h.duplicateSlide(tpl.id, at);
@@ -55,6 +70,7 @@ function newSlide(h: Handle, op: AiOp): void {
 function fillStory(h: Handle, storyId: string, lines: string[], op: AiOp) {
   const style = styleOf(op);
   const drafts: TextParagraphDraft[] = lines.map((text) => ({
+    ...(op.list === 'bullet' ? { bullet: true } : {}),
     alignment: op.align ? ALIGN[op.align] : null, runs: [{ text, ...(Object.keys(style).length ? { style } : {}) }],
   }));
   h.setStoryParagraphs(storyId, drafts);

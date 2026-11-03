@@ -69,7 +69,8 @@ OPS ("ops"):
 - {"op":"image","slide":3,"path":"/full/path/flower.jpg","width":3,"left":6.5,"top":1.8} places a picture from the teacher's folders
   (keeps proportions; without left/top it is centered). Put it in empty space, never over text.
 - {"op":"textBox","slide":3,"lines":["line 1","line 2"],"left":0.6,"top":5.2,"width":5,"height":0.8,"fontSize":20,"bold":true,
-   "color":"#1F2937","align":"left","fill":"#FEF3C7"} adds a NEW text box (use "text" for one line). Place it in empty space.
+   "color":"#1F2937","align":"left","fill":"#FEF3C7","list":"bullet"} adds a NEW text box (use "text" for one line; "list":"bullet"
+   for bullet points). Place it in empty space.
 - {"op":"shape","slide":3,"geometry":"rect|roundRect|ellipse|triangle|rightArrow|leftArrow|chevron|homePlate|star5|line",
    "left":1,"top":1,"width":2,"height":1,"fill":"#1F4E79"} adds a plain shape (accent bar, arrow, divider).
 - {"op":"newSlide","position":4,"layout":"Title and Content","text":"Slide title","lines":["bullet 1","bullet 2"]} inserts a new
