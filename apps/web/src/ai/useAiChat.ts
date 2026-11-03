@@ -109,11 +109,14 @@ export function useAiChat(docId: string, handle: EngineHandle | null) {
 
   /** Voice "yes, apply it": accept every suggestion and apply every waiting change of the latest answers. */
   const approveAll = useCallback(async () => {
+    // Accept the text/cell suggestions first: formatting and structure apply to the accepted content, and the
+    // automatic check after applying must see the finished document, not one with suggestions still pending.
     const waiting = latest.current.filter((m) => m.report && Object.values(m.pendingState ?? {}).includes('waiting'));
+    if (handle?.decideAll) await handle.decideAll(true);
     for (const m of waiting) await apply(m.key, Object.entries(m.pendingState!).filter(([, v]) => v === 'waiting').map(([id]) => id));
-    await decideAll(true);
+    if (!waiting.length) await decideAll(true);
     return waiting.length;
-  }, [apply, decideAll]);
+  }, [apply, decideAll, handle]);
   const lastAnswer = () => [...latest.current].reverse().find((m) => m.role === 'assistant' && m.prompt && !m.review);
 
   return { messages, status, busy: status !== null, send, apply, check, decideAll, approveAll, lastAnswer, stop, clear };

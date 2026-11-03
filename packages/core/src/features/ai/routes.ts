@@ -53,7 +53,7 @@ export function aiRoutes(app: FastifyInstance, cfg: Config, store: DocumentStore
     try {
       send({ type: 'status', text: turn.review ? 'Checking the result…' : 'Reading your document…' });
       const out = await runCli(turn.voice ? { ...cfg, aiModel: cfg.voiceModel } : cfg, {
-        system: systemPrompt(doc.kind, turn.mode, { folders: allowed, review: turn.review, web, docText: `${doc.name}\n${turn.context}` }),
+        system: systemPrompt(doc.kind, turn.mode, { folders: allowed, review: turn.review, web, docText: `${doc.name}\n${turn.prompt}\n${turn.context}` }),
         message: userMessage(turn, recent), emit: send, signal: ctrl.signal, folders: allowed, files, web,
       });
       const result = out.isError ? null : normalizeResult(out.structured, turn.mode, doc.kind);

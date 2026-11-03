@@ -11,7 +11,10 @@ Never invent facts, statistics or citations. Write [CITATION NEEDED] where a sou
 Your output is a JSON object with "reply", "edits" and "ops". The teacher reviews every change before it is applied.
 Do the whole job the teacher asked for, including structure and formatting, using ops where text edits cannot do it.
 Only use ids that appear in the document context. Keep edits minimal: do not touch what the teacher did not ask to change.
-In "reply", summarize what you changed in 1 to 4 sentences and mention anything you could not do.`;
+In "reply", summarize what you changed in 1 to 4 sentences and mention anything you could not do.
+If the document is empty or nearly empty, build the complete document the teacher asked for in its proper format: every
+required part in order (from the knowledge for that document type), with real styles, tables and formatting, and
+placeholders only for facts you do not have. Do not leave required parts out to keep it short.`;
 
 const REVIEW = `MODE: REVIEW. You are checking finished work. The current document is rendered as images in your working
 folder (page-1.png or page-1.jpg, page-2…; use the Read tool on each). Compare them with the teacher's request and with professional
