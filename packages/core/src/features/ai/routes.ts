@@ -33,9 +33,9 @@ export function aiRoutes(app: FastifyInstance, cfg: Config, store: DocumentStore
       prompt: body.prompt.slice(0, 4000), context: body.context.slice(0, MAX_CONTEXT),
       selection: typeof body.selection === 'string' ? body.selection.slice(0, 8000) : undefined,
       review: body.review === true,
-      images: Array.isArray(body.images) ? body.images.filter((x) => typeof x === 'string' && x.startsWith('data:image/png;base64,')).slice(0, 8) : [],
+      images: Array.isArray(body.images) ? body.images.filter((x) => typeof x === 'string' && /^data:image\/(png|jpeg);base64,/.test(x)).slice(0, 20) : [],
     };
-    const files = (turn.images ?? []).map((url, i) => ({ name: `page-${i + 1}.png`, data: Buffer.from(url.slice(url.indexOf(',') + 1), 'base64') }));
+    const files = (turn.images ?? []).map((url, i) => ({ name: `page-${i + 1}.${url.startsWith('data:image/jpeg') ? 'jpg' : 'png'}`, data: Buffer.from(url.slice(url.indexOf(',') + 1), 'base64') }));
     const allowed = folders.list();
     const recent = history.recent(doc.id);
 

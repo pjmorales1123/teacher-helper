@@ -7,7 +7,7 @@ export interface Box {
   id: string; slide: number; slideId: string; shapeId: string; storyId: string;
   text: string; name: string; wIn: number; hIn: number; xIn: number; yIn: number; fontPt: number | null; capacity: number | null;
 }
-export interface DeckSlide { n: number; id: string; title: string | null; notes: string; layout: string | null; boxes: Box[]; pictures?: string[] }
+export interface DeckSlide { n: number; id: string; title: string | null; notes: string; layout: string | null; boxes: Box[]; pictures?: string[]; pictureIds?: { id: string; shapeId: string }[] }
 
 /** Rough characters that fit a box at a font size: ~0.5 em per character, 1.2 em line height. */
 export function capacity(wIn: number, hIn: number, pt: number): number | null {
@@ -34,7 +34,8 @@ export function readDeck(h: Handle): DeckSlide[] {
   const byId = new Map(slides.map((s) => [s.id, s]));
   snap.slides.forEach((s, i) => {
     const pics = [...flatten(s.shapes as unknown as ShapeLike[]).values()].filter((sh) => (sh as { mediaPartPath?: string | null }).mediaPartPath || (sh as { pendingMedia?: unknown }).pendingMedia);
-    slides[i].pictures = pics.map((p) => `${p.name} (${(p.width / EMU_PER_IN).toFixed(1)}x${(p.height / EMU_PER_IN).toFixed(1)}in at ${(p.x / EMU_PER_IN).toFixed(1)},${(p.y / EMU_PER_IN).toFixed(1)})`);
+    slides[i].pictureIds = pics.map((p, j) => ({ id: `S${i + 1}.P${j + 1}`, shapeId: p.id }));
+    slides[i].pictures = pics.map((p, j) => `[S${i + 1}.P${j + 1}] ${p.name} (${(p.width / EMU_PER_IN).toFixed(1)}x${(p.height / EMU_PER_IN).toFixed(1)}in at ${(p.x / EMU_PER_IN).toFixed(1)},${(p.y / EMU_PER_IN).toFixed(1)})`);
   });
   const shapes = new Map(snap.slides.map((s) => [s.id, flatten(s.shapes as unknown as ShapeLike[])]));
   for (const st of read.stories) {
@@ -55,8 +56,8 @@ export function readDeck(h: Handle): DeckSlide[] {
 }
 
 /** The deck as the AI sees it. */
-export function deckContext(slides: DeckSlide[], sizeIn?: [number, number]): string {
-  const head = sizeIn ? `SLIDE SIZE: ${sizeIn[0].toFixed(2)} x ${sizeIn[1].toFixed(2)} in\n\n` : '';
+export function deckContext(slides: DeckSlide[], sizeIn?: [number, number], layouts: string[] = []): string {
+  const head = (sizeIn ? `SLIDE SIZE: ${sizeIn[0].toFixed(2)} x ${sizeIn[1].toFixed(2)} in\n` : '') + (layouts.length ? `LAYOUTS: ${layouts.join('; ')}\n` : '') + '\n';
   return head + slides.map((s) => {
     const head = `## Slide ${s.n}${s.title ? `: ${s.title}` : ''}${s.layout ? ` (layout: ${s.layout})` : ''}`;
     const boxes = s.boxes.map((b) => {

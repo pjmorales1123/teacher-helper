@@ -1,18 +1,25 @@
-import type { XlsxAsyncEditorApi } from '@betteroffice/xlsx-react';
+import type { XlsxEditorApi } from '@betteroffice/xlsx-react';
 import type { AiResult } from '../../lib/types';
 import { describeOp } from '../describe';
 import { clip, runEach, type EngineHandle, type ProposeReport } from '../engine';
 import { parseTarget } from './a1';
+import { sheetLayout, renderSheets } from './layout';
 import { cellsToInputs, runXlsxOp } from './ops';
 
-type Ref = { current: XlsxAsyncEditorApi | null };
+type Ref = { current: XlsxEditorApi | null };
 const READ_RANGE = 'A1:AZ400';
+const SHIFTING = new Set(['insertRows', 'deleteRows', 'insertColumns', 'deleteColumns']);
 /** "0!A1:H9" -> "Written Works A1:H9" for the approval list. */
 const sheetNamer = (names: string[]) => (t: string) => t.replace(/^(\d+)!/, (_, i) => `${names[Number(i)] ?? `Sheet ${i}`} `);
 
+function toDataUrl(bytes: Uint8Array) {
+  let bin = '';
+  for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+  return `data:image/png;base64,${btoa(bin)}`;
+}
+
 /** Excel adapter: sheets become row lines with cell addresses and formulas; edits become cell proposals. */
 export function createXlsxHandle(ref: Ref): EngineHandle {
-  const proposalIds = new Set<string>();
   const api = () => {
     if (!ref.current) throw new Error('The workbook is still loading.');
     return ref.current;
@@ -35,7 +42,9 @@ export function createXlsxHandle(ref: Ref): EngineHandle {
           .map((row) => row.filter((c) => c.displayText !== '' || c.formula))
           .filter((row) => row.length)
           .map((row) => row.map((c) => (c.formula ? `${c.a1}={${c.formula}}→${c.displayText}` : `${c.a1}=${c.displayText}`)).join(' | '));
-        return `## Sheet ${i}: ${read.sheets[i]?.name}\n${rows.join('\n') || '(empty)'}`;
+        const used = r.cells.reduce((m, row) => Math.max(m, row.reduce((n, c, j) => (c.displayText !== '' || c.formula ? j + 1 : n), 0)), 0);
+        const lastRow = r.cells.reduce((n, row, j) => (row.some((c) => c.displayText !== '') ? j + 1 : n), 0);
+        return `## Sheet ${i}: ${read.sheets[i]?.name}\n${sheetLayout(api().handle, i, used, lastRow)}\n${rows.join('\n') || '(empty)'}`;
       });
       return { context: clip(`Cells are listed as ADDRESS=value. Formulas show as ADDRESS={formula}→result.\n\n${parts.join('\n\n')}`) };
     },
@@ -44,6 +53,12 @@ export function createXlsxHandle(ref: Ref): EngineHandle {
       const read = await readAll();
       const names = read.sheets.map((s) => s.name);
       const failed: ProposeReport['failed'] = [];
+      // Inserting or deleting rows moves every address, so such a turn is applied as one ordered list after approval.
+      const ordered = result.ops.some((o) => SHIFTING.has(o.op));
+      if (ordered) {
+        const ops = [...result.ops, ...result.edits.map((e) => ({ op: 'cells', target: e.target, rows: [[e.replace]] }))];
+        return { staged: 0, failed, pending: ops.map((op, i) => ({ id: `${turnId}-op${i}`, label: describeOp(op, sheetNamer(names)), op })) };
+      }
       const staged: { sheet: number; row: number; col: number; input: string }[] = [];
       for (const edit of result.edits) {
         const t = parseTarget(edit.target, names);
@@ -63,9 +78,12 @@ export function createXlsxHandle(ref: Ref): EngineHandle {
         try { staged.push(...cellsToInputs(op, names)); } catch (e) { failed.push({ label: describeOp(op), reason: (e as Error).message }); }
       }
       if (staged.length) {
-        const res = await api().proposeChanges!({ agentId: 'guro-buddy', note: `AI turn ${turnId}`, edits: staged });
-        if (!res.ok) return { staged: 0, pending, failed: [...failed, { label: `${staged.length} cell change(s)`, reason: 'refused by the workbook' }] };
-        proposalIds.add(res.proposal.id);
+        try {
+          api().handle.propose('guro-buddy', `AI turn ${turnId}`, staged);
+          api().refreshProposals();
+        } catch (e) {
+          return { staged: 0, pending, failed: [...failed, { label: `${staged.length} cell change(s)`, reason: (e as Error).message }] };
+        }
         await api().commands.execute('proposalsPanel', { open: true }).catch(() => {});
       }
       return { staged: staged.length, pending, failed };
@@ -74,23 +92,20 @@ export function createXlsxHandle(ref: Ref): EngineHandle {
     applyPending: (changes) => runEach(changes, (op) => runXlsxOp(api(), op)),
 
     async render() {
-      const png = await api().renderRangePng({ scale: 1 });
-      const bytes = png instanceof Uint8Array ? png : new Uint8Array(png as unknown as ArrayBuffer);
-      let bin = '';
-      for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
-      return [`data:image/png;base64,${btoa(bin)}`];
+      return renderSheets(api().handle).map(toDataUrl);
     },
 
     async decideAll(accept: boolean) {
-      for (const proposalId of [...proposalIds]) {
-        const r = accept
-          ? await api().commands.execute('proposalAccept', { proposalId, force: true })
-          : await api().commands.execute('proposalReject', { proposalId });
-        if (r.ok || r.failure.code === 'proposal-not-found') proposalIds.delete(proposalId);
+      const h = api().handle;
+      for (const p of h.listProposals()) {
+        if (accept) h.acceptProposal(p.id, { force: true });
+        else h.rejectProposal(p.id);
       }
+      api().refreshProposals();
     },
 
     async save() {
+      await api().flushPendingInput();
       return api().save();
     },
   };

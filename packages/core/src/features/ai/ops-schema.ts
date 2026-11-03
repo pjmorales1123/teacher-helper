@@ -1,11 +1,12 @@
 import type { DocKind } from '../documents/kinds.ts';
 import type { AiOp } from './types.ts';
+import { checkNewOp, GEOMETRIES } from './ops-check.ts';
 
 /** Structured operations each engine can perform, beyond plain text edits. */
 export const OPS_BY_KIND: Record<DocKind, readonly string[]> = {
   docx: ['style', 'format', 'paragraph', 'table', 'delete', 'pageSetup', 'pageBreak', 'signatories', 'image'],
-  xlsx: ['cells', 'style', 'numberFormat'],
-  pptx: ['format', 'align', 'notes', 'fill', 'bullets', 'duplicateSlide', 'deleteSlide', 'moveSlide', 'resize', 'image'],
+  xlsx: ['cells', 'style', 'numberFormat', 'columnWidth', 'rowHeight', 'merge', 'unmerge', 'insertRows', 'deleteRows', 'insertColumns', 'deleteColumns', 'addSheet', 'renameSheet'],
+  pptx: ['format', 'align', 'notes', 'fill', 'bullets', 'duplicateSlide', 'deleteSlide', 'moveSlide', 'resize', 'image', 'textBox', 'shape', 'newSlide', 'deleteShape'],
 };
 
 const str = { type: 'string' } as const;
@@ -32,12 +33,13 @@ export const OP_ITEM_SCHEMA = {
     keepWithNext: bool, keepTogether: bool, pageBreakBefore: bool, spaceBefore: num, spaceAfter: num, indent: num,
     orientation: { type: 'string', enum: ['portrait', 'landscape'] },
     paper: { type: 'string', enum: ['A4', 'Letter', 'Legal'] },
+    count: num, size: num, side: { type: 'string', enum: ['left', 'right'] }, geometry: { type: 'string', enum: [...GEOMETRIES] }, layout: str,
     margins: { type: 'object', additionalProperties: false, properties: { top: num, bottom: num, left: num, right: num } },
   },
 } as const;
 
 const HEX = /^#?([0-9a-f]{6})$/i;
-const needsTarget = new Set(['signatories', 'resize', 'style', 'format', 'paragraph', 'table', 'delete', 'pageBreak', 'cells', 'numberFormat', 'align', 'fill', 'bullets']);
+const needsTarget = new Set(['columnWidth', 'rowHeight', 'merge', 'unmerge', 'insertRows', 'deleteRows', 'insertColumns', 'deleteColumns', 'renameSheet', 'deleteShape', 'signatories', 'resize', 'style', 'format', 'paragraph', 'table', 'delete', 'pageBreak', 'cells', 'numberFormat', 'align', 'fill', 'bullets']);
 
 /** Returns a cleaned op, or a reason it was dropped. Never trusts the model's output shape. */
 export function checkOp(raw: unknown, kind: DocKind): { op: AiOp } | { reason: string } {
@@ -72,10 +74,12 @@ export function checkOp(raw: unknown, kind: DocKind): { op: AiOp } | { reason: s
   if (o.op === 'resize' && o.width === undefined && o.height === undefined && o.left === undefined && o.top === undefined) return { reason: 'resize needs width, height, left or top' };
   for (const k of ['height', 'left', 'top'] as const) if (o[k] !== undefined && !(o[k]! >= 0 && o[k]! <= 20)) return { reason: `${k} must be 0 to 20 inches` };
   if (o.op === 'image' && (typeof o.path !== 'string' || !/\.(png|jpe?g|gif|webp)$/i.test(o.path))) return { reason: 'image needs the full path of a picture file' };
-  if (o.width !== undefined && !(o.width > 0.2 && o.width <= 9)) return { reason: 'width must be 0.2 to 9 inches' };
+  if (o.width !== undefined && !(o.width > 0.2 && o.width <= 13.4)) return { reason: 'width must be 0.2 to 9 inches' };
   for (const k of ['spaceBefore', 'spaceAfter'] as const) if (o[k] !== undefined && !(o[k]! >= 0 && o[k]! <= 72)) return { reason: `${k} must be 0 to 72 pt` };
   if (o.indent !== undefined && !(o.indent >= -1 && o.indent <= 3)) return { reason: 'indent must be -1 to 3 inches' };
   if (o.op === 'style' && kind === 'docx' && typeof o.styleId !== 'string') return { reason: 'style needs styleId' };
+  const extra = checkNewOp(o);
+  if (extra) return { reason: extra };
   if (o.margins) {
     for (const v of Object.values(o.margins)) if (!(typeof v === 'number' && v >= 0.3 && v <= 3)) return { reason: 'margins must be 0.3 to 3 inches' };
   }

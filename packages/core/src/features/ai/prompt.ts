@@ -14,7 +14,7 @@ Only use ids that appear in the document context. Keep edits minimal: do not tou
 In "reply", summarize what you changed in 1 to 4 sentences and mention anything you could not do.`;
 
 const REVIEW = `MODE: REVIEW. You are checking finished work. The current document is rendered as images in your working
-folder (page-1.png, page-2.png, …; use the Read tool on each). Compare them with the teacher's request and with professional
+folder (page-1.png or page-1.jpg, page-2…; use the Read tool on each). Compare them with the teacher's request and with professional
 layout: nothing split badly across pages (signatories, a heading at the bottom of a page, a table header alone), text fits its
 box, alignment and spacing are consistent, pictures do not cover text, numbering and labels are correct.
 Red strike-through and green underlined text are pending suggestions, not errors.
@@ -46,7 +46,7 @@ export function userMessage(req: AiTurnRequest, history: { role: string; text: s
     ? `Earlier in this conversation:\n${history.map((m) => `${m.role === 'user' ? 'Teacher' : 'You'}: ${m.text}`).join('\n')}\n\n`
     : '';
   const sel = req.selection?.trim() ? `The teacher has selected this text:\n"""${req.selection.trim()}"""\n\n` : '';
-  const pages = req.review && req.images?.length ? `Rendered pages to check: ${req.images.map((_, i) => `page-${i + 1}.png`).join(', ')}\n\n` : '';
+  const pages = req.review && req.images?.length ? `Rendered pages to check: ${req.images.map((u, i) => `page-${i + 1}.${u.startsWith('data:image/jpeg') ? 'jpg' : 'png'}`).join(', ')}\n\n` : '';
   const ask = req.review ? `The teacher's request that was carried out: ${req.prompt}` : `Teacher's request: ${req.prompt}`;
   return `${past}${sel}${pages}${ask}\n\n<document>\n${req.context}\n</document>`;
 }

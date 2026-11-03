@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { extname } from 'node:path';
 import type { FastifyInstance } from 'fastify';
+import { browseFolders } from './browse.ts';
 import { insideAllowed, suggestedFolders, type FolderSettings } from './folders.ts';
 
 const IMAGE_TYPES: Record<string, string> = { '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.gif': 'image/gif', '.webp': 'image/webp' };
@@ -13,6 +14,8 @@ export function fileRoutes(app: FastifyInstance, folders: FolderSettings) {
     if (!Array.isArray(req.body?.allowed)) return reply.code(400).send({ error: 'Send { allowed: string[] }.' });
     return { allowed: folders.set(req.body.allowed), suggested: suggestedFolders() };
   });
+
+  app.get<{ Querystring: { path?: string } }>('/api/files/browse', async (req) => browseFolders(req.query.path));
 
   app.get<{ Querystring: { path?: string } }>('/api/files/image', async (req, reply) => {
     const safe = insideAllowed(String(req.query.path ?? ''), folders.list());

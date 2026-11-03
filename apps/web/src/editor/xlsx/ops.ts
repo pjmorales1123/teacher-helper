@@ -1,10 +1,12 @@
-import type { XlsxAsyncEditorApi } from '@betteroffice/xlsx-react';
+import type { XlsxEditorApi } from '@betteroffice/xlsx-react';
 import type { AiOp } from '../../lib/types';
 import { parseA1, parseRange } from './a1';
+import { STRUCTURE_OPS, structureOps } from './structure';
+import { visibleParts } from './layout';
 
 const NAMED = new Set(['automatic', 'plainText', 'number', 'percent', 'scientific', 'currency', 'date', 'time']);
 
-export async function catalog(api: XlsxAsyncEditorApi) {
+export async function catalog(api: XlsxEditorApi) {
   const r = await api.readCells({ ranges: [] });
   if (!r.ok) throw new Error('Could not read the workbook.');
   return r;
@@ -19,12 +21,36 @@ export function cellsToInputs(op: AiOp, names: string[]) {
   return op.rows!.flatMap((row, r) => row.map((input, c) => ({ sheet: range.sheet, row: start.row + r, col: start.col + c, input })));
 }
 
-/** Applies an approved styling or number-format change as one undo step. */
-export async function runXlsxOp(api: XlsxAsyncEditorApi, op: AiOp): Promise<void> {
+/** Applies an approved styling, number-format or structure change as one undo step. */
+export async function runXlsxOp(api: XlsxEditorApi, op: AiOp): Promise<void> {
   const cat = await catalog(api);
-  const range = parseRange(op.target!, cat.sheets.map((s) => s.name));
+  const names = cat.sheets.map((s) => s.name);
+  if (op.op === 'cells') {
+    const inputs = cellsToInputs(op, names);
+    const res = api.handle.editCells(inputs[0].sheet, inputs.map(({ row, col, input }) => ({ row, col, input })));
+    if (!res.applied) throw new Error('The workbook refused the cells (merged or protected?)');
+    api.refreshProposals();
+    return;
+  }
+  if (STRUCTURE_OPS.has(op.op)) {
+    const res = api.handle.applyOps(structureOps(op, names));
+    // Widths, heights and merges report "not applied" when nothing changed; that is fine. Inserts must change something.
+    if (!res.applied && /^(insert|delete|addSheet)/.test(op.op)) throw new Error('The workbook refused the change (merged or protected cells?)');
+    api.refreshProposals();
+    return;
+  }
+  const range = parseRange(op.target!, names);
   if (!range) throw new Error(`Unknown range ${op.target}`);
-  const target = { sheetId: cat.sheets[range.sheet].sheetId, range: { kind: 'a1' as const, a1: range.a1 } };
+  const sheetId = cat.sheets[range.sheet].sheetId;
+  // Cells hidden under a merge cannot be styled: style only the visible parts of the range.
+  const targets = visibleParts(api.handle, range.sheet, range.a1).map((a1) => ({ sheetId, range: { kind: 'a1' as const, a1 } }));
+  const steps = targets.map((target) => stepFor(op, target));
+  const res = await api.applyEdits({ expectVersion: cat.version, steps } as Parameters<XlsxEditorApi['applyEdits']>[0]);
+  if (!res.ok) throw new Error(`${res.failure.code}: ${res.failure.message ?? ''}`);
+}
+
+type Target = { sheetId: string; range: { kind: 'a1'; a1: string } };
+function stepFor(op: AiOp, target: Target) {
   let step;
   if (op.op === 'style') {
     const patch = {
@@ -42,6 +68,5 @@ export async function runXlsxOp(api: XlsxAsyncEditorApi, op: AiOp): Promise<void
   } else {
     throw new Error(`Excel cannot do "${op.op}" here.`);
   }
-  const res = await api.applyEdits({ expectVersion: cat.version, steps: [step] } as Parameters<XlsxAsyncEditorApi['applyEdits']>[0]);
-  if (!res.ok) throw new Error(`${res.failure.code}: ${res.failure.message ?? ''}`);
+  return step;
 }

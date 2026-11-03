@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { api } from '../lib/api';
+import { FolderPicker } from './FolderPicker';
 
 /**
  * Which folders on this computer the AI may read (search and open files there when the teacher
@@ -11,6 +12,7 @@ export function FilesPanel() {
   const [suggested, setSuggested] = useState<string[]>([]);
   const [custom, setCustom] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [picking, setPicking] = useState(false);
 
   useEffect(() => { api.folders().then((f) => { setAllowed(f.allowed); setSuggested(f.suggested); }, () => {}); }, []);
 
@@ -44,8 +46,11 @@ export function FilesPanel() {
           {all.map((d) => (
             <label key={d}><input type="checkbox" checked={allowed.includes(d)} onChange={() => toggle(d)} /> {d}</label>
           ))}
+          {picking
+            ? <FolderPicker onClose={() => setPicking(false)} onPick={(p) => { setPicking(false); if (!allowed.includes(p)) void save([...allowed, p]); }} />
+            : <button onClick={() => setPicking(true)}>Choose a folder…</button>}
           <div className="files-add">
-            <input value={custom} onChange={(e) => setCustom(e.target.value)} placeholder="Another folder, e.g. D:\School Files" onKeyDown={(e) => e.key === 'Enter' && add()} />
+            <input value={custom} onChange={(e) => setCustom(e.target.value)} placeholder="Or type a path, e.g. D:\School Files" onKeyDown={(e) => e.key === 'Enter' && add()} />
             <button onClick={add}>Add</button>
           </div>
           {error && <p className="error">{error}</p>}

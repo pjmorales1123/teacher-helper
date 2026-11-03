@@ -38,8 +38,11 @@ export const api = {
   messages: (id: string) => fetch(`/api/documents/${id}/messages`).then((r) => json<ChatMessage[]>(r)),
   clearMessages: (id: string) => fetch(`/api/documents/${id}/messages`, { method: 'DELETE' }).then((r) => json<void>(r)),
   aiStatus: () => fetch('/api/ai/status').then((r) => json<AiStatus>(r)),
+  browse: (path?: string) => fetch(`/api/files/browse${path ? `?path=${encodeURIComponent(path)}` : ''}`).then((r) => json<FolderListing>(r)),
   folders: () => fetch('/api/settings/folders').then((r) => json<{ allowed: string[]; suggested: string[] }>(r)),
   setFolders: (allowed: string[]) =>
     fetch('/api/settings/folders', { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ allowed }) })
       .then((r) => json<{ allowed: string[]; suggested: string[] }>(r)),
 };
+
+export interface FolderListing { path: string; parent: string | null; home: string; roots: string[]; folders: { name: string; path: string }[] }

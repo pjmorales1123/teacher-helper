@@ -17,11 +17,12 @@ export function locate(text: string, find: string): string {
 }
 
 /** Pending slide changes carry ids resolved now, so the order they are approved in never matters. */
-export type SlideChange = PendingChange & { ref: { storyId?: string; slideId?: string; rows?: string[][] } };
+export type SlideChange = PendingChange & { ref: { storyId?: string; slideId?: string; shapeId?: string; rows?: string[][] } };
 
 /** Splits AI output into slide proposals (reviewed on the canvas) and pending structural changes. */
 export function planPptx(result: AiResult, deck: DeckSlide[], turnId: string) {
   const boxes = new Map(deck.flatMap((s) => s.boxes).map((b) => [b.id, b]));
+  const pictures = new Map(deck.flatMap((s) => (s.pictureIds ?? []).map((p) => [p.id, { slideId: s.id, shapeId: p.shapeId }] as const)));
   const proposals: { label: string; edit: ProposalEdit }[] = [];
   const pending: SlideChange[] = [];
   const failed: ProposeReport['failed'] = [];
@@ -49,6 +50,12 @@ export function planPptx(result: AiResult, deck: DeckSlide[], turnId: string) {
     const box: Box | undefined = op.target ? boxes.get(op.target) : undefined;
     const slide = op.slide ? deck[op.slide - 1] : undefined;
     const label = describeOp(op, namer);
+    if (op.op === 'deleteShape') {
+      const pic = pictures.get(op.target ?? '');
+      if (box || pic) add(op, box ? { slideId: box.slideId, shapeId: box.shapeId } : pic!); else failed.push({ label, reason: 'unknown box or picture' });
+      continue;
+    }
+    if (op.op === 'newSlide') { add(op, {}); continue; }
     if (op.target && !box) { failed.push({ label, reason: 'unknown text box' }); continue; }
     if (op.slide && !slide) { failed.push({ label, reason: `there is no slide ${op.slide}` }); continue; }
     if (op.op === 'format' && box) {
@@ -58,7 +65,7 @@ export function planPptx(result: AiResult, deck: DeckSlide[], turnId: string) {
       if (start < 0) { failed.push({ label, reason: 'text not found' }); continue; }
       const patch = { ...(op.bold !== undefined && { bold: op.bold }), ...(op.italic !== undefined && { italic: op.italic }),
         ...(op.underline !== undefined && { underline: op.underline ? 'sng' : 'none' }), ...(op.fontSize && { fontSizePt: op.fontSize }),
-        ...(op.color && { color: op.color }), ...(op.fontFamily && { fontFamily: op.fontFamily }) };
+        ...(op.color && { color: `#${op.color}` }), ...(op.fontFamily && { fontFamily: op.fontFamily }) };
       proposals.push({ label, edit: { type: 'formatText', storyId: box.storyId, start, end: op.find ? start + found.length : text.length, patch } });
     } else if (op.op === 'align' && box && op.align) {
       proposals.push({ label, edit: { type: 'setParagraphAlignment', storyId: box.storyId, start: 0, end: textOf(box).length, alignment: ALIGN[op.align] } });
@@ -70,7 +77,7 @@ export function planPptx(result: AiResult, deck: DeckSlide[], turnId: string) {
       const emu = (v: number | undefined, fallback: number) => Math.round((v ?? fallback) * EMU_PER_IN);
       proposals.push({ label, edit: { type: 'setShapeRect', slideId: box.slideId, shapeId: box.shapeId,
         rect: { x: emu(op.left, box.xIn), y: emu(op.top, box.yIn), width: emu(op.width, box.wIn), height: emu(op.height, box.hIn) } } });
-    } else if (op.op === 'image' && slide) {
+    } else if (['image', 'textBox', 'shape'].includes(op.op) && slide) {
       add(op, { slideId: slide.id });
     } else if (op.op === 'bullets' && box) {
       add(op, { storyId: box.storyId });

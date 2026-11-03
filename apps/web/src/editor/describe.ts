@@ -30,6 +30,7 @@ export function describeOp(op: AiOp, namer?: Namer): string {
     case 'signatories': return `Signatories after ${tgt(op.target)}: ${op.rows?.[0]?.length} side by side (${short(op.rows?.find((r) => r.some((c) => /[A-Z]{3}/.test(c) && !/[a-z]/.test(c)))?.join(', ') ?? '', 60)})`;
     case 'resize': return `Resize ${tgt(op.target)}${op.width ? ` to ${op.width}" wide` : ''}${op.height ? `, ${op.height}" tall` : ''}${op.left !== undefined || op.top !== undefined ? ', moved' : ''}`;
     case 'image': if (op.slide) return `Picture ${short(op.path?.split(/[\\/]/).pop() ?? '', 40)} on slide ${op.slide}${op.width ? `, ${op.width}" wide` : ''}`;
+      if (op.side) return `Picture ${short(op.path?.split(/[\\/]/).pop() ?? '', 40)} at the ${op.side} of ${tgt(op.target)}, text wrapping around${op.width ? `, ${op.width}" wide` : ''}`;
       return `Picture ${short(op.path?.split(/[\\/]/).pop() ?? '', 40)} ${op.placement === 'before' ? 'before' : 'after'} ${tgt(op.target)}${op.width ? `, ${op.width}" wide` : ''}, ${op.align ?? 'center'}`;
     case 'cells': return `Fill ${op.rows?.length}×${op.rows?.[0]?.length} cells from ${op.target}`;
     case 'numberFormat': return `Number format ${op.numberFormat} on ${op.target}`;
@@ -40,6 +41,20 @@ export function describeOp(op: AiOp, namer?: Namer): string {
     case 'duplicateSlide': return `Add a copy of slide ${op.slide} after it${op.rows?.length ? `, with new text in ${op.rows.length} box(es)` : ''}`;
     case 'deleteSlide': return `Delete slide ${op.slide}`;
     case 'moveSlide': return `Move slide ${op.slide} to position ${op.position}`;
+    case 'columnWidth': return `Set column width of ${tgt(op.target)} to ${op.size} characters`;
+    case 'rowHeight': return `Set row height of ${tgt(op.target)} to ${op.size} pt`;
+    case 'merge': return `Merge ${tgt(op.target)}`;
+    case 'unmerge': return `Unmerge ${tgt(op.target)}`;
+    case 'insertRows': return `Insert ${op.count ?? 1} row(s) above ${tgt(op.target)}`;
+    case 'deleteRows': return `Delete row(s) ${tgt(op.target)}`;
+    case 'insertColumns': return `Insert ${op.count ?? 1} column(s) before ${tgt(op.target)}`;
+    case 'deleteColumns': return `Delete column(s) ${tgt(op.target)}`;
+    case 'addSheet': return `Add a sheet named “${op.text}”`;
+    case 'renameSheet': return `Rename ${tgt(`${op.target}!`).trim()} to “${op.text}”`;
+    case 'textBox': return `New text box on slide ${op.slide}: “${short(op.text ?? op.lines?.join(' / ') ?? '', 50)}”`;
+    case 'shape': return `New ${op.geometry ?? 'rect'} shape on slide ${op.slide}${op.fill ? `, #${op.fill}` : ''}`;
+    case 'newSlide': return `New slide ${op.position}${op.layout ? ` (${op.layout})` : ''}: “${short(op.text ?? '', 40)}”`;
+    case 'deleteShape': return `Remove ${tgt(op.target)}`;
     default: return op.op;
   }
 }

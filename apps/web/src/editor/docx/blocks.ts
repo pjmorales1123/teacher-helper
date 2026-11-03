@@ -1,3 +1,4 @@
+import { resolveImageLayoutAttrs } from '@betteroffice/docx/docx';
 import type { DocxEditorRef } from '@betteroffice/docx-react';
 import type { AiOp } from '../../lib/types';
 import { paragraphText, setAttrs, STORY, syncParts, textWidthTwips, tick, wholeParagraph } from './session';
@@ -63,6 +64,16 @@ export async function image(ed: DocxEditorRef, op: AiOp): Promise<void> {
   const width = Math.round(widthIn * 96);
   const height = Math.round((width * bitmap.height) / bitmap.width);
   const { pe, ses } = syncParts(ed);
+  if (op.side) {
+    // Floating at the side of the target paragraph; text wraps around it (Word's "Square" layout).
+    const layout = resolveImageLayoutAttrs(op.side === 'left' ? 'squareLeft' : 'squareRight', { wrapType: 'inline' });
+    ses.insertImage({ story: STORY, paraId: op.target!, offset: 0 }, {
+      src, alt: op.path!.split(/[\\/]/).pop() ?? 'picture', width, height, ...layout, distTop: 0, distBottom: 6, distLeft: 9, distRight: 9,
+    });
+    pe.syncYrsInputState(true);
+    await tick(80);
+    return;
+  }
   const id = op.placement === 'before' ? await newParagraphBefore(ed, op.target!) : await newParagraphAfter(ed, op.target!);
   ses.insertImage({ story: STORY, paraId: id, offset: 0 }, {
     src, alt: op.path!.split(/[\\/]/).pop() ?? 'picture', width, height,

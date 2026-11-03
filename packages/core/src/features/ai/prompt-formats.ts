@@ -23,6 +23,8 @@ OPS ("ops"), applied only after the teacher approves them:
 - {"op":"image","target":ID,"path":"/full/path/logo.png","width":1.2,"align":"center","placement":"after|before"} inserts a picture
   from the teacher's folders in its own paragraph after (default) or before the target, so it never breaks other parts.
   width in inches (keeps proportions). A letterhead logo goes "before" the first paragraph.
+  Add "side":"left|right" to float the picture at that side of the target paragraph with the text wrapping around it
+  (good for a small photo beside a paragraph); then placement is ignored.
 - {"op":"table","target":ID,"rows":[["Header 1","Header 2"],["a","b"]],"styleId":"<style for header cells, optional>"}
   inserts a table AFTER the paragraph. First row is the header.
 - {"op":"delete","target":ID,"to":ID2} deletes paragraphs from target through to (to is optional).
@@ -38,7 +40,17 @@ OPS ("ops"):
 - {"op":"cells","target":"0!B2","rows":[["1","2"],["=SUM(B2:C2)","x"]]} fills a block starting at target (reviewed in the sheet).
 - {"op":"style","target":"0!A1:G1","bold":true,"italic":..,"fontSize":11,"fontFamily":"Calibri","color":"#000000","fill":"#DDEBF7",
   "align":"left|center|right","valign":"top|middle|bottom","wrap":true,"border":"all|outer|inner|bottom|none"}
-- {"op":"numberFormat","target":"0!F2:G9","numberFormat":"0.00"} (or "number","percent","currency","date", or a pattern).`,
+- {"op":"numberFormat","target":"0!F2:G9","numberFormat":"0.00"} (or "number","percent","currency","date", or a pattern).
+- {"op":"columnWidth","target":"0!B:D","size":14} width in characters (names ~24-30, scores ~8-10). Widen columns whose text is cut off.
+- {"op":"rowHeight","target":"0!1","size":30} height in points.
+- {"op":"merge","target":"0!A1:G1"} merge a title across the table; {"op":"unmerge","target":"0!A1:G1"}.
+- {"op":"insertRows","target":"0!5","count":2} inserts 2 empty rows ABOVE row 5; {"op":"deleteRows","target":"0!5:6"}.
+- {"op":"insertColumns","target":"0!C","count":1} inserts before column C; {"op":"deleteColumns","target":"0!C:D"}.
+  Formulas that refer to moved cells are updated automatically.
+- {"op":"addSheet","text":"Quarter 2"}  - {"op":"renameSheet","target":"0","text":"Written Works"}
+COLUMN WIDTHS and MERGED under each sheet show the current layout.
+When a turn inserts or deletes rows or columns, everything in it is applied in the listed order after approval: put the
+insert/delete first, then fill the new cells with "cells" ops using addresses as they will be AFTER the insert. Use no text edits then.`,
   pptx: `The document is a PowerPoint deck. Each text box is "[ID] (shape name, size at position, font, fits ~N chars) text" under its slide.
 Lines inside a box are separated by " / ". Slide notes are shown as NOTES.
 TEXT EDITS ("edits"): target = box ID, find = exact substring within ONE line, replace = new text (no line breaks).
@@ -56,6 +68,13 @@ OPS ("ops"):
   shrinking text below 18 pt when there is free space beside it (check other boxes' positions first).
 - {"op":"image","slide":3,"path":"/full/path/flower.jpg","width":3,"left":6.5,"top":1.8} places a picture from the teacher's folders
   (keeps proportions; without left/top it is centered). Put it in empty space, never over text.
+- {"op":"textBox","slide":3,"lines":["line 1","line 2"],"left":0.6,"top":5.2,"width":5,"height":0.8,"fontSize":20,"bold":true,
+   "color":"#1F2937","align":"left","fill":"#FEF3C7"} adds a NEW text box (use "text" for one line). Place it in empty space.
+- {"op":"shape","slide":3,"geometry":"rect|roundRect|ellipse|triangle|rightArrow|leftArrow|chevron|homePlate|star5|line",
+   "left":1,"top":1,"width":2,"height":1,"fill":"#1F4E79"} adds a plain shape (accent bar, arrow, divider).
+- {"op":"newSlide","position":4,"layout":"Title and Content","text":"Slide title","lines":["bullet 1","bullet 2"]} inserts a new
+  slide so it becomes slide 4, using a layout from LAYOUTS, and fills its title and body.
+- {"op":"deleteShape","target":ID} removes a box or picture.
 All IDs and slide numbers always refer to the deck as shown (before any slide is added, moved or deleted).
 Respect "fits ~N chars": never exceed it. Keep labels short.`,
 };

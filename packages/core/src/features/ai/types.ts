@@ -24,6 +24,8 @@ export interface AiOp {
   margins?: { top?: number; bottom?: number; left?: number; right?: number };
   path?: string; width?: number; height?: number; left?: number; top?: number; placement?: 'before' | 'after';
   keepWithNext?: boolean; keepTogether?: boolean; pageBreakBefore?: boolean; spaceBefore?: number; spaceAfter?: number; indent?: number;
+  /** Rows/columns to insert; width in characters or height in points; picture wrap side; slide shape geometry and layout. */
+  count?: number; size?: number; side?: 'left' | 'right'; geometry?: string; layout?: string;
 }
 
 export interface AiResult { reply: string; edits: AiEdit[]; ops: AiOp[]; dropped?: { op: string; reason: string }[] }
