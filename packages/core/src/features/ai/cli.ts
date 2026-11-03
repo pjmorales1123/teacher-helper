@@ -34,7 +34,7 @@ export async function runCli(cfg: Config, run: CliRun): Promise<CliOutput> {
 }
 
 function runClaude(cfg: Config, cwd: string, run: CliRun): Promise<CliOutput> {
-  const args = claudeArgs(cfg, run.system, run.folders ?? [], (run.files ?? []).length > 0, run.web === true);
+  const args = claudeArgs(cfg, run.system, run.folders ?? [], (run.files ?? []).length > 0, run.web === true, cwd);
   const parser = createClaudeStreamParser(run.emit);
   return spawnLines('claude', args, cwd, run, parser.line).then(({ stderr }) => {
     const f = parser.final();

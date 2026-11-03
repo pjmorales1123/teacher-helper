@@ -1,6 +1,7 @@
 import type { DocxEditorRef } from '@betteroffice/docx-react';
 import type { AiEdit } from '../../lib/types';
 import type { CellMap } from './context';
+import { command, selectRange } from './select';
 import type { PlannedInsert, PlannedProposal } from './plan';
 
 const STORY = 'body';
@@ -25,12 +26,19 @@ export async function prepareNewParagraphs(
     // New text after a heading is body text unless the AI named a style; never inherit a heading style.
     const anchorStyle = read.paragraphs[0]?.styleId ?? '';
     const fallback = /^(Heading|Title|Subtitle|TOC)/i.test(anchorStyle) ? 'Normal' : undefined;
-    const res = await ed.applyEdits({
-      expectVersion: read.version, source: 'agent',
-      steps: [{ op: 'insertParagraphs', target: { story: loc.story, paraId: loc.paraId }, at: 'end',
-        paragraphs: ins.paragraphs.map((p) => ({ text: '', ...((p.styleId ?? fallback) ? { styleId: p.styleId ?? fallback } : {}) })) }],
-    });
-    if (!res.ok) { failed.push({ edit: ins.edit, reason: `new paragraphs: ${res.failure.code}` }); continue; }
+    const wanted = ins.paragraphs.map((p) => p.styleId ?? fallback);
+    let res = await insert(ed, read.version, loc, wanted);
+    // The engine cannot create paragraphs that carry list numbering in one batch: create them plain, then style them.
+    let later: (string | undefined)[] = [];
+    if (!res.ok && /numbering/i.test((res.failure as { message?: string }).message ?? '')) {
+      const v = await ed.readParagraphs({ view: 'accepted', paraIds: [] });
+      later = wanted.map((st) => (st && /list|number|bullet/i.test(st) ? st : undefined));
+      if (v.ok) res = await insert(ed, v.version, loc, wanted.map((st, k) => (later[k] ? undefined : st)));
+    }
+    if (!res.ok) { failed.push({ edit: ins.edit, reason: `new paragraphs: ${res.failure.code}${(res.failure as { message?: string }).message ? ` (${(res.failure as { message?: string }).message})` : ''}` }); continue; }
+    if (!cell) {
+      for (const [k, np] of res.receipts[0].newParagraphs.entries()) if (later[k]) await listStyle(ed, np.paraId, later[k]!);
+    }
     res.receipts[0].newParagraphs.forEach((np, k) => {
       const id = `${turnId}-n${i}-${k}`;
       created.set(np.paraId, { id, story: loc.story });
@@ -41,6 +49,22 @@ export async function prepareNewParagraphs(
 }
 
 /** Deletes paragraphs we created whose proposal is gone (rejected or withdrawn) and which are still empty. */
+async function insert(ed: DocxEditorRef, expectVersion: string, loc: { story: string; paraId: string }, styles: (string | undefined)[]) {
+  return ed.applyEdits({
+    expectVersion, source: 'agent',
+    steps: [{ op: 'insertParagraphs', target: { story: loc.story, paraId: loc.paraId }, at: 'end',
+      paragraphs: styles.map((st) => ({ text: '', ...(st ? { styleId: st } : {}) })) }],
+  });
+}
+
+/** Applies a list style the way a teacher would (style picker), falling back to the list buttons. */
+async function listStyle(ed: DocxEditorRef, paraId: string, styleId: string) {
+  try {
+    await selectRange(ed, paraId, 0, 0);
+    try { await command(ed, 'paragraphStyle', { styleId }); } catch { await command(ed, /bullet/i.test(styleId) ? 'bulletList' : 'numberedList', null); }
+  } catch { /* the text still lands; only the list look is missing */ }
+}
+
 export interface Created { id: string; story: string }
 
 export async function removeEmptyCreated(ed: DocxEditorRef, created: Map<string, Created>) {

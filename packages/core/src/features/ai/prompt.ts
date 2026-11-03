@@ -17,7 +17,8 @@ required part in order (from the knowledge for that document type), with real st
 placeholders only for facts you do not have. Do not leave required parts out to keep it short.`;
 
 const REVIEW = `MODE: REVIEW. You are checking finished work. The current document is rendered as images in your working
-folder (page-1.png or page-1.jpg, page-2…; use the Read tool on each). Compare them with the teacher's request and with professional
+folder (page-1.png or page-1.jpg, page-2…). Open each with the Read tool and its file name exactly as listed
+below (e.g. Read page-1.png); no other tool is available for them. Compare them with the teacher's request and with professional
 layout: nothing split badly across pages (signatories, a heading at the bottom of a page, a table header alone), text fits its
 box, alignment and spacing are consistent, pictures do not cover text, numbering and labels are correct.
 Red strike-through and green underlined text are pending suggestions, not errors.

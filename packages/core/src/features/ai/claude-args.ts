@@ -21,7 +21,7 @@ export function readRule(folder: string): string {
  * inside the turn folder (page images) and the folders the teacher allowed, plus web search/fetch when the teacher
  * turned web research on. Everything else is denied.
  */
-export function claudeArgs(cfg: Config, system: string, folders: string[], hasImages: boolean, web = false): string[] {
+export function claudeArgs(cfg: Config, system: string, folders: string[], hasImages: boolean, web = false, cwd?: string): string[] {
   const args = [
     '-p', '--output-format', 'stream-json', '--verbose', '--include-partial-messages',
     '--setting-sources', '', '--strict-mcp-config', '--no-session-persistence',
@@ -32,7 +32,8 @@ export function claudeArgs(cfg: Config, system: string, folders: string[], hasIm
   args.push('--tools', tools.join(','));
   if (!tools.length) return args;
   // Web research (opt-in): search and read pages only; nothing is written or run.
-  const allow = [...(canRead ? ['Read(./**)', ...folders.map(readRule)] : []), ...(web ? ['WebSearch', 'WebFetch'] : [])];
+  // The turn folder by relative and by absolute path: models sometimes read page images by their full path.
+  const allow = [...(canRead ? ['Read(./**)', ...(cwd ? [readRule(cwd)] : []), ...folders.map(readRule)] : []), ...(web ? ['WebSearch', 'WebFetch'] : [])];
   if (folders.length) {
     const server = { type: 'stdio', command: process.execPath, args: [...loaderArgs(), MCP_SERVER], env: { GURO_READ_DIRS: JSON.stringify(folders) } };
     args.push('--mcp-config', JSON.stringify({ mcpServers: { files: server } }));
